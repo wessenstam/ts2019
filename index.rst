@@ -14,7 +14,7 @@
   :name: _opt_labs
   :hidden:
 
-
+  cloud_native_lab/cloud_native_lab
 
 .. raw:: html
 
@@ -87,7 +87,7 @@ Each cluster has been pre-staged with the following:
 
 - **PC** VM - 10.21.XX.39 - Nutanix Prism Central 5.5.0.6
 - **DC** VM - 10.21.XX.40 - ntnxlab.local Domain Controller
-- **Buckets** - 
+- **Buckets** -
 - **XD** VM - 10.21.XX.41 - Citrix XenDesktop 7.15 Delivery Controller/StoreFront/License Server
 - **HYCU** VM - 10.21.XX.44 - Comtrade HYCU 2.0.0
 - **X-Ray** VM - 10.21.XX.45 - Nutanix X-Ray 2.3

@@ -101,7 +101,10 @@ Click **Create**
 
   Move on to the next step while the Karbon cluster is being provisioned, but occasionally check back in on the status.
 
+Deploy Era Database and Database Server
++++++++++++++++++++++++++++++++++++++++
 
+In this section, you will provision a database server which contains a PostgreSQL database, and set up **Time Machine** which provides data copy management.  This Postgres DB will store the persistent data for our web application.
 
 
 
