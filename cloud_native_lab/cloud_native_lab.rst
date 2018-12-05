@@ -35,6 +35,8 @@ Getting Engaged with the Product Team
 - **Buckets Product Marketing Manager** -
 - **Buckets Technical Marketing Engineer** -
 
+- **Cloud Native Technical Marketing Engineer** - Michael Haigh, michael.haigh@nutanix.com
+
 Create a Karbon Kubernetes Cluster
 ++++++++++++++++++++++++++++++++++
 
@@ -106,9 +108,81 @@ Deploy Era Database and Database Server
 
 In this section, you will provision a database server which contains a PostgreSQL database, and set up **Time Machine** which provides data copy management.  This Postgres DB will store the persistent data for our web application.
 
+In a new browser tab, log on to Era https://ERA-IP:8443/ using these credentials:
 
+- **Username** - admin
+- **Password** - techX2019!
 
+Now lets provision a database.
 
+Click on the **Dashboard** dropdown in the upper left, and select **Databases**
+
+On the left column, select **Sources**.
+
+.. figure:: images/era-db-summary.png
+
+Click the blue **+ Provision** button.
+
+Fill in the following:
+
+- **Database Type** - PostgreSQL
+
+Click **Next**
+
+**Database Server**
+
+- **Create New Server** - selected
+- **Software Profile Name** - POSTGRES_10.4_OOB
+- **Database Server Name** - PostgreSQL-*initialsLowerCase*
+- **Description** - Era Postgres DB
+- **Compute Profile** - DEFAULT_OOB_COMPUTE
+- **Network Profile** - DEFAULT_OOB_NETWORK
+- **SSH Public Key for Node Access**
+    - **Text** - selected
+    - **SSH Key** - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDDoJlPj+ACPyHGm0f+FyTQPRt+m1H6JstyLtvFJUntDyF2/dqpcQ9QfKKw1QcjzGdSS8B6HrdOOjKZz42j01/YLWFy2YrDLQOHcNJi6XowCQ059C7bHehP5lqNN6bRIzdQnqGZGYi8iKYzUChMVusfsPd5ZZo0rHCAiCAP1yFqrcSmq83QNN1X8FZ1COoMB66vKyD2rEoeKz4lilEeWKyP4RLmkOc1eMYQNdyMOCNFFbKmC1nPJ+Mpxo1HfNR84R7WNl5oEaNQOORN+NaOzu5Bxim2hhJvU37J+504azZ1PCUiHiC0+zBw4JfeOKMvtInmkEZQEd3y4RrIHLXKB4Yb centos@nutanix.com
+
+.. figure:: images/era-provision-2.png
+
+Click **Next**
+
+**Database**
+
+.. note::
+
+  Be sure to remember, or write down, your entries here, as the will be used later in the lab.
+
+- **Database Name** - oscar_django_*initialsLowerCase*
+- **Description** - Any description of your choice.
+- **Postgres Password** - Nutanix/4u!
+- **Database Parameter Profile** - DEFAULT_POSTGRES_PARAMS
+
+Leave the rest of the fields as their default values.
+
+.. figure:: images/era-provision-3.png
+
+Click **Next**
+
+**Time Machine**
+
+- **Name** - Leave as the default.
+- **SLA** - Leave as default of GOLD
+- **Description** - Any description of your choice.
+- **Schedule** - Leave defaults.
+
+.. figure:: images/era-provision-4.png
+
+Click **Provision**
+
+.. note::
+
+  You can click on the blue banner that appears on the top of the page to view the provision status.  Alternatively, click on the menu in the upper left, and select **Operations**.
+
+.. note::
+
+  Move on to the next task while the database is provisioned, but occasionally check back in to view the status.
+
+Create an Object Storage Bucket with Nutanix Buckets
+++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 
