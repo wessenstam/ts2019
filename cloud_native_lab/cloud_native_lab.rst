@@ -22,7 +22,6 @@ Getting Engaged with the Product Team
 
 .. list-table::
   :widths: 50 50
-  :header-rows: 1
   * - **Karbon Slack**
     - #karbon
   * - **Karbon Product Manager**
@@ -34,7 +33,6 @@ Getting Engaged with the Product Team
 
 .. list-table::
   :widths: 50 50
-  :header-rows: 1
   * - **Era Slack**
     - #era
   * - **Era Product Manager**
@@ -46,7 +44,6 @@ Getting Engaged with the Product Team
 
 .. list-table::
   :widths: 50 50
-  :header-rows: 1
   * - **Buckets Slack**
     - #nutanix-buckets
   * - **Buckets Product Manager**
@@ -76,7 +73,7 @@ Fill in the following:
 - **Kubernetes Version** - 1.10.3
 - **Host OS Image** - centos
 
-.. figure:: images/karbon-create-1.png
+#.. figure:: images/karbon-create-1.png
 
 Click **Next**
 
@@ -103,7 +100,7 @@ Leave all defaults and click **Next**.
 - **Service CIDR** - Leave the default of 172.19.0.0/16
 - **Pod CIDR** - Leave the default of 172.20.0.0/16
 
-.. figure:: images/karbon-create-4.png
+#.. figure:: images/karbon-create-4.png
 
 Click **Next**
 
@@ -116,7 +113,7 @@ Click **Next**
 - **Storage Container Name** - default-container-XXXXXXX
 - **File System** - ext4
 
-.. figure:: images/karbon-create-5.png
+#.. figure:: images/karbon-create-5.png
 
 Click **Create**
 
@@ -140,7 +137,7 @@ Click on the **Dashboard** dropdown in the upper left, and select **Databases**
 
 On the left column, select **Sources**.
 
-.. figure:: images/era-db-summary.png
+#.. figure:: images/era-db-summary.png
 
 Click the blue **+ Provision** button.
 
@@ -179,7 +176,7 @@ Click **Next**
 
 Leave the rest of the fields as their default values.
 
-.. figure:: images/era-provision-3.png
+#.. figure:: images/era-provision-3.png
 
 Click **Next**
 
@@ -190,7 +187,7 @@ Click **Next**
 - **Description** - Any description of your choice.
 - **Schedule** - Leave defaults.
 
-.. figure:: images/era-provision-4.png
+#.. figure:: images/era-provision-4.png
 
 Click **Provision**
 
@@ -216,7 +213,7 @@ Now lets create a Bucket.
 
 Click on the **Red +** and then select the bottom **Yellow Circle**.
 
-.. figure:: images/object-create-ovm.png
+#.. figure:: images/object-create-ovm.png
 
 In the pop-up that appears, fill in the following and hit **Enter**:
 
@@ -226,7 +223,7 @@ In the pop-up that appears, fill in the following and hit **Enter**:
 
   Be sure to write down your entry here, as it will be used later in the lab for the django-jet/django-configmap.yaml file.
 
-.. figure:: images/object-create-ovm-2.provisioning
+#.. figure:: images/object-create-ovm-2.provisioning
 
 Ensure you see your newly created bucket in the list on the left column.
 
