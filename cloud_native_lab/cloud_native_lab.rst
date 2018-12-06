@@ -19,38 +19,43 @@ The goal of this lab is to experience first-hand how Nutanix Cloud Native produc
 
 Getting Engaged with the Product Team
 .....................................
-
-.. list-table::
++----------------------------------------------------------+
+|  Karbon Product Contacts                                 |
++==========================================================+
+|  **Karbon Slack**  +  #karbon
++
+.. list-table:: Karbon
   :widths: 50 50
-  * - **Karbon Slack**
-    - #karbon
-  * - **Karbon Product Manager**
+  :header-rows: 1
+  * - Slack Channel
+    - Product Team
+    - Contact
+  * - #karbon
+    - Product Manager
     - Denis Guyadeen, dguyadeen@nutanix.com
-  * - **Karbon Product Marketing Manager**
+  * -
+    - Product Marketing Manager
     - Maryam Sanglaji, maryam.sanglaji@nutanix.com
-  * - **Karbon Technical Marketing Engineer**
+  * -
+    - Technical Marketing Engineer
     - Dwayne Lessner, dwayne@nutanix.com
-
-.. list-table::
-  :widths: 50 50
-  * - **Era Slack**
-    - #era
-  * - **Era Product Manager**
+  * - #era
+    - Product Manager
     - Jeremy Launier, jeremy.launier@nutanix.com
-  * - **Era Product Marketing Manager**
+  * -
+    - Product Marketing Manager
     - Maryam Sanglaji, maryam.sanglaji@nutanix.com
-  * - **Era Technical Marketing Engineer**
+  * -
+    - Technical Marketing Engineer
     - Mike McGhee, michael.mcghee@nutanix.com
-
-.. list-table::
-  :widths: 50 50
-  * - **Buckets Slack**
-    - #nutanix-buckets
-  * - **Buckets Product Manager**
+  * - #nutanix-buckets
+    - Product Manager
     - Priyadarshi Prasad, priyadarshi@nutanix.com
-  * - **Buckets Product Marketing Manager**
+  * -
+    - Product Marketing Manager
     - Krishnan Badrinarayanan, krishnan.badrinaraya@nutanix.com
-  * - **Buckets Technical Marketing Engineer**
+  * -
+    - Technical Marketing Engineer
     - Sharon Santana, sharon.santana@nutanix.com
 
 - **Cloud Native Technical Marketing Engineer** - Michael Haigh, michael.haigh@nutanix.com
