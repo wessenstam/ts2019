@@ -19,11 +19,13 @@ The goal of this lab is to experience first-hand how Nutanix Cloud Native produc
 
 Getting Engaged with the Product Team
 .....................................
+
 +----------------------------------------------------------+
 |  Karbon Product Contacts                                 |
 +==========================================================+
-|  **Karbon Slack**  +  #karbon
-+
+|  **Karbon Slack**  |  #karbon                            |
++--------------------+-------------------------------------+
+
 .. list-table:: Karbon
   :widths: 50 50
   :header-rows: 1
