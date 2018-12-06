@@ -22,8 +22,8 @@ Getting Engaged with the Product Team
 
 +---------------------------------------------------------------------------------+
 |  Karbon Product Contacts                                                        |
-+=================================================================================+
-|  **Karbon Slack**              |  #karbon                                       |
++================================+================================================+
+|  Slack Channel                 |  #karbon                                       |
 +--------------------------------+------------------------------------------------+
 |  Product Manager               |  Denis Guyadeen, dguyadeen@nutanix.com         |
 +--------------------------------+------------------------------------------------+
@@ -32,41 +32,35 @@ Getting Engaged with the Product Team
 |  Technical Marketing Engineer  |  Dwayne Lessner, dwayne@nutanix.com            |
 +--------------------------------+------------------------------------------------+
 
-.. list-table:: Karbon
-  :widths: 50 50
-  :header-rows: 1
-  * - Slack Channel
-    - Product Team
-    - Contact
-  * - #karbon
-    - Product Manager
-    - Denis Guyadeen, dguyadeen@nutanix.com
-  * -
-    - Product Marketing Manager
-    - Maryam Sanglaji, maryam.sanglaji@nutanix.com
-  * -
-    - Technical Marketing Engineer
-    - Dwayne Lessner, dwayne@nutanix.com
-  * - #era
-    - Product Manager
-    - Jeremy Launier, jeremy.launier@nutanix.com
-  * -
-    - Product Marketing Manager
-    - Maryam Sanglaji, maryam.sanglaji@nutanix.com
-  * -
-    - Technical Marketing Engineer
-    - Mike McGhee, michael.mcghee@nutanix.com
-  * - #nutanix-buckets
-    - Product Manager
-    - Priyadarshi Prasad, priyadarshi@nutanix.com
-  * -
-    - Product Marketing Manager
-    - Krishnan Badrinarayanan, krishnan.badrinaraya@nutanix.com
-  * -
-    - Technical Marketing Engineer
-    - Sharon Santana, sharon.santana@nutanix.com
++---------------------------------------------------------------------------------+
+|  Era Product Contacts                                                           |
++================================+================================================+
+|  Slack Channel                 |  #karbon                                       |
++--------------------------------+------------------------------------------------+
+|  Product Manager               |  Jeremy Launier, jeremy.launier@nutanix.com    |
++--------------------------------+------------------------------------------------+
+|  Product Marketing Manager     |  Maryam Sanglaji, maryam.sanglaji@nutanix.com  |
++--------------------------------+------------------------------------------------+
+|  Technical Marketing Engineer  |  Mike McGhee, michael.mcghee@nutanix.com       |
++--------------------------------+------------------------------------------------+
 
-- **Cloud Native Technical Marketing Engineer** - Michael Haigh, michael.haigh@nutanix.com
++---------------------------------------------------------------------------------------------+
+|  Buckets Product Contacts                                                                   |
++================================+============================================================+
+|  Slack Channel                 |  #nutanix-buckets                                          |
++--------------------------------+------------------------------------------------------------+
+|  Product Manager               |  Priyadarshi Prasad, priyadarshi@nutanix.com               |
++--------------------------------+------------------------------------------------------------+
+|  Product Marketing Manager     |  Krishnan Badrinarayanan, krishnan.badrinaraya@nutanix.com |
++--------------------------------+------------------------------------------------------------+
+|  Technical Marketing Engineer  |  Sharon Santana, sharon.santana@nutanix.com                |
++--------------------------------+------------------------------------------------------------+
+
++---------------------------------------------------------------------------------------------+
+|  Cloud Native Contacts                                                                      |
++================================+============================================================+
+|  Technical Marketing Engineer  |  Michael Haigh, michael.haigh@nutanix.com                  |
++--------------------------------+------------------------------------------------------------+
 
 Create a Karbon Kubernetes Cluster
 ++++++++++++++++++++++++++++++++++
