@@ -20,6 +20,20 @@ The goal of this lab is to experience first-hand how Nutanix Cloud Native produc
 Getting Engaged with the Product Team
 .....................................
 
+.. list-table::
+  :widths: 50 50
+  :header-rows: 1
+  * - **Karbon Slack**
+    - #karbon
+  * - **Karbon Product Manager**
+    - Denis Guyadeen, dguyadeen@nutanix.com
+  * - **Karbon Product Marketing Manager**
+    - Maryam Sanglaji, maryam.sanglaji@nutanix.com
+  * - **Karbon Technical Marketing Engineer**
+    - Dwayne Lessner, dwayne@nutanix.com
+
+
+
 - **Karbon Slack** - #karbon
 - **Karbon Product Manager** - Denis Guyadeen, dguyadeen@nutanix.com
 - **Karbon Product Marketing Manager** - Maryam Sanglaji, maryam.sanglaji@nutanix.com

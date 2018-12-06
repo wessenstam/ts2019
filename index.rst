@@ -7,11 +7,17 @@
   :hidden:
 
 
+.. toctree::
+  :maxdepth: 2
+  :caption:     Optional 101 Labs
+  :name: _opt_101_labs
+  :hidden:
+
 
 .. toctree::
   :maxdepth: 2
-  :caption:     Optional Labs
-  :name: _opt_labs
+  :caption:     Optional 201 Labs
+  :name: _opt_201_labs
   :hidden:
 
   cloud_native_lab/cloud_native_lab
@@ -87,6 +93,7 @@ Each cluster has been pre-staged with the following:
 
 - **PC** VM - 10.21.XX.39 - Nutanix Prism Central 5.5.0.6
 - **DC** VM - 10.21.XX.40 - ntnxlab.local Domain Controller
+- **Era** -
 - **Buckets** -
 - **XD** VM - 10.21.XX.41 - Citrix XenDesktop 7.15 Delivery Controller/StoreFront/License Server
 - **HYCU** VM - 10.21.XX.44 - Comtrade HYCU 2.0.0
