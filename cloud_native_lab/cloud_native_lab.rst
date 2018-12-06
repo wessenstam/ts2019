@@ -32,8 +32,8 @@ Getting Engaged with the Product Team
 
 - **Buckets Slack** - #nutanix-buckets
 - **Buckets Product Manager** - Priyadarshi Prasad, priyadarshi@nutanix.com
-- **Buckets Product Marketing Manager** -
-- **Buckets Technical Marketing Engineer** -
+- **Buckets Product Marketing Manager** - Krishnan Badrinarayanan, krishnan.badrinaraya@nutanix.com
+- **Buckets Technical Marketing Engineer** - Sharon Santana, sharon.santana@nutanix.com
 
 - **Cloud Native Technical Marketing Engineer** - Michael Haigh, michael.haigh@nutanix.com
 
@@ -183,6 +183,47 @@ Click **Provision**
 
 Create an Object Storage Bucket with Nutanix Buckets
 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+In this task you will create an object storage bucket utilizing Nutanix Buckets. This bucket will be used to store all of our web app’s images.
+
+In a new browser tab, log on to Era https://Buckets-IP:7200/ using these credentials:
+
+- **Username** - Access
+- **Password** - Secret
+
+Now lets create a Bucket.
+
+Click on the **Red +** and then select the bottom **Yellow Circle**.
+
+.. figure:: images/object-create-ovm.png
+
+In the pop-up that appears, fill in the following and hit **Enter**:
+
+- **Name** - oscarstatic-*initialsLowerCase*
+
+.. note::
+
+  Be sure to write down your entry here, as it will be used later in the lab for the django-jet/django-configmap.yaml file.
+
+.. figure:: images/object-create-ovm-2.provisioning
+
+Ensure you see your newly created bucket in the list on the left column.
+
+Set up Kubeconfig
++++++++++++++++++
+
+In this task you will download your Karbon Kubernetes cluster’s kubeconfig file and apply that file to kubectl to enable you to control your Kubernetes cluster.
+
+
+
+
+
+
+
+
+
+
+
 
 
 
