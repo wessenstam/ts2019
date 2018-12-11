@@ -2,19 +2,34 @@
 
 .. toctree::
   :maxdepth: 2
-  :caption:     Required Labs
+  :caption: Required Labs
   :name: _req_labs
   :hidden:
 
+  era/era
+
+.. toctree::
+  :maxdepth: 2
+  :caption: Optional 101 Labs
+  :name: _opt_101_labs
+  :hidden:
 
 
 .. toctree::
   :maxdepth: 2
-  :caption:     Optional Labs
-  :name: _opt_labs
+  :caption: Optional 201 Labs
+  :name: _opt_201_labs
   :hidden:
 
+  cloud_native_lab/cloud_native_lab
 
+.. toctree::
+  :maxdepth: 2
+  :caption: Optional Labs
+  :name: _optional_labs
+  :hidden:
+
+  sshkey_creation/sshkey_creation
 
 .. raw:: html
 
@@ -72,11 +87,12 @@ Each cluster has been pre-staged with the following:
 
 **Pre-staged Images**
 
+- **Windows2016** - Windows Server 2016 Standard Disk Image
 - **Windows2012** - Windows Server 2012 R2 Standard Disk Image
 - **Windows10** - Windows 10 Disk Image
 - **CentOS** - CentOS 7 Disk Image
-- **Xtract-VM** - Nutanix Xtract for VMs 1.1.3 Disk Image
-- **Xtract-DB** - Nutanix Xtract for DBs 1.5.0 Disk Image
+- **Era** - Era v1.0 Disk Image
+- **Xtract** - Nutanix Xtract for VMs 1.1.3 Disk Image
 - **VeeamBackupProxy** - Veeam Backup Proxy for AHV BETA Disk Image
 - **XenDesktop-7.15-ISO** - Citrix XenDesktop 7.15 ISO Image
 - **VeeamBR-9.5U3-ISO** - Veeam Backup & Replication 9.5 Update 3 ISO Image
@@ -86,6 +102,8 @@ Each cluster has been pre-staged with the following:
 
 - **PC** VM - 10.21.XX.39 - Nutanix Prism Central 5.5.0.6
 - **DC** VM - 10.21.XX.40 - ntnxlab.local Domain Controller
+- **Era** -
+- **Buckets** -
 - **XD** VM - 10.21.XX.41 - Citrix XenDesktop 7.15 Delivery Controller/StoreFront/License Server
 - **HYCU** VM - 10.21.XX.44 - Comtrade HYCU 2.0.0
 - **X-Ray** VM - 10.21.XX.45 - Nutanix X-Ray 2.3
@@ -98,9 +116,9 @@ Each cluster has been pre-staged with the following:
 
 **Credentials**
 
-- **Prism Username:** admin **Password:** techX2018!
-- **Prism Central Username:** admin **Password:** techX2018!
-- **CVM Username:** nutanix **Password:** techX2018!
+- **Prism Username:** admin **Password:** techX2019!
+- **Prism Central Username:** admin **Password:** techX2019!
+- **CVM Username:** nutanix **Password:** techX2019!
 - **PC VM Username:** nutanix **Password:** nutanix/4u
 - **Domain Username** NTNXLAB\\Administrator **Password:** nutanix/4u
 
