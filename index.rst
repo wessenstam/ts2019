@@ -2,25 +2,34 @@
 
 .. toctree::
   :maxdepth: 2
-  :caption:     Required Labs
+  :caption: Required Labs
   :name: _req_labs
   :hidden:
 
+  era/era
 
 .. toctree::
   :maxdepth: 2
-  :caption:     Optional 101 Labs
+  :caption: Optional 101 Labs
   :name: _opt_101_labs
   :hidden:
 
 
 .. toctree::
   :maxdepth: 2
-  :caption:     Optional 201 Labs
+  :caption: Optional 201 Labs
   :name: _opt_201_labs
   :hidden:
 
   cloud_native_lab/cloud_native_lab
+
+.. toctree::
+  :maxdepth: 2
+  :caption: Optional Labs
+  :name: _optional_labs
+  :hidden:
+
+  sshkey_creation/sshkey_creation
 
 .. raw:: html
 
