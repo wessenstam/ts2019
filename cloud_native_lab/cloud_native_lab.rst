@@ -80,8 +80,6 @@ Fill in the following:
 - **Kubernetes Version** - 1.10.3
 - **Host OS Image** - centos
 
-#.. figure:: images/karbon-create-1.png
-
 Click **Next**
 
 **Worker Configuration**
