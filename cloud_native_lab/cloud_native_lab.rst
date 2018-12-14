@@ -107,8 +107,6 @@ Leave all defaults and click **Next**.
 - **Service CIDR** - Leave the default of 172.19.0.0/16
 - **Pod CIDR** - Leave the default of 172.20.0.0/16
 
-#.. figure:: images/karbon-create-4.png
-
 Click **Next**
 
 **Storage Class**
@@ -119,8 +117,6 @@ Click **Next**
 - **Cluster Password** - *HPOC Password*
 - **Storage Container Name** - default-container-XXXXXXX
 - **File System** - ext4
-
-# .. figure:: images/karbon-create-5.png
 
 Click **Create**
 
@@ -143,8 +139,6 @@ Now lets provision a database.
 Click on the **Dashboard** dropdown in the upper left, and select **Databases**
 
 On the left column, select **Sources**.
-
-# .. figure:: images/era-db-summary.png
 
 Click the blue **+ Provision** button.
 
@@ -183,8 +177,6 @@ Click **Next**
 
 Leave the rest of the fields as their default values.
 
-# .. figure:: images/era-provision-3.png
-
 Click **Next**
 
 **Time Machine**
@@ -193,8 +185,6 @@ Click **Next**
 - **SLA** - Leave as default of GOLD
 - **Description** - Any description of your choice.
 - **Schedule** - Leave defaults.
-
-# .. figure:: images/era-provision-4.png
 
 Click **Provision**
 
