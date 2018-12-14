@@ -1,8 +1,8 @@
 .. _cloud_native_lab:
 
----------------------------------
-Lab - Nutanix Cloud Native Lab
----------------------------------
+------------------------
+Nutanix Cloud Native Lab
+------------------------
 
 Overview
 ++++++++
