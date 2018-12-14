@@ -1,8 +1,8 @@
 .. _sshkey_creation:
 
-----------------------
-Calm: SSH Key Creation
-----------------------
+----------------
+SSH Key Creation
+----------------
 
 Overview
 ++++++++
