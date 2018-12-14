@@ -156,7 +156,11 @@ Click **Next**
 - **Network Profile** - DEFAULT_OOB_NETWORK
 - **SSH Public Key for Node Access**
     - **Text** - selected
-    - **SSH Key** - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDDoJlPj+ACPyHGm0f+FyTQPRt+m1H6JstyLtvFJUntDyF2/dqpcQ9QfKKw1QcjzGdSS8B6HrdOOjKZz42j01/YLWFy2YrDLQOHcNJi6XowCQ059C7bHehP5lqNN6bRIzdQnqGZGYi8iKYzUChMVusfsPd5ZZo0rHCAiCAP1yFqrcSmq83QNN1X8FZ1COoMB66vKyD2rEoeKz4lilEeWKyP4RLmkOc1eMYQNdyMOCNFFbKmC1nPJ+Mpxo1HfNR84R7WNl5oEaNQOORN+NaOzu5Bxim2hhJvU37J+504azZ1PCUiHiC0+zBw4JfeOKMvtInmkEZQEd3y4RrIHLXKB4Yb centos@nutanix.com
+    - **SSH Key** -
+
+.. code-block:: bash
+
+  ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDDoJlPj+ACPyHGm0f+FyTQPRt+m1H6JstyLtvFJUntDyF2/dqpcQ9QfKKw1QcjzGdSS8B6HrdOOjKZz42j01/YLWFy2YrDLQOHcNJi6XowCQ059C7bHehP5lqNN6bRIzdQnqGZGYi8iKYzUChMVusfsPd5ZZo0rHCAiCAP1yFqrcSmq83QNN1X8FZ1COoMB66vKyD2rEoeKz4lilEeWKyP4RLmkOc1eMYQNdyMOCNFFbKmC1nPJ+Mpxo1HfNR84R7WNl5oEaNQOORN+NaOzu5Bxim2hhJvU37J+504azZ1PCUiHiC0+zBw4JfeOKMvtInmkEZQEd3y4RrIHLXKB4Yb centos@nutanix.com
 
 .. figure:: images/era-provision-2.png
 
@@ -218,7 +222,7 @@ In the pop-up that appears, fill in the following and hit **Enter**:
 
   Be sure to write down your entry here, as it will be used later in the lab for the django-jet/django-configmap.yaml file.
 
-.. figure:: images/object-create-ovm-2.provisioning
+.. figure:: images/object-create-ovm-2.provisioning.png
 
 Ensure you see your newly created bucket in the list on the left column.
 
@@ -417,10 +421,11 @@ Next run the following command to verify your pods are up and running:
 
   After a couple of minutes, assuming everything is working properly, you should see the **oscar-django-migrations-xxxxx** pod change status from **Running** to **Completed**
 
-  If this does not happen, you can troubleshoot the issue by running the following command (substituting in your unique 5 digit key instead of xxxxx):
-  .. code-block:: bash
+If this does not happen, you can troubleshoot the issue by running the following command (substituting in your unique 5 digit key instead of xxxxx):
 
-    kubectl logs oscar-django-migrations-xxxxx
+.. code-block:: bash
+
+  kubectl logs oscar-django-migrations-xxxxx
 
 Accessing the Application
 ..........................
