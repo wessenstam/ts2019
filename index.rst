@@ -31,17 +31,19 @@
 
   sshkey_creation/sshkey_creation
 
+
 .. raw:: html
 
     <div class="row">
         <div class="col-md-6">
             <h2>Need Support?</h2>
             <p>Join us in #techsummit2019 on Slack for questions, comments, and important announcements.</p>
-            #<p><a class="btn btn-secondary" href="slack://channel?id=C7ELNM1KL&amp;team=T0252CLM8" role="button">Join Channel &raquo;</a></p>
+            #<p><a class="btn btn-secondary" href="slack://channel?id=CE2LNUG5Q&amp;team=T0252CLM8" role="button">Join Channel &raquo;</a></p>
         </div>
         <div class="col-md-6">
             <h2>Awards and Prizes</h2>
-            <p>In addition to bragging rights and special recognition at SKO, the winning team will receive a Nutanix Tech Summit branded fleece vest from The North Face.</p>
+            <p>In addition to bragging rights, the winning Hackathon team will receive ** Insert Prize Here **.</p>
+            <p>Lab Track prizes will be ** Insert Prize Here **.</p>
         </div>
     </div>
     <hr>
@@ -57,11 +59,9 @@ Getting Started
 
 Following presentations on Tuesday, you will have the remainder of the day to complete the **Required Labs** and begin **Optional Labs**.
 
-Beginning on Wednesday you will be provided with a customer challenge. Your goal is to build and propose a solution using Nutanix and optional 3rd party technologies. The **Optional Labs** provide step by step guides for additional technologies you may find useful for your proposed solution. Bonus points can be earned by incorporating additional technologies (Chef, Puppet, Jenkins, Nagios, etc.) not covered in **Optional Labs**.
+Beginning on Wednesday you will split into your Hackathon teams, or continue doing labs if you are on that track..
 
-Due to resource limitations, many labs are designed to be completed as a group. The Overview section of each lab will indicate whether the lab should be completed once per group/cluster or if it can be performed individually. Teams should **NOT** simply divide and conquer to get through the lab exercises as fast as possible. The challenge exercise will give you ample opportunity to showcase your skillset, but approach the labs as an opportunity to expose yourselves to new tools and features that you may not have had an opportunity to play with yet.
-
-To complete both the labs and the challenge, each team has been provided a four node cluster running AHV and AOS 5.10.x running in the Hosted POC environment.
+The Overview section of each lab will indicate whether another lab should be completed prior to completing that lab.
 
 Team Assignments
 ++++++++++++++++
@@ -127,23 +127,10 @@ Cluster Access Options
 
 The Nutanix Hosted POC environment can be accessed a number of different ways:
 
-Citrix XenDesktop
-.................
+Employee Global Protect VPN
+...........................
 
-https://citrixready.nutanix.com - *Accessible via the Citrix Receiver client or HTML5*
-
-**Nutanix Employees** - Use your NUTANIXDC credentials
-
-**Partners** - **Username:** POCxxx-User01 (up to POCxxx-User20), **Password:** techX2018!
-
-VMware Horizon View
-...................
-
-https://hostedpoc.nutanix.com - *Accessible via the Horizon View client or HTML5*
-
-**Nutanix Employees** - Use your NUTANIXDC credentials
-
-**Partners** - **Username:** POCxxx-User01 (up to POCxxx-User20), **Password:** techX2018!
+- **Portals** - gp.nutanix.com
 
 Employee Pulse Secure VPN
 ..........................
@@ -164,8 +151,3 @@ Add a connection:
 - **Type** - Policy Secure (UAC) or Connection Server
 - **Name** - HPOC VPN
 - **Server URL** - lab-vpn.nutanix.com
-
-Tech Summit Challenge
-+++++++++++++++++++++
-
-`Click here to view the Tech Summit AMER Challenge. <https://nutanixinc.sharepoint.com/:b:/s/Sales-Enablement/Technical-Enablement/Ed1qBZbxaJRMt7t9dfPnhecBQwNsPp3O8qUbrNHNnBm9og?e=mfSdvV>`_
