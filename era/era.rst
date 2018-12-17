@@ -108,8 +108,6 @@ At the "Welcome to Era" screen, fill in the following information and click **Ne
 - **Prism Element Administrator** - admin
 - **Password** - techX2019!
 
-.. figure:: images/4.png
-
 Click **Next**
 
 Select the container named **“default…”** and click **Next**.
