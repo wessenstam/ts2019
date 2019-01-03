@@ -83,9 +83,9 @@ In **Prism Central > VMs > List**, indentify the IP Address assigned to the Era 
 
 .. note::
 
-  If the IP address does not populate, log into the console of the VM and Run “ifconfig” to see the assigned IP address'
-  - **Username - Era
-  - **Password - Nutanix.1
+  If the IP address does not populate, log into the console of the VM and Run “ifconfig” to see the assigned IP address.
+  - **Username** - Era
+  - **Password** - Nutanix.1
 
 In a new browser tab, log on to Era https://ERA-IP:8443/ using these credentials:
 
@@ -205,7 +205,7 @@ Right click Servers in the Browser menu and select **Create**, then **Server**
 
 **Connection Information**
 
-- **Hostname/IP Address - IP for DBServer-*Initials*
+- **Hostname/IP Address** - IP for DBServer-*Initials*
 - **Port** - 5432
 - **Maintenance Database** - postgres
 - **Username** - postgres
@@ -313,7 +313,7 @@ Start pgAdmin, select your source database instance, go to the Tools menu and se
 From the **Query Tool**, paste the following SQL command into the editor:
 
 .. code-block:: bash
-  :name: inline-code-example
+  :name: inline-code
 
   CREATE TABLE products (
   product_no integer,

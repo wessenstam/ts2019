@@ -38,12 +38,12 @@
         <div class="col-md-6">
             <h2>Need Support?</h2>
             <p>Join us in #techsummit2019 on Slack for questions, comments, and important announcements.</p>
-            #<p><a class="btn btn-secondary" href="slack://channel?id=CE2LNUG5Q&amp;team=T0252CLM8" role="button">Join Channel &raquo;</a></p>
+            <p><a class="btn btn-secondary" href="slack://channel?id=CE2LNUG5Q&amp;team=T0252CLM8" role="button">Join Channel &raquo;</a></p>
         </div>
         <div class="col-md-6">
             <h2>Awards and Prizes</h2>
-            <p>In addition to bragging rights, the winning Hackathon team will receive ** Insert Prize Here **.</p>
-            <p>Lab Track prizes will be ** Insert Prize Here **.</p>
+            <p>In addition to bragging rights, the winning Hackathon team will receive <B>** Insert Prize Here **</B>.</p>
+            <p>Lab Track prizes will be <B>** Insert Prize Here **</B>.</p>
         </div>
     </div>
     <hr>
