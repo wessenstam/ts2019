@@ -35,7 +35,7 @@ Getting Engaged with the Product Team
 Pre-requirements
 ++++++++++++++++
 
-To be able to run the workshops you need to have the following available or installed
+To be able to run the lab you need to have the following available or installed
 
 A public ssh key of your machine by using :ref:'sshkey_creation'
 
@@ -107,8 +107,6 @@ At the "Welcome to Era" screen, fill in the following information and click **Ne
 - **IP address of Prism Element** - *HPOC Cluster IP*
 - **Prism Element Administrator** - admin
 - **Password** - techX2019!
-
-.. figure:: images/4.png
 
 Click **Next**
 

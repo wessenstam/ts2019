@@ -2,6 +2,15 @@
 
 .. toctree::
   :maxdepth: 2
+  :caption: Pre-Requirements
+  :name: _prerequirements
+  :hidden:
+
+  appendix/install_wget
+  appendix/install_kubectl
+
+.. toctree::
+  :maxdepth: 2
   :caption: Required Labs
   :name: _req_labs
   :hidden:
@@ -14,6 +23,7 @@
   :name: _opt_101_labs
   :hidden:
 
+  karbon/karbon
 
 .. toctree::
   :maxdepth: 2
