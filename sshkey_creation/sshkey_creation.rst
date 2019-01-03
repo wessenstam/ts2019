@@ -20,6 +20,7 @@ SSH Key Creation
 Open up your terminal of choice, and type in *ssh-keygen -t rsa -f ~/[KEY_FILENAME] -C [USERNAME]*.  After hitting enter, follow the prompts.  Note: Using a passphrase on your key is **only** supported if your Prism Central version is greater than or equal to 5.8.1, otherwise a passphrase **cannot** be used.  The below example will not use a passphrase as this will work on all Prism Central versions.
 
 .. code-block:: bash
+  :name: inline-code
 
    $ ssh-keygen -t rsa -f ~/calmkey -C centos@nutanix.com
    Generating public/private rsa key pair.
@@ -49,6 +50,7 @@ Accessing the Private Key
 When working through Calm blueprints and application launches, you'll need the username you provided in the first step (*centos* in my example, as the majority of the pre-seeded marketplace apps use centos as the username), and the contents of the private key (including the **-----BEGIN RSA PRIVATE KEY-----** and **-----END RSA PRIVATE KEY-----** lines, **without** any additional new lines at the end).
 
 .. code-block:: bash
+  :name: inline-code
 
    $ cat calmkey
    -----BEGIN RSA PRIVATE KEY-----
@@ -86,6 +88,7 @@ Accessing the Public Key
 Depending on the cloud that you're deploying onto, the public SSH key will be used in different places.  For AHV launches, there's a **INSTANCE_PUBLIC_KEY** macro that you'll paste the key into, and for GCP there's a **SSH KEYS** section.  You'll want to copy the entire single line of the public key (starting with **ssh-rsa** and ending with the username and domain), without any new lines.
 
 .. code-block:: bash
+  :name: inline-code
 
    $ cat calmkey.pub
    ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDDoJlPj+ACPyHGm0f+FyTQPRt+m1H6JstyLtvFJUntDyF2/dqpcQ9QfKKw1QcjzGdSS8B6HrdOOjKZz42j01/YLWFy2YrDLQOHcNJi6XowCQ059C7bHehP5lqNN6bRIzdQnqGZGYi8iKYzUChMVusfsPd5ZZo0rHCAiCAP1yFqrcSmq83QNN1X8FZ1COoMB66vKyD2rEoeKz4lilEeWKyP4RLmkOc1eMYQNdyMOCNFFbKmC1nPJ+Mpxo1HfNR84R7WNl5oEaNQOORN+NaOzu5Bxim2hhJvU37J+504azZ1PCUiHiC0+zBw4JfeOKMvtInmkEZQEd3y4RrIHLXKB4Yb centos@nutanix.com
@@ -128,6 +131,3 @@ Accessing the Public Key
 Back in Putty Keygen, near the top there's a Public key section.  Copy the contents of that key, open up a text editor, and save the single line for later use.  Depending on the cloud that you're deploying onto, the public SSH key will be used in different places.  For AHV launches, there's a **INSTANCE_PUBLIC_KEY** macro that you'll paste the key into, and for GCP there's a **SSH KEYS** section.
 
 .. figure:: images/publickey.png
-
-Takeaways
-+++++++++
