@@ -246,7 +246,7 @@ From Terminal, run the following commands to setup your **kubeconfig**:
   cd ~
   mkdir .kube
   cd .kube
-  mv ~\Downloads\kubectl* config
+  mv ~/Downloads/kubectl* config
   kubectl get nodes
 
 
