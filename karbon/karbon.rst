@@ -11,6 +11,9 @@ Overview
 
   Estimated time to complete: **90 MINUTES**
 
+Nutanix Karbon is an on-prem turnkey curated enterprise-grade Kubernetes service offering that simplifies the provisioning, operations and lifecycle management of Kubernetes.
+Karbon provides a consumer-grade experience for delivering Kubernetes on-prem providing huge savings on OpEx of dedicated DevOps or SRE teams to keep Kubernetes online, up to date or integrated with 3rd party components and tooling.
+
 Getting Engaged with the Product Team
 .....................................
 
@@ -485,4 +488,6 @@ You have now deleted your Karbon Kubernetes cluster.
 Takeaways
 +++++++++
 
-- Nutanix Karbon makes it very easy to create and manage kubernetes clusters
+- Karbon enables enterprises to provide a private-cloud Kubernetes solution with the simplicity and performance of public clouds. 
+- Karbon is part of a complete Cloud Native solution from Nutanix including storage (volumes/buckets/files), database automation (era), and enhanced monitoring (epoch).
+- Leveraging Karbon, developers can enjoy the native Kubernetes experience that is delivered fast while all complexities of infrastructure are abstracted with no additional costs. Karbon is included in all AOS software editions.

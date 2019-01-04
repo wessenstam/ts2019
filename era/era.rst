@@ -79,7 +79,7 @@ Select the Nutanix Era VM you created and click **Power On**.
 Register Cluster with Nutanix ERA
 +++++++++++++++++++++++++++++++++
 
-In **Prism Central > VMs > List**, indentify the IP Address assigned to the Era VM you just deployed (“IP Addresses” column).
+In **Prism Central > VMs > List**, identify the IP Address assigned to the Era VM you just deployed (“IP Addresses” column).
 
 .. note::
 
@@ -205,7 +205,7 @@ Right click Servers in the Browser menu and select **Create**, then **Server**
 
 - **Hostname/IP Address** - IP for DBServer-*Initials*
 - **Port** - 5432
-- **Maintenance Database** - postgres
+- **Maintenance Database** - Postgres
 - **Username** - postgres
 - **Password** - techX2019!
 
