@@ -23,7 +23,7 @@ Good news, you can. Let's walk through how to set that up.
 Create Alert Policy
 ...................
 
-In **Prism Central > :fa:`bars` > Virtual Infrastructure > VMs**, and click **Alerts**
+In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click **Alerts**
 
 .. figure:: images/xplay_02.png
 
@@ -47,11 +47,11 @@ Click **Save**.
 Create Playbook
 ...............
 
-In **Prism Central > :fa:`bars` > Operations > Playbooks**.
+In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
 
 Click **Create Playbook**.
 
-Select **:fa:`bell` Alert** as Trigger, and click **Select**.
+Select :fa:`bell` **Alert** as Trigger, and click **Select**.
 
 .. figure:: images/xplay_01.png
 
@@ -94,7 +94,7 @@ Click **Save**.
 Cause Memory Constraint
 .......................
 
-In **Prism Central > :fa:`bars` > Virtual Infrastructure > VMs**.
+In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**.
 
 Take note of your **Tomcat-**\ *initials* VM's memory capacity.
 
@@ -107,7 +107,7 @@ Check the memory capacity on your **Tomcat-**\ *initials* VM now, you should see
 Review the Playbook Play
 ........................
 
-In **Prism Central > :fa:`bars` > Operations > Playbooks**.
+In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
 
 Select your **Auto Remove Memory Constraint -**\ *initials*, and click **Plays**.
 
@@ -127,11 +127,11 @@ In this exercise we will create a playbook to take care of memory over provision
 Create Playbook
 ...............
 
-In **Prism Central > :fa:`bars` > Operations > Playbooks**.
+In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
 
 Click **Create Playbook**.
 
-Select **:fa:`bell` Alert** as Trigger, and click **Select**.
+Select :fa:`bell` **Alert** as Trigger, and click **Select**.
 
 
 
