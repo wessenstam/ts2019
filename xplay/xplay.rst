@@ -23,7 +23,7 @@ Good news, you can. Let's walk through how to set that up.
 Create Alert Policy
 ...................
 
-In **Prism Central > :fa:`navicon` > Virtual Infrastructure > VMs**, and click **Alerts**
+In **Prism Central > :fa:`bars` > Virtual Infrastructure > VMs**, and click **Alerts**
 
 .. figure:: images/xplay_02.png
 
@@ -47,7 +47,7 @@ Click **Save**.
 Create Playbook
 ...............
 
-In **Prism Central > :fa:`navicon` > Operations > Playbooks**.
+In **Prism Central > :fa:`bars` > Operations > Playbooks**.
 
 Click **Create Playbook**.
 
@@ -55,7 +55,7 @@ Select **:fa:`bell` Alert** as Trigger, and click **Select**.
 
 .. figure:: images/xplay_01.png
 
-Search “VM Memory Constrained” in **Alert Policy**, and select **VM Memory Constrained - initials**.
+Search “VM Memory Constrained” in **Alert Policy**, and select **VM Memory Constrained -**\ *initials*.
 
 .. figure:: images/xplay_05.png
 
@@ -94,22 +94,22 @@ Click **Save**.
 Cause Memory Constraint
 .......................
 
-In **Prism Central > :fa:`navicon` > Virtual Infrastructure > VMs**.
+In **Prism Central > :fa:`bars` > Virtual Infrastructure > VMs**.
 
-Take note of your Tomcat-*initials* VM's memory capacity.
+Take note of your **Tomcat-**\ *initials* VM's memory capacity.
 
-Open a console session, and run the **paintrigger** script.
+Open a console session, and run the **paintrigger.py** script.
 
 After 1-2 minutes you should receive an email from Prism.
 
-Check the memory capacity on your Tomcat-*initials* VM now, you should see that it has increased.
+Check the memory capacity on your **Tomcat-**\ *initials* VM now, you should see that it has increased.
 
 Review the Playbook Play
 ........................
 
-In **Prism Central > :fa:`navicon` > Operations > Playbooks**.
+In **Prism Central > :fa:`bars` > Operations > Playbooks**.
 
-Select your **Auto Remove Memory Constraint - initials**, and click **Plays**.
+Select your **Auto Remove Memory Constraint -**\ *initials*, and click **Plays**.
 
 You should see that a Play has just completed.
 
@@ -127,9 +127,11 @@ In this exercise we will create a playbook to take care of memory over provision
 Create Playbook
 ...............
 
-In **Prism Central > :fa:`navicon` > Operations > Playbooks**.
+In **Prism Central > :fa:`bars` > Operations > Playbooks**.
 
 Click **Create Playbook**.
+
+Select **:fa:`bell` Alert** as Trigger, and click **Select**.
 
 
 
@@ -151,7 +153,7 @@ Getting Engaged with the Product Team
 +---------------------------------------------------------------------------------+
 |  XPlay Product Contacts                                                         |
 +================================+================================================+
-|  Slack Channel                 |  #                                             |
+|  Slack Channel                 |  #Prism-Pro                                    |
 +--------------------------------+------------------------------------------------+
 |  Product Manager               |  Harry Yang, harry.yang@nutanix.com            |
 +--------------------------------+------------------------------------------------+
