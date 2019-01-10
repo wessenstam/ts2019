@@ -24,6 +24,7 @@
   :hidden:
 
   karbon/karbon
+  xplay/xplay
 
 .. toctree::
   :maxdepth: 2
