@@ -23,7 +23,7 @@ Good news, you can. Let's walk through how to set that up.
 Create Alert Policy
 ...................
 
-In **Prism Central > :fa:`fa-navicon` > Virtual Infrastructure > VMs**, and click **Alerts**
+In **Prism Central > :fa:`navicon` > Virtual Infrastructure > VMs**, and click **Alerts**
 
 .. figure:: images/xplay_02.png
 
@@ -47,15 +47,15 @@ Click **Save**.
 Create Playbook
 ...............
 
-In **Prism Central > :fa:`fa-navicon` > Operations > Playbooks**.
+In **Prism Central > :fa:`navicon` > Operations > Playbooks**.
 
 Click **Create Playbook**.
 
-Select **:fa:`fa-bell` Alert** as Trigger, and click **Select**.
+Select **:fa:`bell` Alert** as Trigger, and click **Select**.
 
 .. figure:: images/xplay_01.png
 
-Search “VM Memory Constrained” in **Alert Policy**, and select **VM Memory Constrained - \*initials\* **.
+Search “VM Memory Constrained” in **Alert Policy**, and select **VM Memory Constrained - initials**.
 
 .. figure:: images/xplay_05.png
 
@@ -94,7 +94,7 @@ Click **Save**.
 Cause Memory Constraint
 .......................
 
-In **Prism Central > :fa:`fa-navicon` > Virtual Infrastructure > VMs**.
+In **Prism Central > :fa:`navicon` > Virtual Infrastructure > VMs**.
 
 Take note of your Tomcat-*initials* VM's memory capacity.
 
@@ -107,9 +107,9 @@ Check the memory capacity on your Tomcat-*initials* VM now, you should see that 
 Review the Playbook Play
 ........................
 
-In **Prism Central > :fa:`fa-navicon` > Operations > Playbooks**.
+In **Prism Central > :fa:`navicon` > Operations > Playbooks**.
 
-Select your **Auto Remove Memory Constraint - *initials* **, and click **Plays**.
+Select your **Auto Remove Memory Constraint - initials**, and click **Plays**.
 
 You should see that a Play has just completed.
 
@@ -117,6 +117,32 @@ Click the Play, and examine the details.
 
 Reduce Memory On A VM During A Maintenance Windows
 ++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Xfit in Prism Pro utilizes Machine Learning to continually analyze the environment. This is helpful to detect resource constraints, such as our memory constraint in the last lab, as well as inefficiencies.
+
+Inefficiencies could be Virtual Machines with over provisioned vCPU or Memory.
+
+In this exercise we will create a playbook to take care of memory over provision.
+
+Create Playbook
+...............
+
+In **Prism Central > :fa:`navicon` > Operations > Playbooks**.
+
+Click **Create Playbook**.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 Getting Engaged with the Product Team
