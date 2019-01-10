@@ -40,7 +40,7 @@ Create a Karbon Kubernetes Cluster
 
 In this exercise you will create a production ready Kubernetes cluster with Nutanix Karbon.
 
-Navigate to **Prism Central > Select the Three Dashes > Karbon** and ensure you see a ‘Karbon is successfully enabled’ notification.
+In **Prism Central > > :fa:`fa-navicon` > > Karbon** and ensure you see a ‘Karbon is successfully enabled’ notification.
 
 Click the link to open the Karbon Console.
 
@@ -488,6 +488,6 @@ You have now deleted your Karbon Kubernetes cluster.
 Takeaways
 +++++++++
 
-- Karbon enables enterprises to provide a private-cloud Kubernetes solution with the simplicity and performance of public clouds. 
+- Karbon enables enterprises to provide a private-cloud Kubernetes solution with the simplicity and performance of public clouds.
 - Karbon is part of a complete Cloud Native solution from Nutanix including storage (volumes/buckets/files), database automation (era), and enhanced monitoring (epoch).
 - Leveraging Karbon, developers can enjoy the native Kubernetes experience that is delivered fast while all complexities of infrastructure are abstracted with no additional costs. Karbon is included in all AOS software editions.
