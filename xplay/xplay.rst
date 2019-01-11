@@ -59,17 +59,17 @@ Search “VM Memory Constrained” in **Alert Policy**, and select **VM Memory C
 
 .. figure:: images/xplay_05.png
 
-Click **Add Action**, and select the **VM Snapshot** action.
+Click **Add Action**, and select the :fa:`camera` **VM Snapshot** action.
 
 - **Target VM** - Tomcat-*intials*
 
-Click **Add Action**, and select the **VM Hot Add Memory** action.
+Click **Add Action**, and select the :fa:`memory` **VM Hot Add Memory** action.
 
 - **Target VM** - Tomcat-*intials*
 - **Add Absolute Memory** -
 - **Absolute Maximum** -
 
-Click **Add Action**, and select the **Email** action.
+Click **Add Action**, and select the :fa:`envelope` **Email** action.
 
 .. note::
 
