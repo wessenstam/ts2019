@@ -9,7 +9,62 @@ Overview
 
 **Estimated time to complete: 30 MINUTES**
 
+Lab Setup
++++++++++
+In this section we will deploy a Linux VM, install Stress, and run a stress test.
 
+Deploy Linux VM
+...............
+
+In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click **Create VM**.
+
+Fill out the following fields:
+
+- **Name** - Tomcat-*initials*
+- **Description** - (Optional) Description for your VM.
+- **vCPU(s)** - 1
+- **Number of Cores per vCPU** - 1
+- **Memory** - 2 GiB
+
+- Select **+ Add New Disk**
+    - **Type** - DISK
+    - **Operation** - Clone from Image Service
+    - **Image** - CentOS7.qcow2
+    - Select **Add**
+
+- Select **Add New NIC**
+    - **VLAN Name** - Primary
+    - Select **Add**
+
+Click **Save** to create the VM.
+
+Power On the VM.
+
+Install Stress and Run Stress Test
+..................................
+
+Lets install **Stress** so we can use it to generate load.
+
+Login to the VM vis ssh or Console session, and sun the following command:
+
+- **Username** - root
+- **password** - nutanix/4u
+
+.. code-block:: bash
+
+  yum install -y stress
+
+Now lets add some load by initiating a stress test.
+
+.. code-block:: bash
+
+  stress -m 4 --vm-bytes 500M -t 40m &
+
+Review Memory of <*VM-A*> (Pre-Seeded for this lab).
+
+In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click **VM-A**
+
+<Add more content from harry Yang here around Best Practices>
 
 Automatically Add Memory to a VM When A Constraint is Detected
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -23,63 +78,122 @@ Good news, you can. Let's walk through how to set that up.
 Create Alert Policy
 ...................
 
-In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click **Alerts**
+In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click **Tomcat**-*initials*.
+
+Next select **Metrics > Memory Usage**.
+
+.. figure:: images/xplay_01.png
+
+Click **Alert Settings**
 
 .. figure:: images/xplay_02.png
 
-Select **Alert Policy** from the **Configure** dropdown.
-
-.. figure:: images/xplay_03.png
-
-Click **+ New Alert Policy**, and fill out the following fields:
+You will see the  **Create Alert Policy** window, fill out the following fields:
 
 - **Entity Type** - VM
-- **Entity**  - All VMs
+- **Entity (Line 1)** - One VM
+- **Entity (Line 2)** - Tomcat-*initials*
 - **Metric** - Memory Usage
 - **Impact Type** - Performance
 - **Policy Name** - VM Memory Constrained - *initials*
 - **Description** - Optional
+- **Auto Resolve Alerts** - Checked
+- **Enable Policy** - **Unchecked**
+- **Trigger alert if conditions persist for** - 0 Minutes
 
-.. figure:: images/xplay_04.png
+- **Behavioral Anomaly**
+    - **Every time there is an anomaly, alert** - Checked / Warning
+
+- **Static Threshold**
+    - **Alert Critical if** - Checked / 60
+
+.. figure:: images/xplay_03.png
 
 Click **Save**.
+
+.. note::
+
+  Customers can choose out-of-the-box alert policies (shown below) to detect the memory and cpu constraint by X-FIT.
+
+  .. figure:: images/xplay_04.png
 
 Create Playbook
 ...............
 
 In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
 
+.. figure:: images/xplay_05.png
+
 Click **Create Playbook**.
 
 Select :fa:`bell` **Alert** as Trigger, and click **Select**.
 
-.. figure:: images/xplay_01.png
+.. figure:: images/xplay_06.png
+
+.. note::
+
+  When XPlay is GA in 5.11, we will also support a new trigger type “Manual” which allows you associate a playbook to VMs, Hosts, and Clusters and trigger it manually.
+
+  .. figure:: images/xplay_07.png
 
 Search “VM Memory Constrained” in **Alert Policy**, and select **VM Memory Constrained -**\ *initials*.
 
-.. figure:: images/xplay_05.png
+.. figure:: images/xplay_08.png
 
 Click **Add Action**, and select the :fa:`camera` **VM Snapshot** action.
 
-- **Target VM** - Tomcat-*intials*
+.. figure:: images/xplay_09.png
+
+Select **Source Entity** from the parameters.
+
+.. figure:: images/xplay_10.png
+
+.. note::
+
+  Source entity means the entity triggers the alert.
+
+- **Target VM** - {{trigger[0].source_entity_info}}
+- **Time To Live**  - 1 day(s)
+
+.. figure:: images/xplay_11.png
 
 Click **Add Action**, and select the :fa:`memory` **VM Hot Add Memory** action.
 
-- **Target VM** - Tomcat-*intials*
-- **Add Absolute Memory** -
-- **Absolute Maximum** -
+Select **Source Entity** from the parameters.
+
+- **Target VM** - {{trigger[0].source_entity_info}}
+- **Add Absolute Memory** - 1 GiB
+- **Absolute Maximum** -  20 GiB
+
+.. figure:: images/xplay_12.png
 
 Click **Add Action**, and select the :fa:`envelope` **Email** action.
 
 .. note::
 
-  This action requires the SMTP server to be configured.
+  Please look at the example Subject below with parameters.
+
+  Please try creating your own Subjects using parameters.
 
 - **Recipient** - YourEmail@nutanix.com
-- **Subject** - Added Memory to Tomcat-*intials*
-- **Message** - Added Memory to Tomcat-*intials*
+- **Subject** - Playbook {{playbook.playbook_name}} addressed alert {{trigger[0].alert_entity_info.name}}
+- **Message** - Prism Pro X-FIT detected  {{trigger[0].alert_entity_info.name}} in {{trigger[0].source_entity_info.name}}.  Prism Pro X-Play has run the playbook of "{{playbook.playbook_name}}". As a result, Prism Pro increased 1GB memory in {{trigger[0].source_entity_info.name}}.
+
+.. note::
+
+  There is a bug right now that when you click a parameter in the **paramete** popup, the parameter string will be appended at the end of the text string, not at the place of the cursor.
+
+  You have to cut and paste it into the write place if that is the case.
+
+.. figure:: images/xplay_13.png
 
 Click **Add Action**, and select the **Acknowledge Alert** action.
+
+Select **Alert** from the parameters.
+
+.. figure:: images/xplay_14.png
+
+- **Target Alert**  - {{trigger[0].alert_entity_info}}
 
 Click **Save & Close**, and fill out the following fields:
 
@@ -87,20 +201,38 @@ Click **Save & Close**, and fill out the following fields:
 - **Description** - Optional
 - **Status**  - Enabled
 
-.. figure:: images/xplay_06.png
+.. figure:: images/xplay_15.png
 
 Click **Save**.
 
 Cause Memory Constraint
 .......................
 
-In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**.
+In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click **Tomcat**-*initials*.
 
 Take note of your **Tomcat-**\ *initials* VM's memory capacity.
 
-Open a console session, and run the **paintrigger.py** script.
+Click **Alerts**, Select **Alert Policy** from **Configure** Dropdown.
+
+.. figure:: images/xplay_16.png
+
+Select **VM Memory Constrained** - *initials*, and **Enable** the policy.
+
+.. figure:: images/xplay_17.png
+
+Open a console session or SSH into Prism Central, and run the **paintrigger.py** script.
+
+.. code-block:: bash
+
+  ./paintrigger.py
+
+.. note::
+
+  This will resolve all the alerts, force NCC check to run immediately and trigger the alert.
 
 After 1-2 minutes you should receive an email from Prism.
+
+Check the email to see that its subject and email body have filled the real value for the parameters you set up earlier.
 
 Check the memory capacity on your **Tomcat-**\ *initials* VM now, you should see that it has increased.
 
@@ -109,11 +241,15 @@ Review the Playbook Play
 
 In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
 
-Select your **Auto Remove Memory Constraint -**\ *initials*, and click **Plays**.
+Select your **Auto Remove Memory Constraint -**\ *initials*, and **disable** it.
+
+Click **Plays**.
 
 You should see that a Play has just completed.
 
 Click the Play, and examine the details.
+
+.. figure:: images/xplay_18.png
 
 Reduce Memory On A VM During A Maintenance Windows
 ++++++++++++++++++++++++++++++++++++++++++++++++++
