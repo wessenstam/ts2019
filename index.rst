@@ -6,9 +6,10 @@
   :name: _req_labs
   :hidden:
 
+  flow/flow
   era/era
   karbon/karbon
-  flow/flow
+  buckets/buckets
 
 .. toctree::
   :maxdepth: 2
