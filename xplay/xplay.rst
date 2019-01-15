@@ -45,7 +45,7 @@ Install Stress and Run Stress Test
 
 Lets install **Stress** so we can use it to generate load.
 
-Login to the VM vis ssh or Console session, and sun the following command:
+Login to the VM vis ssh or Console session, and run the following command:
 
 - **Username** - root
 - **password** - nutanix/4u
@@ -441,7 +441,7 @@ Things to do Next
 
 As you can see, XPlay paired with XFit is very powerful.
 
-You can go to “Action Gallery” page and familiarize yourself with all the out-of-the-box Actions, and see all the possible things you can do. 
+You can go to “Action Gallery” page and familiarize yourself with all the out-of-the-box Actions, and see all the possible things you can do.
 
 Getting Engaged with the Product Team
 +++++++++++++++++++++++++++++++++++++
