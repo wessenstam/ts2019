@@ -105,7 +105,7 @@ You will see the  **Create Alert Policy** window, fill out the following fields:
     - **Every time there is an anomaly, alert** - Checked / Warning
 
 - **Static Threshold**
-    - **Alert Critical if** - Checked / 60
+    - **Alert Critical if** - Checked / >= 60
 
 .. figure:: images/xplay_03.png
 
@@ -285,7 +285,7 @@ You will see the  **Create Alert Policy** window, fill out the following fields:
 - **Trigger alert if conditions persist for** - 0 Minutes
 
 - **Static Threshold**
-    - **Alert Critical if** - Checked / 30
+    - **Alert Critical if** - Checked / <= 30
 
 .. figure:: images/xplay_20.png
 
@@ -442,6 +442,10 @@ Things to do Next
 As you can see, XPlay paired with XFit is very powerful.
 
 You can go to “Action Gallery” page and familiarize yourself with all the out-of-the-box Actions, and see all the possible things you can do.
+
+In **Prism Central** > select :fa:`bars` **> Operations > Actions Gallery**.
+
+.. figure:: images/xplay_27.png
 
 Getting Engaged with the Product Team
 +++++++++++++++++++++++++++++++++++++

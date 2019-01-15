@@ -51,7 +51,7 @@ Install Tools Software
 
 Lets install **iam_util** and **mc** so we can manage users and access policies.
 
-Login to the VM vis ssh or Console session, and run the following commands:
+Login to the VM via ssh or Console session, and run the following commands:
 
 - **Username** - root
 - **password** - nutanix/4u
@@ -200,6 +200,73 @@ Select the bucket you just created **my-bucket**-*initials*, and click **Configu
 .. note::
 
   In the EA version, the WORM UI is not yet fully functional, so you won’t be able to apply the WORM policy to your bucket.
+
+User Management
++++++++++++++++
+
+In this lab you will create two users using the command line tool, **iam_util**.
+
+.. note::
+
+  User creation and access policy configuration will be in the UI in Buckets GA. In the early access software, we will use the following Linux command line tools:
+
+  - iam_util - for user creation
+  - Mc - for policy configuration
+
+Login to the VM via ssh or Console session.
+
+- **Username** - root
+- **password** - nutanix/4u
+
+Run the following command to create a user named Bob:
+
+.. code-block:: bash
+
+  ./iam_util -url http://<object-store-ip>:5556 -username bob@nutanix.com
+
+The output will contain the access and secret keys for the user.
+
+.. code-block:: bash
+
+  2019/01/10 20:31:29 Creating Access and Secret key for user bob
+  2019/01/10 20:31:29 Access Key Ke2hEtehmOZoXYCrQnzUn_2EDD9Eqf0L
+  Secret Key p6sxh_FhxEyIteslQJKfDlezKrtJro9C
+
+Run the command one more time for a second user named Joe.
+
+.. code-block:: bash
+
+  ./iam_util -url http://<object-store-ip>:5556 -username joe@nutanix.com
+
+Copy and paste the output lines (Access & Secret Keys) for both users into a text file for later use.
+
+Be sure to note whose credentials are whose. We will be using the users you have created in a later lab.
+
+Creating and Accessing Buckets
+++++++++++++++++++++++++++++++
+
+In this lab you will use Cyberduck to create and use buckets in the object store.
+
+You will also briefly use the built-in object store browser, which is an easy way to test that your object store is functional and can be used to quickly to demo IAM access controls.
+
+Download the Sample Images
+..........................
+
+Login to your Windows Tools VM **ToolsVM**-*initials*.
+
+- **Username** - administrator
+- **password** - nutanix/4u
+
+Download the :download:`Sample-Pictures.zip <Sample-Pictures.zip>`
+
+Unzip Sample-Pictures.Unzip
+
+Use Cyberduck to Create A Bucket
+................................
+
+
+
+
 
 
 
