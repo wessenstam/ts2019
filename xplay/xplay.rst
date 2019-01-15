@@ -210,7 +210,7 @@ Cause Memory Constraint
 
 In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click **Tomcat**-*initials*.
 
-Take note of your **Tomcat-**\ *initials* VM's memory capacity.
+Take note of your **Tomcat-**\ *initials* VM's memory capacity (should be 2 GiB).
 
 Click **Alerts**, Select **Alert Policy** from **Configure** Dropdown.
 
@@ -251,14 +251,49 @@ Click the Play, and examine the details.
 
 .. figure:: images/xplay_18.png
 
-Reduce Memory On A VM During A Maintenance Windows
-++++++++++++++++++++++++++++++++++++++++++++++++++
+Reduce CPU Capacity For A VM During A Maintenance Windows
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Xfit in Prism Pro utilizes Machine Learning to continually analyze the environment. This is helpful to detect resource constraints, such as our memory constraint in the last lab, as well as inefficiencies.
+Xfit in Prism Pro utilizes Machine Learning to continually analyze the environment.
+
+This is helpful to detect resource constraints, such as our memory constraint in the last lab, as well as inefficiencies.
 
 Inefficiencies could be Virtual Machines with over provisioned vCPU or Memory.
 
-In this exercise we will create a playbook to take care of memory over provision.
+In this exercise we will create a playbook to take care of over-provisioned CPU.
+
+Create Alert Policy
+...................
+
+In **Prism Central** > select :fa:`bars` **> Activity > Alerts**, and Select **Alert Policy** from **Configure** Dropdown.
+
+Click **+ New Alert Policy**
+
+.. figure:: images/xplay_19.png
+
+You will see the  **Create Alert Policy** window, fill out the following fields:
+
+- **Entity Type** - VM
+- **Entity (Line 1)** - One VM
+- **Entity (Line 2)** - Tomcat-*initials*
+- **Metric** - CPU Usage
+- **Impact Type** - Performance
+- **Policy Name** - -VM CPU Overprovisioned - *initials*
+- **Description** - Optional
+- **Auto Resolve Alerts** - Checked
+- **Enable Policy** - **Unchecked**
+- **Trigger alert if conditions persist for** - 0 Minutes
+
+- **Static Threshold**
+    - **Alert Critical if** - Checked / 30
+
+.. figure:: images/xplay_20.png
+
+Click **Save**.
+
+.. note::
+
+  Customers can choose out-of-the-box alert policies (shown below) to detect the overprovisioned memory and cpu by X-FIT.
 
 Create Playbook
 ...............
@@ -269,19 +304,144 @@ Click **Create Playbook**.
 
 Select :fa:`bell` **Alert** as Trigger, and click **Select**.
 
+Search “VM CPU Overprovisioned” in **Alert Policy**, and select **VM CPU Overprovisioned -**\ *initials*.
 
+Click **Add Action**, and select the :fa:`power-off` **Power Off VM** action.
 
+Select **Source Entity** from the parameters.
 
+- **Target VM** - {{trigger[0].source_entity_info}}
+- **Type of Power Off Action**  - Guest Shutdown
 
+.. note::
 
+  If VM does not have NGT installed, select **Power Off** instead.
 
+Click **Add Action**, and select the **VM Reduce CPU** action.
 
+Select **Source Entity** from the parameters.
 
+- **Target VM** - {{trigger[0].source_entity_info}}
+- **Cores per vCPU to Remove**  - 1
+- **Minimum Number of Cores per vCPU**  - 1
 
+.. note::
 
+  There is a bug in 5.10 that missed the two fields allowing you change the vCPU counts. This is fixed in 5.11.
 
+  .. figure:: images/xplay_21.png
 
+Click **Add Action**, and select the :fa:`power-off` **Power On VM** action.
 
+Select **Source Entity** from the parameters.
+
+- **Target VM** - {{trigger[0].source_entity_info}}
+
+Click **Add Action**, and select the :fa:`envelope` **Email** action.
+
+.. note::
+
+  Please look at the example Subject below with parameters.
+
+  Please try creating your own Subjects using parameters.
+
+- **Recipient** - YourEmail@nutanix.com
+- **Subject** - Playbook {{playbook.playbook_name}} downsized  {{trigger[0].source_entity_info.name}}
+- **Message** - Prism Pro's X-FIT detected that  {{trigger[0].source_entity_info.name}} is overprovisioned.  Prism Pro's X-Play has run the playbook of "{{playbook.playbook_name}}". As a result, Prism Pro downsized {{trigger[0].source_entity_info.name}}.
+
+Many times, you can’t just power off the VM to do the resizing during the production time.
+
+X-Play provides a way for the user to specify the time window where the actions can be executed.
+
+Click **Restrict**.
+
+.. figure:: images/xplay_22.png
+
+Set up the start time about 5 minutes after your current time.
+
+.. figure:: images/xplay_23.png
+
+Click **Set Restriction**.
+
+The **Restrict** label will change to **Restriction Set**. If you hover the mouse, you will see the schedule you just set.
+
+.. note::
+
+  The step above illustrate the way you can achieve this in 5.10 early access. However we made a major enhancement in 5.11.
+
+  You will see three action types that will replace and enhance the “restrict” in 5.10, **Wait for Some Time** / **Wait for Some Day of Month** / **Wait for Some Day of Week**.
+
+  .. figure:: images/xplay_24.png
+
+  .. figure:: images/xplay_25.png
+
+  .. figure:: images/xplay_26.png
+
+  These action type can be used just any other regular action type in any part of the Playbook.
+  It helps unlock not only the maintenance window setting but also allow a human approval process happening for a playbook.
+
+Click **Save & Close**, and fill out the following fields:
+
+- **Name**  - Reduce VM CPU - *initials*
+- **Description** - Optional
+- **Status**  - Enabled
+
+Click **Save**.
+
+Cause CPU Over-Provision
+........................
+
+In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click **Tomcat**-*initials*.
+
+Take note of your **Tomcat-**\ *initials* VM's CPU Cores (should be 2).
+
+Click **Alerts**, Select **Alert Policy** from **Configure** Dropdown.
+
+Select **VM CPU Overprovisioned** - *initials*, and **Enable** the policy.
+
+Open a console session or SSH into Prism Central, and run the **paintrigger.py** script.
+
+.. code-block:: bash
+
+  ./paintrigger.py
+
+.. note::
+
+  This will resolve all the alerts, force NCC check to run immediately and trigger the alert.
+
+In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
+
+Select your **Reduce VM CPU -**\ *initials*, and Click **Plays**.
+
+You should see that there is a play with your playbook name is in **scheduled** status.
+
+Wait for 1-2 minutes past the start time you set earlier, and you should receive an email from Prism.
+
+Check the email to see that its subject and email body have filled the real value for the parameters you set up earlier.
+
+Check the CPU Cores on your **Tomcat-**\ *initials* VM now, you should now see the **Virtual CPU Count** is “1” (instead of “2”).
+
+This means that the trigger happened and the rest of the play is waiting for the window to execute. You can select this play and abort it (from the action button).
+
+Review the Playbook Play
+........................
+
+In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
+
+Select your **Reduce VM CPU -**\ *initials*, and **disable** it.
+
+Click **Plays**.
+
+You should see that the Play has just completed.
+
+Click the Play, and examine the details.
+
+Things to do Next
++++++++++++++++++
+
+As you can see, XPlay paired with XFit is very powerful.
+
+You can go to “Action Gallery” page and familiarize yourself with all the out-of-the-box Actions, and see all the possible things you can do. 
 
 Getting Engaged with the Product Team
 +++++++++++++++++++++++++++++++++++++
