@@ -93,7 +93,7 @@ For example, if the name of the object store is **object-store-demo**, there wil
 
 We are using a small deployment, the deployed VMs are listed in the following table. Take note of the vCPU and Memory assigned to each.
 
-+------------------------------------------------------------------------------+
++----------------+-------------------------------+---------------+-------------+
 |  VM            |  Purpose                      |  vCPU / Cores |  Memory     |
 +================+===============================+===============+=============+
 |  k8s-master    |  Kubernetes Master            |  2 / 2        |  8 GiB      |
