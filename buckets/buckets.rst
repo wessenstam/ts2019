@@ -17,56 +17,13 @@ Another feature is easy integration with 3rd party backup software and S3 compat
 
 Lab Setup
 +++++++++
-In this section we will deploy a Linux VM, install iam_util, mc, s3cmd, and awscli.
 
-Deploy Linux VM
-...............
+For this lab you will need the Windows-ToolsVM and the Linux-ToolsVM.
 
-In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click **Create VM**.
+If you have not deployed those yet, please do the 2 labs below before continuing.
 
-Fill out the following fields:
-
-- **Name** - Buckets-Tools-*initials*
-- **Description** - (Optional) Description for your VM.
-- **vCPU(s)** - 1
-- **Number of Cores per vCPU** - 1
-- **Memory** - 2 GiB
-
-- Select **+ Add New Disk**
-    - **Type** - DISK
-    - **Operation** - Clone from Image Service
-    - **Image** - CentOS7.qcow2
-    - Select **Add**
-
-- Select **Add New NIC**
-    - **VLAN Name** - Primary
-    - Select **Add**
-
-Click **Save** to create the VM.
-
-Power On the VM.
-
-Install Tools Software
-......................
-
-Lets install **iam_util** and **mc** so we can manage users and access policies.
-
-Login to the VM via ssh or Console session, and run the following commands:
-
-- **Username** - root
-- **password** - nutanix/4u
-
-.. code-block:: bash
-
-  curl http://10.4.64.11:8080/Users/nutanix_buckets/ea/builds/18112018/tools/iam_util -o iam_util
-
-  curl http://10.4.64.11:8080/Users/nutanix_buckets/ea/builds/18112018/tools/mc -o mc
-
-  yum install -y s3cmd
-
-  yum install -y awscli
-
-Now we are ready to move onto the labs.
+:ref:`windows_tools_vm`
+:ref:`linux_tools_vm`
 
 Getting Familiar with the Nutanix Buckets Environment
 +++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -130,7 +87,7 @@ Click **Create Object Store**.
 
 Fill out the following fields:
 
-- **Object Store Name** - oss-*initials*
+- **Object Store Name** - *initials*-oss
 - **Domain**  - ntnxlab.local
 - **IP Address**  - Need designated IP?
 
@@ -174,11 +131,11 @@ Click **Deploy**
 Walk through Bucket Creation and Policies
 .........................................
 
-Select the **oss**-*initials* object store you just created.
+Select the *initials*-**oss** object store you just created.
 
 Click **Create Bucket**, and fill out the following fields: and give the bucket a name. You can optionally define versioning or lifecycle policies.
 
-- **Name**  - my-bucket-*initials*
+- **Name**  - *initials*-my-bucket
 - **Enable Versioning** - Checked
 
 Click **Create**.
@@ -195,7 +152,7 @@ Lifecycle policies define how long to keep data in the system.
 
 Once the bucket is created, it can be enabled with WORM (write once read many) for regulatory compliance.
 
-Select the bucket you just created **my-bucket**-*initials*, and click **Configure WORM**.
+Select the bucket you just created *initials*-**my-bucket**, and click **Configure WORM**.
 
 .. note::
 
@@ -213,7 +170,7 @@ In this lab you will create two users using the command line tool, **iam_util**.
   - iam_util - for user creation
   - Mc - for policy configuration
 
-Login to the VM via ssh or Console session.
+Login to the *initials*-**Linux-ToolsVM** via ssh or Console session.
 
 - **Username** - root
 - **password** - nutanix/4u
@@ -252,7 +209,7 @@ You will also briefly use the built-in object store browser, which is an easy wa
 Download the Sample Images
 ..........................
 
-Login to your Windows Tools VM **ToolsVM**-*initials*.
+Login to *initials*-**Windows-ToolsVM**.
 
 - **Username** - administrator
 - **password** - nutanix/4u

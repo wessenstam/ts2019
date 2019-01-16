@@ -11,50 +11,22 @@ Overview
 
 Lab Setup
 +++++++++
-In this section we will deploy a Linux VM, install Stress, and run a stress test.
 
-Deploy Linux VM
-...............
+For this lab you will need the Linux-ToolsVM.
 
-In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click **Create VM**.
+If you have not deployed this yet, please do the lab below before continuing.
 
-Fill out the following fields:
+:ref:`linux_tools_vm`
 
-- **Name** - Tomcat-*initials*
-- **Description** - (Optional) Description for your VM.
-- **vCPU(s)** - 1
-- **Number of Cores per vCPU** - 1
-- **Memory** - 2 GiB
-
-- Select **+ Add New Disk**
-    - **Type** - DISK
-    - **Operation** - Clone from Image Service
-    - **Image** - CentOS7.qcow2
-    - Select **Add**
-
-- Select **Add New NIC**
-    - **VLAN Name** - Primary
-    - Select **Add**
-
-Click **Save** to create the VM.
-
-Power On the VM.
-
-Install Stress and Run Stress Test
+Run Stress Test
 ..................................
 
-Lets install **Stress** so we can use it to generate load.
+Lets add some load by initiating a stress test.
 
-Login to the VM vis ssh or Console session, and run the following command:
+Login to the *initials*-**Linux-ToolsVM** via ssh or Console session.
 
 - **Username** - root
 - **password** - nutanix/4u
-
-.. code-block:: bash
-
-  yum install -y stress
-
-Now lets add some load by initiating a stress test.
 
 .. code-block:: bash
 
@@ -72,13 +44,13 @@ Automatically Add Memory to a VM When A Constraint is Detected
 How often have you been on-call, and got that alert or service ticket for a VM that was having High memory or CPU?
 Chances are a lot, and generally during dinner, while you are out with family, or sleeping.
 
-What if you could use XPlay in Prism Pro to automatically take care of this for you when Prism Pro detected the constraint?
+What if you could use X-Play in Prism Pro to automatically take care of this for you when Prism Pro detected the constraint?
 Good news, you can. Let's walk through how to set that up.
 
 Create Alert Policy
 ...................
 
-In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click **Tomcat**-*initials*.
+In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click *initials*-**Linux-ToolsVM**.
 
 Next select **Metrics > Memory Usage**.
 
@@ -92,10 +64,10 @@ You will see the  **Create Alert Policy** window, fill out the following fields:
 
 - **Entity Type** - VM
 - **Entity (Line 1)** - One VM
-- **Entity (Line 2)** - Tomcat-*initials*
+- **Entity (Line 2)** - *initials*-**Linux-ToolsVM**
 - **Metric** - Memory Usage
 - **Impact Type** - Performance
-- **Policy Name** - VM Memory Constrained - *initials*
+- **Policy Name** - *initials* - VM Memory Constrained
 - **Description** - Optional
 - **Auto Resolve Alerts** - Checked
 - **Enable Policy** - **Unchecked**
@@ -132,7 +104,7 @@ Select :fa:`bell` **Alert** as Trigger, and click **Select**.
 
 .. note::
 
-  When XPlay is GA in 5.11, we will also support a new trigger type “Manual” which allows you associate a playbook to VMs, Hosts, and Clusters and trigger it manually.
+  When X-Play is GA in 5.11, we will also support a new trigger type “Manual” which allows you associate a playbook to VMs, Hosts, and Clusters and trigger it manually.
 
   .. figure:: images/xplay_07.png
 
@@ -181,7 +153,7 @@ Click **Add Action**, and select the :fa:`envelope` **Email** action.
 
 .. note::
 
-  There is a bug right now that when you click a parameter in the **paramete** popup, the parameter string will be appended at the end of the text string, not at the place of the cursor.
+  There is a bug right now that when you click a parameter in the **parameter** popup, the parameter string will be appended at the end of the text string, not at the place of the cursor.
 
   You have to cut and paste it into the write place if that is the case.
 
@@ -197,7 +169,7 @@ Select **Alert** from the parameters.
 
 Click **Save & Close**, and fill out the following fields:
 
-- **Name**  - Auto Remove Memory Constraint - *initials*
+- **Name**  - *initials* - Auto Remove Memory Constraint
 - **Description** - Optional
 - **Status**  - Enabled
 
@@ -208,15 +180,15 @@ Click **Save**.
 Cause Memory Constraint
 .......................
 
-In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click **Tomcat**-*initials*.
+In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click *initials*-**Linux-ToolsVM**.
 
-Take note of your **Tomcat-**\ *initials* VM's memory capacity (should be 2 GiB).
+Take note of your *initials*-**Linux-ToolsVM** VM's memory capacity (should be 2 GiB).
 
 Click **Alerts**, Select **Alert Policy** from **Configure** Dropdown.
 
 .. figure:: images/xplay_16.png
 
-Select **VM Memory Constrained** - *initials*, and **Enable** the policy.
+Select *initials* - **VM Memory Constrained**, and **Enable** the policy.
 
 .. figure:: images/xplay_17.png
 
@@ -234,14 +206,14 @@ After 1-2 minutes you should receive an email from Prism.
 
 Check the email to see that its subject and email body have filled the real value for the parameters you set up earlier.
 
-Check the memory capacity on your **Tomcat-**\ *initials* VM now, you should see that it has increased.
+Check the memory capacity on your *initials*-**Linux-ToolsVM** VM now, you should see that it has increased.
 
 Review the Playbook Play
 ........................
 
 In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
 
-Select your **Auto Remove Memory Constraint -**\ *initials*, and **disable** it.
+Select your *initials* - **Auto Remove Memory Constraint, and **disable** it.
 
 Click **Plays**.
 
@@ -254,7 +226,7 @@ Click the Play, and examine the details.
 Reduce CPU Capacity For A VM During A Maintenance Windows
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Xfit in Prism Pro utilizes Machine Learning to continually analyze the environment.
+X-Fit in Prism Pro utilizes Machine Learning to continually analyze the environment.
 
 This is helpful to detect resource constraints, such as our memory constraint in the last lab, as well as inefficiencies.
 
@@ -275,10 +247,10 @@ You will see the  **Create Alert Policy** window, fill out the following fields:
 
 - **Entity Type** - VM
 - **Entity (Line 1)** - One VM
-- **Entity (Line 2)** - Tomcat-*initials*
+- **Entity (Line 2)** - *initials*-**Linux-ToolsVM**
 - **Metric** - CPU Usage
 - **Impact Type** - Performance
-- **Policy Name** - -VM CPU Overprovisioned - *initials*
+- **Policy Name** - *initials* - VM CPU Overprovisioned
 - **Description** - Optional
 - **Auto Resolve Alerts** - Checked
 - **Enable Policy** - **Unchecked**
@@ -304,7 +276,7 @@ Click **Create Playbook**.
 
 Select :fa:`bell` **Alert** as Trigger, and click **Select**.
 
-Search “VM CPU Overprovisioned” in **Alert Policy**, and select **VM CPU Overprovisioned -**\ *initials*.
+Search “VM CPU Overprovisioned” in **Alert Policy**, and select *initials* - **VM CPU Overprovisioned -**.
 
 Click **Add Action**, and select the :fa:`power-off` **Power Off VM** action.
 
@@ -382,7 +354,7 @@ The **Restrict** label will change to **Restriction Set**. If you hover the mous
 
 Click **Save & Close**, and fill out the following fields:
 
-- **Name**  - Reduce VM CPU - *initials*
+- **Name**  - *initials* - Reduce VM CPU
 - **Description** - Optional
 - **Status**  - Enabled
 
@@ -391,13 +363,13 @@ Click **Save**.
 Cause CPU Over-Provision
 ........................
 
-In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click **Tomcat**-*initials*.
+In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click *initials*-**Linux-ToolsVM**.
 
-Take note of your **Tomcat-**\ *initials* VM's CPU Cores (should be 2).
+Take note of your *initials*-**Linux-ToolsVM** VM's CPU Cores (should be 2).
 
 Click **Alerts**, Select **Alert Policy** from **Configure** Dropdown.
 
-Select **VM CPU Overprovisioned** - *initials*, and **Enable** the policy.
+Select *initials* - **VM CPU Overprovisioned**, and **Enable** the policy.
 
 Open a console session or SSH into Prism Central, and run the **paintrigger.py** script.
 
@@ -411,7 +383,7 @@ Open a console session or SSH into Prism Central, and run the **paintrigger.py**
 
 In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
 
-Select your **Reduce VM CPU -**\ *initials*, and Click **Plays**.
+Select your *initials* - **Reduce VM CPU -**, and Click **Plays**.
 
 You should see that there is a play with your playbook name is in **scheduled** status.
 
@@ -419,7 +391,7 @@ Wait for 1-2 minutes past the start time you set earlier, and you should receive
 
 Check the email to see that its subject and email body have filled the real value for the parameters you set up earlier.
 
-Check the CPU Cores on your **Tomcat-**\ *initials* VM now, you should now see the **Virtual CPU Count** is “1” (instead of “2”).
+Check the CPU Cores on your *initials*-**Linux-ToolsVM** VM now, you should now see the **Virtual CPU Count** is “1” (instead of “2”).
 
 This means that the trigger happened and the rest of the play is waiting for the window to execute. You can select this play and abort it (from the action button).
 
@@ -428,7 +400,7 @@ Review the Playbook Play
 
 In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
 
-Select your **Reduce VM CPU -**\ *initials*, and **disable** it.
+Select your *initials* - **Reduce VM CPU**, and **disable** it.
 
 Click **Plays**.
 
@@ -439,7 +411,7 @@ Click the Play, and examine the details.
 Things to do Next
 +++++++++++++++++
 
-As you can see, XPlay paired with XFit is very powerful.
+As you can see, X-Play paired with X-Fit is very powerful.
 
 You can go to “Action Gallery” page and familiarize yourself with all the out-of-the-box Actions, and see all the possible things you can do.
 
