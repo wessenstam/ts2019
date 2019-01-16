@@ -4,18 +4,364 @@
 Nutanix Karbon
 --------------
 
+*The estimated time to complete this lab is 60 minutes.*
+
+.. raw:: html
+
+  <iframe src="https://drive.google.com/file/d/1sU4_1GPVTNGJwNDoy0kB04r-vz4-9Thq/preview" width="720" height="480" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 Overview
 ++++++++
 
-.. note::
-
-  Estimated time to complete: **90 MINUTES**
-
 Nutanix Karbon is an on-prem turnkey curated enterprise-grade Kubernetes service offering that simplifies the provisioning, operations and lifecycle management of Kubernetes.
+
 Karbon provides a consumer-grade experience for delivering Kubernetes on-prem providing huge savings on OpEx of dedicated DevOps or SRE teams to keep Kubernetes online, up to date or integrated with 3rd party components and tooling.
 
-Getting Engaged with the Product Team
-.....................................
+*<What is Kubernetes/containers? Why do people care about deploying applications using Kubernetes? What are the advantages? What problems does Karbon solve versus a DIY Kubernetes deployment? What about advantages of virtualized Kubernetes over baremetal? What does market adoption of Kubernetes look like? What are people using it for?>* (this could also be covered in the intro video)
+
+**In this lab you will deploy a Kubernetes cluster using Karbon and then deploy multiple containers, referred to as Kubernetes pods, to run a sample application.**
+
+Create a Karbon Kubernetes Cluster
+++++++++++++++++++++++++++++++++++
+
+In this exercise you will create a production ready Kubernetes cluster with Nutanix Karbon.
+
+In **Prism Central**, select :fa:`bars` **> Services > Karbon**.
+
+.. figure:: images/karbon_create_cluster_0.png
+
+.. note::
+
+  If Karbon has not already been enabled on your cluster, click the **Enable Karbon** button when prompted. Once clicked, the process should take approximately 2 minutes to complete. During this time the cluster is... *<What is it doing?>*
+
+  .. figure:: images/2.png
+
+Click the provided link to launch the **Karbon Console**.
+
+.. note::
+
+  If at any point your Karbon session times out, you can log in again using your Prism Central **admin** credentials.
+
+To begin provisioning a Karbon cluster, click **+ Create Cluster**.
+
+On the **Name and Environment** tab, fill out the following fields:
+
+- **Name** - wordpress-*Initials*
+- **Cluster** - Select *Your Nutanix cluster*
+- **Kubernetes Version** - 1.10.3
+- **Host OS Image** - centos
+
+.. figure:: images/3.png
+
+.. note::
+
+  Your cluster has be pre-staged with a compatible CentOS image for use with Karbon.
+
+  Karbon currently supports CentOS 7.5.1804 and Ubuntu 16.04 and requires that these images be downloaded directly from Nutanix.
+
+  To stage another cluster with the supported CentOS image, add http://download.nutanix.com/karbon/0.8/acs-centos7.qcow2 as "acs-centos".
+
+  To stage another cluster with the supported CentOS image, add http://download.nutanix.com/karbon/0.8/acs-ubuntu1604.qcow2 as "acs-ubuntu".
+
+Click **Next**.
+
+Next you will define the number of container host VMs and compute requirements. For the purposes of this exercise you will reduce the amount of memory consumed by default by each worker VM.
+
+On the **Worker Configuration** tab, fill out the following fields:
+
+- **Number of Workers** - 3 (Default)
+- **Memory** - 4 GiB
+- **Size** - 120 GiB (Default)
+- **VCPU** - 4 (Default)
+
+.. figure:: images/4.png
+
+Click **Next**.
+
+Next you will define the compute requirements for the master node which controls the Kubernetes cluster, as well as the number and compute requirements of the etcd nodes, which manage cluster state.
+
+On the **Master Configuration** tab, fill out the following fields:
+
+- **Master Resources > Memory** - 4 GiB (Default)
+- **Master Resources > Size** - 120 GiB (Default)
+- **Master Resources > VCPU** - 2 (Default)
+- **etcd Resources > Number of VMs** - 3 (Default)
+- **etcd Resources > Memory** - 4 GiB
+- **etcd Resources > Size** - 40GiB (Default)
+- **etcd Resources > VCPU** - 2 (Default)
+
+.. figure:: images/5.png
+
+Click **Next**.
+
+Next you will configure the networking for both the host VMs and pods. Karbon utilizes `Flannel <https://github.com/coreos/flannel#flannel>`_ to provide layer 3 IPv4 network between multiple nodes within the Karbon cluster.
+
+Platforms like Kubernetes assume that each pod (container) has a unique, routable IP inside the cluster. The advantage of this model is that it removes the port mapping complexities that come from sharing a single host IP.
+
+The **Service CIDR** defines the network range on which services (like etcd) are exposed. The **Pod CIDR** defines the network range used to IP pods. The default configuration allows for a maximum of 256 nodes with up to 256 pods per node.
+
+On the **Network** tab, fill out the following fields:
+
+- **Network Provider** - Flannel (Default)
+- **VM Network** - Primary (Default)
+- **Service CIDR** - 172.19.0.0/16 (Default)
+- **Pod CIDR** - 172.20.0.0/16 (Default)
+
+.. figure:: images/6.png
+
+Click **Next**.
+
+On the **Storage Class** tab, fill out the following fields:
+
+- **Storage Class Name** - default-storageclass-*xyz*
+- **Prism Element Cluster** - *Your Nutanix cluster*
+- **Nutanix Cluster Username** - admin
+- **Nutanix Cluster Password** - techX2019!
+- **Storage Container Name** - Default
+- **File System** - ext4 (Default)
+
+.. figure:: images/7.png
+
+Click **Create**.
+
+Deployment of the cluster should take approximately X minutes. During this time, Karbon is... *<What is it doing?>*
+
+Filtering VMs for **wordpress-**\ *Initials* in **Prism Central** will display the master, etcd, and worker VMs provisioned by Karbon.
+
+.. figure:: images/8.png
+
+In **Prism Element > Storage > Volume Group**, Karbon has created the **pvc-...** Volume Group, used as persistent storage for logging. Karbon leverages the Nutanix Kubernetes Volume Plug-In to present Nutanix Volumes to Kubernetes pods via iSCSI. This allows containers to take advantage of native Nutanix storage capabilities such as thin provisioning, zero suppression, compression, and more.
+
+.. figure:: images/9.png
+
+The Karbon cluster has finished provisioning when the **Status** of the cluster is **Running**.
+
+.. figure:: images/10.png
+
+Click on your cluster name (**wordpress-**\ *Initials*) to access the Summary Page for your cluster.
+
+.. figure:: images/11.png
+
+Explore this view and note the ability to create and add additional storage classes and persistent storage volumes to the cluster. Additional persistent storage volumes could be leveraged for use cases such as containerized databases.
+
+Under **Add-on**, note that Kibana has been automatically deployed and configured as part of the Karbon cluster to provide logging services.
+
+In approximately 10 minutes, you have deployed a production-ready Kubernetes cluster with *<X, Y, and Z>* services.
+
+Getting Started with Kubectl
+++++++++++++++++++++++++++++
+
+`Kubectl <https://kubernetes.io/docs/reference/kubectl/overview/>`_ is the  command line interface for running commands against Kubernetes clusters. `Kubeconfig <https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/>`_ files contain information about clusters, users, namespaces, and authentication. The ``kubectl`` tool uses **kubeconfig** files to find and communicate with a Kubernetes cluster.
+
+In this exercise you will use ``kubectl`` to perform basic operations against your newly provisioned Karbon cluster.
+
+Using your **Tools VM**, browse to **Prism Central** and open **Karbon**.
+
+Select your **wordpress-**\ *Initials* cluster and click **Download kubeconfig**.
+
+.. figure:: images/12.png
+
+Using your **Tools VM**, open **PowerShell**.
+
+.. note::
+
+  If installed, you can also use a local instance of ``kubectl``. The Tools VM is provided to ensure a consistent experience.
+
+  Instructions for setting up ``kubectl`` in Windows and macOS can be found `here <https://kubernetes.io/docs/tasks/tools/install-kubectl/>`_.
+
+From PowerShell, run the following commands to configure ``kubectl``:
+
+.. code-block:: PowerShell
+
+  cd ~
+  mkdir .kube
+  cd .kube
+  mv ~\Downloads\kubectl* ~\.kube\config
+  kubectl get nodes
+
+.. note::
+
+  By default, ``kubectl`` looks like a file named ``config`` in the ``~/.kube`` directory. Other locations can be specified using environment variables or by setting the ``--kubeconfig`` flag.
+
+Verify that the output of the last command shows 1 master node and 3 worker nodes as **Ready**.
+
+Next you will check the versions of the Kubernetes client and server by running the following command:
+
+.. code-block:: PowerShell
+
+	kubectl version
+
+Deploying an Application
+++++++++++++++++++++++++
+
+Now that you have successfully run commands against your Kubernetes cluster using ``kubectl``, you are now ready to deploy an application. In this exercise you will be deploying the popular open-source content management system used for websites and blogs, Wordpress.
+
+Using your **Tools VM**, open **PowerShell** and create a **wordpress** directory using the following command:
+
+.. code-block:: PowerShell
+
+	mkdir ~\wordpress
+	cd ~\wordpress
+
+Kubernetes depends on YAML files to provision applications and define dependencies. YAML files are a human-readable text-based format for specifying configuration information. This application requires two YAML files to be stored in the **wordpress** directory.
+
+.. note::
+
+  To learn more about Kubernetes application deployment and YAML files, click `here <https://www.mirantis.com/blog/introduction-to-yaml-creating-a-kubernetes-deployment/>`_.
+
+Using your **Tools VM** browser, download the following YAML files for Wordpress and the MySQL deployment used by Wordpress:
+
+- https://kubernetes.io/examples/application/wordpress/mysql-deployment.yaml
+- https://kubernetes.io/examples/application/wordpress/wordpress-deployment.yaml
+
+Move both files to the **wordpress** directory using the following command:
+
+.. code-block:: PowerShell
+
+	mv ~\Downloads\*.yaml
+	cd ~\wordpress\
+
+Open the **wordpress-deployment.yaml** file with your preferred text editor.
+
+.. note::
+
+  **Sublime Text** has been pre-installed on the **Tools VM**.
+
+.. figure:: images/13.png
+
+Under **spec: > type:**, change the value from **LoadBalancer** to **NodePort** and save the file. This change is required as Karbon does not yet support LoadBalancer.
+
+.. figure:: images/14.png
+
+.. note::
+
+  You can learn more about Kubernetes publishing service types `here <https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types>`_.
+
+Next you will need to define a **secret** to be used as the MySQL password. Run the following command to create the secret:
+
+.. code-block:: bash
+
+	kubectl create secret generic mysql-pass --from-literal=password=Nutanix/4u!
+
+Verify the command returns ``secret/mysql-pass created``.
+
+You can also verify the secret has been created by running the following command:
+
+.. code-block:: bash
+
+	kubectl get secrets
+
+Verify **mysql-pass** appears in the **NAME** column.
+
+You will now provision the MySQL database by running the following command:
+
+.. code-block:: bash
+
+	kubectl create -f mysql-deployment.yaml
+
+.. figure:: images/15.png
+
+In addition to the MySQL service, the **mysql-deployment.yaml** also specifies that a persistent volume be created as part of the deployment. You can get additional details about the volume by running:
+
+.. code-block:: bash
+
+	kubectl get pvc
+
+You will note that the **STORAGECLASS** matches the **default-storageclass**\ *Initials* provisioned by Karbon.
+
+The volume also appears in **Karbon** under **wordpress-**\ *Initials* **> Volume**.
+
+.. figure:: images/16.png
+
+To view all running pods on the cluster, which should currently only be your Wordpress MySQL database, run the following command:
+
+.. code-block:: bash
+
+	kubectl get pods
+
+To complete the application, deploy Wordpress by running the following command:
+
+.. code-block:: bash
+
+	kubectl create -f wordpress-deployment.yaml
+
+Verify both pods are displayed as **Running** using ``kubectl get pods``.
+
+Accessing Wordpress
++++++++++++++++++++
+
+You have confirmed the Wordpress application and its MySQL database are running. Configuration of Wordpress is done via web interface, but to access the web interface you must first determine the IP addresses of our worker VMs and the port on which the pod is running.
+
+The IP addresses of all cluster VMs is returned by the ``kubectl describe nodes`` command. You can run this and search for the **InternalIP** of any of your **worker** VMs, or run the following command to return only the hostnames and IP addresses:
+
+.. code-block:: PowerShell
+
+	kubectl describe nodes | Select-String -Pattern "Hostname:","InternalIP"
+
+.. figure:: images/17.png
+
+To determine the port number of the Wordpress application, run the following command and note the TCP port mapped to port 80:
+
+.. code-block:: bash
+
+	kubectl get services wordpress
+
+.. figure:: images/18.png
+
+Open \http://*WORKER-VM-IP:WORDPRESS SERVICE PORT*/ in a new browser tab to access to Wordpress installation.
+
+.. note::
+
+  In the example shown, you would browse to http://10.21.78.72:23160. You environment will have a different IP and port.
+
+.. figure:: images/19.png
+
+Click **Continue** and fill out the following fields:
+
+- **Site Title** - Karbon Blog
+- **Username** - admin
+- **Password** - nutanix/4u
+- **Your Email** - noreply@nutanix.com
+
+Click **Install Wordpress**.
+
+After setup completes (a few seconds), click **Log In** and provide the credentials just configured.
+
+Congratulations! Your Wordpress application and MySQL database setup is complete.
+
+.. figure:: images/20.png
+
+Exploring Logging & Visualization
++++++++++++++++++++++++++++++++++
+
+*<Description of Karbon plug-in architecture>*
+
+Out of the box, Karbon deploys `Elasticsearch <https://github.com/elastic/elasticsearch>`_ and `Kibana <https://github.com/elastic/kibana>`_ to store, search, and visualize logging data for your Kubernetes environment.
+
+*<What's a simple example we can do to illustrate the usefulness of including Kibana?>*
+
+Coming Soon!
+++++++++++++
+
+<What are other things people can look forward to in the Karbon GA? Scaling out worker VMs? Anything else? How do these expand use cases or increase value/solve problems?>
+
+Takeaways
++++++++++
+
+What are the key things you should know about **Nutanix Karbon**?
+
+- Karbon is included in all AOS software editions.
+
+- Leveraging Karbon, developers can enjoy the native Kubernetes experience that is delivered fast while all complexities of infrastructure are abstracted with no additional costs.
+
+- Karbon enables enterprises to provide a private-cloud Kubernetes solution with the simplicity and performance of public clouds.
+
+- Karbon is part of a complete Cloud Native solution from Nutanix including storage (Volumes/Buckets/Files), database automation (Era), and enhanced monitoring (Epoch).
+
+Getting Connected
++++++++++++++++++
+
+Have a question about **Nutanix Karbon**? Please reach out to the resources below:
 
 +---------------------------------------------------------------------------------+
 |  Karbon Product Contacts                                                        |
@@ -28,466 +374,3 @@ Getting Engaged with the Product Team
 +--------------------------------+------------------------------------------------+
 |  Technical Marketing Engineer  |  Dwayne Lessner, dwayne@nutanix.com            |
 +--------------------------------+------------------------------------------------+
-
-Pre-requirements
-++++++++++++++++
-
-To be able to run the lab you need to have the following available or installed
-
-
-Create a Karbon Kubernetes Cluster
-++++++++++++++++++++++++++++++++++
-
-In this exercise you will create a production ready Kubernetes cluster with Nutanix Karbon.
-
-In **Prism Central > > :fa:`fa-navicon` > > Karbon** and ensure you see a ‘Karbon is successfully enabled’ notification.
-
-Click the link to open the Karbon Console.
-
-.. image:: images/karbon_create_cluster_0.png
-
-Next click **+ Create Cluster**.
-
-.. image:: images/karbon_create_cluster_2.png
-
-Fill in the following:
-
-**Name and Environment**
-
-- **Name** - wordpress-*initialsLowerCase*
-- **Cluster** - Leave Default selected
-- **Kubernetes Version** - 1.10.3
-- **Host OS Image** - centos
-
-.. image:: images/karbon_create_cluster_3.png
-
-Click **Next**
-
-**Worker Configuration**
-
-.. note::
-
-  This defines the number of worker nodes that will run the Kubernetes pods.
-
-Leave all defaults
-
-.. image:: images/karbon_create_cluster_4.png
-
-Click **Next**.
-
-**Master Configuration**
-
-.. note::
-
-  This defines the number of master nodes that controls the Kubernetes cluster, and the number of etcd VMs, which manages the cluster state.
-
-Leave all defaults.
-
-.. image:: images/karbon_create_cluster_5.png
-
-click **Next**.
-
-**Network**
-
-.. note::
-
-  We use flannel as the network provider. More information on Flannel can be found here: https://github.com/coreos/flannel#flannel
-
-- **Network Provider** - Flannel
-- **VM Network** - Primary
-- **Service CIDR** - Leave the default of 172.19.0.0/16
-- **Pod CIDR** - Leave the default of 172.20.0.0/16
-
-.. image:: images/karbon_create_cluster_6.png
-
-Click **Next**
-
-**Storage Class**
-
-- **Storage Class Name** - default-storageclass-*initialsLowerCase*
-- **Prism Element Cluster** - Leave default selected
-- **Cluster Username** - admin
-- **Cluster Password** - *HPOC Password*
-- **Storage Container Name** - default-container-XXXXXXX
-- **File System** - ext4
-
-.. image:: images/karbon_create_cluster_7.png
-
-Click **Create**
-
-.. note::
-
-  **Wait until the cluster has been created before proceeding**
-
-.. image:: images/karbon_create_cluster_20.png
-
-During the creation of the Kubernetes cluster there will have been created:
-
-- VMs
-
-.. image:: images/karbon_create_cluster_10.png
-
-- Persistent Storage as VolumeGroup
-
-.. image:: images/karbon_create_cluster_18.png
-
-.. image:: images/karbon_create_cluster_19.png
-
-
-Cluster properties
-++++++++++++++++++
-
-In the Karbon UI, click on your cluster "wordpress-*initialsLowerCase*"
-
-.. image:: images/karbon_create_cluster_21.png
-
-This will take you to the Summary page for your cluster.
-
-.. image:: images/karbon_create_cluster_22.png
-
-You can also click into the following to see specific information:
-
-- Storage Classes
-
-.. image:: images/karbon_create_cluster_23.png
-
-- Volume's
-
-.. image:: images/karbon_create_cluster_24.png
-
-- Add-on's
-
-.. image:: images/karbon_create_cluster_25.png
-
-You now have a running Kubernetes Cluster called "wordpress-*initialsLowerCase*".
-
-Set up Kubeconfig
-+++++++++++++++++
-
-In this task you will download your Karbon Kubernetes cluster’s kubeconfig file and apply that file to **kubectl** to enable you to control your Kubernetes cluster.
-
-Navigate back to the Karbon UI.  If your session has timed out, log back in with your Prism Central credentials.
-
-Select the cluster that you deployed, and click **Download kubeconfig**.
-
-.. image:: images/karbon_deploy_application_1.png
-
-Configure kubeconfig Using Mac
-..............................
-
-From Terminal, run the following commands to setup your **kubeconfig**:
-
-.. code-block:: bash
-
-  cd ~
-  mkdir .kube
-  cd .kube
-  mv ~/Downloads/kubectl* config
-  kubectl get nodes
-
-
-Verify that the output of the last command shows 1 master node, and 3 worker nodes.
-
-Configure kubeconfig Using Windows
-..................................
-
-From PowerShell, run the following commands to setup your **kubeconfig**:
-
-.. code-block:: bash
-
-  cd ~
-  mkdir .kube
-  cd .kube
-  mv ~\Downloads\kubectl* config
-  kubectl get nodes
-
-
-Verify that the output of the last command shows 1 master node, and 3 worker nodes.
-
-Use kubectl command
-+++++++++++++++++++
-
-Now that you have defined the kubeconfig file, you should be able to connect to the kubernetes cluster.
-
-
-Cluster and client version
-..........................
-
-To see the version of the kubernetes client and server run:
-
-.. code-block:: bash
-
-	kubectl version
-
-.. image:: images/karbon_deploy_application_5.png
-
-Cluster info
-............
-
-To see the information of the kubernetes cluster run:.
-
-.. code-block:: bash
-
-	kubectl cluster-info
-
-This will provide information on where the **Kubernetes Master** is running and the **KubeDNS URL**.
-
-.. image:: images/karbon_deploy_application_6.png
-
-Cluster nodes
-.............
-
-To see which master and worker nodes are in the kubernetes cluster run:
-
-.. code-block:: bash
-
-	kubectl get nodes
-
-.. image:: images/karbon_deploy_application_7.png
-
-Running pods
-............
-
-If you are interested in all the pods that are running after the installation of the kubernetes cluster run:
-
-.. code-block:: bash
-
-	kubectl get pods --all-namespaces
-
-.. image:: images/karbon_deploy_application_8.png
-
-Deploy Wordpress
-++++++++++++++++
-
-Now that you have seen the high level information of the kubernetes cluster it is time to deploy our Wordpress application.
-
-Create a directory in the location you are in via the command line named **wordpress**, and change into that directory.
-
-.. code-block:: bash
-
-	mkdir wordpress
-
-	cd wordpress
-
-.. note::
-
-	Kubernetes needs yaml files to create applications and their dependencies.
-	You are going to download two yaml files and store them in the just created **wordpress** directory.
-	Look at https://www.mirantis.com/blog/introduction-to-yaml-creating-a-kubernetes-deployment/ or at https://kubernetes.io/docs/concepts/workloads/controllers/deployment/ to get more information on yaml and kubernetes.
-
-	** MAKE SURE YOU ARE IN THE WORDPRESS DIRECTORY BEFORE PROCEEDING!!!**
-
-To download the needed yaml file for wordpress mysql deployment run the following command:
-
-.. code-block:: bash
-
-	wget https://kubernetes.io/examples/application/wordpress/mysql-deployment.yaml
-
-.. image:: images/karbon_deploy_application_9.png
-
-To download the needed yaml file for wordpress deployment run the following command:
-
-.. code-block:: bash
-
-	wget https://kubernetes.io/examples/application/wordpress/wordpress-deployment.yaml
-
-.. image:: images/karbon_deploy_application_10.png
-
-Now open the wordpress-deployment.yaml file with your preferred text editor.
-
-.. note::
-
-  Use **WordPad** on Windows for opening and editing **YAML** files.
-
-  On Mac use **TextEdit** for opening and editing **YAML** files.
-
-Change the line that shows: **type: LoadBalancer** under **spec:** and change ``LoadBalancer`` into ``NodePort``.
-
-.. note::
-
-	Reason for this change is that Karbon does not (yet) support LoadBalanced.
-
-.. image:: images/karbon_deploy_application_12.png
-
-**Change back** to the **kube** directory, and then run the following command to create the mysql password:
-
-.. code-block:: bash
-
-	kubectl create secret generic mysql-pass --from-literal=password=Nutanix/4u!
-
-This should return:
-
-.. code-block:: bash
-
-	secret/mysql=pass created
-
-.. image:: images/karbon_deploy_application_13.png
-
-To check that the password has been created, run the following command:
-
-.. code-block:: bash
-
-	kubectl get secrets
-
-This should show mysql-pass under NAME.
-
-.. image:: images/karbon_deploy_application_14.png
-
-Creating the MySQL database is done by running the following command:
-
-.. code-block:: bash
-
-	kubectl create -f wordpress\mysql-deployment.yaml
-
-.. image:: images/karbon_deploy_application_15.png
-
-This will also create persistent storage.
-
-.. image:: images/karbon_deploy_application_16.png
-
-This storage will also show up in the Karbon UI under **wordpress -> Volume**.
-
-.. image:: images/karbon_deploy_application_17.png
-
-You can now run the following command:
-
-.. code-block:: bash
-
-	kubectl get pods
-
-It will show the wordpress-mysql pod running.
-
-.. image:: images/karbon_deploy_application_18.png
-
-To create the wordpress application, run the following command:
-
-.. code-block:: bash
-
-	kubectl create -f wordpress\wordpress-deployment.yaml
-
-.. image:: images/karbon_deploy_application_19.png
-
-This will also create persistent storage and a pod.
-
-You can now run the following command:
-
-.. code-block:: bash
-
-	kubectl get pods
-
-It will show both pods running.
-
-Accessing Wordpress
-+++++++++++++++++++
-
-Our Wordpress with mysql application is now running.
-
-Now we need to make a connection to the Wordpress UI to configure the application.
-
-To get the IP address where the UI is running, we need to see what the worker nodes are on which the application is running.
-
-Lets show a list of a Master and worker nodes, run the following command:
-
-.. code-block:: bash
-
-	kubectl get nodes
-
-.. image:: images/karbon_deploy_application_23.png
-
-To get the IP address of one of the workers, run the following command:
-
-.. code-block:: bash
-
-	kubectl describe nodes | Select-String -Pattern "InternalIP"
-
-.. image:: images/karbon_deploy_application_24.png
-
-Search in the information that is provided, a line that starts with **Address:** and note the **InternalIP**.
-
-.. image:: images/karbon_deploy_application_25.png
-
-As the application is running on an internal network inside the kubernetes cluster, we also need to have the service port on which the wordpress application is running.
-
-To see which port number is used to for the Wordpress application, run the following command:
-
-.. code-block:: bash
-
-	kubectl get services wordpress
-
-.. image:: images/karbon_deploy_application_26.png
-
-Putting the IP address and the service port together we can open the Wordpress UI. In our example 172.16.0.36:32387.
-
-In a new Browser tab, go to \http://172.16.0.36:32387
-
-.. image:: images/karbon_deploy_application_27.png
-
-In the initial configuration page, provide the parameters that are asked for.
-
-At the end of the settings, click the **Log in** button and login to the Wordpress UI.
-
-.. image:: images/karbon_deploy_application_29.png
-
-Your Wordpress application with MySQL as the database is running and ready....
-
-Deleting an application
-+++++++++++++++++++++++
-
-From the command line we will run the **kubectl** command to delete the created password, application, service and the persistent storage that we created earlier.
-
-Run the following commands from the command line:
-
-.. code-block:: bash
-  :name: Delete_app
-
-  kubectl delete mysql-pass
-
-  kubectl delete deployment -p app=wordpress
-
-  kubectl delete service -l app=wordpress
-
-  kubectl delete pvc -l app=wordpress
-
-You can check to see if the pods are deleted by running the following command:
-
-.. code-block:: bash
-
-  kubectl get pods
-
-There should be no resources shown.
-
-.. figure:: images/karbon_delete_application_1.png
-
-In the Karbon UI, under the properties of the **wordpress-*initialsLowerCase* -> Volume**, there should only be one **Claim name** called **elasticsearch-xxx**.
-
-The earlier created claims should be gone.
-
-.. figure:: images/karbon_delete_application_2.png
-
-Deleting the Wordpress Cluster
-++++++++++++++++++++++++++++++
-
-Deleting the cluster is almost as easy as deleting a Virtual Machine.
-
-.. note::
-
-  The following actions **can not** be undone!!! If running this in a production environment be very careful.
-
-In the Karbon UI, select your "wordpress-*initialsLowerCase*" cluster.
-
-Click on the **Delete Cluster** button.
-
-.. figure:: images/karbon_delete_application_3.png
-
-Accept the Warning message that pops up by clicking **Delete**.
-
-.. figure:: images/karbon_delete_application_4.png
-
-You have now deleted your Karbon Kubernetes cluster.
-
-Takeaways
-+++++++++
-
-- Karbon enables enterprises to provide a private-cloud Kubernetes solution with the simplicity and performance of public clouds.
-- Karbon is part of a complete Cloud Native solution from Nutanix including storage (volumes/buckets/files), database automation (era), and enhanced monitoring (epoch).
-- Leveraging Karbon, developers can enjoy the native Kubernetes experience that is delivered fast while all complexities of infrastructure are abstracted with no additional costs. Karbon is included in all AOS software editions.

@@ -4,21 +4,495 @@
 Nutanix Era
 -----------
 
+*The estimated time to complete this lab is 60 minutes.*
+
+.. raw:: html
+
+  <iframe src="https://drive.google.com/file/d/1sU4_1GPVTNGJwNDoy0kB04r-vz4-9Thq/preview" width="720" height="480" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 Overview
 ++++++++
 
+Nutanix Era is a software suite that automates and simplifies database administration – bringing One Click simplicity and invisible operations to database provisioning and lifecycle management (LCM).
+
+With One Click database provisioning and Copy Data Management (CDM) as its first services, Nutanix Era enables DBAs to provision, clone, refresh, and backup their databases to any point in time. Line of business applications in every vertical depend on databases, providing use cases in both production and non-production environments.
+
+**In this lab you will explore how Era can be used to standardize database deployment, allow for rapid cloning from a production database to a clone used for application development, updating that clone based on production data, and finally leveraging the REST API to understand how Era can integrate with a customer's existing automation tools.**
+
+Deploying Era
++++++++++++++
+
+Era is distributed as a virtual appliance that can be installed on either AHV or ESXi. In this lab you will deploy Era to your AHV cluster.
+
+In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > VMs**.
+
+.. figure:: images/2a.png
+
+Click **Create VM**.
+
+Fill out the following fields:
+
+- **Name** - Era-*Initials*
+- **Description** - (Optional) Description for your VM.
+- **vCPU(s)** - 4
+- **Number of Cores per vCPU** - 1
+- **Memory** - 16 GiB
+
+- Select **+ Add New Disk**
+    - **Type** - DISK
+    - **Operation** - Clone from Image Service
+    - **Image** - Era.qcow2
+    - Select **Add**
+
+- Select **Add New NIC**
+    - **VLAN Name** - Primary
+    - Select **Add**
+
+Click **Save** to create the VM.
+
+Select your Era VM and click **Power On**.
+
+.. figure:: images/2b.png
+
+Registering a Cluster
++++++++++++++++++++++
+
+In **Prism Central > VMs > List**, identify the IP address assigned to your Era VM using the **IP Addresses** column.
+
+Open \https://*ERA-VM-IP:8443*/ in a new browser tab.
+
 .. note::
 
-  Estimated time to complete: **90 MINUTES**
+  It may take up to 2 minutes for the Era interface to initialize after booting the VM.
 
-Nutanix Era is a software suite that automates and simplifies database administration – bringing one-click simplicity and invisible operations to database provisioning and lifecycle management (LCM).
-With one-click database provisioning and Copy Data Management (CDM) as its first services, Nutanix Era enables DBAs to provision, clone, refresh, and backup their databases to any point in time.
-The rich and straightforward UI and CLI enable DBAs to clone their environments to the latest application-consistent transaction.
-The API-first Nutanix Era architecture can easily integrate with your preferred self-service tools.
-Every operation has a unique ID and is fully visible for auditing.
+Select **I have read and agree to terms and conditions** and click **Continue**.
 
-Getting Engaged with the Product Team
-.....................................
+Enter **techX2019!** as the **admin** password and click **Set Password**.
+
+Login using the following credentials:
+
+- **Username** - admin
+- **Password** - techX2019!
+
+On the **Welcome to Era** page, fill in the following information:
+
+- **Name** - *Your Cluster Name*
+- **Description** - (Optional) Description
+- **Address** - *Your Prism Element Cluster IP*
+- **Prism Element Administrator** - admin
+- **Password** - techX2019!
+
+.. figure:: images/3b.png
+
+.. note::
+
+  Era requires a Prism Element account with full administrator access. For ESXi clusters, vCenter must also be registered with Prism Element.
+
+Click **Next**.
+
+Select the **Default** storage container and click **Next**.
+
+.. figure:: images/3c.png
+
+Select the **Primary** VLAN. This is the default network profile that Era will use when provisioning new databases. Do **not** select **Manage IP Address Pool**, as your AHV cluster already has IPAM (DHCP) configured for that network.
+
+.. figure:: images/3d.png
+
+Click **Next**.
+
+Once Era setup has completed, click **Get Started**.
+
+.. figure:: images/3e.png
+
+Provisioning a Database
++++++++++++++++++++++++
+
+The initial release of Era supports the following Operating Systems and Database Servers:
+
+- CentOS 6.9, 7.2, and 7.3
+- Oracle Linux 7.3
+- RHEL 6.9, 7.2, and 7.3
+- Windows Server 2012, Windows Server 2012 R2, and Windows Server 2016
+- Oracle 11.2.0.4.x, 12.1.0.2.x, and 12.2.0.1.x
+- PostgreSQL 9.x and 10.x
+- SQL Server 2008 R2, SQL Server 2012, SQL Server 2014, and SQL Server 2016
+
+Era can be used to provision database servers and databases on the registered Nutanix cluster, or you can register an existing source database running on the cluster. In this lab, you will provision a new PostgreSQL database server and database.
+
+Era makes it even simpler to provision a simple PostgreSQL database by providing sample profiles the detail **Software**, **Compute**, and **Database Parameters**. You will explore each of these profiles to understand how they are configured.
+
+Select the **Era > Getting Started** drop down menu and click **Profiles**.
+
+.. figure:: images/3g.png
+
+Select **Software** and note there is an included profile for **PostgreSQL 10.4** shipped with Era. Additional PostgreSQL and Oracle profiles can be created by registering database server VMs with Era.
+
+Select **Compute > DEFAULT_OOB_COMPUTE** and note the default Compute Profile creates a 4 core, 32GiB RAM VM to host the database. To reduce memory consumption in the shared lab environment, you will create a custom Compute Profile.
+
+Click **+ Create** and fill out the following fields:
+
+- **Name** - Lab
+- **Description** - Lab Compute Profile
+- **vCPUs** - 1
+- **Cores per CPU** - 2
+- **Memory (GiB)** - 6
+
+.. figure:: images/3f.png
+
+Click **Create**.
+
+Select the **Lab** profile and confirm the configuration is accurate, if not, click **Update** and adjust the profile.
+
+Select **Database Parameters > DEFAULT_POSTGRES_PARAMS** and note the default parameters for a PostgreSQL database provisioned by Era.
+
+Select the **Era > Profiles** drop down menu and click **Getting Started**.
+
+On the **Getting Started** page, click the **PostgreSQL** button under **Provision a Database**.
+
+.. figure:: images/4b.png
+
+Click **Provision a Database**.
+
+.. figure:: images/4c.png
+
+Select the **PostgreSQL** engine and click **Next**.
+
+Fill out the following **Database Server** fields:
+
+- **Database Server** - Select **Create New Server**
+- **Database Server Name** - DBServer-*Initials*
+- **Compute Profile** - Lab
+- **Network Profile** - DEFAULT_OOB_NETWORK
+- **Software Profile** - POSTGRES_10.4_OOB
+- **Description** - (Optional) Description
+- **SSH Public Key for Node Access** -
+
+.. code-block:: text
+
+  ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCoQRdEfm8ZJNGlYLQ2iw08eVk/Wyj0zl3M5KyqKmBTpUaS1uxj0K05HMHaUNP+AeJ63Qa2hI1RJHBJOnV7Dx28/yN7ymQpvO1jWejv/AT/yasC9ayiIT1rCrpHvEDXH9ee0NZ3Dtv91R+8kDEQaUfJLYa5X97+jPMVFC7fWK5PqZRzx+N0bh1izSf8PW0snk3t13DYovHFtlTpzVaYRec/XfgHF9j0032vQDK3svfQqCVzT02NXeEyksLbRfGJwl3UsA1ujQdPgalil0RyyWzCMIabVofz+Czq4zFDFjX+ZPQKZr94/h/6RMBRyWFY5CsUVvw8f+Rq6kW+VTYMvvkv
+
+.. note::
+
+  The above SSH public key is provided as an example and is configured as an authorized key for the operating system provisioned by Era. In a non-lab setting you would create your own SSH private/public keypair and provide the public key during this step.
+
+.. figure:: images/4d.png
+
+Click **Next**.
+
+Fill out the following **Database** fields:
+
+- **Database Name** - LabDB_\ *Initials*
+- **Description** - (Optional) Description
+- **POSTGRES Password** - techX2019!
+- **Database Parameter Profile** - DEFAULT_POSTGRES_PARAMS
+- **Listener Port** - 5432
+- **Size (GiB)** - 200
+
+.. note::
+
+  Era also offers to ability to run scripts or commands both before and after database creation . These can be used to further customize an environment based on specific enterprise needs.
+
+.. figure:: images/4e.png
+
+Click **Next**.
+
+Fill out the following **Time Machine** fields:
+
+- **Name** - LabDB-\ *Initials*\ _TM
+- **Description** - (Optional) Description
+- **SLA** - Gold
+- **Schedule** - Default
+
+.. figure:: images/4f.png
+
+Click **Provision**.
+
+Click **Operations** in the upper right-hand corner to view the provisioning progress. Provisioning should take approximately 5 minutes.
+
+.. note::
+
+  All operations within Era have unique IDs are fully visible for logging/auditing.
+
+.. figure:: images/4g.png
+
+Upon completion, select **Dashboard** from the drop down menu and note your new **Source Database**.
+
+.. figure:: images/4i.png
+
+You should also be able to see the **DBServer-**\ *Initials* VM running within Prism.
+
+Connecting to the Database
+++++++++++++++++++++++++++
+
+Now that Era has successfully provisioned a database instance, you will connect to the instance and verify the database was created.
+
+Select **Era > Databases** from the drop down menu.
+
+Under **Sources**, click the name of your database.
+
+.. figure:: images/5a.png
+
+Note the IP Address of your **Database Server**.
+
+.. figure:: images/5b.png
+
+Using your **Tools VM**, open **pgAdmin**.
+
+.. note::
+
+  If installed, you can also use a local instance of pgAdmin. The Tools VM is provided to ensure a consistent experience.
+
+Under **Browser**, right-click **Servers** and select **Create > Server...**.
+
+On the **General** tab, provide your database server name (e.g. **DBServer-**\ *Initials*).
+
+On the **Connection** tab, fill out the following fields:
+
+- **Hostname/IP Address** - *DBServer-Initials* IP Address
+- **Port** - 5432
+- **Maintenance Database** - postgres
+- **Username** - postgres
+- **Password** - techX2019!
+
+.. figure:: images/5d.png
+
+Expand **DBServer**-*Initials* **> Databases** and note an empty database has been created by Era.
+
+.. figure:: images/5h.png
+
+..  Now you will create a table to store data regarding Names and Ages.
+
+  Expand **labdb_***Initials* **> Schemas > public**. Right-click on **Tables** and select **Create > Table**.
+
+  .. figure:: images/5e.png
+
+  On the **General** tab, enter **table1** as the **Name**.
+
+  On the **Columns** tab, click **+** and fill out the following fields:
+
+  - **Name** - Id
+  - **Data type** - integer
+  - **Primary key?** - Yes
+
+  Click **+** and fill out the following fields:
+
+  - **Name** - Name
+  - **Data type** - text
+  - **Primary key?** - No
+
+  Click **+** and fill out the following fields:
+
+  - **Name** - Age
+  - **Data type** - integer
+  - **Primary key?** - No
+
+  .. figure:: images/5f.png
+
+  Click **Save**.
+
+  Using your **Tools VM**, open the following link to download a .CSV file containing data for your database table: http://ntnx.tips/EraTableData
+
+  Using **pgAdmin**, right-click **table1** and select **Import/Export**.
+
+  Toggle the **Import/Export** button to **Import** and fill out the following fields:
+
+  - **Filename** - C:\\Users\\Nutanix\\Downloads\\table1data.csv
+  - **Format** - csv
+
+  .. figure:: images/5g.png
+
+  Click **OK**.
+
+  You can view the imported data by right-clicking **table1** and selecting **View/Edit Data > All Rows**.
+
+Cloning Your PostgreSQL Source
+++++++++++++++++++++++++++++++
+
+Now that you have created a source database, you can easily clone it using Era Time Machine. Database clones are helpful for development and testing purposes, allowing non-production environments to utilize product data without impacting production operations. Era clones utilize Nutanix-native copy-on-write cloning technology, allowing for zero-byte database clones. This space efficiency can significantly lower storage costs for environments supporting large numbers of database clones.
+
+In **Era > Time Machines**, select the Time Machine instance for your source database.
+
+.. figure:: images/16a.png
+
+Click **Snapshot** and enter **First** as the **Snapshot Name**.
+
+.. figure:: images/17a.png
+
+Click **Create**.
+
+You can monitor the **Create Snapshot** job in **Era > Operations**.
+
+.. figure:: images/18a.png
+
+After the snapshot job completes, select the Time Machine instance for your source database in **Era > Time Machines** and click **Clone Database**.
+
+.. figure:: images/18b.png
+
+On the **Time** tab, select **Snapshot > First**.
+
+.. note::
+
+  Without creating manual snapshots, Era also offers the ability to clone a database based on **Point in Time** increments including Continuous (Every Second), Daily, Weekly, Monthly, or Quarterly. Availability is controlled by the SLA of the source.
+
+.. figure:: images/19a.png
+
+Click **Next**.
+
+On the **Database Server** tab, fill out the following fields:
+
+- **Database Server** - Create New Server
+- **VM Name** - DBServer-*Initials*-Clone
+- **Compute Profile** - Lab
+- **Network Profile** - DEFAULT_OOB_NETWORK
+- **SSH Public Key** -
+
+.. code-block:: text
+
+  ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCoQRdEfm8ZJNGlYLQ2iw08eVk/Wyj0zl3M5KyqKmBTpUaS1uxj0K05HMHaUNP+AeJ63Qa2hI1RJHBJOnV7Dx28/yN7ymQpvO1jWejv/AT/yasC9ayiIT1rCrpHvEDXH9ee0NZ3Dtv91R+8kDEQaUfJLYa5X97+jPMVFC7fWK5PqZRzx+N0bh1izSf8PW0snk3t13DYovHFtlTpzVaYRec/XfgHF9j0032vQDK3svfQqCVzT02NXeEyksLbRfGJwl3UsA1ujQdPgalil0RyyWzCMIabVofz+Czq4zFDFjX+ZPQKZr94/h/6RMBRyWFY5CsUVvw8f+Rq6kW+VTYMvvkv
+
+.. figure:: images/20a.png
+
+Click **Next**.
+
+On the **Database Server** tab, fill out the following fields:
+
+- **Name** - LabDB_\ *Initials*\ _Clone
+- **Description** - (Optional) Description
+- **Password** - techX2019!
+- **Database Parameter Profile** - DEFAULT_POSTGRES_PARAMS
+
+.. figure:: images/21a.png
+
+Click **Clone**.
+
+The cloning process will take approximately the same amount of time as provisioning the original database and can be monitored in **Era > Operations**.
+
+While waiting for the clone to complete, explore **Era > SLAs** to understand the differences between standard SLAs offered by Era, or create your own custom SLA.
+
+.. figure:: images/21b.png
+
+Following the completion of the clone operation, you can connect to the clone instance as described in the previous section, `Connecting to the Database`_.
+
+.. figure:: images/23a.png
+
+The newly provisioned clone is now ready to be used.
+
+Refreshing A Cloned Database
+++++++++++++++++++++++++++++
+
+The ability to easily refresh a cloned database using new data from the source database improves development, test, and other use cases by ensuring they have access to new and relevant data. In this section you will add a new table for storing data to your source database, and refresh the existing clone.
+
+Using your **Tools VM**, open **pgAdmin**.
+
+Select your source database (**NOT** the cloned database), and from the menu bar click **Tools > Query Tool**.
+
+Start pgAdmin, select your source database instance, go to the Tools menu and select Query Tool
+
+.. figure:: images/25a.png
+
+From the **Query Tool**, type the following SQL command into the editor:
+
+.. code-block:: postgresql
+  :name: products-table-sql
+
+  CREATE TABLE products (
+  product_no integer,
+  name text,
+  price numeric
+  );
+
+Click :fa:`bolt` **Execute/Refresh**.
+
+.. figure:: images/26a.png
+
+Verify the creation of the table under **Schemas > Public > Tables > products**.
+
+.. note::
+
+  You may need to refresh **Tables** for the newly created table to appear.
+
+.. figure:: images/27a.png
+
+Previously you created a manual snapshot on which to base your cloned database, for the refresh you will leverage the **Point in Time** capability of Era.
+
+The default schedule for **Log Catch Up**, configured when provisioning the source database, is every 30 minutes. Based on this schedule, you should expect to be able to refresh the database based on updates older than 30 minutes with no further action required.
+
+In this case, you just created the **products** table in your source database, so a manual execution of **Log Catch Up** would be required to copy transactional logs to Era from your source database.
+
+In **Era > Time Machines**, select the Time Machine instance for your source database and click **Log Catch Up > Yes**.
+
+.. figure:: images/27c.png
+
+Once the **Log Catchup** job completes, in **Era > Databases > Clones**, select the clone of your source database and click **Refresh**.
+
+.. figure:: images/27b.png
+
+Refreshing to the latest available **Point in Time** is selected by default. Click **Refresh**.
+
+.. figure:: images/27d.png
+
+Observe the steps taken by Era to refresh the cloned database in **Operations**.
+
+.. figure:: images/27e.png
+
+Once the **Refresh Clone** job is complete, refresh the **Tables** view of your clone database in **pgAdmin** and confirm the **products** table is now present.
+
+.. figure:: images/28a.png
+
+In just a couple of clicks and minutes you were able to update your cloned database using the latest available production data. This same approach could be leveraged to recover absent data from a database by provisioning a clone based on a previous snapshot or point in time.
+
+Return to the **Dashboard** and review the critical information Era provides to administrators, including storage savings, clone aging, tasks, and alerts.
+
+.. figure:: images/28b.png
+
+Using the Era REST API Explorer
++++++++++++++++++++++++++++++++
+
+Era features an "API first" architecture and provides a fully documented REST API to allow for automation and orchestration of its functions through external tools. Similar to Prism, Era also provides a Rest API Explorer to easily discover and test API functions.
+
+From the menu bar, select **Admin > REST API Explorer** from the top right.
+
+.. figure:: images/29.png
+
+Expand the different categories to view the available operations, including registering Nutanix clusters, registering and provisioning databases, cloning and refreshing databases, updating profiles and SLAs, and getting operation and alert information.
+
+As a simple test, expand **Databases > GET /databases**. This function returns JSON containing details regarding all registered and provisioned databases and requires no additional parameters.
+
+Click **Try it out > Execute**.
+
+.. figure:: images/30.png
+
+You should receive a JSON response body similar to the image below.
+
+.. figure:: images/32.png
+
+This API can be used to create powerful workflows using tools like Nutanix Calm, ServiceNow, Ansible, or others. As an example you could provision a Calm blueprint containing the web tier of an application and use a Calm eScript to invoke Era to clone an existing database and return the IP of the newly provisioned database to Calm.
+
+Takeaways
++++++++++
+
+What are the key things you should know about **Nutanix Era**?
+
+- Era 1.0 supports Oracle, SQL Server, and PostgreSQL. MySQL will be supported in an upcoming release.
+
+- Era supports One Click operations for registering, provisioning, cloning and refreshing supported databases.
+
+- Era enables the same type of simplicity and operating efficiency that you would expect from a public cloud while allowing DBAs to maintain control.
+
+- Era automates complex database operations – slashing both DBA time and the cost of managing databases with traditional technologies and saving immensely on enterprise OpEx.
+
+- Era enables database admins to standardize their database deployments across database engines and automatically incorporate database best practices.
+
+- Era enable DBAs to clone their environments to the latest application-consistent transaction.
+
+- Era provides a REST API to allow for integration with other orchestration and automation tools.
+
+- Era can easily be demoed using the http://demo.nutanix.com environment.
+
+Getting Connected
++++++++++++++++++
+
+Have a question about **Nutanix Era**? Please reach out to the resources below:
 
 +---------------------------------------------------------------------------------+
 |  Era Product Contacts                                                           |
@@ -31,346 +505,3 @@ Getting Engaged with the Product Team
 +--------------------------------+------------------------------------------------+
 |  Technical Marketing Engineer  |  Mike McGhee, michael.mcghee@nutanix.com       |
 +--------------------------------+------------------------------------------------+
-
-Pre-requirements
-++++++++++++++++
-
-To be able to run the lab you need to have the following available or installed
-
-A public ssh key of your machine by using :ref:'sshkey_creation'
-
-pgAdmin 4 (This can be downloaded and installed for your OS from https://www.pgadmin.org/download/).
-
-.. note::
-
-  The screenshots in this Workshop are created using a Windows 7 machine. For the Mac OS/X it may be different. An example is the way to create a ssh key pair. Differences will be in writing and may contain a screenshot for clarification where possible.
-
-Deploy ERA VM
-+++++++++++++
-
-Deploy Era VM from Prism Central.
-
-In **Prism Central > VMs > List**, click **Create VM**.
-
-Fill out the following fields and click **Save**:
-
-- **Name** - Era-*Initials*
-- **Description** - (Optional) Description for your VM.
-- **vCPU(s)** - 4
-- **Number of Cores per vCPU** - 1
-- **Memory** - 16 GiB
-
-- Select **+ Add New Disk**
-    - **Type** - DISK
-    - **Operation** - Clone from Image Service
-    - **Image** - **“Era-Server-build…”**.qcow2
-    - Select **Add**
-
-- Select **Add New NIC**
-    - **VLAN Name** - Primary
-    - Select **Add**
-
-Click **Save** to create the VM.
-
-Select the Nutanix Era VM you created and click **Power On**.
-
-.. figure:: images/2.png
-
-Register Cluster with Nutanix ERA
-+++++++++++++++++++++++++++++++++
-
-In **Prism Central > VMs > List**, identify the IP Address assigned to the Era VM you just deployed (“IP Addresses” column).
-
-.. note::
-
-  If the IP address does not populate, log into the console of the VM and Run “ifconfig” to see the assigned IP address.
-  - **Username** - Era
-  - **Password** - Nutanix.1
-
-In a new browser tab, log on to Era https://ERA-IP:8443/ using these credentials:
-
-.. note::
-
-  It may take a **couple minutes** for the Era interface to initialize after booting the VM.
-
-  Check off “I have read and agree to terms and conditions.” And select **Continue**
-
-- **Username** - admin
-- **Password** - Set new admin password **techX2019!**
-
-.. figure:: images/3.png
-
-At the "Welcome to Era" screen, fill in the following information and click **Next**:
-
-- **Name** - HPOC Cluster Name
-- **Description** - (Optional) Description
-- **IP address of Prism Element** - *HPOC Cluster IP*
-- **Prism Element Administrator** - admin
-- **Password** - techX2019!
-
-Click **Next**
-
-Select the container named **“default…”** and click **Next**.
-
-For the Network Profile choose **Primary** and leave Manage IP Address Pool in Era unchecked.
-
-Click **Next**.
-
-Setup of Era will proceed automatically and takes a couple minutes.
-
-Once complete select **Get Started**.
-
-Deploy PostgreSQL
-+++++++++++++++++
-
-On the **Getting Started** page click on PostgreSQL.
-
-.. figure:: images/4.png
-
-In the Provision a PostgreSQL database, select **Provision a Database**.
-
-**Provision a Database**
-
-- **Database Engine** - PostgreSQL
-
-**Database Server**
-
-- **Database Server** - Create New Server
-- **Database Server Name** - DBServer-*Initials*
-- **Description** - (Optional) Description
-- **Software Profile** - Take Default
-- **Compute Profile** - Take Default
-- **Network Profile** - Take Default
-
-Create a new SSH Key following the Instructions in the SSH Key Creation Lab :ref:'sshkey_creation'
-
-Copy and paste the public key into the SSH public key “text” option for the database server
-
-.. figure:: images/7.png
-
-Click **Next**
-
-**Database**
-
-- **Database Name** - LabDB-*Initials*
-- **Description** - (Optional) Description
-- **Password** - techX2019!
-- **Database Parameter Profile** - Take Default
-- **Listener Port** - Take Default
-- **Size (GiB)** - Take Default
-
-.. figure:: images/8.png
-
-Click **Next**
-
-**Time Machine**
-
-- **Name** - LabDB-*Initials*-TM
-- **Description** - (Optional) Description
-- **SLA** - Gold
-- **Schedule** - Take Defaults
-
-.. figure:: images/9.png
-
-Click **Provision**
-
-Monitor the Provision Database task from under the Operations menu, should take around 5 minutes.
-
-While you wait, you can explore other areas of the Era GUI, such as viewing the Dashboard or Administration pages.
-
-.. figure:: images/10.png
-
-Viewing and Connecting to PostgreSQL
-++++++++++++++++++++++++++++++++++++
-
-Lets connect to our Database.
-
-In **Era > Databases**, and select your PostgreSQL Source DB.
-
-.. figure:: images/11.png
-
-On the Summary page take note of your Database Server IP address
-
-.. figure:: images/12.png
-
-Start **pgAdmin**.
-
-Right click Servers in the Browser menu and select **Create**, then **Server**
-
-**General**
-
-- **Name** - Era-Lab-*Intials*
-
-**Connection Information**
-
-- **Hostname/IP Address** - IP for DBServer-*Initials*
-- **Port** - 5432
-- **Maintenance Database** - Postgres
-- **Username** - postgres
-- **Password** - techX2019!
-
-.. figure:: images/14.png
-
-Click **Save**
-
-You should now be able to browse your database instance.
-
-.. figure:: images/15.png
-
-Cloning Your PostgreSQL Source
-++++++++++++++++++++++++++++++
-
-So we have created and connected to our database, now lets make a clone.
-
-In **Era > Time Machines**, and select the Time Machine instance for your Source DB.
-
-.. figure:: images/16.png
-
-Click **Snapshot**, and name it **First_Snapshot**
-
-.. figure:: images/17.png
-
-Click **Create**
-
-Monitor the Create Snapshot job from under the **Operations menu**.
-
-.. figure:: images/18.png
-
-After the snapshot creation completes, from the Time Machine select **Clone**
-
-**Time**
-
-- **Snapshot** - First_Snapshot
-
-.. figure:: images/19.png
-
-Click **Next**
-
-**Server**
-
-- **Database Server** - Create New Server
-- **VM Name** - DBServer-*Initials*-Clone
-- **Compute Profile** - Take Default
-- **Network Profile** - Take Default
-
-Create a new SSH Key following the Instructions in the SSH Key Creation Lab :ref:'sshkey_creation'
-
-Copy and paste the public key into the SSH public key “text” option for the database server
-
-.. figure:: images/20.png
-
-Click **Next**
-
-**Database**
-
-- **Name** - LabDB-*Initials*-Clone
-- **Description** - (Optional) Description
-- **Password** - techX2019!
-- **Database Parameter Profile** - Take Default
-
-.. figure:: images/21.png
-
-Click **Clone**
-
-The clone process will take roughly the same amount of time as provisioning your original source.
-
-You can monitor this process through the **Operations menu**.
-
-While waiting for the clone to compete you can explore other areas of the Era GUI.
-
-For example, view the settings that represent the Software, Compute, Network and DB Parameters from under the Profiles menu.
-
-.. figure:: images/22.png
-
-Following the completion of the clone operation, you can connect to the clone instance as described in the previous section, **Viewing and Connecting to PostgreSQL**.
-
-.. figure:: images/23.png
-
-Refreshing Your Clone Copy
-++++++++++++++++++++++++++
-
-In **Era > Databases**, and select your Cloned DB instance.
-
-Select the radio button next to your instance and click **Refresh**
-
-.. figure:: images/24.png
-
-Choose the previous snapshot you created and click **Refresh**
-
-Follow the job to completion under **Operations**
-
-Modify source database and refresh your clone (10 min)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-Lets modify the source database and refresh the clone.
-
-Start pgAdmin, select your source database instance, go to the Tools menu and select Query Tool
-
-.. figure:: images/25.png
-
-From the **Query Tool**, paste the following SQL command into the editor:
-
-.. code-block:: bash
-  :name: inline-code
-
-  CREATE TABLE products (
-  product_no integer,
-  name text,
-  price numeric
-  );
-
-Choose Execute/Refresh
-
-.. figure:: images/26.png
-
-View the newly created table from under the Schemas tree view
-
-.. figure:: images/27.png
-
-From **Era > Time Machines**, and select the Time Machine instance for your Source DB.
-
-Create a **Snapshot**, and name it **Second_Snapshot**
-
-.. note::
-
-  Follow the same process as the **Cloning Your PostgreSQL Source** section for creating the snapshot.
-
-Refresh your clone copy using this new snapshot as outlined in the previous section **Refreshing your clone copy**.
-
-Once the clone refresh operation is complete, refresh your view for the clone copy in pgAdmin to see the table from the source
-
-.. figure:: images/28.png
-
-View the environment using the REST API Explorer (5 min)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-Now view the environment using the REST API Explorer
-
-From the top right drop down menu choose **REST API Explorer**.
-
-.. figure:: images/29.png
-
-Expand the various categories to view the possible operations.
-
-To execute a given operation, like GET /databases for example, select the operation and choose **“try it out”**
-
-.. figure:: images/30.png
-
-After selecting **“try it out”** choose **Execute**
-
-.. figure:: images/31.png
-
-You should see a response like the following
-
-.. figure:: images/32.png
-
-Takeaways
-++++++++++
-
-- Eliminate the complexity of deploying and managing databases in your environment
-
-- Era provides elegant and efficient one-click database operations and is announcing General Availability with Oracle and Postgres - providing provisioning, cloning and refresh services.
-
-- Era automates complex database operations – slashing both DBA time and the cost of managing databases with traditional technologies and saving immensely on enterprise OpEx
-
-- Era enables database admins to standardize their database deployments across database engines, incorporating best practices.

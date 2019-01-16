@@ -2,20 +2,14 @@
 
 .. toctree::
   :maxdepth: 2
-  :caption: Pre-Requirements
-  :name: _prerequirements
-  :hidden:
-
-  appendix/install_wget
-  appendix/install_kubectl
-
-.. toctree::
-  :maxdepth: 2
   :caption: Required Labs
   :name: _req_labs
   :hidden:
 
+  flow/flow
   era/era
+  karbon/karbon
+  buckets/buckets
 
 .. toctree::
   :maxdepth: 2
@@ -23,7 +17,10 @@
   :name: _opt_101_labs
   :hidden:
 
-  karbon/karbon
+  xplay/xplay
+  calm_3tier_webapp_blueprint/calm_3tier_webapp_blueprint
+  calm_win_tiered_app/calm_win_tiered_app
+
 
 .. toctree::
   :maxdepth: 2
@@ -31,6 +28,7 @@
   :name: _opt_201_labs
   :hidden:
 
+  calm_3twa_day2_blueprint/calm_3twa_day2_blueprint
   cloud_native_lab/cloud_native_lab
 
 .. toctree::
@@ -73,17 +71,6 @@ Beginning on Wednesday you will split into your Hackathon teams, or continue doi
 
 The Overview section of each lab will indicate whether another lab should be completed prior to completing that lab.
 
-Team Assignments
-++++++++++++++++
-
-Using the spreadsheet below, locate your team assignment and note your **Team Number**.
-
-.. raw:: html
-
-  <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSf9BaV63Un42od-9BiC62QcYCKLSJmz7L0Vsfnwz7Zx1nu_oQiVGiZ7IC_AcT8dXWB_qzksn9c6Dpj/pubhtml?gid=1097423445&amp;single=false&amp;widget=false&amp;chrome=false&amp;headers=false&amp;range=a1:k50" style="position: relative; height: 600px; width: 98%; border: none"></iframe>
-
-.. _cluster_details:
-
 Cluster Details
 +++++++++++++++
 
@@ -103,20 +90,14 @@ Each cluster has been pre-staged with the following:
 - **CentOS** - CentOS 7 Disk Image
 - **Era** - Era v1.0 Disk Image
 - **Xtract** - Nutanix Xtract for VMs 1.1.3 Disk Image
-- **VeeamBackupProxy** - Veeam Backup Proxy for AHV BETA Disk Image
-- **XenDesktop-7.15-ISO** - Citrix XenDesktop 7.15 ISO Image
-- **VeeamBR-9.5U3-ISO** - Veeam Backup & Replication 9.5 Update 3 ISO Image
-- **MSSQL-2016SP1-ISO** - Microsoft SQL Server 2016 SP1 ISO Image
+- **MSSQL-2014SP3-ISO** - Microsoft SQL Server 2014 SP3 ISO Image
+- **XenDesktop-7.18-ISO** - Citrix XenDesktop 7.18 ISO Image
 
 **Pre-staged Virtual Machines**
 
 - **PC** VM - 10.21.XX.39 - Nutanix Prism Central 5.5.0.6
 - **DC** VM - 10.21.XX.40 - ntnxlab.local Domain Controller
-- **Era** -
 - **Buckets** -
-- **XD** VM - 10.21.XX.41 - Citrix XenDesktop 7.15 Delivery Controller/StoreFront/License Server
-- **HYCU** VM - 10.21.XX.44 - Comtrade HYCU 2.0.0
-- **X-Ray** VM - 10.21.XX.45 - Nutanix X-Ray 2.3
 
 **Networks**
 

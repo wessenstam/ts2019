@@ -17,51 +17,6 @@ Traditional Enterprise Applications face a variety of deployment challenges for 
 
 The goal of this lab is to experience first-hand how Nutanix Cloud Native products solve these challenges via a series of exercises that walk through the deployment of a fully functional cloud native application, which leverages a Karbon based Kubernetes cluster, an Era DB, and Nutanix Buckets object storage, all of which you will get a chance to deploy, provision, and create respectively.
 
-Getting Engaged with the Product Team
-.....................................
-
-+---------------------------------------------------------------------------------+
-|  Karbon Product Contacts                                                        |
-+================================+================================================+
-|  Slack Channel                 |  #karbon                                       |
-+--------------------------------+------------------------------------------------+
-|  Product Manager               |  Denis Guyadeen, dguyadeen@nutanix.com         |
-+--------------------------------+------------------------------------------------+
-|  Product Marketing Manager     |  Maryam Sanglaji, maryam.sanglaji@nutanix.com  |
-+--------------------------------+------------------------------------------------+
-|  Technical Marketing Engineer  |  Dwayne Lessner, dwayne@nutanix.com            |
-+--------------------------------+------------------------------------------------+
-
-+---------------------------------------------------------------------------------+
-|  Era Product Contacts                                                           |
-+================================+================================================+
-|  Slack Channel                 |  #era                                          |
-+--------------------------------+------------------------------------------------+
-|  Product Manager               |  Jeremy Launier, jeremy.launier@nutanix.com    |
-+--------------------------------+------------------------------------------------+
-|  Product Marketing Manager     |  Maryam Sanglaji, maryam.sanglaji@nutanix.com  |
-+--------------------------------+------------------------------------------------+
-|  Technical Marketing Engineer  |  Mike McGhee, michael.mcghee@nutanix.com       |
-+--------------------------------+------------------------------------------------+
-
-+---------------------------------------------------------------------------------------------+
-|  Buckets Product Contacts                                                                   |
-+================================+============================================================+
-|  Slack Channel                 |  #nutanix-buckets                                          |
-+--------------------------------+------------------------------------------------------------+
-|  Product Manager               |  Priyadarshi Prasad, priyadarshi@nutanix.com               |
-+--------------------------------+------------------------------------------------------------+
-|  Product Marketing Manager     |  Krishnan Badrinarayanan, krishnan.badrinaraya@nutanix.com |
-+--------------------------------+------------------------------------------------------------+
-|  Technical Marketing Engineer  |  Sharon Santana, sharon.santana@nutanix.com                |
-+--------------------------------+------------------------------------------------------------+
-
-+---------------------------------------------------------------------------------------------+
-|  Cloud Native Contacts                                                                      |
-+================================+============================================================+
-|  Technical Marketing Engineer  |  Michael Haigh, michael.haigh@nutanix.com                  |
-+--------------------------------+------------------------------------------------------------+
-
 Create a Karbon Kubernetes Cluster
 ++++++++++++++++++++++++++++++++++
 
@@ -449,10 +404,50 @@ Run the following command:
 
 You should now be able to open a new browser tab and see the online store we created.
 
+Getting Engaged with the Product Team
++++++++++++++++++++++++++++++++++++++
 
++---------------------------------------------------------------------------------+
+|  Karbon Product Contacts                                                        |
++================================+================================================+
+|  Slack Channel                 |  #karbon                                       |
++--------------------------------+------------------------------------------------+
+|  Product Manager               |  Denis Guyadeen, dguyadeen@nutanix.com         |
++--------------------------------+------------------------------------------------+
+|  Product Marketing Manager     |  Maryam Sanglaji, maryam.sanglaji@nutanix.com  |
++--------------------------------+------------------------------------------------+
+|  Technical Marketing Engineer  |  Dwayne Lessner, dwayne@nutanix.com            |
++--------------------------------+------------------------------------------------+
 
++---------------------------------------------------------------------------------+
+|  Era Product Contacts                                                           |
++================================+================================================+
+|  Slack Channel                 |  #era                                          |
++--------------------------------+------------------------------------------------+
+|  Product Manager               |  Jeremy Launier, jeremy.launier@nutanix.com    |
++--------------------------------+------------------------------------------------+
+|  Product Marketing Manager     |  Maryam Sanglaji, maryam.sanglaji@nutanix.com  |
++--------------------------------+------------------------------------------------+
+|  Technical Marketing Engineer  |  Mike McGhee, michael.mcghee@nutanix.com       |
++--------------------------------+------------------------------------------------+
 
++---------------------------------------------------------------------------------------------+
+|  Buckets Product Contacts                                                                   |
++================================+============================================================+
+|  Slack Channel                 |  #nutanix-buckets                                          |
++--------------------------------+------------------------------------------------------------+
+|  Product Manager               |  Priyadarshi Prasad, priyadarshi@nutanix.com               |
++--------------------------------+------------------------------------------------------------+
+|  Product Marketing Manager     |  Krishnan Badrinarayanan, krishnan.badrinaraya@nutanix.com |
++--------------------------------+------------------------------------------------------------+
+|  Technical Marketing Engineer  |  Sharon Santana, sharon.santana@nutanix.com                |
++--------------------------------+------------------------------------------------------------+
 
++---------------------------------------------------------------------------------------------+
+|  Cloud Native Contacts                                                                      |
++================================+============================================================+
+|  Technical Marketing Engineer  |  Michael Haigh, michael.haigh@nutanix.com                  |
++--------------------------------+------------------------------------------------------------+
 
 Takeaways
 +++++++++
