@@ -214,23 +214,69 @@ Login to *initials*-**Windows-ToolsVM**.
 - **Username** - administrator
 - **password** - nutanix/4u
 
-Download the :download:`Sample-Pictures.zip <Sample-Pictures.zip>`
+Download the :download:`Sample-Pictures.zip <sample-pictures.zip>`
 
-Unzip Sample-Pictures.Unzip
+Unzip Sample-Pictures.zip
 
 Use Cyberduck to Create A Bucket
 ................................
 
+Launch Cyberduck, and click on **Open Connection**.
+
+.. figure:: images/buckets_06.png
+
+Select **S3 (HTTP)** from the dropdown list.
+
+.. figure:: images/buckets_07.png
+
+Enter the following fields for user Bob created earlier, and click **Connect**:
+
+- **Server**  - *<object-store-ip>*
+- **Port**  - 7200
+- **Access Key ID**  - *Generated When User Created*
+- **Password (Secret Key)** - *Generated When User Created*
+
+.. figure:: images/buckets_08.png
+
+Click **Continue** to proceed with the unsecured connection.
+
+Once connected, rightclick anywhere inside the pane, and click **New Folder**.
+
+Enter the following name for your bucket, and click **Create**:
+
+- **Bucket Name** - *initials*-bob-bucket
+
+.. figure:: images/buckets_09.png
+
+Double-click into the bucket, and right click and select **Upload**.
 
 
+Navigate to the Desktop and find the Sample Pictures folder. Upload one or more pictures to your bucket.
 
+Click **Continue** to proceed with the unsecured connection.
 
+Browse Bucket and Objects in Object Browser
+...........................................
 
+.. note::
 
+  Object browser is not the recommended way to use the object store, but is an easy way to test that your object store is functional and can be used to quickly demo IAM access controls.
 
+From a web browser, navigate to http://*<object-store-ip>*:7200.
 
+Login with the access and secret keys for Bob you created earlier.
 
+- **Access Key ID**  - *Generated When User Created*
+- **Password (Secret Key)** - *Generated When User Created*
 
+.. figure:: images/buckets_10.png
+
+You should see your bucket and the images you uploaded.
+
+.. figure:: images/buckets_11.png
+
+Work with Object Versioning
++++++++++++++++++++++++++++
 
 
 

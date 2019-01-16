@@ -35,3 +35,14 @@ Fill out the following fields:
 Click **Save** to create the VM.
 
 Power On the VM.
+
+Install Tools Software
+......................
+
+Make sure CyberDuck is installed.
+
+https://cyberduck.io/download/
+
+You will also need to download the connection profile for S3 over HTTP, as we don’t support HTTPS yet.
+
+https://cyberduck.io/s3/

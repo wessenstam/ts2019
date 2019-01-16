@@ -41,8 +41,8 @@
 
 .. toctree::
   :maxdepth: 2
-  :caption: Appendix
-  :name: _appendix
+  :caption: Tools VMs
+  :name: _tools_vms
   :hidden:
 
   tools_vms/windows_tools_vm
