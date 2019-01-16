@@ -278,6 +278,111 @@ You should see your bucket and the images you uploaded.
 Work with Object Versioning
 +++++++++++++++++++++++++++
 
+Object versioning allows the upload of new versions of the same object for required changes, without losing the original data.
+
+This is useful in many use cases, including long term data retention scenarios.
+
+Object Versioning
+.................
+
+On your Windows VM, open Cyberduck and connect to the object store using Bob’s access credentials.
+
+Select Bob’s bucket and click Get Info.
+
+.. figure:: images/buckets_12.png
+
+Click S3 and then check Bucket Versioning, then close the dialog box by clicking the **X**.
+
+.. figure:: images/buckets_13.png
+
+Leaving the Cyberduck window open, launch Notepad.
+
+Type “version 1.0” in Notepad, then click File > Save and save the file as *initials*-**textfile.txt**
+
+In Cyberduck upload the text file to your bucket.
+
+Make changes to the text file and save it with the same name, then upload it again. You can do this multiple times if desired.
+
+Click View > Show Hidden Files.
+
+.. figure:: images/buckets_14.png
+
+Notice that all versions are shown with their individual timestamps.
+The previous versions are shown in a lighter color. You can also see the version number if you toggle View > Column > Version
+
+.. figure:: images/buckets_15.png
+
+User Access Control
+...................
+
+In this lab we will demonstrate user access controls and how to apply permissions so that other users can access your bucket.
+
+Verify Current Access
+.....................
+
+From Cyberduck, click Open Connection and this time, use Joe’s access and secret keys.
+
+Notice when you connect with Joe’s access and secret keys, you don’t see Bob’s bucket.
+
+Click **Go > Go To Folder…**
+
+.. figure:: images/buckets_16.png
+
+Type in the name of Bob’s bucket and click **Go**.
+
+- **Enter the Pathname to List:** - *initials*-Bob-Bucket
+
+.. figure:: images/buckets_17.png
+
+Leave Cyberduck open for the following labs.
+
+Grant Access to Another Bucket
+..............................
+
+From the *initials*-**Linux-ToolsVM**, run the following command to add the object store instance as a host in the mc (minio client) configuration:
+
+.. code-block:: bash
+
+  ./mc config host add NutanixBuckets http://<object-store-ip>:7200 <bobs-access-key> <bobs-secret-key>
+
+Run the following command to grant Joe full access to Bob’s bucket.
+
+.. code-block:: bash
+
+  ./mc policy --user=joe@nutanix.com grant public NutanixBuckets/<initials>-bob-bucket
+
+Example output:
+
+.. code-block:: bash
+
+  ./mc policy --user=joe@nutanix.com grant public NutanixBuckets/xyz-bob-bucket
+  Running grant command for bucket NutanixBuckets/xyz-bob-bucket Permission public User joe@nutanix.com Policy public
+  Setting policy readwrite public
+
+.. note::
+
+  Note that you can set the following bucket policies. Please refer to the Buckets Administration Guide for more details.
+
+  - download (read-only) - Grants read only access to all the users. The users can get objects from this bucket.
+  - upload (write-only) - Grants write only access to all the users.
+  - public (read-write) - Grants read/write access to all the users.
+  - worm - Makes a bucket WORM. This supersedes all other policies.
+  - none - None of the users can perform reads and writes.
+
+View Bucket with Different Users Credentials
+............................................
+
+In Cyberduck, notice that Bob’s bucket still does not show up in the directory listing. However, you can now navigate directly to the bucket.
+
+Click **Go > Go To Folder…**
+
+Type in the name of Bob’s bucket and click **Go**.
+
+- **Enter the Pathname to List:** - *initials*-Bob-Bucket
+
+You should now see the contents of Bob’s bucket.
+
+
 
 
 
