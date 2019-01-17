@@ -23,6 +23,7 @@ For this lab you will need the Windows-ToolsVM and the Linux-ToolsVM.
 If you have not deployed those yet, please do the 2 labs below before continuing.
 
 :ref:`windows_tools_vm`
+
 :ref:`linux_tools_vm`
 
 Getting Familiar with the Nutanix Buckets Environment

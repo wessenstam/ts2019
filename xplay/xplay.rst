@@ -108,7 +108,7 @@ Select :fa:`bell` **Alert** as Trigger, and click **Select**.
 
   .. figure:: images/xplay_07.png
 
-Search “VM Memory Constrained” in **Alert Policy**, and select **VM Memory Constrained -**\ *initials*.
+Search “VM Memory Constrained” in **Alert Policy**, and select *initials* - **VM Memory Constrained**.
 
 .. figure:: images/xplay_08.png
 
@@ -276,7 +276,7 @@ Click **Create Playbook**.
 
 Select :fa:`bell` **Alert** as Trigger, and click **Select**.
 
-Search “VM CPU Overprovisioned” in **Alert Policy**, and select *initials* - **VM CPU Overprovisioned -**.
+Search “VM CPU Overprovisioned” in **Alert Policy**, and select *initials* - **VM CPU Overprovisioned**.
 
 Click **Add Action**, and select the :fa:`power-off` **Power Off VM** action.
 
@@ -294,8 +294,10 @@ Click **Add Action**, and select the **VM Reduce CPU** action.
 Select **Source Entity** from the parameters.
 
 - **Target VM** - {{trigger[0].source_entity_info}}
-- **Cores per vCPU to Remove**  - 1
-- **Minimum Number of Cores per vCPU**  - 1
+- **vCPUs to Remove**  - 1
+- **Minimum Number of vCPUs**  - 1
+- **Cores per vCPU to Remove**  -
+- **Minimum Number of Cores per vCPU**  -
 
 .. note::
 
@@ -375,7 +377,7 @@ Open a console session or SSH into Prism Central, and run the **paintrigger.py**
 
 .. code-block:: bash
 
-  ./paintrigger.py
+  python paintrigger.py
 
 .. note::
 
@@ -419,17 +421,201 @@ In **Prism Central** > select :fa:`bars` **> Operations > Actions Gallery**.
 
 .. figure:: images/xplay_27.png
 
+
+Use X-Play with Other Nutanix Products
+++++++++++++++++++++++++++++++++++++++
+
+Let's see how we can use X-Play with other Nutanix products by creatinga playbook to automatically quarantine a bully VM.
+
+Login to the *initials*-**Linux-ToolsVM** via ssh or Console session.
+
+- **Username** - root
+- **password** - nutanix/4u
+
+Make sure NODE_PATH has the global nodejs module directory by running the following command to set it:
+
+.. code-block:: bash
+
+  export NODE_PATH=/usr/lib/node_modules
+
+Copy the processapi.js folder into one of your local folder.
+
+**Modify the PC IP address and username/password in the script.**
+
+Start the nodejs server
+
+.. code-block:: bash
+
+  node processapi.js&
+
+Run the stress command to simulate the IO load
+
+.. code-block:: bash
+
+  stress -d 2
+
+Let it keep running until you complete this section.
+
+Create Alert Policy
+...................
+
+In **Prism Central** > select :fa:`bars` **> Activity > Alerts**, and Select **Alert Policy** from **Configure** Dropdown.
+
+Click **+ New Alert Policy**
+
+You will see the  **Create Alert Policy** window, fill out the following fields:
+
+- **Entity Type** - VM
+- **Entity (Line 1)** - One VM
+- **Entity (Line 2)** - *initials*-**Linux-ToolsVM**
+- **Metric** - Controller IO Bandwidth
+- **Impact Type** - Performance
+- **Policy Name** - *initials* - Bully VM
+- **Description** - Optional
+- **Auto Resolve Alerts** - Checked
+- **Enable Policy** - **Unchecked**
+- **Trigger alert if conditions persist for** - 0 Minutes
+
+- **Behavioral Anomaly**
+    - **Every time there is an anomaly, alert** - Checked / Warning
+
+- **Static Threshold**
+    - **Alert Critical if** - Checked / >= 250
+
+.. figure:: images/xplay_28.png
+
+Click **Save**.
+
+.. note::
+
+  Customers can choose out-of-the-box alert policies (shown below) to detect the bully VM by X-FIT.
+
+Create Custom REST API Action
+.............................
+
+In **Prism Central** > select :fa:`bars` **> Operations > Actions Gallery**.
+
+Select **REST API** action, and then select **Clone** from the **Action** dropdown.
+
+.. figure:: images/xplay_29.png
+
+Fill in the following fields:
+
+- **Name**  - *initials* - Quarantine a VM
+- **Description** - Quarantine a VM using Flow API
+- **Method**  - PUT
+- **URL** - https://*<your PC IP>*:9440/api/nutanix/v3/vms/{{trigger[0].source_entity_info.uuid}}
+- **Request Headers** - Content-Type: application/json
+
+.. figure:: images/xplay_30.png
+
+Click **Copy**.
+
+Create Playbook
+...............
+
+In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
+
+Click **Create Playbook**.
+
+Select :fa:`bell` **Alert** as Trigger, and click **Select**.
+
+Search “Bully VM” in **Alert Policy**, and select *initials* - **Bully VM**.
+
+Click **Add Action**, and select the :fa:`terminal` **REST API** action.
+
+- **Method**  - GET
+- **URL** - http://<IP of *Initial*_Lnuix_toolsVM>:3000/vm/{{trigger[0].source_entity_info.uuid}}
+
+.. note::
+
+  There is a bug in 5.10 that you have to click the “GET” in the drop list once even though “GET” is shown as the default value)
+
+Click **Add Action**, and select the :fa:`terminal` *initials* - **Quarantine a VM** action.
+
+.. note::
+
+  There is a bug in 5.10 where the title of this action still shows as “REST API”. In 5.11 GA, you will see the title as you specified earlier.
+
+Click **Parameters** and select **Response Body** into the request body field.
+
+.. figure:: images/xplay_31.png
+
+Fill in the username and password for your Prism Central.
+
+Click **Add Action**, and select the **Acknowledge Alert** action.
+
+Select **Alert** from the parameters.
+
+- **Target Alert**  - {{trigger[0].alert_entity_info}}
+
+Click **Save & Close**, and fill out the following fields:
+
+- **Name**  - *initials* - Auto Quarantine A Bully VM
+- **Description** - Optional
+- **Status**  - Enabled
+
+Click **Save**.
+
+Cause Bully VM Condition
+........................
+
+In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click *initials*-**Linux-ToolsVM**.
+
+Click **Categories**, and make sure it is not currently quarantined and associated with any categories.
+
+In **Prism Central** > select :fa:`bars` **> Activity > Alerts**, and Select **Alert Policy** from **Configure** Dropdown.
+
+Select *initials* - **Bully VM**, and **Enable** the policy.
+
+Open a console session or SSH into Prism Central, and run the **paintrigger.py** script.
+
+.. code-block:: bash
+
+  python paintrigger.py
+
+.. note::
+
+  This will resolve all the alerts, force NCC check to run immediately and trigger the alert.
+
+After 1-2 minutes check *initials*-**Linux-ToolsVM**, you should now see the VM is quarantined.
+
+Cleanup Bully VM Condition
+..........................
+
+Un-quarantine your *initials*-**Linux-ToolsVM**.
+
+In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
+
+Click the *initials* - **Auto Quarantine A Bully VM** playbook, and click the **Disable** button.
+
+
+
+Endless Possibilities Using APIs
+++++++++++++++++++++++++++++++++
+
+Send a SMS message (or other actions services in IFTTT) when an alert is detected.
+
+Click the **Play** tab, you should see that a play has just completed.
+
+If the terminal session is broken (due to the quarantine), log in to *Initial*-**Linux-ToolsVM** to kill the node and stress processes.
+
+Call to Action
+++++++++++++++
+
+
+
 Getting Engaged with the Product Team
 +++++++++++++++++++++++++++++++++++++
 
 +---------------------------------------------------------------------------------+
-|  XPlay Product Contacts                                                         |
+|  X-Play Product Contacts                                                        |
 +================================+================================================+
 |  Slack Channel                 |  #Prism-Pro                                    |
 +--------------------------------+------------------------------------------------+
 |  Product Manager               |  Harry Yang, harry.yang@nutanix.com            |
 +--------------------------------+------------------------------------------------+
-|  Product Marketing Manager     |                                                |
+|  Product Marketing Manager     |  Mayank Gupta, mayank.gupta@nutanix.com        |
 +--------------------------------+------------------------------------------------+
 |  Technical Marketing Engineer  |  Brian Suhr, brian.suhr@nutanix.com            |
 +--------------------------------+------------------------------------------------+

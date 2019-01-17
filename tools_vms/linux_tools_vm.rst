@@ -49,12 +49,27 @@ Install the software needed by running the following commands:
 
   yum install -y stress
 
-  curl http://10.4.64.11:8080/Users/nutanix_buckets/ea/builds/18112018/tools/iam_util -o iam_util
+  yum install -y nodejs
 
-  curl http://10.4.64.11:8080/Users/nutanix_buckets/ea/builds/18112018/tools/mc -o mc
+  npm install -g request
+
+  npm install -g express
 
   yum install -y s3cmd
 
   yum install -y awscli
+
+  curl http://10.4.64.11:8080/Users/nutanix_buckets/ea/builds/18112018/tools/iam_util -o iam_util
+
+  curl http://10.4.64.11:8080/Users/nutanix_buckets/ea/builds/18112018/tools/mc -o mc
+
+Open the firewall port needed by running the following commands:
+
+.. code-block:: bash
+
+  firewall-cmd --permanent --add-port=3000/tcp
+
+  firewall-cmd --reload
+
 
 Now we are ready to move onto the labs.
