@@ -35,6 +35,31 @@ Click **Save** to create the VM.
 
 Power On the VM.
 
+Setup NTP
+.........
+
+Install and Enable NTP
+
+.. code-block:: bash
+
+  yum install -y ntp ntpdate
+
+  systemctl start ntpd
+
+  systemctl enable ntpd
+
+  systemctl status ntpd
+
+Set NTP Servers to use (These match what is set by the HPOC Configure Script)
+
+.. code-block:: bash
+
+  ntpdate -u -s 0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org
+
+  systemctl restart ntpd
+
+Now your time is all set.
+
 Install Tools Software
 ......................
 

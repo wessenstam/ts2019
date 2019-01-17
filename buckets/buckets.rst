@@ -383,6 +383,142 @@ Type in the name of Bob’s bucket and click **Go**.
 
 You should now see the contents of Bob’s bucket.
 
+Creating and Using Buckets From CLI Using s3cmd
++++++++++++++++++++++++++++++++++++++++++++++++
+
+In this lab you will leverage s3cmd to access your buckets using the CLI.
+
+You will need the **Access Key** and **Secret Key** for the user Bob you created earlier in this lab.
+
+Setting up s3cmd (CLI)
+......................
+
+Login to the *initials*-**Linux-ToolsVM** via ssh or Console session.
+
+- **Username** - root
+- **password** - nutanix/4u
+
+Configure the s3 environment by running **s3cmd --configure** and entering in the following information:
+
+..note::
+
+  For anything not specified below, just hit enter to leave the defaults. Do **not** set an encryption password and do **not** use HTTPS protocol.
+
+.. code-block:: bash
+
+  s3cmd --configure
+
+- **Access Key**  - *<Bob's Access Key Created Earlier>*
+- **Secret Key**  - *<Bob's Secret Key Created Earlier>*
+- **Default Region [US]**  - us-east-1
+- **S3 Endpoint [s3.amazonaws.com]**  - *<object-store-ip>*:7200
+- **DNS-style bucket+hostname:port template for accessing a bucket [%(bucket)s.s3.amazonaws.com]**  - *<object-store-ip>*
+- **Encryption password** - Leave Blank
+- **Path to GPG program [/usr/bin/gpg]**  - Leave Blank
+- **Use HTTPS protocol [Yes]**  - No
+- **HTTP Proxy server name**  - Leave Blank
+- **Test access with supplied credentials?**  - Y (Yes)
+
+The output should look similar to this and match your environment:
+
+.. code-block:: bash
+
+  New settings:
+    Access Key: Ke2hEtehmOZoXYCrQnzUn_2EDD9Eqf0L
+    Secret Key: p6sxh_FhxEyIteslQJKfDlezKrtJro9C
+    Default Region: us-east-1
+    S3 Endpoint: 10.20.95.51:7200
+    DNS-style bucket+hostname:port template for accessing a bucket: 10.20.95.51
+    Encryption password:
+    Path to GPG program: /usr/bin/gpg
+    Use HTTPS protocol: False
+    HTTP Proxy server name:
+    HTTP Proxy server port: 0
+
+  Test access with supplied credentials? [Y/n] y
+  Please wait, attempting to list all buckets...
+  Success. Your access key and secret key worked fine :-)
+
+  Now verifying that encryption works...
+  Not configured. Never mind.
+
+  Save settings? [y/N] y
+  Configuration saved to '/root/.s3cfg'
+
+Create A Bucket And Add Objects To It Using s3cmd (CLI)
+.......................................................
+
+Now lets use s2cmd to create a new bucket called *initials*-**cli-bob-bucket**.
+
+From the same Linux command line, run the following command:
+
+.. code-block:: bash
+
+  s3cmd mb s3://xyz-cli-bob-bucket
+
+You should see the following output:
+
+.. code-block:: bash
+
+  Bucket 's3://xyz-cli-bob-bucket/' created
+
+List your bucket with the **ls** command:
+
+.. code-block:: bash
+
+  s3cmd ls
+
+You will see a list of all the buckets in the object-store.
+
+To see just your buckets run the following command:
+
+.. code-block:: bash
+
+  s3cmd ls | grep *initials*
+
+Now that we have a new bucket, lets upload some data to it.
+
+If you do not already have the Sample-Pictures.zip, download :download:`it <sample-pictures.zip>` and copy to your Linux-ToolsVM.
+
+Run the following command to upload one of the images to your bucket:
+
+.. code-block:: bash
+
+  s3cmd put --acl-public --guess-mime-type image01.jpg
+
+You should see the following output:
+
+.. code-block:: bash
+
+  s3://xyz-cli-bob-bucket/image01.jpg
+  WARNING: Module python-magic is not available. Guessing MIME types based on file extensions.
+  upload: 'image01.jpg' -> 's3://xyz-cli-bob-bucket/image01.jpg'  [1 of 1]
+  1048576 of 1048576   100% in    7s   142.74 kB/s  done
+  Public URL of the object is: http://10.20.95.51:7200/xyz-cli-bob-bucket/image01.jpg
+
+If desired, repeat with more images.
+
+Run the **la** command to list all objects in all buckets:
+
+.. code-block:: bash
+
+  s3cmd la
+
+To see just objects in your buckets, run the following command:
+
+.. code-block:: bash
+
+  s3cmd la | grep *initials*
+
+Creating and Using Buckets From Scripts
++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+
+
+
 
 
 

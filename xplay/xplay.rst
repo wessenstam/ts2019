@@ -589,8 +589,6 @@ In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
 
 Click the *initials* - **Auto Quarantine A Bully VM** playbook, and click the **Disable** button.
 
-
-
 Endless Possibilities Using APIs
 ++++++++++++++++++++++++++++++++
 
