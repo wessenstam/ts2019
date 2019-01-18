@@ -80,6 +80,12 @@ Install the software needed by running the following commands:
 
   npm install -g express
 
+  yum install -y python-pip
+
+  pip install -U pip
+
+  pip install boto3
+
   yum install -y s3cmd
 
   yum install -y awscli

@@ -314,7 +314,7 @@ The previous versions are shown in a lighter color. You can also see the version
 .. figure:: images/buckets_15.png
 
 User Access Control
-...................
++++++++++++++++++++
 
 In this lab we will demonstrate user access controls and how to apply permissions so that other users can access your bucket.
 
@@ -334,6 +334,8 @@ Type in the name of Bob’s bucket and click **Go**.
 - **Enter the Pathname to List:** - *initials*-Bob-Bucket
 
 .. figure:: images/buckets_17.png
+
+You should receive an Access Denied error.
 
 Leave Cyberduck open for the following labs.
 
@@ -513,14 +515,124 @@ To see just objects in your buckets, run the following command:
 Creating and Using Buckets From Scripts
 +++++++++++++++++++++++++++++++++++++++
 
+In this lab you will use **boto3**, the AWS SDK for Python, to manipulate your buckets using Python scripts.
 
+Listing and Creating Buckets with Python
+........................................
 
+In this lab, you will modify a sample script to match your environment, which will list all the buckets available to that user.
 
+You will also add to the script to include the creation of a bucket.
 
+If you are not still logged in, log back into your *initials*-**Linux-ToolsVM**.
 
+Modify the following script in vi, or another editor of your choice.
 
+The items in bold will need to be modified.
 
+.. code-block:: bash
 
+  #!/usr/bin/python3
+
+  import boto3
+
+  endpoint_ip= "<object-store-ip>"
+  access_key_id="<access-key>"
+  secret_access_key="<secret-key>"
+  endpoint_url= "http://"+endpoint_ip+":7200"
+
+  session = boto3.session.Session()
+  s3client = session.client(service_name="s3", aws_access_key_id=access_key_id, aws_secret_access_key=secret_access_key, endpoint_url=endpoint_url)
+
+  # list the buckets
+  response = s3client.list_buckets()
+
+  for b in response['Buckets']:
+  print (b['Name'])
+
+Save the script with the name **list-buckets.py**, and grant execute permissions on it.
+
+.. code-block:: bash
+
+  chmod +x list-buckets.py
+
+Run the script.
+
+The output should look similar to the following:
+
+.. code-block:: bash
+
+  [root@centos ~]# ./list-buckets.py
+  xyz-bob-bucket
+  xyz-cli-bob-bucket
+
+Using the previous script as a base, and the boto3 documentation, modify the script to create a new bucket named *initials*-**python-bob-bucket**.
+
+Make a copy of the list-buckets.py script before modifying it. Call the new script **create-bucket.py**.
+
+Hint: you only need to add an additional line in your script, before the # list the buckets section. Check your work :download:`here <create-bucket.py>`.
+
+Uploading Multiple Files to Buckets with Python
+...............................................
+
+In your Linux VM, from the current working directory, create a new directory called **sample-files** and change to that directory.
+
+Run the following command to create 100 small files:
+
+.. code-block:: bash
+
+  for i in {1..100}; do dd if=/dev/urandom of=file$i bs=1024 count=1; done
+
+Change back to the previous directory.
+
+Modify your script to loop through all files in that directory and upload them to the bucket using the put_object method.
+
+Save the script with the name **upload-files.py**, and grant execute permissions on it.
+
+Alternatively, you can download the :download:`sample <upload-files.py>` script and edit the user defined variables section to match your environment.
+
+.. code-block:: bash
+
+  #!/usr/local/bin/python3
+
+  import boto3
+  import glob
+  import re
+
+  # user defined variables
+  endpoint_ip= "<your-endpoint-ip>"
+  access_key_id="<access-key>"
+  secret_access_key="<secret-key>"
+  bucket="<bucket-name-to-upload-to>"
+  name_of_dir="sample-files"
+
+  # system variables
+  endpoint_url= "http://"+endpoint_ip+":7200"
+  filepath = glob.glob("%s/*" % name_of_dir)
+
+  # connect to object store
+  session = boto3.session.Session()
+  s3client = session.client(service_name="s3", aws_access_key_id=access_key_id, aws_secret_access_key=secret_access_key, endpoint_url=endpoint_url)
+
+  # go through all the files in the directory and upload
+  for current in filepath:
+      full_file_path=current
+      m=re.search('sample-files/(.*)', current)
+      if m:
+        object_name=m.group(1)
+      print("Path to File:",full_file_path)
+      print("Object name:",object_name)
+      response = s3client.put_object(Bucket=bucket, Body=full_file_path, Key=object_name)
+  #     print(response)
+
+Now you can list all the files you uploaded by running the following s3cmd:
+
+.. code-block:: bash
+
+  s3cmd la | grep *initials*
+
+Call To Actions
++++++++++++++++
 
 
 
