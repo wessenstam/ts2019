@@ -7,7 +7,7 @@ Nutanix Prism Pro X-Play
 Overview
 ++++++++
 
-**Estimated time to complete: 30 MINUTES**
+**Estimated time to complete: 60 MINUTES**
 
 Lab Setup
 +++++++++
