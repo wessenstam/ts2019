@@ -17,56 +17,14 @@ Another feature is easy integration with 3rd party backup software and S3 compat
 
 Lab Setup
 +++++++++
-In this section we will deploy a Linux VM, install iam_util, mc, s3cmd, and awscli.
 
-Deploy Linux VM
-...............
+For this lab you will need the Windows-ToolsVM and the Linux-ToolsVM.
 
-In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click **Create VM**.
+If you have not deployed those yet, please do the 2 labs below before continuing.
 
-Fill out the following fields:
+:ref:`windows_tools_vm`
 
-- **Name** - Buckets-Tools-*initials*
-- **Description** - (Optional) Description for your VM.
-- **vCPU(s)** - 1
-- **Number of Cores per vCPU** - 1
-- **Memory** - 2 GiB
-
-- Select **+ Add New Disk**
-    - **Type** - DISK
-    - **Operation** - Clone from Image Service
-    - **Image** - CentOS7.qcow2
-    - Select **Add**
-
-- Select **Add New NIC**
-    - **VLAN Name** - Primary
-    - Select **Add**
-
-Click **Save** to create the VM.
-
-Power On the VM.
-
-Install Tools Software
-......................
-
-Lets install **iam_util** and **mc** so we can manage users and access policies.
-
-Login to the VM via ssh or Console session, and run the following commands:
-
-- **Username** - root
-- **password** - nutanix/4u
-
-.. code-block:: bash
-
-  curl http://10.4.64.11:8080/Users/nutanix_buckets/ea/builds/18112018/tools/iam_util -o iam_util
-
-  curl http://10.4.64.11:8080/Users/nutanix_buckets/ea/builds/18112018/tools/mc -o mc
-
-  yum install -y s3cmd
-
-  yum install -y awscli
-
-Now we are ready to move onto the labs.
+:ref:`linux_tools_vm`
 
 Getting Familiar with the Nutanix Buckets Environment
 +++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -130,7 +88,7 @@ Click **Create Object Store**.
 
 Fill out the following fields:
 
-- **Object Store Name** - oss-*initials*
+- **Object Store Name** - *initials*-oss
 - **Domain**  - ntnxlab.local
 - **IP Address**  - Need designated IP?
 
@@ -174,11 +132,11 @@ Click **Deploy**
 Walk through Bucket Creation and Policies
 .........................................
 
-Select the **oss**-*initials* object store you just created.
+Select the *initials*-**oss** object store you just created.
 
 Click **Create Bucket**, and fill out the following fields: and give the bucket a name. You can optionally define versioning or lifecycle policies.
 
-- **Name**  - my-bucket-*initials*
+- **Name**  - *initials*-my-bucket
 - **Enable Versioning** - Checked
 
 Click **Create**.
@@ -195,7 +153,7 @@ Lifecycle policies define how long to keep data in the system.
 
 Once the bucket is created, it can be enabled with WORM (write once read many) for regulatory compliance.
 
-Select the bucket you just created **my-bucket**-*initials*, and click **Configure WORM**.
+Select the bucket you just created *initials*-**my-bucket**, and click **Configure WORM**.
 
 .. note::
 
@@ -213,7 +171,7 @@ In this lab you will create two users using the command line tool, **iam_util**.
   - iam_util - for user creation
   - Mc - for policy configuration
 
-Login to the VM via ssh or Console session.
+Login to the *initials*-**Linux-ToolsVM** via ssh or Console session.
 
 - **Username** - root
 - **password** - nutanix/4u
@@ -252,30 +210,429 @@ You will also briefly use the built-in object store browser, which is an easy wa
 Download the Sample Images
 ..........................
 
-Login to your Windows Tools VM **ToolsVM**-*initials*.
+Login to *initials*-**Windows-ToolsVM**.
 
 - **Username** - administrator
 - **password** - nutanix/4u
 
-Download the :download:`Sample-Pictures.zip <Sample-Pictures.zip>`
+Download the :download:`Sample-Pictures.zip <sample-pictures.zip>`
 
-Unzip Sample-Pictures.Unzip
+Unzip Sample-Pictures.zip
 
 Use Cyberduck to Create A Bucket
 ................................
 
+Launch Cyberduck, and click on **Open Connection**.
+
+.. figure:: images/buckets_06.png
+
+Select **S3 (HTTP)** from the dropdown list.
+
+.. figure:: images/buckets_07.png
+
+Enter the following fields for user Bob created earlier, and click **Connect**:
+
+- **Server**  - *<object-store-ip>*
+- **Port**  - 7200
+- **Access Key ID**  - *Generated When User Created*
+- **Password (Secret Key)** - *Generated When User Created*
+
+.. figure:: images/buckets_08.png
+
+Click **Continue** to proceed with the unsecured connection.
+
+Once connected, rightclick anywhere inside the pane, and click **New Folder**.
+
+Enter the following name for your bucket, and click **Create**:
+
+- **Bucket Name** - *initials*-bob-bucket
+
+.. figure:: images/buckets_09.png
+
+Double-click into the bucket, and right click and select **Upload**.
 
 
+Navigate to the Desktop and find the Sample Pictures folder. Upload one or more pictures to your bucket.
 
+Click **Continue** to proceed with the unsecured connection.
 
+Browse Bucket and Objects in Object Browser
+...........................................
 
+.. note::
 
+  Object browser is not the recommended way to use the object store, but is an easy way to test that your object store is functional and can be used to quickly demo IAM access controls.
 
+From a web browser, navigate to http://*<object-store-ip>*:7200.
 
+Login with the access and secret keys for Bob you created earlier.
 
+- **Access Key ID**  - *Generated When User Created*
+- **Password (Secret Key)** - *Generated When User Created*
 
+.. figure:: images/buckets_10.png
 
+You should see your bucket and the images you uploaded.
 
+.. figure:: images/buckets_11.png
+
+Work with Object Versioning
++++++++++++++++++++++++++++
+
+Object versioning allows the upload of new versions of the same object for required changes, without losing the original data.
+
+This is useful in many use cases, including long term data retention scenarios.
+
+Object Versioning
+.................
+
+On your Windows VM, open Cyberduck and connect to the object store using Bob’s access credentials.
+
+Select Bob’s bucket and click Get Info.
+
+.. figure:: images/buckets_12.png
+
+Click S3 and then check Bucket Versioning, then close the dialog box by clicking the **X**.
+
+.. figure:: images/buckets_13.png
+
+Leaving the Cyberduck window open, launch Notepad.
+
+Type “version 1.0” in Notepad, then click File > Save and save the file as *initials*-**textfile.txt**
+
+In Cyberduck upload the text file to your bucket.
+
+Make changes to the text file and save it with the same name, then upload it again. You can do this multiple times if desired.
+
+Click View > Show Hidden Files.
+
+.. figure:: images/buckets_14.png
+
+Notice that all versions are shown with their individual timestamps.
+The previous versions are shown in a lighter color. You can also see the version number if you toggle View > Column > Version
+
+.. figure:: images/buckets_15.png
+
+User Access Control
++++++++++++++++++++
+
+In this lab we will demonstrate user access controls and how to apply permissions so that other users can access your bucket.
+
+Verify Current Access
+.....................
+
+From Cyberduck, click Open Connection and this time, use Joe’s access and secret keys.
+
+Notice when you connect with Joe’s access and secret keys, you don’t see Bob’s bucket.
+
+Click **Go > Go To Folder…**
+
+.. figure:: images/buckets_16.png
+
+Type in the name of Bob’s bucket and click **Go**.
+
+- **Enter the Pathname to List:** - *initials*-Bob-Bucket
+
+.. figure:: images/buckets_17.png
+
+You should receive an Access Denied error.
+
+Leave Cyberduck open for the following labs.
+
+Grant Access to Another Bucket
+..............................
+
+From the *initials*-**Linux-ToolsVM**, run the following command to add the object store instance as a host in the mc (minio client) configuration:
+
+.. code-block:: bash
+
+  ./mc config host add NutanixBuckets http://<object-store-ip>:7200 <bobs-access-key> <bobs-secret-key>
+
+Run the following command to grant Joe full access to Bob’s bucket.
+
+.. code-block:: bash
+
+  ./mc policy --user=joe@nutanix.com grant public NutanixBuckets/<initials>-bob-bucket
+
+Example output:
+
+.. code-block:: bash
+
+  ./mc policy --user=joe@nutanix.com grant public NutanixBuckets/xyz-bob-bucket
+  Running grant command for bucket NutanixBuckets/xyz-bob-bucket Permission public User joe@nutanix.com Policy public
+  Setting policy readwrite public
+
+.. note::
+
+  Note that you can set the following bucket policies. Please refer to the Buckets Administration Guide for more details.
+
+  - download (read-only) - Grants read only access to all the users. The users can get objects from this bucket.
+  - upload (write-only) - Grants write only access to all the users.
+  - public (read-write) - Grants read/write access to all the users.
+  - worm - Makes a bucket WORM. This supersedes all other policies.
+  - none - None of the users can perform reads and writes.
+
+View Bucket with Different Users Credentials
+............................................
+
+In Cyberduck, notice that Bob’s bucket still does not show up in the directory listing. However, you can now navigate directly to the bucket.
+
+Click **Go > Go To Folder…**
+
+Type in the name of Bob’s bucket and click **Go**.
+
+- **Enter the Pathname to List:** - *initials*-Bob-Bucket
+
+You should now see the contents of Bob’s bucket.
+
+Creating and Using Buckets From CLI Using s3cmd
++++++++++++++++++++++++++++++++++++++++++++++++
+
+In this lab you will leverage s3cmd to access your buckets using the CLI.
+
+You will need the **Access Key** and **Secret Key** for the user Bob you created earlier in this lab.
+
+Setting up s3cmd (CLI)
+......................
+
+Login to the *initials*-**Linux-ToolsVM** via ssh or Console session.
+
+- **Username** - root
+- **password** - nutanix/4u
+
+Configure the s3 environment by running **s3cmd --configure** and entering in the following information:
+
+..note::
+
+  For anything not specified below, just hit enter to leave the defaults. Do **not** set an encryption password and do **not** use HTTPS protocol.
+
+.. code-block:: bash
+
+  s3cmd --configure
+
+- **Access Key**  - *<Bob's Access Key Created Earlier>*
+- **Secret Key**  - *<Bob's Secret Key Created Earlier>*
+- **Default Region [US]**  - us-east-1
+- **S3 Endpoint [s3.amazonaws.com]**  - *<object-store-ip>*:7200
+- **DNS-style bucket+hostname:port template for accessing a bucket [%(bucket)s.s3.amazonaws.com]**  - *<object-store-ip>*
+- **Encryption password** - Leave Blank
+- **Path to GPG program [/usr/bin/gpg]**  - Leave Blank
+- **Use HTTPS protocol [Yes]**  - No
+- **HTTP Proxy server name**  - Leave Blank
+- **Test access with supplied credentials?**  - Y (Yes)
+
+The output should look similar to this and match your environment:
+
+.. code-block:: bash
+
+  New settings:
+    Access Key: Ke2hEtehmOZoXYCrQnzUn_2EDD9Eqf0L
+    Secret Key: p6sxh_FhxEyIteslQJKfDlezKrtJro9C
+    Default Region: us-east-1
+    S3 Endpoint: 10.20.95.51:7200
+    DNS-style bucket+hostname:port template for accessing a bucket: 10.20.95.51
+    Encryption password:
+    Path to GPG program: /usr/bin/gpg
+    Use HTTPS protocol: False
+    HTTP Proxy server name:
+    HTTP Proxy server port: 0
+
+  Test access with supplied credentials? [Y/n] y
+  Please wait, attempting to list all buckets...
+  Success. Your access key and secret key worked fine :-)
+
+  Now verifying that encryption works...
+  Not configured. Never mind.
+
+  Save settings? [y/N] y
+  Configuration saved to '/root/.s3cfg'
+
+Create A Bucket And Add Objects To It Using s3cmd (CLI)
+.......................................................
+
+Now lets use s2cmd to create a new bucket called *initials*-**cli-bob-bucket**.
+
+From the same Linux command line, run the following command:
+
+.. code-block:: bash
+
+  s3cmd mb s3://xyz-cli-bob-bucket
+
+You should see the following output:
+
+.. code-block:: bash
+
+  Bucket 's3://xyz-cli-bob-bucket/' created
+
+List your bucket with the **ls** command:
+
+.. code-block:: bash
+
+  s3cmd ls
+
+You will see a list of all the buckets in the object-store.
+
+To see just your buckets run the following command:
+
+.. code-block:: bash
+
+  s3cmd ls | grep *initials*
+
+Now that we have a new bucket, lets upload some data to it.
+
+If you do not already have the Sample-Pictures.zip, download :download:`it <sample-pictures.zip>` and copy to your Linux-ToolsVM.
+
+Run the following command to upload one of the images to your bucket:
+
+.. code-block:: bash
+
+  s3cmd put --acl-public --guess-mime-type image01.jpg
+
+You should see the following output:
+
+.. code-block:: bash
+
+  s3://xyz-cli-bob-bucket/image01.jpg
+  WARNING: Module python-magic is not available. Guessing MIME types based on file extensions.
+  upload: 'image01.jpg' -> 's3://xyz-cli-bob-bucket/image01.jpg'  [1 of 1]
+  1048576 of 1048576   100% in    7s   142.74 kB/s  done
+  Public URL of the object is: http://10.20.95.51:7200/xyz-cli-bob-bucket/image01.jpg
+
+If desired, repeat with more images.
+
+Run the **la** command to list all objects in all buckets:
+
+.. code-block:: bash
+
+  s3cmd la
+
+To see just objects in your buckets, run the following command:
+
+.. code-block:: bash
+
+  s3cmd la | grep *initials*
+
+Creating and Using Buckets From Scripts
++++++++++++++++++++++++++++++++++++++++
+
+In this lab you will use **boto3**, the AWS SDK for Python, to manipulate your buckets using Python scripts.
+
+Listing and Creating Buckets with Python
+........................................
+
+In this lab, you will modify a sample script to match your environment, which will list all the buckets available to that user.
+
+You will also add to the script to include the creation of a bucket.
+
+If you are not still logged in, log back into your *initials*-**Linux-ToolsVM**.
+
+Modify the following script in vi, or another editor of your choice.
+
+The items in bold will need to be modified.
+
+.. code-block:: bash
+
+  #!/usr/bin/python3
+
+  import boto3
+
+  endpoint_ip= "<object-store-ip>"
+  access_key_id="<access-key>"
+  secret_access_key="<secret-key>"
+  endpoint_url= "http://"+endpoint_ip+":7200"
+
+  session = boto3.session.Session()
+  s3client = session.client(service_name="s3", aws_access_key_id=access_key_id, aws_secret_access_key=secret_access_key, endpoint_url=endpoint_url)
+
+  # list the buckets
+  response = s3client.list_buckets()
+
+  for b in response['Buckets']:
+  print (b['Name'])
+
+Save the script with the name **list-buckets.py**, and grant execute permissions on it.
+
+.. code-block:: bash
+
+  chmod +x list-buckets.py
+
+Run the script.
+
+The output should look similar to the following:
+
+.. code-block:: bash
+
+  [root@centos ~]# ./list-buckets.py
+  xyz-bob-bucket
+  xyz-cli-bob-bucket
+
+Using the previous script as a base, and the boto3 documentation, modify the script to create a new bucket named *initials*-**python-bob-bucket**.
+
+Make a copy of the list-buckets.py script before modifying it. Call the new script **create-bucket.py**.
+
+Hint: you only need to add an additional line in your script, before the # list the buckets section. Check your work :download:`here <create-bucket.py>`.
+
+Uploading Multiple Files to Buckets with Python
+...............................................
+
+In your Linux VM, from the current working directory, create a new directory called **sample-files** and change to that directory.
+
+Run the following command to create 100 small files:
+
+.. code-block:: bash
+
+  for i in {1..100}; do dd if=/dev/urandom of=file$i bs=1024 count=1; done
+
+Change back to the previous directory.
+
+Modify your script to loop through all files in that directory and upload them to the bucket using the put_object method.
+
+Save the script with the name **upload-files.py**, and grant execute permissions on it.
+
+Alternatively, you can download the :download:`sample <upload-files.py>` script and edit the user defined variables section to match your environment.
+
+.. code-block:: bash
+
+  #!/usr/local/bin/python3
+
+  import boto3
+  import glob
+  import re
+
+  # user defined variables
+  endpoint_ip= "<your-endpoint-ip>"
+  access_key_id="<access-key>"
+  secret_access_key="<secret-key>"
+  bucket="<bucket-name-to-upload-to>"
+  name_of_dir="sample-files"
+
+  # system variables
+  endpoint_url= "http://"+endpoint_ip+":7200"
+  filepath = glob.glob("%s/*" % name_of_dir)
+
+  # connect to object store
+  session = boto3.session.Session()
+  s3client = session.client(service_name="s3", aws_access_key_id=access_key_id, aws_secret_access_key=secret_access_key, endpoint_url=endpoint_url)
+
+  # go through all the files in the directory and upload
+  for current in filepath:
+      full_file_path=current
+      m=re.search('sample-files/(.*)', current)
+      if m:
+        object_name=m.group(1)
+      print("Path to File:",full_file_path)
+      print("Object name:",object_name)
+      response = s3client.put_object(Bucket=bucket, Body=full_file_path, Key=object_name)
+  #     print(response)
+
+Now you can list all the files you uploaded by running the following s3cmd:
+
+.. code-block:: bash
+
+  s3cmd la | grep *initials*
+
+Call To Actions
++++++++++++++++
 
 
 

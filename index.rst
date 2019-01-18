@@ -39,6 +39,23 @@
 
   sshkey_creation/sshkey_creation
 
+.. toctree::
+  :maxdepth: 2
+  :caption: Tools VMs
+  :name: _tools_vms
+  :hidden:
+
+  tools_vms/windows_tools_vm
+  tools_vms/linux_tools_vm
+
+.. toctree::
+  :maxdepth: 2
+  :caption: Appendix
+  :name: _appendix
+  :hidden:
+
+  appendix/glossary
+  appendix/basics
 
 .. raw:: html
 
