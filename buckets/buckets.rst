@@ -7,13 +7,28 @@ Nutanix Buckets
 Overview
 ++++++++
 
-**Estimated time to complete: 30 MINUTES**
+**Estimated time to complete: 60 MINUTES**
 
-Buckets is a scalable S3-compatible object storage solution that allows users to store petabytes of unstructured data on the Nutanix platform.
+Buckets is a scalable S3-compatible object storage solution that allows users to store petabytes of unstructured data on the Nutanix platform, with S3 support for features such as WORM and object versioning that are required for regulatory compliance, and easy integration with 3rd party backup software (HYCU and Commvault are confirmed for GA, with other vendors on the roadmap), and S3-compatible applications.
 
-It has support for features such as WORM and object versioning that are required for regulatory compliance.
+Use cases targeted at GA include:
 
-Another feature is easy integration with 3rd party backup software and S3 compatible applications.
+- DevOps
+    - Single global namespace for multi-geography collaboration for Engg teams spread around the world
+    - S3 support
+    - Time-to-first-byte of 10ms or less
+-  Long Term Data Retention
+    - WORM compliance
+    - Object versioning
+    - Lifecycle policies
+-  Backup Target
+    - Support for HYCU and Commvault at GA, with other vendors on the roadmap.
+    - Ability to support multiple backup clients simultaneously.
+    - Ability to handle really small and really large backup files simultaneously with a key-value store based metadata structure and multi-part upload capabilities.
+
+In this lab, you will walk through an object store deployment and learn how to create and manage buckets using a popular file transfer application (Cyberduck) as well as via other S3-compatible applications.
+
+You will also set up the object store as a backup target in HYCU, and create scripts in Python to access the object store.
 
 Lab Setup
 +++++++++
@@ -132,9 +147,9 @@ Click **Deploy**
 Walk through Bucket Creation and Policies
 .........................................
 
-Select the *initials*-**oss** object store you just created.
+Select the object store you were assigned.
 
-Click **Create Bucket**, and fill out the following fields: and give the bucket a name. You can optionally define versioning or lifecycle policies.
+Click **Create Bucket**, and fill out the following fields:
 
 - **Name**  - *initials*-my-bucket
 - **Enable Versioning** - Checked
@@ -169,7 +184,7 @@ In this lab you will create two users using the command line tool, **iam_util**.
   User creation and access policy configuration will be in the UI in Buckets GA. In the early access software, we will use the following Linux command line tools:
 
   - iam_util - for user creation
-  - Mc - for policy configuration
+  - mc - for policy configuration
 
 Login to the *initials*-**Linux-ToolsVM** via ssh or Console session.
 
@@ -215,9 +230,9 @@ Login to *initials*-**Windows-ToolsVM**.
 - **Username** - administrator
 - **password** - nutanix/4u
 
-Download the :download:`Sample-Pictures.zip <sample-pictures.zip>`
+Download and unzip the following on your Windows-ToolsVM:
 
-Unzip Sample-Pictures.zip
+:download:`sample-pictures <sample-pictures.zip>`
 
 Use Cyberduck to Create A Bucket
 ................................
@@ -286,7 +301,7 @@ This is useful in many use cases, including long term data retention scenarios.
 Object Versioning
 .................
 
-On your Windows VM, open Cyberduck and connect to the object store using Bob’s access credentials.
+On your Windows VM, open Cyberduck and connect to the object store using Bob’s access credentials (If not already connected).
 
 Select Bob’s bucket and click Get Info.
 
@@ -302,7 +317,9 @@ Type “version 1.0” in Notepad, then click File > Save and save the file as *
 
 In Cyberduck upload the text file to your bucket.
 
-Make changes to the text file and save it with the same name, then upload it again. You can do this multiple times if desired.
+Make changes to the text file and save it with the same name, then upload it again. Overwrite the existing file when prompted.
+
+You can do this multiple times if desired.
 
 Click View > Show Hidden Files.
 
@@ -364,7 +381,7 @@ Example output:
 
 .. note::
 
-  Note that you can set the following bucket policies. Please refer to the Buckets Administration Guide for more details.
+  Note that you can set the following bucket policies. Please refer to the Buckets `Administration Guide <https://docs.google.com/document/d/1l0fekqhDH-q3snlBmogfEAOg2MVoGMveiNa6fw6VOeM/edit#>`_ for more details.
 
   - download (read-only) - Grants read only access to all the users. The users can get objects from this bucket.
   - upload (write-only) - Grants write only access to all the users.
@@ -388,6 +405,8 @@ You should now see the contents of Bob’s bucket.
 Creating and Using Buckets From CLI Using s3cmd
 +++++++++++++++++++++++++++++++++++++++++++++++
 
+Buckets is an object store service that is designed to be accessed and consumed over S3 APIs.
+
 In this lab you will leverage s3cmd to access your buckets using the CLI.
 
 You will need the **Access Key** and **Secret Key** for the user Bob you created earlier in this lab.
@@ -402,7 +421,7 @@ Login to the *initials*-**Linux-ToolsVM** via ssh or Console session.
 
 Configure the s3 environment by running **s3cmd --configure** and entering in the following information:
 
-..note::
+.. note::
 
   For anything not specified below, just hit enter to leave the defaults. Do **not** set an encryption password and do **not** use HTTPS protocol.
 
@@ -450,7 +469,7 @@ The output should look similar to this and match your environment:
 Create A Bucket And Add Objects To It Using s3cmd (CLI)
 .......................................................
 
-Now lets use s2cmd to create a new bucket called *initials*-**cli-bob-bucket**.
+Now lets use s3cmd to create a new bucket called *initials*-**cli-bob-bucket**.
 
 From the same Linux command line, run the following command:
 
@@ -480,13 +499,15 @@ To see just your buckets run the following command:
 
 Now that we have a new bucket, lets upload some data to it.
 
-If you do not already have the Sample-Pictures.zip, download :download:`it <sample-pictures.zip>` and copy to your Linux-ToolsVM.
+If you do not already have the Sample-Pictures.zip, download it and copy to your Linux-ToolsVM.
+
+:download:`sample-pictures <sample-pictures.zip>`
 
 Run the following command to upload one of the images to your bucket:
 
 .. code-block:: bash
 
-  s3cmd put --acl-public --guess-mime-type image01.jpg
+  s3cmd put --acl-public --guess-mime-type image01.jpg s3://<your-bucket-name>/image01.jpg
 
 You should see the following output:
 
@@ -528,11 +549,9 @@ If you are not still logged in, log back into your *initials*-**Linux-ToolsVM**.
 
 Modify the following script in vi, or another editor of your choice.
 
-The items in bold will need to be modified.
-
 .. code-block:: bash
 
-  #!/usr/bin/python3
+  #!/usr/bin/python
 
   import boto3
 
@@ -548,7 +567,7 @@ The items in bold will need to be modified.
   response = s3client.list_buckets()
 
   for b in response['Buckets']:
-  print (b['Name'])
+    print (b['Name'])
 
 Save the script with the name **list-buckets.py**, and grant execute permissions on it.
 
@@ -577,6 +596,12 @@ Uploading Multiple Files to Buckets with Python
 
 In your Linux VM, from the current working directory, create a new directory called **sample-files** and change to that directory.
 
+.. code-block:: bash
+
+  mkdir sample-files
+  cd sample-files
+
+
 Run the following command to create 100 small files:
 
 .. code-block:: bash
@@ -584,6 +609,10 @@ Run the following command to create 100 small files:
   for i in {1..100}; do dd if=/dev/urandom of=file$i bs=1024 count=1; done
 
 Change back to the previous directory.
+
+.. code-block:: bash
+
+  cd ../
 
 Modify your script to loop through all files in that directory and upload them to the bucket using the put_object method.
 
@@ -593,7 +622,7 @@ Alternatively, you can download the :download:`sample <upload-files.py>` script 
 
 .. code-block:: bash
 
-  #!/usr/local/bin/python3
+  #!/usr/local/bin/python
 
   import boto3
   import glob
