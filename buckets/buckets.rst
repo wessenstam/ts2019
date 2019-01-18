@@ -232,7 +232,7 @@ Login to *initials*-**Windows-ToolsVM**.
 
 Download and unzip the following on your Windows-ToolsVM:
 
-:download:`sample-pictures <sample-pictures.zip>`
+:download:`sample-pictures <https://s3.amazonaws.com/get-ahv-images/sample-pictures.zip>`
 
 Use Cyberduck to Create A Bucket
 ................................
@@ -501,7 +501,11 @@ Now that we have a new bucket, lets upload some data to it.
 
 If you do not already have the Sample-Pictures.zip, download it and copy to your Linux-ToolsVM.
 
-:download:`sample-pictures <sample-pictures.zip>`
+:download:`sample-pictures <https://s3.amazonaws.com/get-ahv-images/sample-pictures.zip>`
+
+.. code-block:: bash
+
+  curl https://s3.amazonaws.com/get-ahv-images/sample-pictures.zip -o sample-pictures
 
 Run the following command to upload one of the images to your bucket:
 
