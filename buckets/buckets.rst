@@ -105,7 +105,7 @@ Fill out the following fields:
 
 - **Object Store Name** - *initials*-oss
 - **Domain**  - ntnxlab.local
-- **IP Address**  - Need designated IP?
+- **IP Address**  - 1.1.1.1
 
 .. figure:: images/buckets_02.png
 
@@ -626,7 +626,7 @@ Alternatively, you can download the :download:`sample <upload-files.py>` script 
 
 .. code-block:: bash
 
-  #!/usr/local/bin/python
+  #!/usr/bin/python
 
   import boto3
   import glob
