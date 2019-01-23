@@ -684,7 +684,7 @@ Getting Engaged with the Product Team
 +--------------------------------+------------------------------------------------+
 |  Product Manager               |  Mark Nijmeijer, mark.nijmeijer@nutanix.com    |
 +--------------------------------+------------------------------------------------+
-|  Product Marketing Manager     |                                                |
+|  Product Marketing Manager     |  Mayank Gupta, mayank.gupta@nutanix.com        |
 +--------------------------------+------------------------------------------------+
 |  Technical Marketing Engineer  |  Dwayne Lessner, dwayne@nutanix.com            |
 +--------------------------------+------------------------------------------------+
