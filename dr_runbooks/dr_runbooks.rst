@@ -33,7 +33,7 @@ Create Multi-Tier Wordpress App
 
 .. note::
 
-  When creating the VMs you will use the **Secondary**, and adding static IPs you have been assigned in the .230-.253 range.
+  When creating the VMs you will use the **Secondary** network, and adding static IPs you have been assigned in the .230-.253 range.
   You will be using the same last octet in the 2nd assigned hosted POC cluster.
   The 2nd HPOC cluster will also have a secondary network that we will use as well. Also check that X.X.X.230+ is also free.
 
@@ -154,6 +154,8 @@ Now disable the Firewall:
 
 Turn off SELinux:
 
+.. code-block:: bash
+
   setenforce 0
 
   sed -i 's/enforcing/disabled/g' /etc/selinux/config /etc/selinux/config
@@ -254,6 +256,8 @@ Now disable the Firewall:
   systemctl stop firewalld
 
 Turn off SELinux:
+
+.. code-block:: bash
 
   setenforce 0
 
@@ -549,7 +553,7 @@ Virtual networks in on-premises Nutanix clusters are virtual subnets that are bo
 
 At physical locations, including the recovery location, administrators must create these virtual subnets manually, with separate virtual subnets created for production and test purposes.
 
-..note::
+.. note::
 
   You must create these virtual subnets before configuring recovery plans.
 
