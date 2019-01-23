@@ -577,14 +577,102 @@ Fill out the following fields:
 
 Click **Done**, and click **Continue** on the "incomplete Network Mapping" warning.
 
-Failover to the Remote AZ (PC)
-++++++++++++++++++++++++++++++
+Perform a Failover to the Remote AZ (PC)
+++++++++++++++++++++++++++++++++++++++++
 
+Failover operations in Leap are of the following types:
 
+**Test Failover**
+You perform a test failover when you want to test a recovery plan. When you perform a test failover, the VMs are started in the virtual network designated for testing purposes at the recovery location (a manually created virtual network on on-premises clusters and a virtual subnet in the Test VPC in Xi Cloud Services).
+However, the VMs at the primary location are not affected. Test failovers rely on the presence of VM snapshots at the recovery location.
 
+**Planned Failover**
+You perform planned failover when a disaster that disrupts services is predicted at the primary location. When you perform a planned failover, the recovery plan first creates a snapshot of each VM, replicates the snapshots at the recovery location, and then starts the VMs at the recovery location.
+Therefore, for a planned failover to succeed, the VMs must be available at the primary location. If the failover process encounters errors, you can resolve the error condition.
+After a planned failover, the VMs no longer run in the source availability zone.
+After failover, replication begins in the reverse direction. For a planned failover the MAC address will be maintained.
 
+**Unplanned Failover**
+You perform unplanned failover when a disaster has occurred at the primary location. In an unplanned failover, you can expect some data loss to occur.
+The maximum data loss possible is equal to the RPO configured in the protection policy or the data that was generated after the last manual backup for a given VM.
+In an unplanned failover, by default, VMs are recovered from the most recent snapshot. However, you can recover from an earlier snapshot by selecting a date and time.
+Any errors are logged but the execution of the failover continues.
+After failover, replication begins in the reverse direction.
 
+You can perform an unplanned failover operation only if snapshots have been replicated to the recovery availability zone.
+At the recovery location, failover operations cannot use snapshots that were created locally in the past.
+For example, if you perform a planned failover from the primary availability zone AZ1 to recovery location AZ2 (Xi Cloud Services) and then attempt an unplanned failover from AZ2 to AZ1, recovery will succeed at AZ1 only if snapshots were replicated from AZ2 to AZ1 after the planned failover operation.
+The unplanned failover operation cannot perform recovery based on snapshots that were created locally when the entities were running in AZ1.
 
+Perform Failover
+................
+
+In **DR Prism Central** > select :fa:`bars` **> Policies > Recovery Plans**.
+
+Select your *initials*-\**Recovery** recovery plan and select **Failover** from the **Actions** dropdown.
+
+.. figure:: images/drrunbooks_11.png
+
+You should see your assigned HPOC PC as the **Primary Location**, and your assigned DR PC (that you are logged into) as the **Recovery Location).
+
+.. figure:: images/drrunbooks_12.png
+
+Click **Failover**.
+
+Change the **Action** to **Execute Anyway**, and click **Proceed** when se the licensing error.
+
+.. figure:: images/drrunbooks_13.png
+
+Check Failover Status
+.....................
+
+Click the *initials*-\**Recovery** recovery plan to see the status and details.
+
+.. figure:: images/drrunbooks_14.png
+
+.. note::
+
+  The failed validation is due to the licensing error earlier.
+
+Click on Failover to see more details.
+
+.. figure:: images/drrunbooks_15.png
+
+In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**.
+
+You can make sure that the DB and Web VMs are up.
+
+You can also go to the Wordpress url in your *initials*-**Windows-ToolsVM**, http://drweb1.ntnxlab.local and check that the service is up.
+
+Fail Back to the Original AZ (PC)
++++++++++++++++++++++++++++++++++
+
+In **Prism Central** > select :fa:`bars` **> Policies > Recovery Plans**.
+
+Select your *initials*-\**Recovery** recovery plan and select **Failover** from the **Actions** dropdown.
+
+You should see your assigned DR PC as the **Primary Location**, and your assigned HPOC PC (that you are logged into) as the **Recovery Location).
+
+Click **Failover**.
+
+Change the **Action** to **Execute Anyway**, and click **Proceed** when se the licensing error.
+
+Check Failover Status
+.....................
+
+Click the *initials*-\**Recovery** recovery plan to see the status and details.
+
+.. note::
+
+  The failed validation is due to the licensing error earlier.
+
+Click on Failover to see more details.
+
+In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**.
+
+You can make sure that the DB and Web VMs are up.
+
+You can also go to the Wordpress url in your *initials*-**Windows-ToolsVM**, http://drweb1.ntnxlab.local and check that the service is up.
 
 Getting Engaged with the Product Team
 +++++++++++++++++++++++++++++++++++++
@@ -594,7 +682,7 @@ Getting Engaged with the Product Team
 +================================+================================================+
 |  Slack Channel                 |  #Prism-Pro                                    |
 +--------------------------------+------------------------------------------------+
-|  Product Manager               |  Mark Nijmeijer, hmark.nijmeijer@nutanix.com   |
+|  Product Manager               |  Mark Nijmeijer, mark.nijmeijer@nutanix.com    |
 +--------------------------------+------------------------------------------------+
 |  Product Marketing Manager     |                                                |
 +--------------------------------+------------------------------------------------+
