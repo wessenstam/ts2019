@@ -1,7 +1,7 @@
 .. _dr_runbooks:
 
 ------------------------
-Xi Leap: DR Runbooks
+Leap: DR Runbooks
 ------------------------
 
 Overview
@@ -78,7 +78,7 @@ Click **Create VM**, and fill out the following fields:
 
 - Select **Add New NIC**
     - **VLAN Name** - Secondary
-    - **IP Address**  - **DRDB1 - DRDB12 Assigned IP*
+    - **IP Address**  - *DRDB1 - DRDB12 Assigned IP*
     - Select **Add**
 
 Click **Save** to create the VM.
@@ -144,6 +144,20 @@ Now set the hostname:
 
 - **Hostname**  - drdbXX.ntnxlab.local (drdb1-drdb12 based on assignment)
 
+Now disable the Firewall:
+
+.. code-block:: bash
+
+  systemctl disable firewalld
+
+  systemctl stop firewalld
+
+Turn off SELinux:
+
+  setenforce 0
+
+  sed -i 's/enforcing/disabled/g' /etc/selinux/config /etc/selinux/config
+
 Install MariaDB:
 
 .. code-block:: bash
@@ -173,11 +187,15 @@ Create new MariaDB user for wordpress:
 
   CREATE USER 'wpuser'@'localhost' IDENTIFIED BY 'techsummit';
 
-  CREATE USER 'wpuser'@'drdbXX.ntnxlab.local' IDENTIFIED BY 'techsummit';
+  CREATE USER 'wpuser'@'drwebXX IP local PC' IDENTIFIED BY 'techsummit';
 
-  GRANT ALL PRIVILEGES ON wpdb.* TO 'wpuser'@’localhost’;
+  CREATE USER 'wpuser'@'drwebXX IP remote PC' IDENTIFIED BY 'techsummit';
 
-   GRANT ALL PRIVILEGES ON wpdb.* TO 'wpuser'@'%';
+  GRANT ALL PRIVILEGES ON wpdb.* TO 'wpuser'@'localhost';
+
+  GRANT ALL PRIVILEGES ON wpdb.* TO 'wpuser'@'drwebXX IP local PC';
+
+  GRANT ALL PRIVILEGES ON wpdb.* TO 'wpuser'@'drwebXX IP remote PC';
 
   MariaDB [(none)]> FLUSH PRIVILEGES;
 
@@ -226,6 +244,20 @@ Now set the hostname:
   nmtui
 
 - **Hostname**  - drwebXX.ntnxlab.local (drweb1-drweb12 based on assignment)
+
+Now disable the Firewall:
+
+.. code-block:: bash
+
+  systemctl disable firewalld
+
+  systemctl stop firewalld
+
+Turn off SELinux:
+
+  setenforce 0
+
+  sed -i 's/enforcing/disabled/g' /etc/selinux/config /etc/selinux/config
 
 Install the Apache web server:
 
@@ -375,41 +407,174 @@ Save the changes and restart Apache for the changes to take effect:
 
 Open http://drwebXX.ntnxlab.local in the web browser on your *initials*-**Windows-ToolsVM**, and finish the WordPress installation.
 
+Create Protection Policy
+++++++++++++++++++++++++
 
+Leap is built into Prism Central and requires no additional appliances or consoles to manage. Before you can begin managing DR-Orchestration with Leap, the service must be enabled.
 
+.. note::
 
+  Leap can only be enabled once per Prism Central instance. If **Leap** displays a green check mark next to it, that means Leap has already been enabled for the Prism Central instance being used.
 
+Enable Leap and Connect Availability Zone (Local)
+.................................................
 
+In **Prism Central**, click the **?** drop down menu, expand **New in Prism Central** and select **Leap**.
 
+In **Prism Central** > select :fa:`bars` **> Administration > Availability Zones**, and click **Connect to Availability Zone**.
 
+.. note::
 
+  You can only setup the **Connect to Availability Zone** once to a given Prism Central.
 
+Fill out the following fields:
 
+- **Availability Zone Type**  - Physical location
+- **IP Address for Remote PC**  - *Assigned DR PC IP*
+- **Username**  - admin
+- **Password**  - techX2019!
 
+.. figure:: images/drrunbooks_04.png
 
+Click **Connect**.
 
+Enable Leap and Connect Availability Zone (Remote)
+.................................................
 
+In **DR Prism Central**, click the **?** drop down menu, expand **New in Prism Central** and select **Leap**.
 
+In **DR Prism Central** > select :fa:`bars` **> Administration > Availability Zones**, and click **Connect to Availability Zone**.
 
+.. note::
 
+  You can only setup the **Connect to Availability Zone** once to a given Prism Central.
 
+Fill out the following fields:
 
+- **Availability Zone Type**  - Physical location
+- **IP Address for Remote PC**  - *Assigned PC IP*
+- **Username**  - admin
+- **Password**  - techX2019!
 
+.. figure:: images/drrunbooks_05.png
 
+Click **Connect**.
 
+.. note::
 
+  If Leap has been enabled on both PC's and the PC’s have been paired, proceed.
 
+Create Protection Policy
+++++++++++++++++++++++++
 
+In **Prism Central** > select :fa:`bars` **> Policies > Protection Policies**, and click **Create Protection Policy**.
 
+Fill out the following fields:
 
+- **Name**  - *initials*-Protection
+- **Primary Location**  - Local AZ
+- **Remote Location** - Assigned DR PC
+- **Target Cluster**  - Assigned DR HPOC
+- **Recovery Point Objective**  - Hours
+- **Start immediately** - 1
+- **Remote Retention**  - 2
+- **Local Retention**  - 2
 
+- Select **+ Add Categories**
+    - **Select Categories - *initials*-**DR:Web**
+    - **Select Categories - *initials*-**DR:DB**
+    Select **Save**
 
+.. figure:: images/drrunbooks_06.png
 
+Click **Save**
 
+Create Recovery Plan
+++++++++++++++++++++++++
 
+In **Prism Central** > select :fa:`bars` **> Policies > Recovery Plans**, and click **Create Recovery Plan**.
 
+Fill out the following fields:
 
+- **Primary Location**  - Local AZ
+- **Remote Location** - Assigned DR PC
 
+Click **Proceed**
+
+Fill out the following fields:
+
+- **Name**  - *initials*-Recover
+- **Recovery Plan Description** - optional
+
+Click **Next**
+
+Select **+ Add Entities**
+
+- **Search Entities by**  - VM Name
+    - Add *DRDB1 - DRDB12 based on assignment*
+    Select **Add**
+
+.. figure:: images/drrunbooks_07.png
+
+Click **+ Add New Stage**
+
+.. figure:: images/drrunbooks_08.png
+
+Select **+ Add Entities**
+
+- **Search Entities by**  - VM Name
+    - Add *DRWeb1 - DRWeb12 based on assignment*
+    Select **Add**
+
+.. note::
+
+  Sometimes it can take up to 5 minutes for the individual VMs to be added to the protection policy.
+  Since we added the policy at the start you should be good to go.
+
+  If you don’t want to wait you can manually protect the VM by using “Protect” on the VM menu in PC.
+
+Add in a delay between stages 1 and 2 or 60 seconds to make sure the database is up first before the web front end loads.
+
+Click **+ Add Delay**
+
+- **Seconds** - 60
+
+Click **Add**
+
+.. figure:: images/drrunbooks_09.png
+
+Click **Next**
+
+Virtual networks in on-premises Nutanix clusters are virtual subnets that are bound to a single VLAN.
+
+At physical locations, including the recovery location, administrators must create these virtual subnets manually, with separate virtual subnets created for production and test purposes.
+
+..note::
+
+  You must create these virtual subnets before configuring recovery plans.
+
+When configuring a recovery plan, map the virtual subnets at the source location to the virtual subnets at the recovery location.
+
+Fill out the following fields:
+
+- Local AZ
+    - **Virtual Network or Port Group** - Secondary
+
+- Remote AZ
+    - **Virtual Network or Port Group** - Secondary
+
+.. figure:: images/drrunbooks_10.png
+
+.. note::
+
+  You can leave out the Test Failback Network as we don’t have enough networks setup. Typically, the Test Network will be a non-routable network.
+
+  If you are not using Nutanix AHV IPAM and need to retain your IP addresses, you would need to install NGT. ESXi will always need NGT to reserve IP address.
+
+Click **Done**, and click **Continue** on the "incomplete Network Mapping" warning.
+
+Failover to the Remote AZ (PC)
+++++++++++++++++++++++++++++++
 
 
 
