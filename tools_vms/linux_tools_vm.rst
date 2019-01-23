@@ -94,6 +94,8 @@ Install the software needed by running the following commands:
 
   curl http://10.4.64.11:8080/Users/nutanix_buckets/ea/builds/18112018/tools/mc -o mc
 
+  chmod +x iam_util mc
+
 Open the firewall port needed by running the following commands:
 
 .. code-block:: bash
