@@ -7,7 +7,7 @@ Windows Tools VM
 Overview
 +++++++++
 
-In this section we will deploy the Windows Tools VM.
+In this section we will deploy the Windows Tools VM on your assigned HPOC for TechSummit.
 
 Deploy Windows VM
 .................
@@ -29,7 +29,7 @@ Fill out the following fields:
     - Select **Add**
 
 - Select **Add New NIC**
-    - **VLAN Name** - Primary
+    - **VLAN Name** - Secondary
     - Select **Add**
 
 Click **Save** to create the VM.

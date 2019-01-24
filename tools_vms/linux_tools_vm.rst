@@ -8,6 +8,8 @@ Overview
 +++++++++
 In this section we will deploy a Linux VM, and install tools that are need in various labs.
 
+Do this on your assigned HPOC for TechSummit.
+
 Deploy Linux VM
 ...............
 
@@ -28,7 +30,7 @@ Fill out the following fields:
     - Select **Add**
 
 - Select **Add New NIC**
-    - **VLAN Name** - Primary
+    - **VLAN Name** - Secondary
     - Select **Add**
 
 Click **Save** to create the VM.

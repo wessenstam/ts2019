@@ -31,6 +31,7 @@
 
   calm_3twa_day2_blueprint/calm_3twa_day2_blueprint
   cloud_native_lab/cloud_native_lab
+  apis/apis
 
 .. toctree::
   :maxdepth: 2
