@@ -1,4 +1,4 @@
-.. _apis:
+initialization.. _apis:
 
 ----------------------------------------------
 Nutanix APIs: Python Example
@@ -44,8 +44,6 @@ You can store your project files anywhere you like.  For our lab, to keep things
 
 - Create a folder named `python-lab`, making sure you have write permissions to that folder.  If you are using the command line, some examples for creating the folder are as follows:
 
-.. figure:: ../images/linux_logo_32x32.png
-
 .. code-block:: bash
 
   cd ~
@@ -61,8 +59,6 @@ It is recommended that your Python development is done inside a Python virtual e
 
 Even though virtual environments (venv) are now included with Python 3, we'll use the following command to make sure they work.  Please run these commands from the directory your project will be stored in.
 
-.. figure:: ../images/linux_logo_32x32.png
-
 .. code-block:: bash
 
   python3.6 -m venv nutanix
@@ -72,11 +68,9 @@ Running these commands to setup and activate a new virtual environment will look
 
 Note the `(nutanix)` designation that indicates we are now developing inside the new virtual environment.
 
-.. figure:: ../images/venv_activated_linux.png
+.. figure:: images/venv_activated_linux.png
 
 If you need to leave the virtual environment, use the following command:
-
-.. figure:: ../images/linux_logo_32x32.png
 
 .. code-block:: bash
 
@@ -142,8 +136,6 @@ Now, to ensure our dependencies are installed and available, run the `setup.py` 
 
 **Note:** The trailing period (`.`) is required.
 
-.. figure:: ../images/linux_logo_32x32.png
-
 .. code-block:: bash
 
   pip3 install -e .
@@ -152,7 +144,7 @@ If all dependencies have been found and installed correctly, the end of the outp
 
 Note that if you are installing packages you don't have, the messages re installing from cache may be slightly different.
 
-.. figure:: ../images/dependencies_installed.png
+.. figure:: images/dependencies_installed.png
 
 With our environment now setup to run our Python Flask application.
 
@@ -206,7 +198,7 @@ The API versions available today are as follows.
 API v0.8
 ~~~~~~~~
 
-Status: Superceded by API v2.0
+Status: Super-ceded by API v2.0
 
 This set of APIs was available when API v1 didn’t yet have the capability to carry out some VM management operations, e.g. VM power state.
 
@@ -471,7 +463,7 @@ A few things to note about this class:
 
 With the basic application structure and main supporting class created, we can move forward with creating the other parts of our app.
 
-Initialisation
+Initialization
 ++++++++++++++
 
 For this section we'll build the app based on the structure seen earlier.
@@ -497,7 +489,7 @@ CSRF protection isn't strictly required for demo or isolated applications, but i
 
 We will import this key later to ensure our app is protected against CSRF.
 
-Initialisation Script
+Initialization Script
 .....................
 
 `lab/__init__.py` is our application's main initialisation script.  This file contains the application **factory** and instructs Python to treat our `lab` folder as a package.  In our app, configuration and setup, for example, will be carried out inside the factory function and the app returned afterwards.  For a more detailed explanation, please see the official factory tutorial_.
@@ -556,23 +548,17 @@ Since we are developing a simple demo application, we only have two requirements
 
 Tell Python Flask where to find our application.
 
-.. figure:: ../images/linux_logo_32x32.png
-
 .. code-block:: bash
 
   export FLASK_APP=lab
 
 Tell Python Flask to run our app in development mode:
 
-.. figure:: ../images/linux_logo_32x32.png
-
 .. code-block:: bash
 
   export FLASK_ENV=development
 
 Run the application:
-
-.. figure:: ../images/linux_logo_32x32.png
 
 .. code-block:: bash
 
@@ -592,15 +578,13 @@ At this point, that is completely expected but indicates that your environment i
 
 **Tip:** If you are developing this application and require access to it from outside your development system, the following command can be run to allow external access.  Instead of only listening on the localhost IP address (**127.0.0.1**), the Python Flask server will listen on your system's IP address.
 
-.. figure:: ../images/linux_logo_32x32.png
-
 .. code-block:: bash
 
   flask run --host:0.0.0.0
 
 - Check the output in your console/terminal and you'll also see the 404 error reflected there, as expected:
 
-.. figure:: ../images/flask_run_app_404.png
+.. figure:: images/flask_run_app_404.png
 
 This is a good test as it verifies everything is setup and working.  It also verifies that the dependencies are installed, along with Python Flask being ready to serve your application.
 
@@ -1115,8 +1099,6 @@ With our JavaScript, AJAX, CSS, views and templates now in place, it's a good ti
 
 If you don't currently have your virtual environment activated or if the application isn't running, these are the steps to do so.  Make sure you are in the application's directory before running these commands.
 
-.. figure:: ../images/linux_logo_32x32.png
-
 .. code-block:: bash
 
   export FLASK_APP=lab
@@ -1126,7 +1108,7 @@ If you don't currently have your virtual environment activated or if the applica
 
 - Browse to http://127.0.0.1:5000 to view your application.  If everything is setup correctly, you will see a basic HTML form prompting for a **Cluster/CVM IP**, your **Cluster Username** and **Cluster Password**.  You'll also see a number of styled and labelled "containers", ready for our cluster info to be displayed.
 
-.. figure:: ../images/flask_app_run_first.png
+.. figure:: images/flask_app_run_first.png
 
 - In our lab environment, enter the CVM/Cluster IP address as provided by your presenter.
 - Enter your cluster username.
@@ -1137,7 +1119,7 @@ If everything has been created and all parts of the application wired up correct
 
 A successful test run will look similar to the screenshot below, although your cluster details will be different.
 
-.. figure:: ../images/flask_app_run_final.png
+.. figure:: images/flask_app_run_final.png
 
 Final Thoughts
 ++++++++++++++
