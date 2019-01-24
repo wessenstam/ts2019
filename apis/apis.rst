@@ -1,7 +1,7 @@
 .. _apis:
 
 ----------------------------------------------
-Nutanix APIs: Example with Python
+Nutanix APIs: Python Example
 ----------------------------------------------
 
 Overview

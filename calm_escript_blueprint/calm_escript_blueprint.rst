@@ -1,7 +1,7 @@
 .. _calm_escript_blueprint:
 
 ------------------------------------------------------
-Calm: EScript, Set Variable, and Task Library Tutorial
+Calm: EScript and Task Library
 ------------------------------------------------------
 
 Overview
@@ -118,15 +118,15 @@ In the **Blueprint Canvas**, click the **+ Task** button to add a task to our cu
    # Set the credentials
    pc_user = '@@{PC_Creds.username}@@'
    pc_pass = '@@{PC_Creds.secret}@@'
-   
+
    # Set the headers, url, and payload
    headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
    url     = "https://@@{address}@@:9440/api/nutanix/v3/@@{kind}@@/list"
    payload = {}
-   
+
    # Make the request
    resp = urlreq(url, verb='POST', auth='BASIC', user=pc_user, passwd=pc_pass, params=json.dumps(payload), headers=headers)
-   
+
    # If the request went through correctly, print it out.  Otherwise error out, and print the response.
    if resp.ok:
        print json.dumps(json.loads(resp.content), indent=4)
@@ -171,22 +171,22 @@ In the **Blueprint Canvas**, click the **+ Task** button to add a task to our cu
 
    # Get the JWT
    jwt = '@@{calm_jwt}@@'
-   
+
    # Set the headers, url, and payload
    headers = {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': 'Bearer {}'.format(jwt)}
    url     = "https://@@{address}@@:9440/api/nutanix/v3/projects/list"
    payload = {}
-   
+
    # Make the request
    resp = urlreq(url, verb='POST', params=json.dumps(payload), headers=headers, verify=False)
-   
+
    # If the request went through correctly
    if resp.ok:
-     
+
      # Cycle through the project "entities", and check if its name matches the current project
      for project in json.loads(resp.content)['entities']:
        if project['spec']['name'] == '@@{calm_project_name}@@':
-   
+
          # If there's a default subnet reference, print UUID to set variable and exit success, otherwise error out
          if 'uuid' in project['status']['resources']['default_subnet_reference']:
            print "SUBNET={0}".format(project['status']['resources']['default_subnet_reference']['uuid'])
@@ -194,12 +194,12 @@ In the **Blueprint Canvas**, click the **+ Task** button to add a task to our cu
          else:
            print "The '@@{calm_project_name}@@' project does not have a default subnet set."
            exit(1)
-   
+
      # If we've reached this point in the code, none of our projects matched the calm_project_name macro
      print "The '@@{calm_project_name}@@' project does not match any of our /projects/list api call."
      print json.dumps(json.loads(resp.content), indent=4)
      exit(0)
-   
+
    # In case the request returns an error
    else:
      print "Post clusters/list request failed", resp.content
@@ -225,15 +225,15 @@ Back in the **Blueprint Canvas**, click the **+ Task** button again to add a sec
 
    # Get the JWT
    jwt = '@@{calm_jwt}@@'
-   
+
    # Set the headers, url, and payload
    headers = {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': 'Bearer {}'.format(jwt)}
    url     = "https://@@{address}@@:9440/api/nutanix/v3/subnets/@@{SUBNET}@@"
    payload = {}
-   
+
    # Make the request
    resp = urlreq(url, verb='GET', params=json.dumps(payload), headers=headers, verify=False)
-   
+
    # If the request went through correctly, print it out.  Otherwise error out, and print the response.
    if resp.ok:
        print json.dumps(json.loads(resp.content), indent=4)
@@ -245,7 +245,7 @@ Back in the **Blueprint Canvas**, click the **+ Task** button again to add a sec
 There's nothing too groundbreaking in this task.  As with the very first task in this exercise, we're doing an **Execute** of type **EScript**.  Similar to the previous task, we're using the JWT macro instead of using blueprint credentials.  Lastly, the API call is a GET instead of a POST, and we're utilizing the **SUBNET** variable we set in the previous task.
 
 .. figure:: images/get_subnet_info.png
-   
+
 
 Click **Save**, and ensure no errors or warnings appear.
 
@@ -257,27 +257,27 @@ Click the **Launch** button in the upper right corner of our blueprint.  Name th
 Navigate to the **Manage** page of the application, and view the **Create** task that is currently running.  It should complete quickly, as no VMs are getting created, and we do not have any tasks or scripts associated with our Create or Package Install.
 
 .. figure:: images/app_create.png
-   
+
 
 Next, run the **RestList** action by clicking the play button next to it.  You should see a pop-up appear with our **kind** variable, leave **apps** in the field, and then click **Run**.
 
 .. figure:: images/apps_run.png
-   
+
 
 In the output on the right pane, maximize the **RuntimePost** task, and view the API output.  Toggle between the output and the Script, by clicking the **View Script** link below the output.  Maximize the output/script window to make viewing easier.
 
 .. figure:: images/apps_run2.png
-   
+
 
 Next, run the **RestList** task again, this time changing the value of the runtime variable to something of your choice, like **images**, **clusters**, **hosts**, or **vms**.  View the output like before.
 
 Lastly, run the **GetDefaultSubnet** action by clicking the play button next to it, and clicking **Run** in the pop-up.  Expand both the **GetSubnetUUID** and **GetSubnetInfo** tasks, and view the output and the scripts, as before.
 
 .. figure:: images/GetDefaultSubnet.png
-   
+
 
 .. figure:: images/GetDefaultSubnet2.png
-   
+
 Publishing to the Task Library
 ..............................
 
@@ -303,4 +303,3 @@ Takeaways
 * EScript tasks are run directly within the Calm engine, rather than being executed on the remote machine.
 * Shell, Powershell, and EScript tasks can all be utilized to set a variable based on script output.  That variable can then be used in other portions of the blueprint.
 * The Task Library allows for publishing of commonly used tasks into a central repository, giving the ability to share these scripts across Projects and Blueprints.
-
