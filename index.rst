@@ -8,15 +8,16 @@
 
   flow/flow
   era/era
-  karbon/karbon
-  buckets/buckets
+
 
 .. toctree::
   :maxdepth: 2
-  :caption: Optional 101 Labs
+  :caption: Optional Intro Labs
   :name: _opt_101_labs
   :hidden:
 
+  karbon/karbon
+  buckets/buckets
   xplay/xplay
   dr_runbooks/dr_runbooks
   calm_3tier_webapp_blueprint/calm_3tier_webapp_blueprint
@@ -25,7 +26,7 @@
 
 .. toctree::
   :maxdepth: 2
-  :caption: Optional 201 Labs
+  :caption: Advanced Labs
   :name: _opt_201_labs
   :hidden:
 
@@ -40,7 +41,7 @@
   :name: _optional_labs
   :hidden:
 
-  sshkey_creation/sshkey_creation
+..  sshkey_creation/sshkey_creation
 
 .. toctree::
   :maxdepth: 2
@@ -59,6 +60,7 @@
 
   appendix/glossary
   appendix/basics
+  taskman/taskman
 
 .. raw:: html
 

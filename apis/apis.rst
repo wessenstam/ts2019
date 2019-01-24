@@ -28,7 +28,7 @@ If you have not deployed this yet, please do the lab below before continuing.
 Python 3.6 on CentOS 7
 ......................
 
-From the terminal, the following commands can be used to install Python 3.6:
+From the terminal in your *initials*-Linux-ToolsVM**, install Python 3.6 with the following commands:
 
 .. code-block:: bash
 
@@ -50,7 +50,7 @@ You can store your project files anywhere you like.  For our lab, to keep things
   mkdir python-lab
   cd python-lab
 
-  Please ensure you have a command prompt open and have changed to the above directory before continuing.
+Please ensure you have a command prompt open and have changed to the above directory before continuing.
 
 Virtual Environments
 ....................
@@ -66,7 +66,9 @@ Even though virtual environments (venv) are now included with Python 3, we'll us
 
 Running these commands to setup and activate a new virtual environment will look similar to the following screenshot.
 
-Note the `(nutanix)` designation that indicates we are now developing inside the new virtual environment.
+.. note::
+
+  Note the `(nutanix)` designation that indicates we are now developing inside the new virtual environment.
 
 .. figure:: images/venv_activated_linux.png
 
@@ -142,11 +144,13 @@ Now, to ensure our dependencies are installed and available, run the `setup.py` 
 
 If all dependencies have been found and installed correctly, the end of the output will look something like this.
 
-Note that if you are installing packages you don't have, the messages re installing from cache may be slightly different.
+.. note::
+
+  Note that if you are installing packages you don't have, the messages regarding installing from cache may be slightly different.
 
 .. figure:: images/dependencies_installed.png
 
-With our environment now setup to run our Python Flask application.
+Now our environment is setup to run our Python Flask application using Nutanix REST APIs.
 
 Nutanix API Intro
 +++++++++++++++++
@@ -155,11 +159,11 @@ Before we start creating our app, let's take a look at how Nutanix describes the
 
 **Those familiar with the Nutanix APIs may wish to skip this section.**
 
-.. code-block:: bash
+The Nutanix REST APIs allow you to create scripts that run system administration commands against the Nutanix cluster.
+The API enables the use of HTTP requests to get information about the cluster as well as make changes to the configuration.
+Output from the API calls are returned in JSON format.
 
-  The Nutanix REST APIs allow you to create scripts that run system administration commands against the Nutanix cluster. The API enables the use of HTTP requests to get information about the cluster as well as make changes to the configuration. Output from the API calls are returned in JSON format.
-
-  The v2 API is an update of the v1 API. Users of the v1 API are encouraged to migrate to v2.
+The v2 API is an update of the v1 API. Users of the v1 API are encouraged to migrate to v2.
 
 Authentication
 ..............
@@ -345,12 +349,23 @@ With what we know about the various API versions now, let's take a look at why y
 App Structure
 +++++++++++++
 
+Now we have a good understanding of the history and progression of the Nutanix REST APIs, lets get to using them inside of our Python Flask application.
+
+Key Directories
+...............
+
 The key directories of our app are as follows.
 
 - A folder called `lab`.  This folder contains our project's code and all associated files.
 - `nutanix/`, the folder containing our virtual environment files.
 
-**Please create the `lab/` folder now, if you haven't already.**  The rest of this section is meant as FYI only - we'll create these files as we go through the lab.
+Create the `/lab` directory now.
+
+.. code-block::
+
+  mkdir lab
+
+we'll create these files as we go through the lab, but here is some info of what they do.
 
 - `lab/__init__.py`, the application's "main" entry point.
 - `lab/static/`, the folder containing our JavaScript, CSS and JSON files that describe our main view's layout.
