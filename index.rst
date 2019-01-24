@@ -30,6 +30,7 @@
   :hidden:
 
   calm_3twa_day2_blueprint/calm_3twa_day2_blueprint
+  calm_escript_blueprint/calm_escript_blueprint
   cloud_native_lab/cloud_native_lab
   apis/apis
 
