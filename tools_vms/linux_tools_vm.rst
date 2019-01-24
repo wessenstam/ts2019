@@ -8,6 +8,8 @@ Overview
 +++++++++
 In this section we will deploy a Linux VM, and install tools that are need in various labs.
 
+Do this on your assigned HPOC for TechSummit.
+
 Deploy Linux VM
 ...............
 
@@ -28,7 +30,7 @@ Fill out the following fields:
     - Select **Add**
 
 - Select **Add New NIC**
-    - **VLAN Name** - Primary
+    - **VLAN Name** - Secondary
     - Select **Add**
 
 Click **Save** to create the VM.
@@ -93,6 +95,8 @@ Install the software needed by running the following commands:
   curl http://10.4.64.11:8080/Users/nutanix_buckets/ea/builds/18112018/tools/iam_util -o iam_util
 
   curl http://10.4.64.11:8080/Users/nutanix_buckets/ea/builds/18112018/tools/mc -o mc
+
+  chmod +x iam_util mc
 
 Open the firewall port needed by running the following commands:
 

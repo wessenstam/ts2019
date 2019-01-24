@@ -140,7 +140,7 @@ On the final screen, you will see the clusters managed by Prism Central and thei
 
 Select the *TechSummit-Buckets* Cluster, and the *TechSummit-Buckets* Network.
 
-Click **Deploy**
+Close the **Create Object Store** wizard. **Do NOT click Deploy**.
 
 .. figure:: images/buckets_04.png
 

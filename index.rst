@@ -18,6 +18,7 @@
   :hidden:
 
   xplay/xplay
+  dr_runbooks/dr_runbooks
   calm_3tier_webapp_blueprint/calm_3tier_webapp_blueprint
   calm_win_tiered_app/calm_win_tiered_app
 
@@ -30,6 +31,7 @@
 
   calm_3twa_day2_blueprint/calm_3twa_day2_blueprint
   cloud_native_lab/cloud_native_lab
+  apis/apis
 
 .. toctree::
   :maxdepth: 2
