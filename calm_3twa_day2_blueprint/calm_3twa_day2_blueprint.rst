@@ -1,7 +1,7 @@
 .. _calm_3twa_day2_blueprint:
 
 --------------------------------------
-Calm: 3-Tier WebApp - Day 2 Operations
+Calm: Day 2 Operations
 --------------------------------------
 
 Overview

@@ -1,7 +1,7 @@
 .. _calm_win_tiered_app
 
 --------------------------------
-Calm: Windows Tiered Application
+Calm: Windows Tiered App
 --------------------------------
 
 Overview
@@ -282,7 +282,7 @@ Then click the **Configure install** button.  In the blueprint canvas, click the
    $setupDriveLetter = "D:"
    $setupPath = "$setupDriveLetter\setup.exe"
    $validExitCodes = @(0)
-   
+
    if ($Prerequisites){
    Install-WindowsFeature -IncludeAllSubFeature -ErrorAction Stop $Prerequisites
    }
@@ -335,7 +335,7 @@ Then click the **Configure install** button.  In the blueprint canvas, click the
 **MSIIS - Task 2 Name**: InstallWebPI
 
 .. code-block:: powershell
-   
+
    # Install WPI
    New-Item c:/msi -Type Directory
    Invoke-WebRequest 'http://download.microsoft.com/download/C/F/F/CFF3A0B8-99D4-41A2-AE1A-496C08BEB904/WebPlatformInstaller_amd64_en-US.msi' -OutFile c:/msi/WebPlatformInstaller_amd64_en-US.msi
@@ -346,12 +346,12 @@ Then click the **Configure install** button.  In the blueprint canvas, click the
 **MSIIS - Task 3 Name**: InstallNetFeatures
 
 .. code-block:: powershell
-   
+
    # Enable Repair via Windows Update
    $servicing = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\policies\Servicing"
    New-Item -Path $servicing -Force
    Set-ItemProperty -Path $servicing -Name RepairContentServerSource -Value 2
-   
+
    # Install Features
    Install-WindowsFeature -Name NET-Framework-Core
    Install-WindowsFeature -Name NET-WCF-Services45 -IncludeAllSubFeature
@@ -360,7 +360,7 @@ Then click the **Configure install** button.  In the blueprint canvas, click the
 **MSIIS - Task 4 Name**: InstallBugNetApp
 
 .. code-block:: powershell
-   
+
    # Create the installation configuration file
    $configFile = "AppPath[@]Default Web Site/bugnet
    DbServer[@]@@{MSSQL.address}@@
@@ -369,9 +369,9 @@ Then click the **Configure install** button.  In the blueprint canvas, click the
    Database Password[@]@@{DbPassword}@@
    DbAdminUsername[@]sa
    DbAdminPassword[@]@@{SQL_CRED.secret}@@"
-   
+
    echo $configFile >> BugNET0.app
-   
+
    # Install the application via Web PI
    WebpiCmd-x64.exe /Install /UseRemoteDatabase /Application:BugNET@BugNET0.app /AcceptEula
 
@@ -413,5 +413,3 @@ You'll be presented with an **Installation Status Report** page.  Wait for it to
 Play around with your fully functional bug tracking application, powered by Microsoft SQL and IIS.
 
 .. figure:: images/bugnet_app.png
-
-
