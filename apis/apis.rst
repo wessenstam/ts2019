@@ -538,7 +538,7 @@ Initialization Script
 
 .. _tutorial: http://flask.pocoo.org/docs/1.0/tutorial/factory/
 
--Create a file named `__init__.py` in the `lab/` folder.
+Create a file named `__init__.py` in the `lab/` folder.
 
 ..  code-block:: bash
 
