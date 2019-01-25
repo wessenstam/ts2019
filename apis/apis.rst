@@ -514,7 +514,7 @@ Create `config.py`.
 
 Please note that `config.py` should **not** be in the `lab/` folder.
 
-..code-block:: bash
+.. code-block:: bash
 
   vi config.py
 
@@ -648,6 +648,7 @@ Checking directory structure
 Create the following directories and files:
 
 - **lab/static/css/lib**
+- **lab/static/css/fonts**
 - **lab/static/js/lib**
 - **lab/static/layouts**
 
@@ -655,11 +656,14 @@ Create the following directories and files:
 
   mkdir -p lab/static/css/lib
 
+  mkdir -p lab/static/css/fonts
+
   mkdir -p lab/static/js/lib
 
   mkdir -p lab/static/layouts
 
   (nutanix) [root@centos python-lab]# mkdir -p lab/static/css/lib
+  (nutanix) [root@centos python-lab]# mkdir -p lab/static/css/fonts
   (nutanix) [root@centos python-lab]# mkdir -p lab/static/js/lib
   (nutanix) [root@centos python-lab]# mkdir -p lab/static/layouts
 
@@ -669,11 +673,14 @@ Adding Third Party Files
 From the URLs below, grab the relevant file, make sure the name is correct and extract it into the appropriate directory.
 
 - CSS_ - extract to **lab/static/css/lib/**
+- FONTS_ - extract to **lab/static/css/fonts/**
 - Javascript_ - extract to **lab/static/js/lib/**
 
 .. code-block:: bash
 
   curl https://s3.amazonaws.com/get-ahv-images/css-lib.zip -o css-lib.zip
+
+  curl https://s3.amazonaws.com/get-ahv-images/fonts.zip -o fonts.zip
 
   curl https://s3.amazonaws.com/get-ahv-images/js-lib.zip -o js-lib.zip
 
@@ -683,9 +690,12 @@ From the URLs below, grab the relevant file, make sure the name is correct and e
 
   unzip -d lab/static/css/lib/ css-lib.zip
 
+  unzip -d lab/static/css/fonts/ fonts.zip
+
   unzip -d lab/static/js/lib/ js-lib.zip
 
 .. _CSS: https://s3.amazonaws.com/get-ahv-images/css-lib.zip
+.. _FONTS: https://s3.amazonaws.com/get-ahv-images/fonts.zip
 .. _Javascript: https://s3.amazonaws.com/get-ahv-images/js-lib.zip
 
 Adding Custom Files
