@@ -1,7 +1,7 @@
 .. _xplay:
 
 ------------------------
-Nutanix Prism Pro X-Play
+Prism Pro: X-Play
 ------------------------
 
 Overview

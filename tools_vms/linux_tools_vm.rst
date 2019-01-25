@@ -74,6 +74,8 @@ Install the software needed by running the following commands:
 
 .. code-block:: bash
 
+  yum install -y unzip
+
   yum install -y stress
 
   yum install -y nodejs
@@ -98,13 +100,21 @@ Install the software needed by running the following commands:
 
   chmod +x iam_util mc
 
-Open the firewall port needed by running the following commands:
+Now disable the Firewall:
 
 .. code-block:: bash
 
-  firewall-cmd --permanent --add-port=3000/tcp
+  systemctl disable firewalld
 
-  firewall-cmd --reload
+  systemctl stop firewalld
+
+Turn off SELinux:
+
+.. code-block:: bash
+
+  setenforce 0
+
+  sed -i 's/enforcing/disabled/g' /etc/selinux/config /etc/selinux/config
 
 
 Now we are ready to move onto the labs.
