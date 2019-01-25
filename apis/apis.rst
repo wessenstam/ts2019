@@ -673,9 +673,9 @@ From the URLs below, grab the relevant file, make sure the name is correct and e
 
 .. code-block:: bash
 
-  curl https://github.com/nutanix-engineering/lab-content/raw/master/python-lab/v1/resources/css-lib.zip -o css-lib.zip
+  curl https://github.com/nutanixworkshops/ts2019/apis/css-lib.zip -o css-lib.zip
 
-  curl https://github.com/nutanix-engineering/lab-content/raw/master/python-lab/v1/resources/js-lib.zip -o js-lib.zip
+  curl https://github.com/nutanixworkshops/ts2019/apis/js-lib.zip -o js-lib.zip
 
 **Note**: When extracting the ZIP files, ensure they are extracted **directly** to the directories above and not into subdirectories.
 
