@@ -19,7 +19,7 @@ Unlike file or block storage, object storage is a data storage architecture desi
 
 Buckets is a scalable, S3-compatible, object storage solution.
 
-Buckets allows users to store petabytes of unstructured data on the Nutanix platform, with support for features such as WORM and object versioning that are required for regulatory compliance, and easy integration with 3rd party backup software and S3-compatible applications.
+Buckets allows users to store petabytes of unstructured data on the Nutanix platform, with support for features such as WORM (write once, read many) and object versioning that are required for regulatory compliance, and easy integration with 3rd party backup software and S3-compatible applications.
 
 **What are the use cases for Nutanix Buckets?**
 
@@ -48,6 +48,14 @@ If you have not yet deployed these VMs, see the steps linked below before procee
 :ref:`windows_tools_vm`
 
 :ref:`linux_tools_vm`
+
+
+Getting Familiar with Object Storage
+++++++++++++++++++++++++++++++++++++
+
+An object store is a repository for storing objects. Objects are stored in a flat hierarchy and made up of only 3 attributes - an unique key or identifier, the data itself, and an expandable amount of metadata.  An object store is a single global namespace on which buckets can be created. A bucket can be thought of as similar to a folder in a file storage environment. However, object storage and file storage are very different. Here are some ways object storage and file storage differ.
+
+.. figure:: images/buckets_00.png
 
 Getting Familiar with the Nutanix Buckets Environment
 +++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -83,27 +91,51 @@ We are using a small deployment, the deployed VMs are listed in the following ta
 +================+===============================+===============+=============+
 |  k8s-master    |  Kubernetes Master            |  2 / 2        |  8 GiB      |
 +----------------+-------------------------------+---------------+-------------+
-|  k8s-worker-0  |  Object Controller            |  6 / 1        |  13.02 GiB  |
+|  k8s-worker-0  |  Kubernetes Worker            |  6 / 1        |  13.02 GiB  |
 +----------------+-------------------------------+---------------+-------------+
-|  k8s-worker-1  |  Object Controller            |  6 / 1        |  13.02  GiB |
+|  k8s-worker-1  |  Kubernetes Worker            |  6 / 1        |  13.02  GiB |
 +----------------+-------------------------------+---------------+-------------+
-|  k8s-worker-2  |  Object Controller            |  6 / 1        |  13.02  GiB |
+|  k8s-worker-2  |  Kubernetes Worker            |  6 / 1        |  13.02  GiB |
 +----------------+-------------------------------+---------------+-------------+
-|  envoy-1       |  Load Balancer                |  2 / 2        |  4 GiB      |
+|  envoy-1       |  Load Balancer / Endpoint     |  2 / 2        |  4 GiB      |
 +----------------+-------------------------------+---------------+-------------+
-|  etcd-0        |  Distributed metadata server  |  2 / 1        |  4 GiB      |
+|  etcd-0        |  Kubernetes Metadata          |  2 / 1        |  4 GiB      |
 +----------------+-------------------------------+---------------+-------------+
-|  etcd-1        |  Distributed metadata server  |  2 / 1        |  4 GiB      |
+|  etcd-1        |  Kubernetes Metadata          |  2 / 1        |  4 GiB      |
 +----------------+-------------------------------+---------------+-------------+
-|  etcd-2        |  Distributed metadata server  |  2 / 1        |  4 GiB      |
+|  etcd-2        |  Kubernetes Metadata          |  2 / 1        |  4 GiB      |
 +----------------+-------------------------------+---------------+-------------+
 
-<What does any of this mean? Why does it deploy all of these VMs? What services are actually running on those k8s worker VMs? This would be a good opportunity to highlight the benefit of being deployed as part of MSP. If there's a diagram to illustrate how all of these things talk to one another that would be even better.>
+All of these VMs are deployed by the Microservices Platform which is built on Kubernetes technology. The service that controls the MSP runs on Prism Central. Note that the VM layout will change in GA - some services (such as etcd) which are currently running as VMs will become containerized and be built into the worker VMs themselves.
+
+The envoy VM is the load balancer and endpoint. The IP address of this VM is the IP used by clients to access the object store. It is the first point of entry for an object request (for example, an S3 GET or PUT). It then forwards this request to one of the worker VMs (specifically, the S3 adapter service running as part of the object-controller pod).
+
+The master VM is the Kubernetes master, which provides the control plane for the Kubernetes cluster. In GA the architecture is moving to a multi-master format, and will be distributed across the worker nodes.
+
+The worker VMs run the object store components. This includes:
+
+- S3 adapter (minio-based) - this translates the S3 language into our internal language.
+- Object controller - this handles all the I/O. Think of it as like Stargate in AOS.
+- Metadata service - this handles the metadata for the object storage cluster. Think of it as like Medusa/Cassandra in AOS.
+- Atlas service - this handles garbage collection. Think of it as like Curator in AOS.
+- UI gateway - this is the endpoint for all UI requests, handles bucket management, stats display, user management interface, etc.
+- Zookeeper - this manages the configuration for the object storage cluster.
+- IAM service - handles user authentication for accessing buckets.
+
+The etcd VMs are a Kubernetes-level distributed key-value store. This stores and replicates the Kubernetes cluster level metadata, including networks, pod names & ID numbers, storage volumes, etc. As mentioned before, these services will be containerized in GA and will be running within the worker VMs.
+
+.. note::
+
+  In GA, the VM layout will be drastically different, consisting of simply 3 or more Service VMs (which will encompass everything currently in the worker VMs, plus etcd and the Kubernetes master) and 1 or more load balancer (envoy) VMs.
 
 Walk Through the Object Store Deployment
 ........................................
 
-In this exercise you will walk through the steps of creating an Object Store. <What is an object store? Why would I have multiple object stores?>
+In this exercise you will walk through the steps of creating an Object Store.
+
+.. note::
+
+  In many use cases only a single object store is required. If global namespace isolation is required, for example a Service Provider is providing object storage to multiple customers from the same infrastructure, then multiple object stores can be created.
 
 .. note::
 
@@ -135,7 +167,7 @@ The chosen option determines how many object controllers will be deployed and th
 
   Note that although a storage capacity is defined here, it is not a hard limit, and the customer is limited only by their license and the storage capacity of the cluster.
 
-Select the different options (Small, Medium, Large) and notice how the Resource numbers change. <What resources are these actually changing? The k8s worker VMs?>
+Select the different options (Small, Medium, Large) and notice how the Resource numbers change. These are the resources that will be applied across the K8s worker VMs. For example, specifying 20vCPU and 40GB of RAM across 3 workers, comes to 6 vCPU and 13 GB of RAM per worker.
 
 Custom values are also allowed.
 
@@ -158,7 +190,7 @@ Close the **Create Object Store** wizard.
 Walk through Bucket Creation and Policies
 .........................................
 
-<What is a bucket? How does it differentiate from an object store?>
+A bucket is a sub-repository within an object store which can have policies applied to it, such as versioning, WORM, etc. By default a newly created bucket is a private resource to the creator. The creator of the bucket by default has read/write permissions, and can grant permissions to other users.
 
 Click the **Name** of the existing Object Store to manage it.
 
@@ -253,7 +285,7 @@ Once the download is complete, open the file to launch **Cyberduck** and add the
 
 .. note::
 
-  Buckets does not currently support HTTPS connections. <Will GA?>
+  Buckets does not currently support HTTPS connections, but this will be supported at GA.
 
 Close the **s3.amazonaws.com** default profile, and click on **Open Connection**.
 
