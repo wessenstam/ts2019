@@ -631,8 +631,6 @@ At this point, that is completely expected but indicates that your environment i
 
 Check the output in your console/terminal and you'll also see the 404 error reflected there, as expected:
 
-.. figure:: images/flask_run_app_404.png
-
 This is a good test as it verifies everything is setup and working.  It also verifies that the dependencies are installed, along with Python Flask being ready to serve your application.
 
 Stop the application (Press CTRL+C to quit)
@@ -670,13 +668,25 @@ Adding Third Party Files
 
 From the URLs below, grab the relevant file, make sure the name is correct and extract it into the appropriate directory.
 
-- CSS_ - extract to **lab/static/css/lib**
-- Javascript_ - extract to **lab/static/js/lib**
+- CSS_ - extract to **lab/static/css/lib/**
+- Javascript_ - extract to **lab/static/js/lib/**
+
+.. code-block:: bash
+
+  curl https://github.com/nutanix-engineering/lab-content/raw/master/python-lab/v1/resources/css-lib.zip -o css-lib.zip
+
+  curl https://github.com/nutanix-engineering/lab-content/raw/master/python-lab/v1/resources/js-lib.zip -o js-lib.zip
 
 **Note**: When extracting the ZIP files, ensure they are extracted **directly** to the directories above and not into subdirectories.
 
-.. _CSS: https://github.com/nutanix-engineering/lab-content/raw/master/python-lab/v1/resources/css-lib.zip
-.. _Javascript: https://github.com/nutanix-engineering/lab-content/raw/master/python-lab/v1/resources/js-lib.zip
+.. code-block:: bash
+
+  unzip -d lab/static/css/lib/ css-lib.zip
+
+  unzip -d lab/static/js/lib/ js-lib.zip
+
+.. _CSS: https://github.com/nutanixworkshops/ts2019/apis/css-lib.zip
+.. _Javascript: https://github.com/nutanixworkshops/ts2019/apis/js-lib.zip
 
 Adding Custom Files
 ...................
@@ -687,9 +697,9 @@ From the URLs below, grab the relevant file, make sure the name is correct and c
 - ntnx.js_ - copy to **lab/static/js**
 - dashboard.json_ - copy to **lab/static/layouts**
 
-.. _ntnx.css: https://github.com/nutanix-engineering/lab-content/raw/master/python-lab/v1/ntnx.css
-.. _ntnx.js: https://github.com/nutanix-engineering/lab-content/raw/master/python-lab/v1/ntnx.js
-.. _dashboard.json: https://github.com/nutanix-engineering/lab-content/raw/master/python-lab/v1/dashboard.json
+.. _ntnx.css: https://github.com/nutanixworkshops/ts2019/apis/ntnx.css
+.. _ntnx.js: https://github.com/nutanixworkshops/ts2019/apis/ntnx.js
+.. _dashboard.json: https://github.com/nutanixworkshops/ts2019/apis/dashboard.json
 
 Referencing Supporting Files
 ............................
