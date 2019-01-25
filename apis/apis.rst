@@ -361,7 +361,7 @@ The key directories of our app are as follows.
 
 Create the `/lab` directory now.
 
-.. code-block::
+.. code-block:: bash
 
   mkdir lab
 
@@ -408,9 +408,25 @@ The first file we'll create is one of the most supporting files in the app.
 
 This file is the **ApiClient** class and describes what an API request looks like as well as the functions associated with it.
 
-- Create the `lab/util` folder.
-- Create the `lab/util/apiclient/` folder.
-- Create `lab/util/apiclient/__init__py`.  `__init__.py` is a reserved filename that Python looks for when instantiating a class.  The contents of `__init.py__` should be as follows:
+Create the `lab/util/apiclient/` folders.
+
+.. code-block:: bash
+
+  mkdir -p lab/util/apiclient
+
+  (nutanix) [root@centos python-lab]# mkdir -p lab/util/apiclient
+
+Create the file `lab/util/apiclient/__init__py`.
+
+.. code-block:: bash
+
+  vi lab/util/apiclient/__init__py
+
+  (nutanix) [root@centos python-lab]# vi lab/util/apiclient/__init__py
+
+The `__init__.py` file is a reserved filename that Python looks for when instantiating a class.
+
+The contents of `__init.py__` should be as follows:
 
 .. code-block:: python
 
@@ -486,14 +502,25 @@ For this section we'll build the app based on the structure seen earlier.
 Configuration Options
 .....................
 
-`config.py` is where our app stores app-specific configuration.  For this basic application we are only storing a single static configuration item - the `SECRET_KEY` required for CSRF protection.  For more information on CSRF_, please see the CSRF_ Wikipedia article.
+`config.py` is where our app stores app-specific configuration.
+For this basic application we are only storing a single static configuration item - the `SECRET_KEY` required for CSRF protection.
+For more information on CSRF_, please see the CSRF_ Wikipedia article.
 
 CSRF protection isn't strictly required for demo or isolated applications, but is a good habit to get into when developing web applications.
 
 .. _CSRF: https://en.wikipedia.org/wiki/Cross-site_request_forgery
 
-- Create `config.py`.  Please note that `config.py` should **not** be in the `lab/` folder.
-- Add the following content to `config.py`:
+Create `config.py`.
+
+Please note that `config.py` should **not** be in the `lab/` folder.
+
+..code-block:: bash
+
+  vi config.py
+
+  (nutanix) [root@centos python-lab]# vi config.py
+
+Add the following content to `config.py`:
 
 .. code-block:: python
 
@@ -511,8 +538,15 @@ Initialization Script
 
 .. _tutorial: http://flask.pocoo.org/docs/1.0/tutorial/factory/
 
-- Create a file named `__init__.py` in the `lab/` folder.
-- For our application, the initial contents of `__init__.py` should be as follows:
+-Create a file named `__init__.py` in the `lab/` folder.
+
+..  code-block:: bash
+
+  vi lab/__init__.py
+
+  (nutanix) [root@centos python-lab]# vi lab/__init__.py
+
+For our application, the initial contents of `__init__.py` should be as follows:
 
 .. code-block:: python
 
@@ -567,41 +601,41 @@ Tell Python Flask where to find our application.
 
   export FLASK_APP=lab
 
+  (nutanix) [root@centos python-lab]# export FLASK_APP=lab
+
 Tell Python Flask to run our app in development mode:
 
 .. code-block:: bash
 
   export FLASK_ENV=development
 
+  (nutanix) [root@centos python-lab]# export FLASK_ENV=development
+
 Run the application:
 
 .. code-block:: bash
 
-  flask run
+  flask run --host 0.0.0.0
 
 At this point, Python Flask tells us exactly what to do in order to test the beginnings of our application:
 
 .. code-block:: bash
 
-  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 
-- Browse to http://127.0.0.1:5000 on your local machine.
+Browse to http://<*initials*-Linux-ToolsVM IP>:5000 on your local machine.
 
 If everything is working, you'll get an HTTP 404 (Not Found) error.
 
 At this point, that is completely expected but indicates that your environment is setup correctly and Flask is listening for HTTP requests on port 5000.
 
-**Tip:** If you are developing this application and require access to it from outside your development system, the following command can be run to allow external access.  Instead of only listening on the localhost IP address (**127.0.0.1**), the Python Flask server will listen on your system's IP address.
-
-.. code-block:: bash
-
-  flask run --host:0.0.0.0
-
-- Check the output in your console/terminal and you'll also see the 404 error reflected there, as expected:
+Check the output in your console/terminal and you'll also see the 404 error reflected there, as expected:
 
 .. figure:: images/flask_run_app_404.png
 
 This is a good test as it verifies everything is setup and working.  It also verifies that the dependencies are installed, along with Python Flask being ready to serve your application.
+
+Stop the application (Press CTRL+C to quit)
 
 Now let's start building our application by adding the application's supporting files.
 
@@ -615,14 +649,21 @@ Checking directory structure
 
 Create the following directories and files:
 
-- **lab/static**
-- **lab/static/css**
-- **lab/static/css/ntnx.css**
 - **lab/static/css/lib**
-- **lab/static/js**
-- **lab/static/js/ntnx.js**
 - **lab/static/js/lib**
 - **lab/static/layouts**
+
+.. code-block:: bash
+
+  mkdir -p lab/static/css/lib
+
+  mkdir -p lab/static/js/lib
+
+  mkdir -p lab/static/layouts
+
+  (nutanix) [root@centos python-lab]# mkdir -p lab/static/css/lib
+  (nutanix) [root@centos python-lab]# mkdir -p lab/static/js/lib
+  (nutanix) [root@centos python-lab]# mkdir -p lab/static/layouts
 
 Adding Third Party Files
 ........................
