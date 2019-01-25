@@ -673,9 +673,9 @@ From the URLs below, grab the relevant file, make sure the name is correct and e
 
 .. code-block:: bash
 
-  curl https://github.com/nutanixworkshops/ts2019/apis/css-lib.zip -o css-lib.zip
+  curl https://s3.amazonaws.com/get-ahv-images/css-lib.zip -o css-lib.zip
 
-  curl https://github.com/nutanixworkshops/ts2019/apis/js-lib.zip -o js-lib.zip
+  curl https://s3.amazonaws.com/get-ahv-images/js-lib.zip -o js-lib.zip
 
 **Note**: When extracting the ZIP files, ensure they are extracted **directly** to the directories above and not into subdirectories.
 
@@ -685,8 +685,8 @@ From the URLs below, grab the relevant file, make sure the name is correct and e
 
   unzip -d lab/static/js/lib/ js-lib.zip
 
-.. _CSS: https://github.com/nutanixworkshops/ts2019/apis/css-lib.zip
-.. _Javascript: https://github.com/nutanixworkshops/ts2019/apis/js-lib.zip
+.. _CSS: https://s3.amazonaws.com/get-ahv-images/css-lib.zip
+.. _Javascript: https://s3.amazonaws.com/get-ahv-images/js-lib.zip
 
 Adding Custom Files
 ...................
@@ -696,6 +696,18 @@ From the URLs below, grab the relevant file, make sure the name is correct and c
 - ntnx.css_ - copy to **lab/static/css**
 - ntnx.js_ - copy to **lab/static/js**
 - dashboard.json_ - copy to **lab/static/layouts**
+
+.. code-block:: bash
+
+  curl https://github.com/nutanixworkshops/ts2019/apis/ntnx.css -o lab/static/css/ntnx.css
+
+  curl https://github.com/nutanixworkshops/ts2019/apis/ntnx.js -o lab/static/js/ntnx.js
+
+  curl https://github.com/nutanixworkshops/ts2019/apis/dashboard.json -o lab/static/layouts/dashboard.json
+
+  (nutanix) [root@centos python-lab]# curl https://github.com/nutanixworkshops/ts2019/apis/ntnx.css -o lab/static/css/ntnx.css
+  (nutanix) [root@centos python-lab]# curl https://github.com/nutanixworkshops/ts2019/apis/ntnx.js -o lab/static/js/ntnx.js
+  (nutanix) [root@centos python-lab]# curl https://github.com/nutanixworkshops/ts2019/apis/dashboard.json -o lab/static/layouts/dashboard.json
 
 .. _ntnx.css: https://github.com/nutanixworkshops/ts2019/apis/ntnx.css
 .. _ntnx.js: https://github.com/nutanixworkshops/ts2019/apis/ntnx.js
@@ -757,7 +769,13 @@ Because we are writing a single-page application that is accessed via the root (
 
 However, that view references other views that we haven't created, yet.  To prepare for the main application view, let's first create the 'forms' view.  It handles the creation of the form that accepts input from the user.
 
-- Create `lab/forms.py` and add the following content:
+Create `lab/forms.py`:
+
+.. code-block:: bash
+
+  vi lab/forms.py
+
+Add the following content:
 
 .. code-block:: python
 
@@ -784,7 +802,13 @@ The resources below are for learning more about forms management in Python Flask
 
 With the forms view created, we look at the main view for our application.  Let's do that now.
 
-- Create `lab/index.py` and add the following content:
+Create `lab/index.py` and
+
+.. code-block:: bash
+
+  vi lab/index.py
+
+Add the following content:
 
 .. code-block:: python
 
@@ -813,8 +837,9 @@ The view does a few things:
 
 However, for this view to function correctly, we now need to make it available via the application initialisation script.
 
-- Open `lab/__init.py`
-- Below the line that says `    pass`, add the following content, remembering to indent the code correctly:
+Open `lab/__init__.py`
+
+Below the line that says `    pass`, add the following content, remembering to indent the code correctly:
 
 .. code-block:: python
 
@@ -828,7 +853,13 @@ The `index` view (and `ajax` view, which we will create shortly) are now availab
 
 Quick question - what will happen if we now run our application?  Correct - we will be shown an error saying the `ajax` view can't be imported.  To fix that and prepare for template creation, let's create our `ajax` view now.
 
-- Create `lab/ajax.py` and add the following content.  Just create the file for now - we'll go through what the view does in an upcoming section.
+Create `lab/ajax.py`
+
+.. code-block:: bash
+
+  vi lab/ajax.py
+
+Add the following content. (We'll go through what the view does in an upcoming section).
 
 .. code-block:: python
 
@@ -941,16 +972,27 @@ Quick question - what will happen if we now run our application?  Correct - we w
 Templates
 .........
 
-- Create the `lab/templates` folder.
+Create the `lab/templates` folder.
+
+.. code-block:: bash
+
+  mkdir -p lab/templates
 
 Inside the `templates` folder we are going to create two templates.  These are as follows:
 
 - `base`, the **master** template that our application's main view will be based on.
 - `index`, the application's main view i.e. the one that we'll actually see.
 
-Both templates are mostly HTML, with the exception of a few placeholders.  The placeholders are identified by being enclosed in `{{` and `}}` and will be replaced with dynamic data when the template is rendered.
+Both templates are mostly HTML, with the exception of a few placeholders.
+The placeholders are identified by being enclosed in `{{` and `}}` and will be replaced with dynamic data when the template is rendered.
 
-- Create `lab/templates/base.html` and add the following content:
+Create `lab/templates/base.html`:
+
+.. code-block:: bash
+
+  vi lab/templates/base.html
+
+Add the following content:
 
 .. code-block:: html
 
@@ -1005,7 +1047,13 @@ Both templates are mostly HTML, with the exception of a few placeholders.  The p
 
   </html>
 
-- Create `lab/templates/index.html` and add the following content:
+Create `lab/templates/index.html`:
+
+.. code-block:: bash
+
+  vi lab/templates/index.html
+
+Add the following content:
 
 .. code-block:: html
 
@@ -1167,19 +1215,27 @@ If you don't currently have your virtual environment activated or if the applica
 
 .. code-block:: bash
 
-  export FLASK_APP=lab
-  export FLASK_ENV=development
   . nutanix/bin/activate
-  flask run
 
-- Browse to http://127.0.0.1:5000 to view your application.  If everything is setup correctly, you will see a basic HTML form prompting for a **Cluster/CVM IP**, your **Cluster Username** and **Cluster Password**.  You'll also see a number of styled and labelled "containers", ready for our cluster info to be displayed.
+  export FLASK_APP=lab
 
-.. figure:: images/flask_app_run_first.png
+  export FLASK_ENV=development
 
-- In our lab environment, enter the CVM/Cluster IP address as provided by your presenter.
-- Enter your cluster username.
-- Enter your cluster password.
-- Click the `Go!` button.
+  flask run --host 0.0.0.0
+
+Browse to http://<*initials*-Linux-ToolsVM IP>:5000 on your local machine.to view your application.
+
+If everything is setup correctly, you will see a basic HTML form prompting for a **Cluster/CVM IP**, your **Cluster Username** and **Cluster Password**.
+
+You'll also see a number of styled and labelled "containers", ready for our cluster info to be displayed.
+
+Fill out the following fields:
+
+- **Cluster/CVM IP**  - *Assigned HPOC Cluster IP*
+- **Cluster Username**  - admin
+- **Cluster Password**  - techX2019!
+
+Click **Go!**
 
 If everything has been created and all parts of the application wired up correctly, the application will carry out our API requests via AJAX, process the results and display it all nicely on our page.
 
