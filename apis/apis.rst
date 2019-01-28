@@ -42,7 +42,7 @@ Project Location
 
 You can store your project files anywhere you like.  For our lab, to keep things consistent, we will use a folder named `python-lab`.
 
-- Create a folder named `python-lab`, making sure you have write permissions to that folder.  If you are using the command line, some examples for creating the folder are as follows:
+Create a folder named `python-lab`, making sure you have write permissions to that folder.  If you are using the command line, some examples for creating the folder are as follows:
 
 .. code-block:: bash
 
