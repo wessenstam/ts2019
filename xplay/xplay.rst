@@ -589,14 +589,209 @@ In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
 
 Click the *initials* - **Auto Quarantine A Bully VM** playbook, and click the **Disable** button.
 
-Endless Possibilities Using APIs
-++++++++++++++++++++++++++++++++
-
-Send a SMS message (or other actions services in IFTTT) when an alert is detected.
-
 Click the **Play** tab, you should see that a play has just completed.
 
 If the terminal session is broken (due to the quarantine), log in to *Initial*-**Linux-ToolsVM** to kill the node and stress processes.
+
+Endless Possibilities Using APIs
+++++++++++++++++++++++++++++++++
+
+This lab will show how you can easily include 3rd party tools into the X-Play.
+
+We will using IFTTT as the example of the 3rd party tool to send a Slack message when an alert is detected. You can extend this use case to ServiceNow or other tools.
+
+Before we setup IFTTT, ensure your *initial*-**Linux-ToolsVM** has memory size of 2gb, and if not change it to 2GB (power off, update, and power on).
+
+If not still logged in, Login to the *initials*-**Linux-ToolsVM** via ssh or Console session.
+
+Run stress again to generate load.
+
+.. code-block:: bash
+
+  stress -m 4 --vm-bytes 500M
+
+Setup IFTTT
+...........
+
+Go to https://ifttt.com/, log in and search **Webhooks**.
+
+.. note::
+
+  If you don’t have an IFTTT (ifttt.com) account, please register one.
+
+Click on Services, then select **Webhooks**.
+
+.. figure:: images/xplay_32.png
+
+Click **Connect**.
+
+.. figure:: images/xplay_33.png
+
+Once you connect it, Click the **Settings** button at the top right.
+
+.. figure:: images/xplay_34.png
+
+Copy the URL shown in the setting page.
+
+The URL is similar to this. *https://maker.ifttt.com/use/xxxxxyyyyzzz*
+
+Paste that URL into a new browser tab, and go to the page. The page that opens will show your unique webhook address.
+
+The URL is something like this. https://maker.ifttt.com/trigger/{event}/with/key/xxxxxyyyzzz
+
+.. note::
+
+  Take note of the address, as this is what we will be targeting in the X-Play REST API action later.
+
+Now you can create your own applet that will be triggered when it is called from X-Play.
+
+In the original browser tab, click on **My Applets** (or go to https://ifttt.com/my_applets).
+
+Click “New Applet”
+
+.. figure:: images/xplay_35.png
+
+Click **+this**.
+
+This is where you will set up the webhook URL that X-Play can trigger.
+
+.. figure:: images/xplay_36.png
+
+Search and click **Webhooks**.
+
+.. figure:: images/xplay_37.png
+
+Click **Receive a web request**.
+
+Fill your event name. This name will be part of the webhook url that you got earler.
+
+For example, if the event name is **xplay**, the webhook URL you will use in X-Play will be something like this:
+
+*https://maker.ifttt.com/trigger/xplay/with/key/xxxxxyyyzzz*
+
+.. figure:: images/xplay_38.png
+
+Click **Create trigger**.
+
+You can now create the **+that** to decide what you are going to do in this applet.
+
+You can use your imagination here. There are over 600 services you can choose here.
+For example, you can call your cell phone, send you an calendar event, send a text message, or even open your garage door (**Strongly discouraged**).
+
+If you are familiar with Zapier, you can also use that instead of IFTTT.
+Zapier can connect to over 1000 services, including Salesforce, PagerDuty, and many enterprise applications.
+
+For this lab we are using its Slack service as an example. You are free and **encouraged** to choose any other service in this step.
+
+.. note::
+
+  X-Play also includes a native Slack action out of the box.
+
+Click **+that**.
+
+Search and click **Slack**.
+
+.. note::
+
+  If you choose any other service, it will be the similar to the following steps.
+
+Click **Connect**.
+
+When prompted, sign into Slack.
+
+Click **Post to channel** and fill in the channel and message.
+
+You have three values can pass from from X-Play to IFTTT.
+In this example, Value 1 is the Alert name, Value 2 is the VM name, and Value 3 is the Playbook name. Click “Add Ingredient” is where you insert the parameters of “Value 1/Value 2/Value 3”.
+
+Fill in the Following:
+
+- **Which channel** - Direct Messages & @yourSlackHandle
+- **Message** - Nutanix X-FIT just detected an issue of {{Value1}} in {{Value2}} VM. Playbook "{{Value3}}" has increased its memory by 1GB. -- This message was sent by Prism Pro on {{OccurredAt}}.
+- **Title** - Nutanix Prism Pro just fixed an issue for you.
+
+.. figure:: images/xplay_39.png
+
+Click **Create Action**, then click **Finish**.
+
+Now you have an IFTTT applet that can be called from X-Play through Webhook
+
+Create Custom REST API Action
+.............................
+
+In **Prism Central** > select :fa:`bars` **> Operations > Actions Gallery**.
+
+Select **REST API** action, and then select **Clone** from the **Action** dropdown.
+
+Fill in the following fields:
+
+- **Name**  - *initials* - Slack an X-Play Message by IFTTT
+- **Description** - Using with IFTTT
+- **Method**  - Post
+- **URL** - Your IFTTT URL, will be something like this *https://maker.ifttt.com/trigger/xplay/with/key/xxxxxyyyzzz*
+- **Request Body**  - { "value1": "{{trigger[0].alert_entity_info.name}}", "value2": "{{trigger[0].source_entity_info.name}}", "value3": "{{playbook.playbook_name}}" }
+- **Request Headers** - Content-Type: application/json
+
+.. figure:: images/xplay_40.png
+
+Click **Copy**.
+
+Create Playbook
+...............
+
+In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
+
+Select *initials* - **Auto Remove Memory Constraint** created in the earlier lab, and click **Update** from the **Action** dropdown.
+
+Click :fa:`ellipsis-v` next to the action **Email** and then choose **Add Action Before**.
+
+.. figure:: images/xplay_41.png
+
+Select the :fa:`terminal` *initials* - **Slack an X-Play Message by IFTTT** action.
+
+Click **Save & Close**
+
+Toggle to **Enabled**, and click **Save**.
+
+Cause Memory Constraint
+.......................
+
+In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click *initials*-**Linux-ToolsVM**.
+
+Take note of your *initials*-**Linux-ToolsVM** VM's memory capacity (should be 2 GiB).
+
+Click **Alerts**, Select **Alert Policy** from **Configure** Dropdown.
+
+Select *initials* - **VM Memory Constrained**, and **Enable** the policy.
+
+Open a console session or SSH into Prism Central, and run the **paintrigger.py** script.
+
+.. code-block:: bash
+
+  python paintrigger.py
+
+.. note::
+
+  This will resolve all the alerts, force NCC check to run immediately and trigger the alert.
+
+After 1-2 minutes you should receive an email from Prism.
+
+You also should receive the slack message. Check the message content.
+
+Check the memory capacity on your *initials*-**Linux-ToolsVM** VM now, you should see that it has increased.
+
+Review the Playbook Play
+........................
+
+In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
+
+Select your *initials* - **Auto Remove Memory Constraint, and **disable** it.
+
+Click **Plays**.
+
+You should see that a Play has just completed.
+
+Click the Play, and examine the details.
 
 Call to Action
 ++++++++++++++
