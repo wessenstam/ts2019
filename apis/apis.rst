@@ -24,6 +24,7 @@ For this lab you will need the Linux-ToolsVM or the Windows-ToolsVM (your choice
 If you have not deployed this yet, please do the lab below before continuing.
 
 :ref:`linux_tools_vm`
+
 :ref:`windows_tools_vm`
 
 Project Location
