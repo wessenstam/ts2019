@@ -26,64 +26,11 @@ Lab Setup
 
 For this lab you will be using the HPOC you were assigned, as well as the secondary Prism Central you were assigned.
 
-You will also need to deploy two CentOS7 VMs, and deploy Wordpress and MariaDB.
+This lab depends on the availability of a multi-tier **Wordpress** web application.
 
-Create Multi-Tier Wordpress App
-...............................
+Refer to the :ref:`wordpress` lab for instructions on importing and launching the completed **Wordpress** blueprint.
 
-.. note::
-
-  When creating the VMs you will use the **Secondary** network, and adding static IPs you have been assigned in the .230-.253 range.
-  You will be using the same last octet in the 2nd assigned hosted POC cluster.
-  The 2nd HPOC cluster will also have a secondary network that we will use as well. Also check that X.X.X.230+ is also free.
-
-Check Web and DB name, and Secondary Prism Central assignments here - https://docs.google.com/spreadsheets/d/1gN5wEcsQrs2B6NFFom3md5VuPqQizyaafudA5HIghb0/edit?ts=5c475e5d#gid=0
-
-In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click **Create VM**.
-
-Fill out the following fields:
-
-- **Name** - *DRWeb1 - DRWeb12 based on assignment*
-- **Description** - (Optional) Description for your VM.
-- **vCPU(s)** - 2
-- **Number of Cores per vCPU** - 1
-- **Memory** - 2 GiB
-
-- Select **+ Add New Disk**
-    - **Type** - DISK
-    - **Operation** - Clone from Image Service
-    - **Image** - CentOS7.qcow2
-    - Select **Add**
-
-- Select **Add New NIC**
-    - **VLAN Name** - Secondary
-    - **IP Address**  - *DRWeb1 - DRWeb12 Assigned IP*
-    - Select **Add**
-
-Click **Save** to create the VM.
-
-Click **Create VM**, and fill out the following fields:
-
-- **Name** - *DRDB1 - DRDB12 based on assignment*
-- **Description** - (Optional) Description for your VM.
-- **vCPU(s)** - 2
-- **Number of Cores per vCPU** - 1
-- **Memory** - 2 GiB
-
-- Select **+ Add New Disk**
-    - **Type** - DISK
-    - **Operation** - Clone from Image Service
-    - **Image** - CentOS7.qcow2
-    - Select **Add**
-
-- Select **Add New NIC**
-    - **VLAN Name** - Secondary
-    - **IP Address**  - *DRDB1 - DRDB12 Assigned IP*
-    - Select **Add**
-
-Click **Save** to create the VM.
-
-Power On the VMs.
+Once you have initiated the **Wordpress** deployment, you can proceed with the lab below.
 
 Create Category
 ...............

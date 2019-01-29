@@ -61,6 +61,7 @@
   appendix/glossary
   appendix/basics
   taskman/taskman
+  wordpress/wordpress
 
 .. raw:: html
 
