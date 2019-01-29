@@ -37,14 +37,42 @@ Click **Save** to create the VM.
 
 Power On the VM.
 
-Setup NTP
-.........
+Install Tools Software
+......................
 
-Install and Enable NTP
+Login to the VM via ssh or Console session, and run the following commands:
+
+- **Username** - root
+- **password** - nutanix/4u
+
+Install the software needed by running the following commands:
 
 .. code-block:: bash
 
-  yum install -y ntp ntpdate
+  yum update -y
+
+  yum install -y ntp ntpdate unzip stress nodejs python-pip s3cmd awscli
+
+  npm install -g request
+
+  npm install -g express
+
+  pip install -U pip
+
+  pip install boto3
+
+  curl http://10.4.64.11:8080/Users/nutanix_buckets/ea/builds/18112018/tools/iam_util -o iam_util
+
+  curl http://10.4.64.11:8080/Users/nutanix_buckets/ea/builds/18112018/tools/mc -o mc
+
+  chmod +x iam_util mc
+
+Setup NTP
+.........
+
+Enable NTP
+
+.. code-block:: bash
 
   systemctl start ntpd
 
@@ -61,44 +89,6 @@ Set NTP Servers to use (These match what is set by the HPOC Configure Script)
   systemctl restart ntpd
 
 Now your time is all set.
-
-Install Tools Software
-......................
-
-Login to the VM via ssh or Console session, and run the following commands:
-
-- **Username** - root
-- **password** - nutanix/4u
-
-Install the software needed by running the following commands:
-
-.. code-block:: bash
-
-  yum install -y unzip
-
-  yum install -y stress
-
-  yum install -y nodejs
-
-  npm install -g request
-
-  npm install -g express
-
-  yum install -y python-pip
-
-  pip install -U pip
-
-  pip install boto3
-
-  yum install -y s3cmd
-
-  yum install -y awscli
-
-  curl http://10.4.64.11:8080/Users/nutanix_buckets/ea/builds/18112018/tools/iam_util -o iam_util
-
-  curl http://10.4.64.11:8080/Users/nutanix_buckets/ea/builds/18112018/tools/mc -o mc
-
-  chmod +x iam_util mc
 
 Python 3.6
 ...........
