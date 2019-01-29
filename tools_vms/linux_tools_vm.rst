@@ -100,6 +100,21 @@ Install the software needed by running the following commands:
 
   chmod +x iam_util mc
 
+Python 3.6
+...........
+
+Install Python 3.6 with the following commands:
+
+.. code-block:: bash
+
+  yum -y update
+  yum -y install python36
+  python3.6 -m ensurepip
+  yum -y install python36-setuptools
+
+Disable Firewall and SELinux
+............................
+
 Now disable the Firewall:
 
 .. code-block:: bash
