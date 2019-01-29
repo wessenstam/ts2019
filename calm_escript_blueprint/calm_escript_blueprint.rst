@@ -29,7 +29,7 @@ From **Prism Central > Calm**, select **Blueprints** from the sidebar, and click
 
 In the pop-up, fill in the following three fields, and click **Proceed**:
 
-- **Name** - EScript<Initials>
+- **Name** - *Initials*-EScript
 - **Description** - My First EScript Blueprint
 - **Project** - Calm
 
@@ -252,7 +252,7 @@ Click **Save**, and ensure no errors or warnings appear.
 Launching the Blueprint and Running the Custom Actions
 ......................................................
 
-Click the **Launch** button in the upper right corner of our blueprint.  Name the application **RestCalls<Initials>**, and then click **Create**.
+Click the **Launch** button in the upper right corner of our blueprint.  Name the application *Initials*-**RestCalls**, and then click **Create**.
 
 Navigate to the **Manage** page of the application, and view the **Create** task that is currently running.  It should complete quickly, as no VMs are getting created, and we do not have any tasks or scripts associated with our Create or Package Install.
 
@@ -287,7 +287,7 @@ Navigate back to the **Blueprints** section, and select your same **eScript<Init
 
 In the **Configuration Pane** on the right, click the **Publish to Library** button.  In the pop-up that appears, change the following fields:
 
-- **Name** - Prism Central Runtime List <Initials>
+- **Name** - *Initials* Prism Central Runtime List
 - Replace **address** with **Prism_Central_IP**
 
 Then click **Apply**.  You should note that the original **address** macro was replaced with **Prism_Central_IP**.  This feature allows you to make your macro names more generic to increase task portability.
