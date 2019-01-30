@@ -194,15 +194,18 @@ Select *initials* - **VM Memory Constrained**, and **Enable** the policy.
 
 Open a console session or SSH into Prism Central, and run the **paintrigger.py** script.
 
+- **Username** - nutanix
+- **password** - nutanix/4u
+
 .. code-block:: bash
 
-  ./paintrigger.py
+  python PrismProLab/paintrigger.py
 
 .. note::
 
   This will resolve all the alerts, force NCC check to run immediately and trigger the alert.
 
-After 1-2 minutes you should receive an email from Prism.
+After 2-5 minutes you should receive an email from Prism.
 
 Check the email to see that its subject and email body have filled the real value for the parameters you set up earlier.
 
@@ -213,7 +216,7 @@ Review the Playbook Play
 
 In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
 
-Select your *initials* - **Auto Remove Memory Constraint, and **disable** it.
+Select your *initials* - **Auto Remove Memory Constraint**, and **disable** it.
 
 Click **Plays**.
 
@@ -375,9 +378,12 @@ Select *initials* - **VM CPU Overprovisioned**, and **Enable** the policy.
 
 Open a console session or SSH into Prism Central, and run the **paintrigger.py** script.
 
+- **Username** - nutanix
+- **password** - nutanix/4u
+
 .. code-block:: bash
 
-  python paintrigger.py
+  python PrismProLab/paintrigger.py
 
 .. note::
 
@@ -570,9 +576,12 @@ Select *initials* - **Bully VM**, and **Enable** the policy.
 
 Open a console session or SSH into Prism Central, and run the **paintrigger.py** script.
 
+- **Username** - nutanix
+- **password** - nutanix/4u
+
 .. code-block:: bash
 
-  python paintrigger.py
+  python PrismProLab/paintrigger.py
 
 .. note::
 
@@ -766,9 +775,12 @@ Select *initials* - **VM Memory Constrained**, and **Enable** the policy.
 
 Open a console session or SSH into Prism Central, and run the **paintrigger.py** script.
 
+- **Username** - nutanix
+- **password** - nutanix/4u
+
 .. code-block:: bash
 
-  python paintrigger.py
+  python PrismProLab/paintrigger.py
 
 .. note::
 
