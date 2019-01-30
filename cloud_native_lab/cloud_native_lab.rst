@@ -404,8 +404,19 @@ Run the following command:
 
 You should now be able to open a new browser tab and see the online store we created.
 
-Getting Engaged with the Product Team
-+++++++++++++++++++++++++++++++++++++
+Takeaways
++++++++++
+
+- stuff
+
+- goes
+
+- here
+
+Getting Connected
++++++++++++++++++
+
+Have a question about **Nutanix and CLoud Native**? Please reach out to the resources below:
 
 +---------------------------------------------------------------------------------+
 |  Karbon Product Contacts                                                        |
@@ -448,6 +459,3 @@ Getting Engaged with the Product Team
 +================================+============================================================+
 |  Technical Marketing Engineer  |  Michael Haigh, michael.haigh@nutanix.com                  |
 +--------------------------------+------------------------------------------------------------+
-
-Takeaways
-+++++++++

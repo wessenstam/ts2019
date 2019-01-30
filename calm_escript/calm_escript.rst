@@ -299,7 +299,29 @@ Click **Publish**.  Then on the left menu, select the **Task Library** icon.  Se
 Takeaways
 +++++++++
 
-* In addition to being able to use Bash and Powershell scripts, Nutanix Calm can use EScript, which is a sandboxed Python interpreter, to provide application lifecycle management.
-* EScript tasks are run directly within the Calm engine, rather than being executed on the remote machine.
-* Shell, Powershell, and EScript tasks can all be utilized to set a variable based on script output.  That variable can then be used in other portions of the blueprint.
-* The Task Library allows for publishing of commonly used tasks into a central repository, giving the ability to share these scripts across Projects and Blueprints.
+What are the key things you should know about **Nutanix Calm**?
+
+- In addition to being able to use Bash and Powershell scripts, Nutanix Calm can use EScript, which is a sandboxed Python interpreter, to provide application lifecycle management.
+
+- EScript tasks are run directly within the Calm engine, rather than being executed on the remote machine.
+
+- Shell, Powershell, and EScript tasks can all be utilized to set a variable based on script output.  That variable can then be used in other portions of the blueprint.
+
+- The Task Library allows for publishing of commonly used tasks into a central repository, giving the ability to share these scripts across Projects and Blueprints.
+
+Getting Connected
++++++++++++++++++
+
+Have a question about **Nutanix Calm**? Please reach out to the resources below:
+
++---------------------------------------------------------------------------------+
+|  Calm Product Contacts                                                          |
++================================+================================================+
+|  Slack Channel                 |  #Calm                                         |
++--------------------------------+------------------------------------------------+
+|  Product Manager               |  Jasnoor Gill, jasnoor.gill@nutanix.com        |
++--------------------------------+------------------------------------------------+
+|  Product Marketing Manager     |  Chris Brown, christopher.brown@nutanix.com    |
++--------------------------------+------------------------------------------------+
+|  Technical Marketing Engineer  |  Michael Haigh, michael.haigh@nutanix.com      |
++--------------------------------+------------------------------------------------+

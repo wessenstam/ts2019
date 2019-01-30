@@ -461,6 +461,8 @@ Can you build a version of this Blueprint that leverages an Era clone of your SQ
 Takeaways
 +++++++++
 
+What are the key things you should know about **Nutanix Calm**?
+
 - Stuff
 
 - Goes
@@ -468,3 +470,20 @@ Takeaways
 - Here
 
 - Integration with other apps - leveraging Era, eScript, and an existing VM service
+
+Getting Connected
++++++++++++++++++
+
+Have a question about **Nutanix Calm**? Please reach out to the resources below:
+
++---------------------------------------------------------------------------------+
+|  Calm Product Contacts                                                          |
++================================+================================================+
+|  Slack Channel                 |  #Calm                                         |
++--------------------------------+------------------------------------------------+
+|  Product Manager               |  Jasnoor Gill, jasnoor.gill@nutanix.com        |
++--------------------------------+------------------------------------------------+
+|  Product Marketing Manager     |  Chris Brown, christopher.brown@nutanix.com    |
++--------------------------------+------------------------------------------------+
+|  Technical Marketing Engineer  |  Michael Haigh, michael.haigh@nutanix.com      |
++--------------------------------+------------------------------------------------+
