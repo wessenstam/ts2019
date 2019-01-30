@@ -448,7 +448,7 @@ Download the :download:`processapi.js <processapi.js>` file.
 
 .. code-block::
 
-  curl -L https://github.com/nutanixworkshops/ts2019/blob/master/xplay/processapi.js -o processapi.js
+  curl -L https://s3.amazonaws.com/get-ahv-images/processapi.js -o processapi.js
 
 **Modify the PC IP address and username/password in the script.**
 
