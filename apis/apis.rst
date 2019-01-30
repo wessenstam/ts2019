@@ -764,11 +764,11 @@ From the URLs below, grab the relevant file, make sure the name is correct and e
 
 .. code-block:: bash
 
-  curl -L https://github.com/nutanixworkshops/ts2019/apis/css-lib.zip -o css-lib.zip
+  curl -L https://s3.amazonaws.com/get-ahv-images/css-lib.zip -o css-lib.zip
 
-  curl -L https://github.com/nutanixworkshops/ts2019/apis/fonts.zip -o fonts.zip
+  curl -L https://s3.amazonaws.com/get-ahv-images/fonts.zip -o fonts.zip
 
-  curl -L https://github.com/nutanixworkshops/ts2019/apis/js-lib.zip -o js-lib.zip
+  curl -L https://s3.amazonaws.com/get-ahv-images/js-lib.zip -o js-lib.zip
 
 **Note**: When extracting the ZIP files, ensure they are extracted **directly** to the directories above and not into subdirectories.
 
@@ -783,9 +783,9 @@ From the URLs below, grab the relevant file, make sure the name is correct and e
 
   unzip -d lab/static/js/lib/ js-lib.zip
 
-.. _CSS: https://github.com/nutanixworkshops/ts2019/apis/css-lib.zip
-.. _FONTS: https://github.com/nutanixworkshops/ts2019/apis/fonts.zip
-.. _Javascript: https://github.com/nutanixworkshops/ts2019/apis/js-lib.zip
+.. _CSS: https://s3.amazonaws.com/get-ahv-images/css-lib.zip
+.. _FONTS: https://s3.amazonaws.com/get-ahv-images/fonts.zip
+.. _Javascript: https://s3.amazonaws.com/get-ahv-images/js-lib.zip
 
 Adding Custom Files
 ...................
@@ -801,19 +801,19 @@ From the URLs below, grab the relevant file, make sure the name is correct and c
 
 .. code-block:: bash
 
-  curl -L https://github.com/nutanixworkshops/ts2019/apis/ntnx.css -o lab/static/css/ntnx.css
+  curl -L https://s3.amazonaws.com/get-ahv-images/ntnx.css -o lab/static/css/ntnx.css
 
-  curl -L https://github.com/nutanixworkshops/ts2019/apis/ntnx.js -o lab/static/js/ntnx.js
+  curl -L https://s3.amazonaws.com/get-ahv-images/ntnx.js -o lab/static/js/ntnx.js
 
-  curl -L https://github.com/nutanixworkshops/ts2019/apis/dashboard.json -o lab/static/layouts/dashboard.json
+  curl -L https://s3.amazonaws.com/get-ahv-images/dashboard.json -o lab/static/layouts/dashboard.json
 
-  (nutanix) [root@centos python-lab]# curl -L https://github.com/nutanixworkshops/ts2019/apis/ntnx.css -o lab/static/css/ntnx.css
-  (nutanix) [root@centos python-lab]# curl -L https://github.com/nutanixworkshops/ts2019/apis/ntnx.js -o lab/static/js/ntnx.js
-  (nutanix) [root@centos python-lab]# curl -L https://github.com/nutanixworkshops/ts2019/apis/dashboard.json -o lab/static/layouts/dashboard.json
+  (nutanix) [root@centos python-lab]# curl -L https://s3.amazonaws.com/get-ahv-images/ntnx.css -o lab/static/css/ntnx.css
+  (nutanix) [root@centos python-lab]# curl -L https://s3.amazonaws.com/get-ahv-images/ntnx.js -o lab/static/js/ntnx.js
+  (nutanix) [root@centos python-lab]# curl -L https://s3.amazonaws.com/get-ahv-images/dashboard.json -o lab/static/layouts/dashboard.json
 
-.. _ntnx.css: https://github.com/nutanixworkshops/ts2019/apis/ntnx.css
-.. _ntnx.js: https://github.com/nutanixworkshops/ts2019/apis/ntnx.js
-.. _dashboard.json: https://github.com/nutanixworkshops/ts2019/apis/dashboard.json
+.. _ntnx.css: https://s3.amazonaws.com/get-ahv-images/ntnx.css
+.. _ntnx.js: https://s3.amazonaws.com/get-ahv-images/ntnx.js
+.. _dashboard.json: https://s3.amazonaws.com/get-ahv-images/dashboard.json
 
 Referencing Supporting Files
 ............................

@@ -194,15 +194,18 @@ Select *initials* - **VM Memory Constrained**, and **Enable** the policy.
 
 Open a console session or SSH into Prism Central, and run the **paintrigger.py** script.
 
+- **Username** - nutanix
+- **password** - nutanix/4u
+
 .. code-block:: bash
 
-  ./paintrigger.py
+  python PrismProLab/paintrigger.py
 
 .. note::
 
   This will resolve all the alerts, force NCC check to run immediately and trigger the alert.
 
-After 1-2 minutes you should receive an email from Prism.
+After 2-5 minutes you should receive an email from Prism.
 
 Check the email to see that its subject and email body have filled the real value for the parameters you set up earlier.
 
@@ -213,7 +216,7 @@ Review the Playbook Play
 
 In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
 
-Select your *initials* - **Auto Remove Memory Constraint, and **disable** it.
+Select your *initials* - **Auto Remove Memory Constraint**, and **disable** it.
 
 Click **Plays**.
 
@@ -222,6 +225,11 @@ You should see that a Play has just completed.
 Click the Play, and examine the details.
 
 .. figure:: images/xplay_18.png
+
+Reset VM Memory
+...............
+
+Change your *initials*-**Linux-ToolsVM** memory back to 2gb.
 
 Reduce CPU Capacity For A VM During A Maintenance Windows
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -294,7 +302,7 @@ Click **Add Action**, and select the **VM Reduce CPU** action.
 Select **Source Entity** from the parameters.
 
 - **Target VM** - {{trigger[0].source_entity_info}}
-- **vCPUs to Remove**  - 1
+- **vCPUs to Remove**  -
 - **Minimum Number of vCPUs**  - 1
 - **Cores per vCPU to Remove**  -
 - **Minimum Number of Cores per vCPU**  -
@@ -375,9 +383,12 @@ Select *initials* - **VM CPU Overprovisioned**, and **Enable** the policy.
 
 Open a console session or SSH into Prism Central, and run the **paintrigger.py** script.
 
+- **Username** - nutanix
+- **password** - nutanix/4u
+
 .. code-block:: bash
 
-  python paintrigger.py
+  python PrismProLab/paintrigger.py
 
 .. note::
 
@@ -438,9 +449,21 @@ Make sure NODE_PATH has the global nodejs module directory by running the follow
 
   export NODE_PATH=/usr/lib/node_modules
 
-Copy the processapi.js folder into one of your local folder.
+Download the :download:`processapi.js <processapi.js>` file.
 
-**Modify the PC IP address and username/password in the script.**
+.. code-block:: bash
+
+  curl -L https://s3.amazonaws.com/get-ahv-images/processapi.js -o processapi.js
+
+Modify the PC IP address and username/password in the script.
+
+.. code-block:: bash
+
+  sed -i 's/127.0.0.1/<*your PC IP*>/g' processapi.js
+
+  sed -i 's/pc user/admin/g' processapi.js
+
+  sed -i 's/pc password/<*your PC password*>/g' processapi.js
 
 Start the nodejs server
 
@@ -525,7 +548,7 @@ Search “Bully VM” in **Alert Policy**, and select *initials* - **Bully VM**.
 Click **Add Action**, and select the :fa:`terminal` **REST API** action.
 
 - **Method**  - GET
-- **URL** - http://<IP of *Initial*_Lnuix_toolsVM>:3000/vm/{{trigger[0].source_entity_info.uuid}}
+- **URL** - http://<IP of *Initial*-Linux-toolsVM>:3000/vm/{{trigger[0].source_entity_info.uuid}}
 
 .. note::
 
@@ -570,9 +593,12 @@ Select *initials* - **Bully VM**, and **Enable** the policy.
 
 Open a console session or SSH into Prism Central, and run the **paintrigger.py** script.
 
+- **Username** - nutanix
+- **password** - nutanix/4u
+
 .. code-block:: bash
 
-  python paintrigger.py
+  python PrismProLab/paintrigger.py
 
 .. note::
 
@@ -766,15 +792,18 @@ Select *initials* - **VM Memory Constrained**, and **Enable** the policy.
 
 Open a console session or SSH into Prism Central, and run the **paintrigger.py** script.
 
+- **Username** - nutanix
+- **password** - nutanix/4u
+
 .. code-block:: bash
 
-  python paintrigger.py
+  python PrismProLab/paintrigger.py
 
 .. note::
 
   This will resolve all the alerts, force NCC check to run immediately and trigger the alert.
 
-After 1-2 minutes you should receive an email from Prism.
+After 2-5 minutes you should receive an email from Prism.
 
 You also should receive the slack message. Check the message content.
 
@@ -785,13 +814,18 @@ Review the Playbook Play
 
 In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
 
-Select your *initials* - **Auto Remove Memory Constraint, and **disable** it.
+Select your *initials* - **Auto Remove Memory Constraint**, and **disable** it.
 
 Click **Plays**.
 
 You should see that a Play has just completed.
 
 Click the Play, and examine the details.
+
+Reset VM Memory
+...............
+
+Change your *initials*-**Linux-ToolsVM** memory back to 2gb.
 
 Call to Action
 ++++++++++++++
