@@ -702,8 +702,10 @@ Takeaways
 
 - here
 
-Getting Engaged with the Product Team
-+++++++++++++++++++++++++++++++++++++
+Getting Connected
++++++++++++++++++
+
+Have a question about **Nutanix Buckets**? Please reach out to the resources below:
 
 +---------------------------------------------------------------------------------------------+
 |  Buckets Product Contacts                                                                   |

@@ -32,6 +32,13 @@ Login to the *initials*-**Linux-ToolsVM** via ssh or Console session.
 
   stress -m 4 --vm-bytes 500M -t 40m &
 
+.. note::
+
+  It will take roughly 5min for Stress to generate the memory load to cause the alert.
+
+Review Anomalies
+++++++++++++++++
+
 Review Memory of <*VM-A*> (Pre-Seeded for this lab).
 
 In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click **VM-A**
@@ -636,6 +643,10 @@ Run stress again to generate load.
 
   stress -m 4 --vm-bytes 500M
 
+.. note::
+
+  It will take roughly 5min for Stress to generate the memory load to cause the alert.
+
 Setup IFTTT
 ...........
 
@@ -827,8 +838,23 @@ Reset VM Memory
 
 Change your *initials*-**Linux-ToolsVM** memory back to 2gb.
 
-Getting Engaged with the Product Team
-+++++++++++++++++++++++++++++++++++++
+Takeaways
++++++++++
+
+What are the key things you should know about **Prism Pro: XPlay**?
+
+- Prism Pro is our solution to make IT OPS smarter and automated. It covers the IT OPS process ranging from intelligent detection to automated remediation.
+
+- X-FIT is our machine learning engine to support smart IT OPS, including forecast, anomaly detection, and inefficiency detection.
+
+- X-Play, the IFTTT for the enterprise, is our engine to enable the automation of daily operations tasks.
+
+- X-Play enables admins to confidently automate their daily tasks within minutes.
+
+Getting Connected
++++++++++++++++++
+
+Have a question about **Prism Pro: XPlay**? Please reach out to the resources below:
 
 +---------------------------------------------------------------------------------+
 |  X-Play Product Contacts                                                        |
@@ -841,12 +867,3 @@ Getting Engaged with the Product Team
 +--------------------------------+------------------------------------------------+
 |  Technical Marketing Engineer  |  Brian Suhr, brian.suhr@nutanix.com            |
 +--------------------------------+------------------------------------------------+
-
-
-Takeaways
-+++++++++
-
-- Prism Pro is our solution to make IT OPS smarter and automated. It covers the IT OPS process ranging from intelligent detection to automated remediation.
-- X-FIT is our machine learning engine to support smart IT OPS, including forecast, anomaly detection, and inefficiency detection.
-- X-Play, the IFTTT for the enterprise, is our engine to enable the automation of daily operations tasks.
-- X-Play enables admins to confidently automate their daily tasks within minutes.

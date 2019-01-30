@@ -644,6 +644,8 @@ If you are interested in learning about additional Calm capabilities, check out 
 Takeaways
 +++++++++
 
+What are the key things you should know about **Nutanix Calm**?
+
 - <Need value based takeaways>
 - The Blueprint Editor provides a simple UI for modeling potentially complex applications.
 - Blueprints are tied to SSP Projects which can be used to enforce quotas and role based access control.
@@ -654,6 +656,23 @@ Takeaways
 - Applications typically span across multiple VMs, each responsible for different services. Calm is capable of automated and orchestrating full applications.
 - Dependencies between services can be easily modeled in the Blueprint Editor.
 - Users can quickly provision entire application stacks for production or testing for repeatable results without time lost to manual configuration.
+
+Getting Connected
++++++++++++++++++
+
+Have a question about **Nutanix Calm**? Please reach out to the resources below:
+
++---------------------------------------------------------------------------------+
+|  Calm Product Contacts                                                          |
++================================+================================================+
+|  Slack Channel                 |  #Calm                                         |
++--------------------------------+------------------------------------------------+
+|  Product Manager               |  Jasnoor Gill, jasnoor.gill@nutanix.com        |
++--------------------------------+------------------------------------------------+
+|  Product Marketing Manager     |  Chris Brown, christopher.brown@nutanix.com    |
++--------------------------------+------------------------------------------------+
+|  Technical Marketing Engineer  |  Michael Haigh, michael.haigh@nutanix.com      |
++--------------------------------+------------------------------------------------+
 
 .. |proj-icon| image:: ../images/projects_icon.png
 .. |mktmgr-icon| image:: ../images/marketplacemanager_icon.png
