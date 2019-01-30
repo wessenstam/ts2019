@@ -459,6 +459,8 @@ Modify the PC IP address and username/password in the script.
 
 .. code-block:: bash
 
+  sed -i 's/127.0.0.1/<*your PC IP*>/g' processapi.js
+
   sed -i 's/pc user/admin/g' processapi.js
 
   sed -i 's/pc password/<*your PC password*>/g' processapi.js
