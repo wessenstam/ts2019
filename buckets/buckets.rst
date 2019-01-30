@@ -696,6 +696,8 @@ Similar S3 SDKs are available for languages including Java, JavaScript, Ruby, Go
 Takeaways
 +++++++++
 
+What are the key things you should know about **Nutanix Buckets**?
+
 - stuff
 
 - goes

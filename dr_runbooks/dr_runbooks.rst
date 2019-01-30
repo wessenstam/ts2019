@@ -332,8 +332,21 @@ You can make sure that the DB and Web VMs are up.
 
 You can also go to the Wordpress url in your *initials*-**Windows-ToolsVM**, http://drweb1.ntnxlab.local and check that the service is up.
 
-Getting Engaged with the Product Team
-+++++++++++++++++++++++++++++++++++++
+Takeaways
++++++++++
+
+What are the key things you should know about **Nutanix Leap DR Runbooks**?
+
+- stuff
+
+- goes
+
+- here
+
+Getting Connected
++++++++++++++++++
+
+Have a question about **Nutanix Leap DR Runbooks**? Please reach out to the resources below:
 
 +---------------------------------------------------------------------------------+
 |  DR Runbooks Product Contacts                                                   |
@@ -346,7 +359,3 @@ Getting Engaged with the Product Team
 +--------------------------------+------------------------------------------------+
 |  Technical Marketing Engineer  |  Dwayne Lessner, dwayne@nutanix.com            |
 +--------------------------------+------------------------------------------------+
-
-
-Takeaways
-+++++++++
