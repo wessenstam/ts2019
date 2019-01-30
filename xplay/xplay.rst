@@ -297,7 +297,7 @@ Click **Add Action**, and select the **VM Reduce CPU** action.
 Select **Source Entity** from the parameters.
 
 - **Target VM** - {{trigger[0].source_entity_info}}
-- **vCPUs to Remove**  - 
+- **vCPUs to Remove**  -
 - **Minimum Number of vCPUs**  - 1
 - **Cores per vCPU to Remove**  -
 - **Minimum Number of Cores per vCPU**  -
@@ -444,7 +444,11 @@ Make sure NODE_PATH has the global nodejs module directory by running the follow
 
   export NODE_PATH=/usr/lib/node_modules
 
-Copy the processapi.js folder into one of your local folder.
+Download the :download:`processapi.js <processapi.js>` file.
+
+.. code-block::
+
+  curl -L https://github.com/nutanixworkshops/ts2019/blob/master/xplay/processapi.js -o processapi.js
 
 **Modify the PC IP address and username/password in the script.**
 
