@@ -226,6 +226,11 @@ Click the Play, and examine the details.
 
 .. figure:: images/xplay_18.png
 
+Reset VM Memory
+...............
+
+Change your *initials*-**Linux-ToolsVM** memory back to 2gb.
+
 Reduce CPU Capacity For A VM During A Maintenance Windows
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -446,11 +451,17 @@ Make sure NODE_PATH has the global nodejs module directory by running the follow
 
 Download the :download:`processapi.js <processapi.js>` file.
 
-.. code-block::
+.. code-block:: bash
 
   curl -L https://s3.amazonaws.com/get-ahv-images/processapi.js -o processapi.js
 
-**Modify the PC IP address and username/password in the script.**
+Modify the PC IP address and username/password in the script.
+
+.. code-block:: bash
+
+  sed -i 's/pc user/admin/g' processapi.js
+
+  sed -i 's/pc password/<*your PC password*>/g' processapi.js
 
 Start the nodejs server
 
@@ -535,7 +546,7 @@ Search “Bully VM” in **Alert Policy**, and select *initials* - **Bully VM**.
 Click **Add Action**, and select the :fa:`terminal` **REST API** action.
 
 - **Method**  - GET
-- **URL** - http://<IP of *Initial*_Lnuix_toolsVM>:3000/vm/{{trigger[0].source_entity_info.uuid}}
+- **URL** - http://<IP of *Initial*-Linux-toolsVM>:3000/vm/{{trigger[0].source_entity_info.uuid}}
 
 .. note::
 
@@ -790,7 +801,7 @@ Open a console session or SSH into Prism Central, and run the **paintrigger.py**
 
   This will resolve all the alerts, force NCC check to run immediately and trigger the alert.
 
-After 1-2 minutes you should receive an email from Prism.
+After 2-5 minutes you should receive an email from Prism.
 
 You also should receive the slack message. Check the message content.
 
@@ -801,13 +812,18 @@ Review the Playbook Play
 
 In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
 
-Select your *initials* - **Auto Remove Memory Constraint, and **disable** it.
+Select your *initials* - **Auto Remove Memory Constraint**, and **disable** it.
 
 Click **Plays**.
 
 You should see that a Play has just completed.
 
 Click the Play, and examine the details.
+
+Reset VM Memory
+...............
+
+Change your *initials*-**Linux-ToolsVM** memory back to 2gb.
 
 Call to Action
 ++++++++++++++
