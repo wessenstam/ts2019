@@ -231,8 +231,8 @@ Reset VM Memory
 
 Change your *initials*-**Linux-ToolsVM** memory back to 2gb.
 
-Reduce CPU Capacity For A VM During A Maintenance Windows
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Reduce CPU Capacity For A VM During A Maintenance Window
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 X-Fit in Prism Pro utilizes Machine Learning to continually analyze the environment.
 
