@@ -297,7 +297,7 @@ Click **Add Action**, and select the **VM Reduce CPU** action.
 Select **Source Entity** from the parameters.
 
 - **Target VM** - {{trigger[0].source_entity_info}}
-- **vCPUs to Remove**  - 1
+- **vCPUs to Remove**  - 
 - **Minimum Number of vCPUs**  - 1
 - **Cores per vCPU to Remove**  -
 - **Minimum Number of Cores per vCPU**  -
