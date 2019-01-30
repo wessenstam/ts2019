@@ -619,8 +619,8 @@ Click the **Play** tab, you should see that a play has just completed.
 
 If the terminal session is broken (due to the quarantine), log in to *Initial*-**Linux-ToolsVM** to kill the node and stress processes.
 
-Endless Possibilities Using APIs
-++++++++++++++++++++++++++++++++
+(Optional) Endless Possibilities Using APIs
++++++++++++++++++++++++++++++++++++++++++++
 
 This lab will show how you can easily include 3rd party tools into the X-Play.
 
@@ -826,11 +826,6 @@ Reset VM Memory
 ...............
 
 Change your *initials*-**Linux-ToolsVM** memory back to 2gb.
-
-Call to Action
-++++++++++++++
-
-
 
 Getting Engaged with the Product Team
 +++++++++++++++++++++++++++++++++++++
