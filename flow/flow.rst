@@ -533,6 +533,10 @@ Have a question about **Nutanix Flow**? Please reach out to the resources below:
 +--------------------------------+------------------------------------------------+
 |  Technical Marketing Engineer  |  Mike McGhee, michael.mcghee@nutanix.com       |
 +--------------------------------+------------------------------------------------+
+|  SME                           |                                                |
++--------------------------------+------------------------------------------------+
+|  SME                           |                                                |
++--------------------------------+------------------------------------------------+
 
 .. |blueprints| image:: images/blueprints.png
 .. |applications| image:: images/applications.png
