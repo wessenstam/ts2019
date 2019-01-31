@@ -351,7 +351,7 @@ Have a question about **Nutanix Leap DR Runbooks**? Please reach out to the reso
 +---------------------------------------------------------------------------------+
 |  DR Runbooks Product Contacts                                                   |
 +================================+================================================+
-|  Slack Channel                 |  #Prism-Pro                                    |
+|  Slack Channel                 |  #dr-orchestration                             |
 +--------------------------------+------------------------------------------------+
 |  Product Manager               |  Mark Nijmeijer, mark.nijmeijer@nutanix.com    |
 +--------------------------------+------------------------------------------------+

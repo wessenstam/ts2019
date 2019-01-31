@@ -21,8 +21,8 @@ Xtract is... <?>
 
   This lab does require you to sign up for your own AWS Free Tier account. While there should be no charges incurred for the EC2 instances provisioned as part of the lab, signing up for an account does require you to provide a credit card and phone number for verification.
 
-Staging the AWS Environment
-+++++++++++++++++++++++++++
+AWS Environment Setup
++++++++++++++++++++++
 
 In order to make the lab a self-contained experience that you can take forward with you in the field and easily repeat for future demos, events, etc., you will need to provide your own AWS account details.
 

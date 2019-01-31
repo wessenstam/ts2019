@@ -15,8 +15,8 @@ Overview
 
 <Blah blah blah>
 
-Staging the Lab
-+++++++++++++++
+Lab Setup
++++++++++
 
 This lab depends on the availability of a multi-tier **Task Manger** web application.
 
