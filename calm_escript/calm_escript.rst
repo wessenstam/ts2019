@@ -1,4 +1,4 @@
-.. _calm_escript_blueprint:
+.. _calm_escript:
 
 ------------------------------------------------------
 Calm: EScript and Task Library

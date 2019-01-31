@@ -1,4 +1,4 @@
-.. _calm_3twa_day2_blueprint:
+.. _calm_day2:
 
 --------------------------------------
 Calm: Day 2 Operations
