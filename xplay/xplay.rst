@@ -19,7 +19,7 @@ If you have not deployed this yet, please do the lab below before continuing.
 :ref:`linux_tools_vm`
 
 Run Stress Test
-..................................
+...............
 
 Lets add some load by initiating a stress test.
 
@@ -866,4 +866,8 @@ Have a question about **Prism Pro: XPlay**? Please reach out to the resources be
 |  Product Marketing Manager     |  Mayank Gupta, mayank.gupta@nutanix.com        |
 +--------------------------------+------------------------------------------------+
 |  Technical Marketing Engineer  |  Brian Suhr, brian.suhr@nutanix.com            |
++--------------------------------+------------------------------------------------+
+|  SME                           |                                                |
++--------------------------------+------------------------------------------------+
+|  SME                           |                                                |
 +--------------------------------+------------------------------------------------+
