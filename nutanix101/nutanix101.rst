@@ -9,7 +9,7 @@ Overview
 
 **Estimated time to complete: 60 MINUTES**
 
-
+So you just started at Nutanix, this is the set of labs for you. This will give you an opportunity to get your hands dirty.
 
 
 
