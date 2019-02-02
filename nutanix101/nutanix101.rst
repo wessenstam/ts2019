@@ -11,6 +11,11 @@ Overview
 
 So you just started at Nutanix, this is the set of labs for you. This will give you an opportunity to get your hands dirty.
 
+This lab will introduce the Prism Element UI, and familiarize you with its layout and navigation.
+You will use Prism to perform a basic container, and network setup for the cluster.
+The networks you create in the steps below provide VMs with connectivity by assigning the appropriate networks for the VMs’ respective NICs.
+Get experience with basic VM deployment, and VM management tasks from Prism, which include power actions, searching, cloning, and migrating.
+
 Prism Element
 +++++++++++++
 
@@ -120,6 +125,9 @@ First Way, In **Prism > Tasks**, click **Tasks**. Second Way, click :fa:`circle-
   Example view of storage containers (datastores) from vCenter:
 
   .. figure:: images/nutanix_tech_overview_14.png
+
+Prism Element Storage Configuration Items
++++++++++++++++++++++++++++++++++++++++++
 
 Configure Storage Containers
 ............................
