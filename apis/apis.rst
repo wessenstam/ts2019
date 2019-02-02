@@ -1,8 +1,8 @@
 initialization.. _apis:
 
-----------------------------------------------
-Nutanix APIs: Python Example
-----------------------------------------------
+--------------------
+APIs: Python Example
+--------------------
 
 Overview
 ++++++++
@@ -19,34 +19,35 @@ The Nutanix Python API Lab will cover a couple of key points.
 Lab Setup
 +++++++++
 
-For this lab you will need the Linux-ToolsVM.
+For this lab you will need the Linux-ToolsVM or the Windows-ToolsVM (your choice based on what you are comfortable with).
 
 If you have not deployed this yet, please do the lab below before continuing.
 
 :ref:`linux_tools_vm`
 
-Python 3.6 on CentOS 7
-......................
-
-From the terminal in your *initials*-Linux-ToolsVM**, install Python 3.6 with the following commands:
-
-.. code-block:: bash
-
-  yum -y update
-  yum -y install python36
-  python3.6 -m ensurepip
-  yum -y install python36-setuptools
+:ref:`windows_tools_vm`
 
 Project Location
 ................
 
 You can store your project files anywhere you like.  For our lab, to keep things consistent, we will use a folder named `python-lab`.
 
-- Create a folder named `python-lab`, making sure you have write permissions to that folder.  If you are using the command line, some examples for creating the folder are as follows:
+Create a folder named `python-lab`, making sure you have write permissions to that folder.  If you are using the command line, some examples for creating the folder are as follows:
+
+.. figure:: images/linux_logo_32x32.png
+.. figure:: images/osx_logo_32x32.png
 
 .. code-block:: bash
 
   cd ~
+  mkdir python-lab
+  cd python-lab
+
+.. figure:: images/windows_logo_32x32.png
+
+.. code-block:: bash
+
+  cd %HOMEPATH%
   mkdir python-lab
   cd python-lab
 
@@ -59,10 +60,28 @@ It is recommended that your Python development is done inside a Python virtual e
 
 Even though virtual environments (venv) are now included with Python 3, we'll use the following command to make sure they work.  Please run these commands from the directory your project will be stored in.
 
+.. figure:: images/linux_logo_32x32.png
+.. figure:: images/osx_logo_32x32.png
+
 .. code-block:: bash
 
   python3.6 -m venv nutanix
   . nutanix/bin/activate
+
+.. figure:: images/windows_logo_32x32.png
+
+.. code-block:: bash
+
+  python.exe -m venv nutanix
+  nutanix\Scripts\activate.bat
+
+.. note::
+
+  Windows systems:** As at January 2019, a **default** installation of Python 3.6 will be installed in the following folder:
+
+  .. code-block:: bash
+
+    C:\Users\<username>\AppData\Local\Programs\Python\Python36
 
 Running these commands to setup and activate a new virtual environment will look similar to the following screenshot.
 
@@ -71,12 +90,30 @@ Running these commands to setup and activate a new virtual environment will look
   Note the `(nutanix)` designation that indicates we are now developing inside the new virtual environment.
 
 .. figure:: images/venv_activated_linux.png
+.. figure:: images/venv_activated_windows.png
 
 If you need to leave the virtual environment, use the following command:
+
+.. figure:: images/linux_logo_32x32.png
+.. figure:: images/osx_logo_32x32.png
 
 .. code-block:: bash
 
   deactivate
+
+.. figure:: images/windows_logo_32x32.png
+
+.. code-block:: bash
+
+  nutanix\Scripts\deactivate.bat
+
+.. note::
+
+  Even though the commands above run .bat files, PowerShell .ps1 scripts are included, too.
+  If you prefer to use PowerShell, replace `activate.bat` with `Activate.ps1`.
+  To deactivate, simply enter `deactivate`.  There is no `Deactivate.ps1` as a script is created in memory for this purpose.
+
+If you wish to delete the virtual environment at any stage, simply delete the `nutanix` virtual environment directory and all its contents.
 
 .. note::
 
@@ -138,9 +175,18 @@ Now, to ensure our dependencies are installed and available, run the `setup.py` 
 
 **Note:** The trailing period (`.`) is required.
 
+.. figure:: images/linux_logo_32x32.png
+.. figure:: images/osx_logo_32x32.png
+
 .. code-block:: bash
 
   pip3 install -e .
+
+.. figure:: images/windows_logo_32x32.png
+
+.. code-block:: bash
+
+  <python_install_folder>\Scripts\pip3.6.exe install -e .
 
 If all dependencies have been found and installed correctly, the end of the output will look something like this.
 
@@ -410,6 +456,9 @@ This file is the **ApiClient** class and describes what an API request looks lik
 
 Create the `lab/util/apiclient/` folders.
 
+.. figure:: images/linux_logo_32x32.png
+.. figure:: images/osx_logo_32x32.png
+
 .. code-block:: bash
 
   mkdir -p lab/util/apiclient
@@ -417,6 +466,9 @@ Create the `lab/util/apiclient/` folders.
   (nutanix) [root@centos python-lab]# mkdir -p lab/util/apiclient
 
 Create the file `lab/util/apiclient/__init__py`.
+
+.. figure:: images/linux_logo_32x32.png
+.. figure:: images/osx_logo_32x32.png
 
 .. code-block:: bash
 
@@ -514,7 +566,10 @@ Create `config.py`.
 
 Please note that `config.py` should **not** be in the `lab/` folder.
 
-..code-block:: bash
+.. figure:: images/linux_logo_32x32.png
+.. figure:: images/osx_logo_32x32.png
+
+.. code-block:: bash
 
   vi config.py
 
@@ -538,7 +593,10 @@ Initialization Script
 
 .. _tutorial: http://flask.pocoo.org/docs/1.0/tutorial/factory/
 
--Create a file named `__init__.py` in the `lab/` folder.
+Create a file named `__init__.py` in the `lab/` folder.
+
+.. figure:: images/linux_logo_32x32.png
+.. figure:: images/osx_logo_32x32.png
 
 ..  code-block:: bash
 
@@ -597,13 +655,25 @@ Since we are developing a simple demo application, we only have two requirements
 
 Tell Python Flask where to find our application.
 
+.. figure:: images/linux_logo_32x32.png
+.. figure:: images/osx_logo_32x32.png
+
 .. code-block:: bash
 
   export FLASK_APP=lab
 
   (nutanix) [root@centos python-lab]# export FLASK_APP=lab
 
+.. figure:: images/windows_logo_32x32.png
+
+.. code-block:: bash
+
+  set FLASK_APP=lab
+
 Tell Python Flask to run our app in development mode:
+
+.. figure:: images/linux_logo_32x32.png
+.. figure:: images/osx_logo_32x32.png
 
 .. code-block:: bash
 
@@ -611,7 +681,17 @@ Tell Python Flask to run our app in development mode:
 
   (nutanix) [root@centos python-lab]# export FLASK_ENV=development
 
+.. figure:: images/windows_logo_32x32.png
+
+.. code-block:: bash
+
+  set FLASK_ENV=development
+
 Run the application:
+
+.. figure:: images/linux_logo_32x32.png
+.. figure:: images/osx_logo_32x32.png
+.. figure:: images/windows_logo_32x32.png
 
 .. code-block:: bash
 
@@ -623,7 +703,7 @@ At this point, Python Flask tells us exactly what to do in order to test the beg
 
   * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 
-Browse to http://<*initials*-Linux-ToolsVM IP>:5000 on your local machine.
+Browse to http://<*initials*-Linux-ToolsVM IP>:5000 on your local machine, or open a browser on your Windows-ToolsVM and point to http://<*initials*-Windows-ToolsVM IP>:5000.
 
 If everything is working, you'll get an HTTP 404 (Not Found) error.
 
@@ -648,18 +728,25 @@ Checking directory structure
 Create the following directories and files:
 
 - **lab/static/css/lib**
+- **lab/static/css/fonts**
 - **lab/static/js/lib**
 - **lab/static/layouts**
+
+.. figure:: images/linux_logo_32x32.png
+.. figure:: images/osx_logo_32x32.png
 
 .. code-block:: bash
 
   mkdir -p lab/static/css/lib
+
+  mkdir -p lab/static/css/fonts
 
   mkdir -p lab/static/js/lib
 
   mkdir -p lab/static/layouts
 
   (nutanix) [root@centos python-lab]# mkdir -p lab/static/css/lib
+  (nutanix) [root@centos python-lab]# mkdir -p lab/static/css/fonts
   (nutanix) [root@centos python-lab]# mkdir -p lab/static/js/lib
   (nutanix) [root@centos python-lab]# mkdir -p lab/static/layouts
 
@@ -669,24 +756,36 @@ Adding Third Party Files
 From the URLs below, grab the relevant file, make sure the name is correct and extract it into the appropriate directory.
 
 - CSS_ - extract to **lab/static/css/lib/**
+- FONTS_ - extract to **lab/static/css/fonts/**
 - Javascript_ - extract to **lab/static/js/lib/**
+
+.. figure:: images/linux_logo_32x32.png
+.. figure:: images/osx_logo_32x32.png
 
 .. code-block:: bash
 
-  curl https://github.com/nutanix-engineering/lab-content/raw/master/python-lab/v1/resources/css-lib.zip -o css-lib.zip
+  curl -L https://s3.amazonaws.com/get-ahv-images/css-lib.zip -o css-lib.zip
 
-  curl https://github.com/nutanix-engineering/lab-content/raw/master/python-lab/v1/resources/js-lib.zip -o js-lib.zip
+  curl -L https://s3.amazonaws.com/get-ahv-images/fonts.zip -o fonts.zip
+
+  curl -L https://s3.amazonaws.com/get-ahv-images/js-lib.zip -o js-lib.zip
 
 **Note**: When extracting the ZIP files, ensure they are extracted **directly** to the directories above and not into subdirectories.
+
+.. figure:: images/linux_logo_32x32.png
+.. figure:: images/osx_logo_32x32.png
 
 .. code-block:: bash
 
   unzip -d lab/static/css/lib/ css-lib.zip
 
+  unzip -d lab/static/css/fonts/ fonts.zip
+
   unzip -d lab/static/js/lib/ js-lib.zip
 
-.. _CSS: https://github.com/nutanixworkshops/ts2019/apis/css-lib.zip
-.. _Javascript: https://github.com/nutanixworkshops/ts2019/apis/js-lib.zip
+.. _CSS: https://s3.amazonaws.com/get-ahv-images/css-lib.zip
+.. _FONTS: https://s3.amazonaws.com/get-ahv-images/fonts.zip
+.. _Javascript: https://s3.amazonaws.com/get-ahv-images/js-lib.zip
 
 Adding Custom Files
 ...................
@@ -697,9 +796,24 @@ From the URLs below, grab the relevant file, make sure the name is correct and c
 - ntnx.js_ - copy to **lab/static/js**
 - dashboard.json_ - copy to **lab/static/layouts**
 
-.. _ntnx.css: https://github.com/nutanixworkshops/ts2019/apis/ntnx.css
-.. _ntnx.js: https://github.com/nutanixworkshops/ts2019/apis/ntnx.js
-.. _dashboard.json: https://github.com/nutanixworkshops/ts2019/apis/dashboard.json
+.. figure:: images/linux_logo_32x32.png
+.. figure:: images/osx_logo_32x32.png
+
+.. code-block:: bash
+
+  curl -L https://s3.amazonaws.com/get-ahv-images/ntnx.css -o lab/static/css/ntnx.css
+
+  curl -L https://s3.amazonaws.com/get-ahv-images/ntnx.js -o lab/static/js/ntnx.js
+
+  curl -L https://s3.amazonaws.com/get-ahv-images/dashboard.json -o lab/static/layouts/dashboard.json
+
+  (nutanix) [root@centos python-lab]# curl -L https://s3.amazonaws.com/get-ahv-images/ntnx.css -o lab/static/css/ntnx.css
+  (nutanix) [root@centos python-lab]# curl -L https://s3.amazonaws.com/get-ahv-images/ntnx.js -o lab/static/js/ntnx.js
+  (nutanix) [root@centos python-lab]# curl -L https://s3.amazonaws.com/get-ahv-images/dashboard.json -o lab/static/layouts/dashboard.json
+
+.. _ntnx.css: https://s3.amazonaws.com/get-ahv-images/ntnx.css
+.. _ntnx.js: https://s3.amazonaws.com/get-ahv-images/ntnx.js
+.. _dashboard.json: https://s3.amazonaws.com/get-ahv-images/dashboard.json
 
 Referencing Supporting Files
 ............................
@@ -757,7 +871,16 @@ Because we are writing a single-page application that is accessed via the root (
 
 However, that view references other views that we haven't created, yet.  To prepare for the main application view, let's first create the 'forms' view.  It handles the creation of the form that accepts input from the user.
 
-- Create `lab/forms.py` and add the following content:
+Create `lab/forms.py`:
+
+.. figure:: images/linux_logo_32x32.png
+.. figure:: images/osx_logo_32x32.png
+
+.. code-block:: bash
+
+  vi lab/forms.py
+
+Add the following content:
 
 .. code-block:: python
 
@@ -784,7 +907,16 @@ The resources below are for learning more about forms management in Python Flask
 
 With the forms view created, we look at the main view for our application.  Let's do that now.
 
-- Create `lab/index.py` and add the following content:
+Create `lab/index.py` and
+
+.. figure:: images/linux_logo_32x32.png
+.. figure:: images/osx_logo_32x32.png
+
+.. code-block:: bash
+
+  vi lab/index.py
+
+Add the following content:
 
 .. code-block:: python
 
@@ -813,8 +945,9 @@ The view does a few things:
 
 However, for this view to function correctly, we now need to make it available via the application initialisation script.
 
-- Open `lab/__init.py`
-- Below the line that says `    pass`, add the following content, remembering to indent the code correctly:
+Open `lab/__init__.py`
+
+Below the line that says `    pass`, add the following content, remembering to indent the code correctly:
 
 .. code-block:: python
 
@@ -828,7 +961,16 @@ The `index` view (and `ajax` view, which we will create shortly) are now availab
 
 Quick question - what will happen if we now run our application?  Correct - we will be shown an error saying the `ajax` view can't be imported.  To fix that and prepare for template creation, let's create our `ajax` view now.
 
-- Create `lab/ajax.py` and add the following content.  Just create the file for now - we'll go through what the view does in an upcoming section.
+Create `lab/ajax.py`
+
+.. figure:: images/linux_logo_32x32.png
+.. figure:: images/osx_logo_32x32.png
+
+.. code-block:: bash
+
+  vi lab/ajax.py
+
+Add the following content. (We'll go through what the view does in an upcoming section).
 
 .. code-block:: python
 
@@ -941,16 +1083,33 @@ Quick question - what will happen if we now run our application?  Correct - we w
 Templates
 .........
 
-- Create the `lab/templates` folder.
+Create the `lab/templates` folder.
+
+.. figure:: images/linux_logo_32x32.png
+.. figure:: images/osx_logo_32x32.png
+
+.. code-block:: bash
+
+  mkdir -p lab/templates
 
 Inside the `templates` folder we are going to create two templates.  These are as follows:
 
 - `base`, the **master** template that our application's main view will be based on.
 - `index`, the application's main view i.e. the one that we'll actually see.
 
-Both templates are mostly HTML, with the exception of a few placeholders.  The placeholders are identified by being enclosed in `{{` and `}}` and will be replaced with dynamic data when the template is rendered.
+Both templates are mostly HTML, with the exception of a few placeholders.
+The placeholders are identified by being enclosed in `{{` and `}}` and will be replaced with dynamic data when the template is rendered.
 
-- Create `lab/templates/base.html` and add the following content:
+Create `lab/templates/base.html`:
+
+.. figure:: images/linux_logo_32x32.png
+.. figure:: images/osx_logo_32x32.png
+
+.. code-block:: bash
+
+  vi lab/templates/base.html
+
+Add the following content:
 
 .. code-block:: html
 
@@ -1005,7 +1164,16 @@ Both templates are mostly HTML, with the exception of a few placeholders.  The p
 
   </html>
 
-- Create `lab/templates/index.html` and add the following content:
+Create `lab/templates/index.html`:
+
+.. figure:: images/linux_logo_32x32.png
+.. figure:: images/osx_logo_32x32.png
+
+.. code-block:: bash
+
+  vi lab/templates/index.html
+
+Add the following content:
 
 .. code-block:: html
 
@@ -1096,7 +1264,7 @@ Here are the most important steps carried out by this function:
 .. _jQuery: https://jquery.com/
 
 The AJAX
---------
+........
 
 Now that we are familiar with the simple JavaScript code that will make the AJAX call, let's look at the Python code that carries out the first part of the API request.
 
@@ -1143,14 +1311,14 @@ If you were to change `<cluster_virtual_ip>` to your cluster IP address and brow
 
 Now that we have our API request URL, we can add HTTP Basic Authentication in the form of a username and password, then simulate the entire request using cURL.  For this quick test we will assume the following:
 
-- Cluster virtual IP address is **192.168.1.10**
-- Cluster username is **admin**
-- Cluster password is **nutanix4u**
+- **Cluster virtual IP address** - *your HPOC Cluser IP*
+- *Cluster username** - admin
+- **Cluster password** - techX2019!
 
 .. code-block:: bash
 
   curl -X GET \
-    https://192.168.1.10:9440/api/nutanix/v2.0/vms \
+    https://<*ClusterIP*>:9440/api/nutanix/v2.0/vms \
     -H 'Accept: application/json' \
     -H 'Content-Type: application/json' \
     --insecure \
@@ -1165,21 +1333,41 @@ With our JavaScript, AJAX, CSS, views and templates now in place, it's a good ti
 
 If you don't currently have your virtual environment activated or if the application isn't running, these are the steps to do so.  Make sure you are in the application's directory before running these commands.
 
+.. figure:: images/linux_logo_32x32.png
+.. figure:: images/osx_logo_32x32.png
+
 .. code-block:: bash
 
-  export FLASK_APP=lab
-  export FLASK_ENV=development
   . nutanix/bin/activate
-  flask run
 
-- Browse to http://127.0.0.1:5000 to view your application.  If everything is setup correctly, you will see a basic HTML form prompting for a **Cluster/CVM IP**, your **Cluster Username** and **Cluster Password**.  You'll also see a number of styled and labelled "containers", ready for our cluster info to be displayed.
+  export FLASK_APP=lab
 
-.. figure:: images/flask_app_run_first.png
+  export FLASK_ENV=development
 
-- In our lab environment, enter the CVM/Cluster IP address as provided by your presenter.
-- Enter your cluster username.
-- Enter your cluster password.
-- Click the `Go!` button.
+  flask run --host 0.0.0.0
+
+.. figure:: images/windows_logo_32x32.png
+
+.. code-block:: bash
+
+  set FLASK_APP=lab
+  set FLASK_ENV=development
+  nutanix\Scripts\activate.bat
+  flask run --host 0.0.0.0
+
+Browse to http://<*initials*-Linux-ToolsVM IP>:5000 on your local machine to view your application,  or open a browser on your Windows-ToolsVM and point to http://<*initials*-Windows-ToolsVM IP>:5000.
+
+If everything is setup correctly, you will see a basic HTML form prompting for a **Cluster/CVM IP**, your **Cluster Username** and **Cluster Password**.
+
+You'll also see a number of styled and labelled "containers", ready for our cluster info to be displayed.
+
+Fill out the following fields:
+
+- **Cluster/CVM IP**  - *Assigned HPOC Cluster IP*
+- **Cluster Username**  - admin
+- **Cluster Password**  - techX2019!
+
+Click **Go!**
 
 If everything has been created and all parts of the application wired up correctly, the application will carry out our API requests via AJAX, process the results and display it all nicely on our page.
 

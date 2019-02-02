@@ -1,7 +1,7 @@
 .. _era:
 
 -----------
-Nutanix Era
+Era
 -----------
 
 *The estimated time to complete this lab is 60 minutes.*
@@ -504,4 +504,8 @@ Have a question about **Nutanix Era**? Please reach out to the resources below:
 |  Product Marketing Manager     |  Maryam Sanglaji, maryam.sanglaji@nutanix.com  |
 +--------------------------------+------------------------------------------------+
 |  Technical Marketing Engineer  |  Mike McGhee, michael.mcghee@nutanix.com       |
++--------------------------------+------------------------------------------------+
+|  SME                           |                                                |
++--------------------------------+------------------------------------------------+
+|  SME                           |                                                |
 +--------------------------------+------------------------------------------------+

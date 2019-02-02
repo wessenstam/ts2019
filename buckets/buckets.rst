@@ -696,14 +696,18 @@ Similar S3 SDKs are available for languages including Java, JavaScript, Ruby, Go
 Takeaways
 +++++++++
 
+What are the key things you should know about **Nutanix Buckets**?
+
 - stuff
 
 - goes
 
 - here
 
-Getting Engaged with the Product Team
-+++++++++++++++++++++++++++++++++++++
+Getting Connected
++++++++++++++++++
+
+Have a question about **Nutanix Buckets**? Please reach out to the resources below:
 
 +---------------------------------------------------------------------------------------------+
 |  Buckets Product Contacts                                                                   |
@@ -715,4 +719,8 @@ Getting Engaged with the Product Team
 |  Product Marketing Manager     |  Krishnan Badrinarayanan, krishnan.badrinaraya@nutanix.com |
 +--------------------------------+------------------------------------------------------------+
 |  Technical Marketing Engineer  |  Sharon Santana, sharon.santana@nutanix.com                |
++--------------------------------+------------------------------------------------------------+
+|  SME                           |                                                            |
++--------------------------------+------------------------------------------------------------+
+|  SME                           |                                                            |
 +--------------------------------+------------------------------------------------------------+

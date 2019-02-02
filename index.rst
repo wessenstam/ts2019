@@ -12,45 +12,42 @@
 
 .. toctree::
   :maxdepth: 2
-  :caption: Optional Intro Labs
-  :name: _opt_101_labs
+  :caption: Introductory Labs
+  :name: _introductory_labs
   :hidden:
 
+  nutanix101/nutanix101
   karbon/karbon
   buckets/buckets
   xplay/xplay
   dr_runbooks/dr_runbooks
-  calm_3tier_webapp_blueprint/calm_3tier_webapp_blueprint
-  calm_win_tiered_app/calm_win_tiered_app
-
+  calm_linux/calm_linux
+  files/files
+  xtract_aws/xtract_aws
+  epoch/epoch
+  xiiot/xiiot
 
 .. toctree::
   :maxdepth: 2
   :caption: Advanced Labs
-  :name: _opt_201_labs
+  :name: _advanced_labs
   :hidden:
 
-  calm_3twa_day2_blueprint/calm_3twa_day2_blueprint
-  calm_escript_blueprint/calm_escript_blueprint
+  calm_day2/calm_day2
+  calm_escript/calm_escript
+  calm_win/calm_win
   cloud_native_lab/cloud_native_lab
   apis/apis
 
 .. toctree::
   :maxdepth: 2
-  :caption: Optional Labs
-  :name: _optional_labs
+  :caption: Sponsor Labs
+  :name: _sponsor_labs
   :hidden:
 
-..  sshkey_creation/sshkey_creation
-
-.. toctree::
-  :maxdepth: 2
-  :caption: Tools VMs
-  :name: _tools_vms
-  :hidden:
-
-  tools_vms/windows_tools_vm
-  tools_vms/linux_tools_vm
+  veeam/veeam
+  hycu/hycu
+  peer/peer
 
 .. toctree::
   :maxdepth: 2
@@ -58,9 +55,10 @@
   :name: _appendix
   :hidden:
 
-  appendix/glossary
-  appendix/basics
+  tools_vms/windows_tools_vm
+  tools_vms/linux_tools_vm
   taskman/taskman
+  wordpress/wordpress
 
 .. raw:: html
 
@@ -83,84 +81,17 @@
 Getting Started
 ===============
 
-.. raw:: html
+This is a placeholder that will eventually contain key details regarding the Hands on Learning track, including:
 
-  <strong><font color="red">Do not start any labs before being told to do so by your Team Coach.</font></strong>
-
-Following presentations on Tuesday, you will have the remainder of the day to complete the **Required Labs** and begin **Optional Labs**.
-
-Beginning on Wednesday you will split into your Hackathon teams, or continue doing labs if you are on that track..
-
-The Overview section of each lab will indicate whether another lab should be completed prior to completing that lab.
+- User/cluster assignments
+- Cluster staging details
+- Instructions for accessing clusters (VPN/Tools VM)
+- How to ask questions/get labs validated
 
 Cluster Details
 +++++++++++++++
 
-Using the spreadsheet below, locate your **Team Number** and corresponding details for your assigned cluster.
 
-.. raw:: html
-
-  <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSf9BaV63Un42od-9BiC62QcYCKLSJmz7L0Vsfnwz7Zx1nu_oQiVGiZ7IC_AcT8dXWB_qzksn9c6Dpj/pubhtml?gid=427935111&amp;single=false&amp;widget=false&amp;chrome=false&amp;headers=false&amp;range=a1:g50" style="position: relative; height: 600px; width: 98%; border: none"></iframe>
-
-Each cluster has been pre-staged with the following:
-
-**Pre-staged Images**
-
-- **Windows2016** - Windows Server 2016 Standard Disk Image
-- **Windows2012** - Windows Server 2012 R2 Standard Disk Image
-- **Windows10** - Windows 10 Disk Image
-- **CentOS** - CentOS 7 Disk Image
-- **Era** - Era v1.0 Disk Image
-- **Xtract** - Nutanix Xtract for VMs 1.1.3 Disk Image
-- **MSSQL-2014SP3-ISO** - Microsoft SQL Server 2014 SP3 ISO Image
-- **XenDesktop-7.18-ISO** - Citrix XenDesktop 7.18 ISO Image
-
-**Pre-staged Virtual Machines**
-
-- **PC** VM - 10.21.XX.39 - Nutanix Prism Central 5.5.0.6
-- **DC** VM - 10.21.XX.40 - ntnxlab.local Domain Controller
-- **Buckets** -
-
-**Networks**
-
-- **Primary** Network - 10.21.XX.1/25 - IPAM DHCP Pool 10.21.XX.50-10.21.XX.124
-- **Secondary** Network - 10.21.XX.129/25 - IPAM DHCP Pool 10.21.XX.132-10.21.XX.253
-- **Link-Local** Network - **DO NOT ENABLE IPAM**
-
-**Credentials**
-
-- **Prism Username:** admin **Password:** techX2019!
-- **Prism Central Username:** admin **Password:** techX2019!
-- **CVM Username:** nutanix **Password:** techX2019!
-- **PC VM Username:** nutanix **Password:** nutanix/4u
-- **Domain Username** NTNXLAB\\Administrator **Password:** nutanix/4u
 
 Cluster Access Options
 ++++++++++++++++++++++
-
-The Nutanix Hosted POC environment can be accessed a number of different ways:
-
-Employee Global Protect VPN
-...........................
-
-- **Portals** - gp.nutanix.com
-
-Employee Pulse Secure VPN
-..........................
-
-https://sslvpn.nutanix.com - Use your CORP credentials
-
-Partner Pulse Secure VPN
-........................
-
-https://lab-vpn.nutanix.com - **Username:** POCxxx-User01 (up to POCxxx-User20), **Password:** techX2018!
-
-Under **Client Application Sessions**, click **Start** to the right of **Pulse Secure** to download the client.
-
-Install and open **Pulse Secure**.
-
-Add a connection:
-
-- **Type** - Policy Secure (UAC) or Connection Server
-- **Name** - HPOC VPN
-- **Server URL** - lab-vpn.nutanix.com

@@ -15,8 +15,8 @@ Overview
 
 <Blah blah blah>
 
-Staging the Lab
-+++++++++++++++
+Lab Setup
++++++++++
 
 This lab depends on the availability of a multi-tier **Task Manger** web application.
 
@@ -532,6 +532,10 @@ Have a question about **Nutanix Flow**? Please reach out to the resources below:
 |  Product Marketing Manager     |  Maryam Sanglaji, maryam.sanglaji@nutanix.com  |
 +--------------------------------+------------------------------------------------+
 |  Technical Marketing Engineer  |  Mike McGhee, michael.mcghee@nutanix.com       |
++--------------------------------+------------------------------------------------+
+|  SME                           |                                                |
++--------------------------------+------------------------------------------------+
+|  SME                           |                                                |
 +--------------------------------+------------------------------------------------+
 
 .. |blueprints| image:: images/blueprints.png

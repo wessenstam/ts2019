@@ -19,7 +19,7 @@ If you have not deployed this yet, please do the lab below before continuing.
 :ref:`linux_tools_vm`
 
 Run Stress Test
-..................................
+...............
 
 Lets add some load by initiating a stress test.
 
@@ -31,6 +31,13 @@ Login to the *initials*-**Linux-ToolsVM** via ssh or Console session.
 .. code-block:: bash
 
   stress -m 4 --vm-bytes 500M -t 40m &
+
+.. note::
+
+  It will take roughly 5min for Stress to generate the memory load to cause the alert.
+
+Review Anomalies
+++++++++++++++++
 
 Review Memory of <*VM-A*> (Pre-Seeded for this lab).
 
@@ -194,15 +201,18 @@ Select *initials* - **VM Memory Constrained**, and **Enable** the policy.
 
 Open a console session or SSH into Prism Central, and run the **paintrigger.py** script.
 
+- **Username** - nutanix
+- **password** - nutanix/4u
+
 .. code-block:: bash
 
-  ./paintrigger.py
+  python PrismProLab/paintrigger.py
 
 .. note::
 
   This will resolve all the alerts, force NCC check to run immediately and trigger the alert.
 
-After 1-2 minutes you should receive an email from Prism.
+After 2-5 minutes you should receive an email from Prism.
 
 Check the email to see that its subject and email body have filled the real value for the parameters you set up earlier.
 
@@ -213,7 +223,7 @@ Review the Playbook Play
 
 In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
 
-Select your *initials* - **Auto Remove Memory Constraint, and **disable** it.
+Select your *initials* - **Auto Remove Memory Constraint**, and **disable** it.
 
 Click **Plays**.
 
@@ -223,8 +233,13 @@ Click the Play, and examine the details.
 
 .. figure:: images/xplay_18.png
 
-Reduce CPU Capacity For A VM During A Maintenance Windows
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Reset VM Memory
+...............
+
+Change your *initials*-**Linux-ToolsVM** memory back to 2gb.
+
+Reduce CPU Capacity For A VM During A Maintenance Window
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 X-Fit in Prism Pro utilizes Machine Learning to continually analyze the environment.
 
@@ -294,7 +309,7 @@ Click **Add Action**, and select the **VM Reduce CPU** action.
 Select **Source Entity** from the parameters.
 
 - **Target VM** - {{trigger[0].source_entity_info}}
-- **vCPUs to Remove**  - 1
+- **vCPUs to Remove**  -
 - **Minimum Number of vCPUs**  - 1
 - **Cores per vCPU to Remove**  -
 - **Minimum Number of Cores per vCPU**  -
@@ -375,9 +390,12 @@ Select *initials* - **VM CPU Overprovisioned**, and **Enable** the policy.
 
 Open a console session or SSH into Prism Central, and run the **paintrigger.py** script.
 
+- **Username** - nutanix
+- **password** - nutanix/4u
+
 .. code-block:: bash
 
-  python paintrigger.py
+  python PrismProLab/paintrigger.py
 
 .. note::
 
@@ -438,9 +456,21 @@ Make sure NODE_PATH has the global nodejs module directory by running the follow
 
   export NODE_PATH=/usr/lib/node_modules
 
-Copy the processapi.js folder into one of your local folder.
+Download the :download:`processapi.js <processapi.js>` file.
 
-**Modify the PC IP address and username/password in the script.**
+.. code-block:: bash
+
+  curl -L https://s3.amazonaws.com/get-ahv-images/processapi.js -o processapi.js
+
+Modify the PC IP address and username/password in the script.
+
+.. code-block:: bash
+
+  sed -i 's/127.0.0.1/<*your PC IP*>/g' processapi.js
+
+  sed -i 's/pc user/admin/g' processapi.js
+
+  sed -i 's/pc password/<*your PC password*>/g' processapi.js
 
 Start the nodejs server
 
@@ -525,7 +555,7 @@ Search “Bully VM” in **Alert Policy**, and select *initials* - **Bully VM**.
 Click **Add Action**, and select the :fa:`terminal` **REST API** action.
 
 - **Method**  - GET
-- **URL** - http://<IP of *Initial*_Lnuix_toolsVM>:3000/vm/{{trigger[0].source_entity_info.uuid}}
+- **URL** - http://<IP of *Initial*-Linux-toolsVM>:3000/vm/{{trigger[0].source_entity_info.uuid}}
 
 .. note::
 
@@ -570,9 +600,12 @@ Select *initials* - **Bully VM**, and **Enable** the policy.
 
 Open a console session or SSH into Prism Central, and run the **paintrigger.py** script.
 
+- **Username** - nutanix
+- **password** - nutanix/4u
+
 .. code-block:: bash
 
-  python paintrigger.py
+  python PrismProLab/paintrigger.py
 
 .. note::
 
@@ -589,22 +622,239 @@ In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
 
 Click the *initials* - **Auto Quarantine A Bully VM** playbook, and click the **Disable** button.
 
-Endless Possibilities Using APIs
-++++++++++++++++++++++++++++++++
-
-Send a SMS message (or other actions services in IFTTT) when an alert is detected.
-
 Click the **Play** tab, you should see that a play has just completed.
 
 If the terminal session is broken (due to the quarantine), log in to *Initial*-**Linux-ToolsVM** to kill the node and stress processes.
 
-Call to Action
-++++++++++++++
+(Optional) Endless Possibilities Using APIs
++++++++++++++++++++++++++++++++++++++++++++
 
+This lab will show how you can easily include 3rd party tools into the X-Play.
 
+We will using IFTTT as the example of the 3rd party tool to send a Slack message when an alert is detected. You can extend this use case to ServiceNow or other tools.
 
-Getting Engaged with the Product Team
-+++++++++++++++++++++++++++++++++++++
+Before we setup IFTTT, ensure your *initial*-**Linux-ToolsVM** has memory size of 2gb, and if not change it to 2GB (power off, update, and power on).
+
+If not still logged in, Login to the *initials*-**Linux-ToolsVM** via ssh or Console session.
+
+Run stress again to generate load.
+
+.. code-block:: bash
+
+  stress -m 4 --vm-bytes 500M
+
+.. note::
+
+  It will take roughly 5min for Stress to generate the memory load to cause the alert.
+
+Setup IFTTT
+...........
+
+Go to https://ifttt.com/, log in and search **Webhooks**.
+
+.. note::
+
+  If you don’t have an IFTTT (ifttt.com) account, please register one.
+
+Click on Services, then select **Webhooks**.
+
+.. figure:: images/xplay_32.png
+
+Click **Connect**.
+
+.. figure:: images/xplay_33.png
+
+Once you connect it, Click the **Settings** button at the top right.
+
+.. figure:: images/xplay_34.png
+
+Copy the URL shown in the setting page.
+
+The URL is similar to this. *https://maker.ifttt.com/use/xxxxxyyyyzzz*
+
+Paste that URL into a new browser tab, and go to the page. The page that opens will show your unique webhook address.
+
+The URL is something like this. https://maker.ifttt.com/trigger/{event}/with/key/xxxxxyyyzzz
+
+.. note::
+
+  Take note of the address, as this is what we will be targeting in the X-Play REST API action later.
+
+Now you can create your own applet that will be triggered when it is called from X-Play.
+
+In the original browser tab, click on **My Applets** (or go to https://ifttt.com/my_applets).
+
+Click “New Applet”
+
+.. figure:: images/xplay_35.png
+
+Click **+this**.
+
+This is where you will set up the webhook URL that X-Play can trigger.
+
+.. figure:: images/xplay_36.png
+
+Search and click **Webhooks**.
+
+.. figure:: images/xplay_37.png
+
+Click **Receive a web request**.
+
+Fill your event name. This name will be part of the webhook url that you got earler.
+
+For example, if the event name is **xplay**, the webhook URL you will use in X-Play will be something like this:
+
+*https://maker.ifttt.com/trigger/xplay/with/key/xxxxxyyyzzz*
+
+.. figure:: images/xplay_38.png
+
+Click **Create trigger**.
+
+You can now create the **+that** to decide what you are going to do in this applet.
+
+You can use your imagination here. There are over 600 services you can choose here.
+For example, you can call your cell phone, send you an calendar event, send a text message, or even open your garage door (**Strongly discouraged**).
+
+If you are familiar with Zapier, you can also use that instead of IFTTT.
+Zapier can connect to over 1000 services, including Salesforce, PagerDuty, and many enterprise applications.
+
+For this lab we are using its Slack service as an example. You are free and **encouraged** to choose any other service in this step.
+
+.. note::
+
+  X-Play also includes a native Slack action out of the box.
+
+Click **+that**.
+
+Search and click **Slack**.
+
+.. note::
+
+  If you choose any other service, it will be the similar to the following steps.
+
+Click **Connect**.
+
+When prompted, sign into Slack.
+
+Click **Post to channel** and fill in the channel and message.
+
+You have three values can pass from from X-Play to IFTTT.
+In this example, Value 1 is the Alert name, Value 2 is the VM name, and Value 3 is the Playbook name. Click “Add Ingredient” is where you insert the parameters of “Value 1/Value 2/Value 3”.
+
+Fill in the Following:
+
+- **Which channel** - Direct Messages & @yourSlackHandle
+- **Message** - Nutanix X-FIT just detected an issue of {{Value1}} in {{Value2}} VM. Playbook "{{Value3}}" has increased its memory by 1GB. -- This message was sent by Prism Pro on {{OccurredAt}}.
+- **Title** - Nutanix Prism Pro just fixed an issue for you.
+
+.. figure:: images/xplay_39.png
+
+Click **Create Action**, then click **Finish**.
+
+Now you have an IFTTT applet that can be called from X-Play through Webhook
+
+Create Custom REST API Action
+.............................
+
+In **Prism Central** > select :fa:`bars` **> Operations > Actions Gallery**.
+
+Select **REST API** action, and then select **Clone** from the **Action** dropdown.
+
+Fill in the following fields:
+
+- **Name**  - *initials* - Slack an X-Play Message by IFTTT
+- **Description** - Using with IFTTT
+- **Method**  - Post
+- **URL** - Your IFTTT URL, will be something like this *https://maker.ifttt.com/trigger/xplay/with/key/xxxxxyyyzzz*
+- **Request Body**  - { "value1": "{{trigger[0].alert_entity_info.name}}", "value2": "{{trigger[0].source_entity_info.name}}", "value3": "{{playbook.playbook_name}}" }
+- **Request Headers** - Content-Type: application/json
+
+.. figure:: images/xplay_40.png
+
+Click **Copy**.
+
+Create Playbook
+...............
+
+In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
+
+Select *initials* - **Auto Remove Memory Constraint** created in the earlier lab, and click **Update** from the **Action** dropdown.
+
+Click :fa:`ellipsis-v` next to the action **Email** and then choose **Add Action Before**.
+
+.. figure:: images/xplay_41.png
+
+Select the :fa:`terminal` *initials* - **Slack an X-Play Message by IFTTT** action.
+
+Click **Save & Close**
+
+Toggle to **Enabled**, and click **Save**.
+
+Cause Memory Constraint
+.......................
+
+In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click *initials*-**Linux-ToolsVM**.
+
+Take note of your *initials*-**Linux-ToolsVM** VM's memory capacity (should be 2 GiB).
+
+Click **Alerts**, Select **Alert Policy** from **Configure** Dropdown.
+
+Select *initials* - **VM Memory Constrained**, and **Enable** the policy.
+
+Open a console session or SSH into Prism Central, and run the **paintrigger.py** script.
+
+- **Username** - nutanix
+- **password** - nutanix/4u
+
+.. code-block:: bash
+
+  python PrismProLab/paintrigger.py
+
+.. note::
+
+  This will resolve all the alerts, force NCC check to run immediately and trigger the alert.
+
+After 2-5 minutes you should receive an email from Prism.
+
+You also should receive the slack message. Check the message content.
+
+Check the memory capacity on your *initials*-**Linux-ToolsVM** VM now, you should see that it has increased.
+
+Review the Playbook Play
+........................
+
+In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
+
+Select your *initials* - **Auto Remove Memory Constraint**, and **disable** it.
+
+Click **Plays**.
+
+You should see that a Play has just completed.
+
+Click the Play, and examine the details.
+
+Reset VM Memory
+...............
+
+Change your *initials*-**Linux-ToolsVM** memory back to 2gb.
+
+Takeaways
++++++++++
+
+What are the key things you should know about **Prism Pro: XPlay**?
+
+- Prism Pro is our solution to make IT OPS smarter and automated. It covers the IT OPS process ranging from intelligent detection to automated remediation.
+
+- X-FIT is our machine learning engine to support smart IT OPS, including forecast, anomaly detection, and inefficiency detection.
+
+- X-Play, the IFTTT for the enterprise, is our engine to enable the automation of daily operations tasks.
+
+- X-Play enables admins to confidently automate their daily tasks within minutes.
+
+Getting Connected
++++++++++++++++++
+
+Have a question about **Prism Pro: XPlay**? Please reach out to the resources below:
 
 +---------------------------------------------------------------------------------+
 |  X-Play Product Contacts                                                        |
@@ -617,12 +867,7 @@ Getting Engaged with the Product Team
 +--------------------------------+------------------------------------------------+
 |  Technical Marketing Engineer  |  Brian Suhr, brian.suhr@nutanix.com            |
 +--------------------------------+------------------------------------------------+
-
-
-Takeaways
-+++++++++
-
-- Prism Pro is our solution to make IT OPS smarter and automated. It covers the IT OPS process ranging from intelligent detection to automated remediation.
-- X-FIT is our machine learning engine to support smart IT OPS, including forecast, anomaly detection, and inefficiency detection.
-- X-Play, the IFTTT for the enterprise, is our engine to enable the automation of daily operations tasks.
-- X-Play enables admins to confidently automate their daily tasks within minutes.
+|  SME                           |                                                |
++--------------------------------+------------------------------------------------+
+|  SME                           |                                                |
++--------------------------------+------------------------------------------------+
