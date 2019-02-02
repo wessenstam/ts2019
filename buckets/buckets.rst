@@ -15,9 +15,9 @@ Overview
 
 Data is growing faster than ever before, and much of the new data generated every second is unstructured. Video, backups, images, and e-mail archives are all examples of unstructured data that can cause issues at scale using traditional file and block storage solutions.
 
-Unlike file or block storage, object storage is a data storage architecture designed for unstructured data at the petabyte scale. Object storage manages data as objects, where each object contains the data itself, a variable amount of metadata, and a globally unique identifier.
+Unlike file or block storage, object storage is a data storage architecture designed for unstructured data at the petabyte scale. Object storage manages data as objects, where each object contains the data itself, a variable amount of metadata, and a globally unique identifier. There is no filesystem overhead as there is in block and file storage, so it can be easily scaled out at a global level.
 
-Buckets is a scalable, S3-compatible, object storage solution.
+Nutanix Buckets is an S3-compatible object storage solution that leverages the underlying Nutanix storage fabric which allows it to benefit from features such as encryption, compression, and erasure coding (EC-X).
 
 Buckets allows users to store petabytes of unstructured data on the Nutanix platform, with support for features such as WORM (write once, read many) and object versioning that are required for regulatory compliance, and easy integration with 3rd party backup software and S3-compatible applications.
 
@@ -698,11 +698,22 @@ Takeaways
 
 What are the key things you should know about **Nutanix Buckets**?
 
-- stuff
+- Nutanix Buckets provides a simple and scalable S3-compatible object storage solution, optimized for DevOps, Long Term Retention and Backup Target use cases.
 
-- goes
+- The target for Buckets GA is end of March and will require 5.11.
 
-- here
+- Buckets will support AHV at GA. ESXi support is on the roadmap.
+
+- A 2TB Buckets license is included with every AOS cluster. After that, it is licensed by used capacity (as opposed to number of nodes).
+
+- Buckets will be enabled and deployed from Prism Central. Upgrades will be done via Lifecycle Manager (LCM).
+
+References
+++++++++++
+
+- `Buckets FAQ <https://docs.google.com/document/d/1xEkrB5EOGu5-8yCB7EUYuy95TTgnuBE2s2DWWmVRJw4/edit?usp=sharing>`_
+- `Buckets Admin Guide (Draft) <https://docs.google.com/document/d/1l0fekqhDH-q3snlBmogfEAOg2MVoGMveiNa6fw6VOeM/edit?usp=sharing>`_
+- `Buckets Tech Note (Draft) <https://docs.google.com/document/d/1jYud1z6JV1TwmJj5gon4Cs-Syq7J4jBn3BhvWfSCBeU/edit?usp=sharing>`_
 
 Getting Connected
 +++++++++++++++++
@@ -718,7 +729,7 @@ Have a question about **Nutanix Buckets**? Please reach out to the resources bel
 +--------------------------------+------------------------------------------------------------+
 |  Product Marketing Manager     |  Krishnan Badrinarayanan, krishnan.badrinaraya@nutanix.com |
 +--------------------------------+------------------------------------------------------------+
-|  Technical Marketing Engineer  |  Sharon Santana, sharon.santana@nutanix.com                |
+|  Technical Marketing Engineer  |  Laura Jordana, laura@nutanix.com                |
 +--------------------------------+------------------------------------------------------------+
 |  SME                           |                                                            |
 +--------------------------------+------------------------------------------------------------+
