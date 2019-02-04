@@ -30,7 +30,7 @@ If you have not deployed this yet, please do the lab below before continuing.
 Project Location
 ................
 
-You can store your project files anywhere you like.  For our lab, to keep things consistent, we will use a folder named `python-lab`.
+You can store your project files anywhere you like.  To keep things consistent, we will use a folder named `python-lab`.  This folder will be referred to as the **project folder** throughout this lab.
 
 Create a folder named `python-lab`, making sure you have write permissions to that folder.  If you are using the command line, some examples for creating the folder are as follows:
 
@@ -171,7 +171,7 @@ Create a file in the project folder named `MANIFEST.in` and add the following co
   graft lab/templates
   global-exclude *.pyc
 
-Now, to ensure our dependencies are installed and available, run the `setup.py` script as follows.
+Now, to ensure our dependencies are available, let's install our app for the first time.  This process makes use of both *setup.py* and *MANIFEST.in*.
 
 **Note:** The trailing period (`.`) is required.
 
@@ -432,7 +432,7 @@ If you are going to store your application in Git or GitHub (recommended), creat
 
 .. code-block:: bash
 
-  venv/
+  nutanix/
 
   *.pyc
   __pycache__/
@@ -1224,7 +1224,7 @@ The AJAX View
 JavaScript function
 ...................
 
-The `ajax` view is a key part of our application.  When the user enters their cluster or CVM IP address, credentials and hits the 'Go!' button, JavaScript makes various calls to the Nutanix APIs.  These calls are handled via AJAX_ so the user's browser doesn't get refreshed every time.
+The `ajax` view is a key part of our application.  This function is in the `lab/static/js/ntnx.js` file.  When the user enters their cluster or CVM IP address, credentials and hits the 'Go!' button, JavaScript makes various calls to the Nutanix APIs.  These calls are handled via AJAX_ so the user's browser doesn't get refreshed every time.
 
 .. _AJAX: https://en.wikipedia.org/wiki/Ajax_(programming)
 

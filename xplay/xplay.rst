@@ -12,11 +12,23 @@ Overview
 Lab Setup
 +++++++++
 
+
+
 For this lab you will need the Linux-ToolsVM.
 
 If you have not deployed this yet, please do the lab below before continuing.
 
 :ref:`linux_tools_vm`
+
+
+Automatically Add Memory to a VM When A Constraint is Detected
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+How often have you been on-call, and got that alert or service ticket for a VM that was having High memory or CPU?
+Chances are a lot, and generally during dinner, while you are out with family, or sleeping.
+
+What if you could use X-Play in Prism Pro to automatically take care of this for you when Prism Pro detected the constraint?
+Good news, you can. Let's walk through how to set that up.
 
 Run Stress Test
 ...............
@@ -35,24 +47,6 @@ Login to the *initials*-**Linux-ToolsVM** via ssh or Console session.
 .. note::
 
   It will take roughly 5min for Stress to generate the memory load to cause the alert.
-
-Review Anomalies
-++++++++++++++++
-
-Review Memory of <*VM-A*> (Pre-Seeded for this lab).
-
-In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click **VM-A**
-
-<Add more content from harry Yang here around Best Practices>
-
-Automatically Add Memory to a VM When A Constraint is Detected
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-How often have you been on-call, and got that alert or service ticket for a VM that was having High memory or CPU?
-Chances are a lot, and generally during dinner, while you are out with family, or sleeping.
-
-What if you could use X-Play in Prism Pro to automatically take care of this for you when Prism Pro detected the constraint?
-Good news, you can. Let's walk through how to set that up.
 
 Create Alert Policy
 ...................
