@@ -1,7 +1,7 @@
 .. _buckets:
 
 ---------------
-Nutanix Buckets
+Buckets
 ---------------
 
 *The estimated time to complete this lab is 60 minutes.*
@@ -729,7 +729,7 @@ Have a question about **Nutanix Buckets**? Please reach out to the resources bel
 +--------------------------------+------------------------------------------------------------+
 |  Product Marketing Manager     |  Krishnan Badrinarayanan, krishnan.badrinaraya@nutanix.com |
 +--------------------------------+------------------------------------------------------------+
-|  Technical Marketing Engineer  |  Laura Jordana, laura@nutanix.com                |
+|  Technical Marketing Engineer  |  Laura Jordana, laura@nutanix.com                          |
 +--------------------------------+------------------------------------------------------------+
 |  SME                           |                                                            |
 +--------------------------------+------------------------------------------------------------+
