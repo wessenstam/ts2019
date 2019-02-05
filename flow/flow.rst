@@ -533,6 +533,14 @@ Have a question about **Nutanix Flow**? Please reach out to the resources below:
 +--------------------------------+------------------------------------------------+
 |  Technical Marketing Engineer  |  Mike McGhee, michael.mcghee@nutanix.com       |
 +--------------------------------+------------------------------------------------+
+|  Solutions Architect           |  Robert Kintner, robert.kintner@nutanix.com    |
++--------------------------------+------------------------------------------------+
+|  Founders Team                 |  Dan Angst, dan.angst@nutanix.com              |
++--------------------------------+------------------------------------------------+
+|  Founders Team                 |  Scott Tye, scott.tye@nutanix.com              |
++--------------------------------+------------------------------------------------+
+|  Founders Team                 |  Jon Jones, jon.jones@nutanix.com              |
++--------------------------------+------------------------------------------------+
 |  SME                           |                                                |
 +--------------------------------+------------------------------------------------+
 |  SME                           |                                                |
