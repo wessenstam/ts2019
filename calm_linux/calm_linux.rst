@@ -31,7 +31,7 @@ Click **+ Create Blueprint > Multi VM/Pod Blueprint**.
 Fill out the following fields:
 
 **Name** - *Initials*-CalmLinuxIntro
-**Description** - Introductory Linux blueprint
+**Description** - * [Task Manager Application](http://@@{HAProxy.address}@@/)
 **Project** - default
 
 .. figure:: images/2.png
@@ -105,7 +105,7 @@ In the **Configuration Pane** on the right side of the Blueprint Editor, under *
 +------------------------+------------------------------------------------------+------------+-------------+
 | **Variable Name**      | **Value**                                            | **Secret** | **Runtime** |
 +------------------------+------------------------------------------------------+------------+-------------+
-| User_initials          | root                                                 |            |      X      |
+| User_initials          | xyz                                                  |            |      X      |
 +------------------------+------------------------------------------------------+------------+-------------+
 | Mysql\_user            | root                                                 |            |             |
 +------------------------+------------------------------------------------------+------------+-------------+
@@ -162,7 +162,7 @@ In **Application Overview > Services**, click :fa:`plus-circle` to add a new Ser
 
 By default, the Application Overview is located in the lower right-hand corner of the Blueprint Editor and is used to create and manage Blueprint layers such as Services, Application Profiles, and Actions.
 
-.. figure:: 7.png
+.. figure:: image/7.png
 
 Note **Service1** appears in the **Workspace** and the **Configuration Pane** reflects the configuration of the selected Service.
 
@@ -217,7 +217,7 @@ Click **Save**.
 
   If errors or warnings are presented after saving the blueprint, hover over the icon in the top toolbar to see a list of issues. Resolve any issues and **Save** the blueprint again.
 
-  .. figure:: 8.png
+  .. figure:: image/8.png
 
 Now that you have completed the deployment details for the VM associated with the service, the next step is to tell Calm how the application will be installed on the VM.
 
@@ -225,7 +225,7 @@ With the **MySQL** service icon selected in the Workspace pane, scroll to the to
 
 Specify **MySQL_PACKAGE** as the **Package Name** and click **Configure install**.
 
-.. figure:: 9.png
+.. figure:: image/9.png
 
 Note the **Package install** field that appears on the MySQL service in the Workspace pane.
 
@@ -418,7 +418,8 @@ Select **+ Task**, and fill out the following fields in the **Configuration Pane
     sudo chmod -R 777 /var/www/laravel/
     sudo systemctl restart nginx
 
-<Need background on what the script does, call out MySQL.address>
+This script installs PHP and Nginx to create a web server, and then a Laravel based web application.
+It then configures the web application settings, including updating the **DB_HOST** with the MySQL IP address, accessed via the **@@{MySQL.address}@@** macro.
 
 Select the **Package** tab and click **Configure uninstall**.
 
@@ -637,6 +638,8 @@ Once the application reaches a **Running** status, navigate to the **Services** 
 
 In a new browser tab or window, navigate to http://<HAProxy-IP>, and verify your Task Manager application is functioning.
 
+** You can also click the link in the Description of the Application.**
+
 .. figure:: images/17.png
 
 If you are interested in learning about additional Calm capabilities, check out :ref:`day-2-labs`.
@@ -672,6 +675,24 @@ Have a question about **Nutanix Calm**? Please reach out to the resources below:
 |  Product Marketing Manager     |  Chris Brown, christopher.brown@nutanix.com    |
 +--------------------------------+------------------------------------------------+
 |  Technical Marketing Engineer  |  Michael Haigh, michael.haigh@nutanix.com      |
++--------------------------------+------------------------------------------------+
+|  Solutions Architect           |  Ben Peterson, bp@nutanix.com                  |
++--------------------------------+------------------------------------------------+
+|  Solutions Architect           |  Mark Lavi, mark.lavi@nutanix.com              |
++--------------------------------+------------------------------------------------+
+|  Solutions Architect           |  Andy Schmid, andy.schmid@nutanix.com          |
++--------------------------------+------------------------------------------------+
+|  Founders Team                 |  Mike Masterson, mike.masterson@nutanix.com    |
++--------------------------------+------------------------------------------------+
+|  Founders Team                 |  Akbar Aziz, akbar.aziz@nutanix.com            |
++--------------------------------+------------------------------------------------+
+|  Founders Team                 |  David Roberts, dave.roberts@nutanix.com       |
++--------------------------------+------------------------------------------------+
+|  Founders Team                 |  Sachin Malhotra, sachin.malhotra@nutanix.com  |
++--------------------------------+------------------------------------------------+
+|  SME                           |                                                |
++--------------------------------+------------------------------------------------+
+|  SME                           |                                                |
 +--------------------------------+------------------------------------------------+
 
 .. |proj-icon| image:: ../images/projects_icon.png

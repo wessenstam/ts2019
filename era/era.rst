@@ -32,7 +32,7 @@ Click **Create VM**.
 
 Fill out the following fields:
 
-- **Name** - Era-*Initials*
+- **Name** - *Initials*-Era
 - **Description** - (Optional) Description for your VM.
 - **vCPU(s)** - 4
 - **Number of Cores per vCPU** - 1
@@ -160,7 +160,7 @@ Select the **PostgreSQL** engine and click **Next**.
 Fill out the following **Database Server** fields:
 
 - **Database Server** - Select **Create New Server**
-- **Database Server Name** - DBServer-*Initials*
+- **Database Server Name** - *Initials*-DBServer
 - **Compute Profile** - Lab
 - **Network Profile** - DEFAULT_OOB_NETWORK
 - **Software Profile** - POSTGRES_10.4_OOB
@@ -181,7 +181,7 @@ Click **Next**.
 
 Fill out the following **Database** fields:
 
-- **Database Name** - LabDB_\ *Initials*
+- **Database Name** - *Initials*\_LabDB
 - **Description** - (Optional) Description
 - **POSTGRES Password** - techX2019!
 - **Database Parameter Profile** - DEFAULT_POSTGRES_PARAMS
@@ -198,7 +198,7 @@ Click **Next**.
 
 Fill out the following **Time Machine** fields:
 
-- **Name** - LabDB-\ *Initials*\ _TM
+- **Name** - *Initials*\_LabDB_TM
 - **Description** - (Optional) Description
 - **SLA** - Gold
 - **Schedule** - Default
@@ -219,7 +219,7 @@ Upon completion, select **Dashboard** from the drop down menu and note your new 
 
 .. figure:: images/4i.png
 
-You should also be able to see the **DBServer-**\ *Initials* VM running within Prism.
+You should also be able to see the *Initials*-**DBServer-**  VM running within Prism.
 
 Connecting to the Database
 ++++++++++++++++++++++++++
@@ -244,7 +244,7 @@ Using your **Tools VM**, open **pgAdmin**.
 
 Under **Browser**, right-click **Servers** and select **Create > Server...**.
 
-On the **General** tab, provide your database server name (e.g. **DBServer-**\ *Initials*).
+On the **General** tab, provide your database server name (e.g. *Initials*-**DBServer**).
 
 On the **Connection** tab, fill out the following fields:
 
@@ -256,13 +256,13 @@ On the **Connection** tab, fill out the following fields:
 
 .. figure:: images/5d.png
 
-Expand **DBServer**-*Initials* **> Databases** and note an empty database has been created by Era.
+Expand Initials*-**DBServer **> Databases** and note an empty database has been created by Era.
 
 .. figure:: images/5h.png
 
 ..  Now you will create a table to store data regarding Names and Ages.
 
-  Expand **labdb_***Initials* **> Schemas > public**. Right-click on **Tables** and select **Create > Table**.
+  Expand *Initials*\_**labdb** **> Schemas > public**. Right-click on **Tables** and select **Create > Table**.
 
   .. figure:: images/5e.png
 
@@ -341,7 +341,7 @@ Click **Next**.
 On the **Database Server** tab, fill out the following fields:
 
 - **Database Server** - Create New Server
-- **VM Name** - DBServer-*Initials*-Clone
+- **VM Name** - *Initials*-DBServer-Clone
 - **Compute Profile** - Lab
 - **Network Profile** - DEFAULT_OOB_NETWORK
 - **SSH Public Key** -
@@ -356,7 +356,7 @@ Click **Next**.
 
 On the **Database Server** tab, fill out the following fields:
 
-- **Name** - LabDB_\ *Initials*\ _Clone
+- **Name** - *Initials*\_LabDB_Clone
 - **Description** - (Optional) Description
 - **Password** - techX2019!
 - **Database Parameter Profile** - DEFAULT_POSTGRES_PARAMS
@@ -473,7 +473,7 @@ Takeaways
 
 What are the key things you should know about **Nutanix Era**?
 
-- Era 1.0 supports Oracle, SQL Server, and PostgreSQL. MySQL will be supported in an upcoming release.
+- Era supports Oracle, SQL Server, PostgreSQL, and MariaDB.
 
 - Era supports One Click operations for registering, provisioning, cloning and refreshing supported databases.
 
@@ -494,18 +494,30 @@ Getting Connected
 
 Have a question about **Nutanix Era**? Please reach out to the resources below:
 
-+---------------------------------------------------------------------------------+
-|  Era Product Contacts                                                           |
-+================================+================================================+
-|  Slack Channel                 |  #era                                          |
-+--------------------------------+------------------------------------------------+
-|  Product Manager               |  Jeremy Launier, jeremy.launier@nutanix.com    |
-+--------------------------------+------------------------------------------------+
-|  Product Marketing Manager     |  Maryam Sanglaji, maryam.sanglaji@nutanix.com  |
-+--------------------------------+------------------------------------------------+
-|  Technical Marketing Engineer  |  Mike McGhee, michael.mcghee@nutanix.com       |
-+--------------------------------+------------------------------------------------+
-|  SME                           |                                                |
-+--------------------------------+------------------------------------------------+
-|  SME                           |                                                |
-+--------------------------------+------------------------------------------------+
++---------------------------------------------------------------------------------------------------+
+|  Era Product Contacts                                                                             |
++============================================+======================================================+
+|  Slack Channel                             |  #era                                                |
++--------------------------------------------+------------------------------------------------------+
+|  Product Manager                           |  Jeremy Launier, jeremy.launier@nutanix.com          |
++--------------------------------------------+------------------------------------------------------+
+|  Product Marketing Manager                 |  Maryam Sanglaji, maryam.sanglaji@nutanix.com        |
++--------------------------------------------+------------------------------------------------------+
+|  Technical Marketing Engineer              |  Mike McGhee, michael.mcghee@nutanix.com             |
++--------------------------------------------+------------------------------------------------------+
+|  Engineering                               |                                                      |
++--------------------------------------------+------------------------------------------------------+
+|  Solutions Architect Americas - Era        |  Murali Sriram, murali.sriram@nutanix.com            |
++--------------------------------------------+------------------------------------------------------+
+|  Solutions Architect Americas - Oracle/Era |  Mandar Surkund, mandar.surkund@nutanix.com          |
++--------------------------------------------+------------------------------------------------------+
+|  Solutions Architect Americas - SQL/Era    |  Mike Matthews, mike.matthews@nutanix.com            |
++--------------------------------------------+------------------------------------------------------+
+|  Solutions Architect APAC - Oracle/Era     |  Kim Hock Cheok, kimhock.cheok@nutanix.com           |
++--------------------------------------------+------------------------------------------------------+
+|  Solutions Architect APAC - Oracle/Era     |  Predee Kajonpai, predee.kajonpa@nutanix.com         |
++--------------------------------------------+------------------------------------------------------+
+|  Solutions Architect EMEA - Oracle/Era     |  Olivier Parcollet, olivier.parcollet@nutanix.com    |
++--------------------------------------------+------------------------------------------------------+
+|  Solutions Architect EMEA - Oracle/Era     |  Karsten Zimmermann, karsten.zimmermann@nutanix.com  |
++--------------------------------------------+------------------------------------------------------+

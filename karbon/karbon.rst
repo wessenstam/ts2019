@@ -374,6 +374,8 @@ Have a question about **Nutanix Karbon**? Please reach out to the resources belo
 +--------------------------------+------------------------------------------------+
 |  Technical Marketing Engineer  |  Dwayne Lessner, dwayne@nutanix.com            |
 +--------------------------------+------------------------------------------------+
+|  Solutions Architect           |  Andrew Nelson, andrew.nelson@nutanix.com      |
++--------------------------------+------------------------------------------------+
 |  SME                           |                                                |
 +--------------------------------+------------------------------------------------+
 |  SME                           |                                                |
