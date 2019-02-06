@@ -141,6 +141,8 @@ In this exercise you will walk through the steps of creating an Object Store.
 
   In the Tech Summit Buckets environment, you will **not** be able to actually deploy the object store, but you will be able to see the workflow and how simple it is for users to deploy an object store.
 
+  Note that the interface and workflow will be slightly different in GA.
+
 In **Prism Central > Explore > Nutanix Buckets**, click **Create Object Store**.
 
 .. figure:: images/buckets_01.png
@@ -711,9 +713,13 @@ What are the key things you should know about **Nutanix Buckets**?
 References
 ++++++++++
 
+Right-click to open in a new tab.
+
 - `Buckets FAQ <https://docs.google.com/document/d/1xEkrB5EOGu5-8yCB7EUYuy95TTgnuBE2s2DWWmVRJw4/edit?usp=sharing>`_
 - `Buckets Admin Guide (Draft) <https://docs.google.com/document/d/1l0fekqhDH-q3snlBmogfEAOg2MVoGMveiNa6fw6VOeM/edit?usp=sharing>`_
 - `Buckets Tech Note (Draft) <https://docs.google.com/document/d/1jYud1z6JV1TwmJj5gon4Cs-Syq7J4jBn3BhvWfSCBeU/edit?usp=sharing>`_
+- `SE Deck <https://nutanixinc-my.sharepoint.com/:p:/g/personal/priyadarshi_nutanix_com/EZof9glUu31Jlu6lG1JAUVUBxSrmYBNcjaeiCmTz8iXSyQ?e=eAvhB5>`_
+
 
 Getting Connected
 +++++++++++++++++
@@ -731,7 +737,9 @@ Have a question about **Nutanix Buckets**? Please reach out to the resources bel
 +--------------------------------+------------------------------------------------------------+
 |  Technical Marketing Engineer  |  Laura Jordana, laura@nutanix.com                          |
 +--------------------------------+------------------------------------------------------------+
-|  SME                           |                                                            |
+|  SME                           |  Karan Gupta, karan.gupta@nutanix.com                      |
 +--------------------------------+------------------------------------------------------------+
-|  SME                           |                                                            |
+|  SME                           |  Roger Liao, roger.liao@nutanix.com                        |
++--------------------------------+------------------------------------------------------------+
+|  SME                           |  Dheer Moghe, dheer.moghe@nutanix.com                      |
 +--------------------------------+------------------------------------------------------------+
