@@ -493,7 +493,7 @@ Have a question about **Nutanix Calm**? Please reach out to the resources below:
 +--------------------------------+------------------------------------------------+
 |  Solutions Architect           |  Andy Schmid, andy.schmid@nutanix.com          |
 +--------------------------------+------------------------------------------------+
-|  Founders Team                 |  Mike Masterson, mike.masterson@nutanix.com    |
+|  Founders Team Manager         |  Mike Masterson, mike.masterson@nutanix.com    |
 +--------------------------------+------------------------------------------------+
 |  Founders Team                 |  Akbar Aziz, akbar.aziz@nutanix.com            |
 +--------------------------------+------------------------------------------------+
