@@ -407,11 +407,11 @@ You should now be able to open a new browser tab and see the online store we cre
 Takeaways
 +++++++++
 
-- stuff
+- Nutanix Karbon, Era, and Buckets can be combined to make a full Cloud Native stack
 
-- goes
+- Cloud Native applications help reduce infrastructure silos and the time it takes to release new application features
 
-- here
+- Nutanix Cloud Native can easily be integrated into 3rd party tools like Jenkins to create a CI/CD pipeline
 
 Getting Connected
 +++++++++++++++++
@@ -429,18 +429,36 @@ Have a question about **Nutanix and CLoud Native**? Please reach out to the reso
 +--------------------------------+------------------------------------------------+
 |  Technical Marketing Engineer  |  Dwayne Lessner, dwayne@nutanix.com            |
 +--------------------------------+------------------------------------------------+
+|  Solutions Architect           |  Andrew Nelson, andrew.nelson@nutanix.com      |
++--------------------------------+------------------------------------------------+
 
-+---------------------------------------------------------------------------------+
-|  Era Product Contacts                                                           |
-+================================+================================================+
-|  Slack Channel                 |  #era                                          |
-+--------------------------------+------------------------------------------------+
-|  Product Manager               |  Jeremy Launier, jeremy.launier@nutanix.com    |
-+--------------------------------+------------------------------------------------+
-|  Product Marketing Manager     |  Maryam Sanglaji, maryam.sanglaji@nutanix.com  |
-+--------------------------------+------------------------------------------------+
-|  Technical Marketing Engineer  |  Mike McGhee, michael.mcghee@nutanix.com       |
-+--------------------------------+------------------------------------------------+
++---------------------------------------------------------------------------------------------------+
+|  Era Product Contacts                                                                             |
++============================================+======================================================+
+|  Slack Channel                             |  #era                                                |
++--------------------------------------------+------------------------------------------------------+
+|  Product Manager                           |  Jeremy Launier, jeremy.launier@nutanix.com          |
++--------------------------------------------+------------------------------------------------------+
+|  Product Marketing Manager                 |  Maryam Sanglaji, maryam.sanglaji@nutanix.com        |
++--------------------------------------------+------------------------------------------------------+
+|  Technical Marketing Engineer              |  Mike McGhee, michael.mcghee@nutanix.com             |
++--------------------------------------------+------------------------------------------------------+
+|  Engineering                               |                                                      |
++--------------------------------------------+------------------------------------------------------+
+|  Solutions Architect Americas - Era        |  Murali Sriram, murali.sriram@nutanix.com            |
++--------------------------------------------+------------------------------------------------------+
+|  Solutions Architect Americas - Oracle/Era |  Mandar Surkund, mandar.surkund@nutanix.com          |
++--------------------------------------------+------------------------------------------------------+
+|  Solutions Architect Americas - SQL/Era    |  Mike Matthews, mike.matthews@nutanix.com            |
++--------------------------------------------+------------------------------------------------------+
+|  Solutions Architect APAC - Oracle/Era     |  Kim Hock Cheok, kimhock.cheok@nutanix.com           |
++--------------------------------------------+------------------------------------------------------+
+|  Solutions Architect APAC - Oracle/Era     |  Predee Kajonpai, predee.kajonpa@nutanix.com         |
++--------------------------------------------+------------------------------------------------------+
+|  Solutions Architect EMEA - Oracle/Era     |  Olivier Parcollet, olivier.parcollet@nutanix.com    |
++--------------------------------------------+------------------------------------------------------+
+|  Solutions Architect EMEA - Oracle/Era     |  Karsten Zimmermann, karsten.zimmermann@nutanix.com  |
++--------------------------------------------+------------------------------------------------------+
 
 +---------------------------------------------------------------------------------------------+
 |  Buckets Product Contacts                                                                   |
@@ -451,7 +469,7 @@ Have a question about **Nutanix and CLoud Native**? Please reach out to the reso
 +--------------------------------+------------------------------------------------------------+
 |  Product Marketing Manager     |  Krishnan Badrinarayanan, krishnan.badrinaraya@nutanix.com |
 +--------------------------------+------------------------------------------------------------+
-|  Technical Marketing Engineer  |  Sharon Santana, sharon.santana@nutanix.com                |
+|  Technical Marketing Engineer  |  Laura Jordana, laura@nutanix.com                          |
 +--------------------------------+------------------------------------------------------------+
 
 +---------------------------------------------------------------------------------------------+

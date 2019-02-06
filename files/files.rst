@@ -419,7 +419,13 @@ Have a question about **Nutanix Files**? Please reach out to the resources below
 +--------------------------------+------------------------------------------------+
 |  Technical Marketing Engineer  |                                                |
 +--------------------------------+------------------------------------------------+
-|  Founders Team Lead            |                                                |
+|  Founders Team Manager         |  Mark Sommer, mark.sommer@nutanix.com          |
++--------------------------------+------------------------------------------------+
+|  Founders Team                 |  Peter Brass, peter@nutanix.com                |
++--------------------------------+------------------------------------------------+
+|  Founders Team                 |  Eric Tornwall, eric.tornwall@nutanix.com      |
++--------------------------------+------------------------------------------------+
+|  Founders Team                 |  Vlad Pejovic, vladimi.pejovic@nutanix.com     |
 +--------------------------------+------------------------------------------------+
 |  SME                           |                                                |
 +--------------------------------+------------------------------------------------+

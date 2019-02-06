@@ -1,7 +1,7 @@
 .. _karbon:
 
 --------------
-Nutanix Karbon
+Karbon
 --------------
 
 *The estimated time to complete this lab is 60 minutes.*
@@ -373,6 +373,8 @@ Have a question about **Nutanix Karbon**? Please reach out to the resources belo
 |  Product Marketing Manager     |  Maryam Sanglaji, maryam.sanglaji@nutanix.com  |
 +--------------------------------+------------------------------------------------+
 |  Technical Marketing Engineer  |  Dwayne Lessner, dwayne@nutanix.com            |
++--------------------------------+------------------------------------------------+
+|  Solutions Architect           |  Andrew Nelson, andrew.nelson@nutanix.com      |
 +--------------------------------+------------------------------------------------+
 |  SME                           |                                                |
 +--------------------------------+------------------------------------------------+
