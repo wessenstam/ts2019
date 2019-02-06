@@ -535,7 +535,7 @@ Have a question about **Nutanix Flow**? Please reach out to the resources below:
 +--------------------------------+------------------------------------------------+
 |  Solutions Architect           |  Robert Kintner, robert.kintner@nutanix.com    |
 +--------------------------------+------------------------------------------------+
-|  Founders Team                 |  Dan Angst, dan.angst@nutanix.com              |
+|  Founders Team Manager         |  Dan Angst, dan.angst@nutanix.com              |
 +--------------------------------+------------------------------------------------+
 |  Founders Team                 |  Scott Tye, scott.tye@nutanix.com              |
 +--------------------------------+------------------------------------------------+
