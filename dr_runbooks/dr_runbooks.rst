@@ -337,11 +337,15 @@ Takeaways
 
 What are the key things you should know about **Nutanix Leap DR Runbooks**?
 
-- stuff
+- All new Runbook functionality is in PC and required on both sides.
 
-- goes
+- Runbooks don't require you to setup remote sites or storage mappings anymore.
 
-- here
+- The last octet of IP address can be kept the same in a new subnet in case DNS doesn't work.
+
+- Tech Note - https://portal.nutanix.com/#/page/solutions/details?targetId=TN-2027_Data_Protection_and_Disaster_Recovery:TN-2027_Data_Protection_and_Disaster_Recovery
+
+- Best Practice Guide - https://portal.nutanix.com/#/page/solutions/details?targetId=BP-2005_Data_Protection:BP-2005_Data_Protection - best practice
 
 Getting Connected
 +++++++++++++++++
@@ -358,6 +362,12 @@ Have a question about **Nutanix Leap DR Runbooks**? Please reach out to the reso
 |  Product Marketing Manager     |  Mayank Gupta, mayank.gupta@nutanix.com        |
 +--------------------------------+------------------------------------------------+
 |  Technical Marketing Engineer  |  Dwayne Lessner, dwayne@nutanix.com            |
++--------------------------------+------------------------------------------------+
+|  Founders Team Manager         |  Diane Genova, diane.genova@nutanix.com        |
++--------------------------------+------------------------------------------------+
+|  Founders Team                 |  Archish Dalal, archish.dalal@nutanix.com      |
++--------------------------------+------------------------------------------------+
+|  Founders Team                 |  Norbert Thier, norbert.thier@nutanix.com      |
 +--------------------------------+------------------------------------------------+
 |  SME                           |                                                |
 +--------------------------------+------------------------------------------------+
