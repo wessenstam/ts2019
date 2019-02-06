@@ -423,6 +423,12 @@ Have a question about **Nutanix Xi IoT**? Please reach out to the resources belo
 +--------------------------------+------------------------------------------------+
 |  Solutions Architect           |  Brennan Conley, brennan.conley@nutanix.com    |
 +--------------------------------+------------------------------------------------+
+|  Founders Team Manager         |  Diane Genova, diane.genova@nutanix.com        |
++--------------------------------+------------------------------------------------+
+|  Founders Team                 |  Archish Dalal, archish.dalal@nutanix.com      |
++--------------------------------+------------------------------------------------+
+|  Founders Team                 |  Norbert Thier, norbert.thier@nutanix.com      |
++--------------------------------+------------------------------------------------+
 |  SME                           |                                                |
 +--------------------------------+------------------------------------------------+
 |  SME                           |                                                |
