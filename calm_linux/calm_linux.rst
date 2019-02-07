@@ -690,9 +690,15 @@ Have a question about **Nutanix Calm**? Please reach out to the resources below:
 +--------------------------------+------------------------------------------------+
 |  Founders Team                 |  Sachin Malhotra, sachin.malhotra@nutanix.com  |
 +--------------------------------+------------------------------------------------+
-|  SME                           |                                                |
+|  SME Americas                  |  Alex Lott, alex.lott@nutanix.com              |
 +--------------------------------+------------------------------------------------+
-|  SME                           |                                                |
+|  SME APAC                      |  Lei Ming Pan, leiming.pan@nutanix.com         |
++--------------------------------+------------------------------------------------+
+|  SME APAC                      |  Chris Rasmussen, crasmussen@nutanix.com       |
++--------------------------------+------------------------------------------------+
+|  SME EMEA                      |  Christophe Jauffret, christophe@nutanix.com   |
++--------------------------------+------------------------------------------------+
+|  SME EMEA                      |  Jose Gomez, jose.gomez@nutanix.com            |
 +--------------------------------+------------------------------------------------+
 
 .. |proj-icon| image:: ../images/projects_icon.png

@@ -431,6 +431,10 @@ Have a question about **Nutanix and CLoud Native**? Please reach out to the reso
 +--------------------------------+------------------------------------------------+
 |  Solutions Architect           |  Andrew Nelson, andrew.nelson@nutanix.com      |
 +--------------------------------+------------------------------------------------+
+|  SME EMEA                      |  Christophe Jauffret, christophe@nutanix.com   |
++--------------------------------+------------------------------------------------+
+|  SME EMEA                      |  Jose Gomez, jose.gomez@nutanix.com            |
++--------------------------------+------------------------------------------------+
 
 +---------------------------------------------------------------------------------------------------+
 |  Era Product Contacts                                                                             |
