@@ -376,7 +376,7 @@ Have a question about **Nutanix Karbon**? Please reach out to the resources belo
 +--------------------------------+------------------------------------------------+
 |  Solutions Architect           |  Andrew Nelson, andrew.nelson@nutanix.com      |
 +--------------------------------+------------------------------------------------+
-|  SME                           |                                                |
+|  SME EMEA                      |  Christophe Jauffret, christophe@nutanix.com   |
 +--------------------------------+------------------------------------------------+
-|  SME                           |                                                |
+|  SME EMEA                      |  Jose Gomez, jose.gomez@nutanix.com            |
 +--------------------------------+------------------------------------------------+
