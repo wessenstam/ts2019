@@ -12,8 +12,6 @@ Overview
 Lab Setup
 +++++++++
 
-
-
 For this lab you will need the Linux-ToolsVM.
 
 If you have not deployed this yet, please do the lab below before continuing.
