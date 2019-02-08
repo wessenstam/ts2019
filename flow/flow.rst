@@ -8,12 +8,16 @@ Flow
 
 .. raw:: html
 
-  <iframe src="https://drive.google.com/file/d/1sU4_1GPVTNGJwNDoy0kB04r-vz4-9Thq/preview" width="720" height="480" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  <iframe src="https://www.youtube.com/watch?v=50edygfpBvw" width="720" height="480" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 Overview
 ++++++++
 
-<Blah blah blah>
+Flow is a software-defined networking product tightly integrated into Nutanix AHV and Prism Central.
+Flow provides rich visualization, automation, and security for VMs running on AHV.
+Microsegmentation is a component of Flow that simplifies policy management.
+Using multiple Prism Central categories (logical groups), you can create a powerful distributed firewall that gives administrators an application-centric policy management tool for securing VM traffic.
+Combining this with Calm allows automated deployment of applications that are secured as they are created.
 
 Lab Setup
 +++++++++
@@ -84,7 +88,7 @@ Click **Save**.
 Creating a Security Policy
 ..........................
 
-While you wait for <blah blah blah>.
+While you wait for the Task Manager application to be deployed from the Calm blueprint, create the security policies that will protect the application.
 
 In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > Policies > Security Policies**.
 
@@ -334,7 +338,9 @@ Verify that the Windows Client VM can still access the Task Manager application 
 Isolating Environments
 ++++++++++++++++++++++
 
-<When would someone want to isolate environments versus locking down applications?>
+Use isolation policies when one group of VMs must be completely blocked from communicating with another group of VMs without any whitelist exceptions.
+One great example of using isolation policies is to block VMs tagged Environment:Dev from talking to VMs in Environment:Production.
+Do not use isolation policies if you want to create exceptions between the two groups, instead use an Application Policy which allows a whitelist model.
 
 In this exercise you will create a new environment category and assign this to the Task Manager application. Then you will create and implement an isolation security policy that uses the newly created category in order to restrict unauthorized access.
 
@@ -502,20 +508,28 @@ Once application provisioning has completed, note the additional VMs detected as
 
 Does the application behave as expected? From the new client VM, are you able to ping the load balancer but not the database? Are you able to access the application?
 
-Integrating with Calm offers... <?>
+Integrating Flow with Calm allows automated deployment of applications that are secured as they are created.
+When an application is deployed from a blueprint the proper categories can be assigned as the VMs are created.
+As soon as a VM is powered on for the first time it will automatically be part of the right category and security policy without any manual intervention.
 
-The application of categories can also be performed programmatically via ... <?>
+The application of categories can be performed programmatically via the v3 REST API in Prism Central. Categories are a metadata property of the v3/vms API_.
+
+.. _API https://developer.nutanix.com/reference/prism_central/v3/#definitions-vm_metadata
 
 Takeaways
 +++++++++
 
 What are the key things you should know about **Nutanix Flow**?
 
-- stuff
+- Flow is easily enabled from Prism Central.
 
-- Goes
+- Categories are created and applied to VMs as a simple text based way to group VMs into applications, environments, and tiers.
 
-- here
+- Security Policies such as Quarantine, Isolation, and Application operate on the categories applied to VMs.
+
+- Security Policies are evaluated in order, and this precedence allows for creation of complex policies.
+
+-Calm can use Categories created in Prism Central to automatically deploy VMs into a pre-existing security policy by default.
 
 Getting Connected
 +++++++++++++++++
@@ -527,11 +541,11 @@ Have a question about **Nutanix Flow**? Please reach out to the resources below:
 +================================+================================================+
 |  Slack Channel                 |  #era                                          |
 +--------------------------------+------------------------------------------------+
-|  Product Manager               |  Jeremy Launier, jeremy.launier@nutanix.com    |
+|  Product Manager               |  Abhishek Tiwari, abhishek.tiwari1@nutanix.com |
 +--------------------------------+------------------------------------------------+
-|  Product Marketing Manager     |  Maryam Sanglaji, maryam.sanglaji@nutanix.com  |
+|  Product Marketing Manager     |  Mike Wronski, michael.wronski@nutanix.com     |
 +--------------------------------+------------------------------------------------+
-|  Technical Marketing Engineer  |  Mike McGhee, michael.mcghee@nutanix.com       |
+|  Technical Marketing Engineer  |  Jason Burns, jason.burns@nutanix.com          |
 +--------------------------------+------------------------------------------------+
 |  Solutions Architect           |  Robert Kintner, robert.kintner@nutanix.com    |
 +--------------------------------+------------------------------------------------+
