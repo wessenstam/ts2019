@@ -8,7 +8,7 @@ Flow
 
 .. raw:: html
 
-  <iframe src="https://www.youtube.com/watch?v=50edygfpBvw" width="720" height="480" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  <iframe src="https://www.youtube.com/watch?v=50edygfpBvw/preview" width="720" height="480" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 Overview
 ++++++++
@@ -131,7 +131,7 @@ Specify the **Environment:Production** and click **Add**.
 
   Sources can also be specified by IP or subnet, but Categories allow for greater flexibility as this data can follow a VM regardless of changes to its network location.
 
-To create an inbound rule, select the **+** icon that appears to the left of **AppTier:**\ *Initials*-TMLB**.
+To create an inbound rule, select the **+** icon that appears to the left of **AppTier:**\ *Initials*-**TMLB**.
 
 .. figure:: images/21.png
 
@@ -490,7 +490,7 @@ In a production environment, VMs from Calm could leverage either a staging categ
 
 In **Prism Central**, select :fa:`bars` **> Services > Calm**.
 
-Click |blueprints| **Blueprints > **\ *Initials*\ **-TaskManager** to open your existing blueprint.
+Click |blueprints| **Blueprints** > *Initials*-**TaskManager** to open your existing blueprint.
 
 Select the **WebServer** service.
 
@@ -512,7 +512,7 @@ Integrating Flow with Calm allows automated deployment of applications that are 
 When an application is deployed from a blueprint the proper categories can be assigned as the VMs are created.
 As soon as a VM is powered on for the first time it will automatically be part of the right category and security policy without any manual intervention.
 
-The application of categories can be performed programmatically via the v3 REST API in Prism Central. Categories are a metadata property of the v3/vms API_.
+The application of categories can be performed programmatically via the v3 REST API in Prism Central. Categories are a metadata property of the v3/vms API_ .
 
 .. _API https://developer.nutanix.com/reference/prism_central/v3/#definitions-vm_metadata
 
