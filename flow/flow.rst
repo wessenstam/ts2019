@@ -65,7 +65,7 @@ Select the checkbox for **AppType** and click **Actions > Update**.
 
 Click the :fa:`plus-circle` icon beside the last value to add an additional Category value.
 
-Specify **TaskMan-**\ *Initials* as the value name.
+Specify *Initials*-**TaskMan**  as the value name.
 
 .. figure:: images/13.png
 
@@ -75,11 +75,11 @@ Select the checkbox for **AppTier** and click **Actions > Update**.
 
 Click the :fa:`plus-circle` icon beside the last value to add an additional Category value.
 
-Specify **TMWeb-**\ *Initials* as the value name. This category will be applied to the application's web tier.
+Specify *Initials*-**TMWeb**  as the value name. This category will be applied to the application's web tier.
 
-Click :fa:`plus-circle` and specify **TMDB-**\ *Initials*. This category will be applied to the application's MySQL database.
+Click :fa:`plus-circle` and specify *Initials*-**TMDB**. This category will be applied to the application's MySQL database.
 
-Click :fa:`plus-circle` and specify **TMLB-**\ *Initials*. This category will be applied to the application's HAProxy load balancer.
+Click :fa:`plus-circle` and specify *Initials*-**TMLB**. This category will be applied to the application's HAProxy load balancer.
 
 .. figure:: images/14.png
 
@@ -96,9 +96,9 @@ Click **Create Security Policy > Secure an Application**.
 
 Fill out the following fields:
 
-- **Name** - AppTaskMan-\ *Initials*
+- **Name** - *Initials*-AppTaskMan
 - **Purpose** - Restrict unnecessary access to Task Manager
-- **Secure this app** - AppType: TaskMan-\ *Initials*
+- **Secure this app** - AppType: *Initials*-TaskMan
 - Do **NOT** select **Filter the app type by category**.
 
 .. figure:: images/18.png
@@ -113,9 +113,9 @@ To allow for more granular configuration of the security policy, click **Set rul
 
 Click **+ Add Tier**.
 
-Select **AppTier: TMLB-**\ *Initials* from the drop down.
+Select **AppTier:**\ *Initials*-**TMLB** from the drop down.
 
-Repeat for **AppTier: TMWeb-**\ *Initials* and **AppTier: TMDB-**\ *Initials*.
+Repeat for **AppTier:**\ *Initials*-**TMWeb** and **AppTier:**\ *Initials*-**TMDB**.
 
 .. figure:: images/20.png
 
@@ -131,7 +131,7 @@ Specify the **Environment:Production** and click **Add**.
 
   Sources can also be specified by IP or subnet, but Categories allow for greater flexibility as this data can follow a VM regardless of changes to its network location.
 
-To create an inbound rule, select the **+** icon that appears to the left of **AppTier: TMLB-**\ *Initials*.
+To create an inbound rule, select the **+** icon that appears to the left of **AppTier:**\ *Initials*-TMLB**.
 
 .. figure:: images/21.png
 
@@ -167,9 +167,9 @@ Fill out the following fields:
 
 Click **Add**.
 
-Select the **+** icon that appears to the left of **AppTier: TMLB-**\ *Initials*, specify **TCP** port **22** and click **Save**.
+Select the **+** icon that appears to the left of **AppTier:**\ *Initials*-**TMLB**, specify **TCP** port **22** and click **Save**.
 
-Repeat for **AppTier: TMWeb-**\ *Initials* and **AppTier: TMDB-**\ *Initials* to allow Calm to communicate with the web tier and database VMs.
+Repeat for **AppTier:**\ *Initials*-**TMWeb** and **AppTier:**\ *Initials*-**TMDB** to allow Calm to communicate with the web tier and database VMs.
 
 .. figure:: images/24.png
 
@@ -186,7 +186,7 @@ Fill out the following fields:
 
 Click **Add**.
 
-Select the **+** icon that appears to the right of **AppTier: TMDB-**\ *Initials*, specify **UDP** port **53** and click **Save** to allow DNS traffic.
+Select the **+** icon that appears to the right of **AppTier:**\ *Initials*-**TMDB**, specify **UDP** port **53** and click **Save** to allow DNS traffic.
 
 .. figure:: images/26.png
 
@@ -196,9 +196,9 @@ To define intra-app communication, click **Set Rules within App**.
 
 .. figure:: images/27.png
 
-Click **AppTier: TMLB-**\ *Initials* and select **No** to prevent communication between VMs in this tier. There is only a single load balancer VM within the tier.
+Click **AppTier:**\ *Initials*-**TMLB** and select **No** to prevent communication between VMs in this tier. There is only a single load balancer VM within the tier.
 
-While **AppTier: TMLB-**\ *Initials* is still selected, click the :fa:`plus-circle` icon to the right of **AppTier: TMWeb-**\ *Initials* to create a tier to tier rule.
+While **AppTier:**\ *Initials*-**TMLB** is still selected, click the :fa:`plus-circle` icon to the right of **AppTier:**\ *Initials*-**TMWeb** to create a tier to tier rule.
 
 Fill out the following fields to allow communication on TCP port 80 between the load balancer and web tiers:
 
@@ -209,9 +209,9 @@ Fill out the following fields to allow communication on TCP port 80 between the 
 
 Click **Save**.
 
-Click **AppTier: TMWeb-**\ *Initials* and select **No** to prevent communication between VMs in this tier. While there are multiple web server VMs, they do not need to communicate with each other.
+Click **AppTier:**\ *Initials*-**TMWeb** and select **No** to prevent communication between VMs in this tier. While there are multiple web server VMs, they do not need to communicate with each other.
 
-While **AppTier: TMWeb-**\ *Initials* is still selected, click the :fa:`plus-circle` icon to the right of **AppTier: TMDB-**\ *Initials* to create another tier to tier rule.
+While **AppTier:**\ *Initials*-**TMWeb** is still selected, click the :fa:`plus-circle` icon to the right of **AppTier:**\ *Initials*-**TMDB** to create another tier to tier rule.
 
 Fill out the following fields to allow communication on TCP port 3306 to allow the database connection between the web servers and the MySQL database:
 
@@ -251,15 +251,15 @@ Using the checkboxes, select the 4 VMs associated with the application (HAProxy,
 
   .. figure:: images/16b.png
 
-Specify **AppType:TaskMan-**\ *Initials* in the search bar and click **Save** icon to bulk assign the category to all 4 VMs.
+Specify **AppType:**\ *Initials*-**TaskMan** in the search bar and click **Save** icon to bulk assign the category to all 4 VMs.
 
-Select ONLY the *Initials*\ **-HAProxy** VM, select **Actions > Manage Categories**, specify the **AppTier:TMLB-**\ *Initials* category and click **Save**.
+Select ONLY the *Initials*\ **-HAProxy** VM, select **Actions > Manage Categories**, specify the **AppTier:**\ *Initials*-**TMLB** category and click **Save**.
 
 .. figure:: images/17.png
 
-Repeat this procedure to assign **AppTier:TMWeb-**\ *Initials* to your web tier VMs.
+Repeat this procedure to assign **AppTier:**\ *Initials*-**TMWeb** to your web tier VMs.
 
-Repeat this procedure to assign **AppTier:TMDB-**\ *Initials* to your MySQL VM.
+Repeat this procedure to assign ***AppTier:**\ *Initials*-**TMLB** to your MySQL VM.
 
 Finally, repeat this procedure to assign **Environment:Dev** to your Windows client VM.
 
@@ -290,13 +290,13 @@ Open a second **Command Prompt** and run ``ping -t HAPROXY-VM-IP`` to verify con
 Using Flow Visualization
 ........................
 
-Return to **Prism Central** and select :fa:`bars` **> Virtual Infrastructure > Policies > Security Policies > AppTaskMan-**\ *Initials*.
+Return to **Prism Central** and select :fa:`bars` **> Virtual Infrastructure > Policies > Security Policies >**\ *Initials*-**AppTaskMan**.
 
 Verify that **Environment: Dev** appears as an inbound source. The source and line appear in yellow to indicate that traffic has been detected from your client VM.
 
 .. figure:: images/32.png
 
-Mouse over the line connecting **Environment: Dev** to **AppTier: TMLB-**\ *Initials* to view the protocol and connection information.
+Mouse over the line connecting **Environment: Dev** to **AppTier:**\ *Initials*-**TMLB** to view the protocol and connection information.
 
 Click the yellow flow line to view a graph of connection attempts over the past 24 hours.
 
@@ -310,7 +310,7 @@ Click **Update** to edit the policy.
 
 Click **Next** and wait for the detected traffic flows to populate.
 
-Mouse over the **Environment: Dev** source that connects to **AppTier: TMLB-**\ *Initials* and click the :fa:`check` icon that appears.
+Mouse over the **Environment: Dev** source that connects to **AppTier:**\ *Initials*-**TMLB** and click the :fa:`check` icon that appears.
 
 .. figure:: images/35.png
 
@@ -323,7 +323,7 @@ Applying Flow Policies
 
 In order to enforce the policy you have defined, the policy must be applied.
 
-Select **AppTaskMan-**\ *Initials* and click **Actions > Apply**.
+Select *Initials*-**AppTaskMan**  and click **Actions > Apply**.
 
 .. figure:: images/36.png
 
@@ -353,7 +353,7 @@ Select the checkbox for **Environment** and click **Actions > Update**.
 
 Click the :fa:`plus-circle` icon beside the last value to add an additional Category value.
 
-Specify **Prod-**\ *Initials* as the value name.
+Specify *Initials*-**Prod** as the value name.
 
 .. figure:: images/37.png
 
@@ -365,13 +365,13 @@ Click **Filters** and search for *Initials-* to display your virtual machines.
 
 .. note::
 
-  If you previously created a Label for your application VMs you can also search for that label. Alternatively you can search for the **AppType:TaskMan-**\ *Initials* category from the Filters pane.
+  If you previously created a Label for your application VMs you can also search for that label. Alternatively you can search for the **AppType:** *Initials*-**TaskMan** category from the Filters pane.
 
   .. figure:: images/38.png
 
 Using the checkboxes, select the 4 VMs associated with the application (HAProxy, MYSQL, WebServer-0, WebServer-1) and select **Actions > Manage Categories**.
 
-Specify **Environment:Prod-**\ *Initials* in the search bar and click **Save** icon to bulk assign the category to all 4 VMs.
+Specify **Environment:**\ *Initials*-**Prod** in the search bar and click **Save** icon to bulk assign the category to all 4 VMs.
 
 .. figure:: images/39.png
 
@@ -384,10 +384,10 @@ Click **Create Security Policy > Isolate Environments**.
 
 Fill out the following fields:
 
-- **Name** - Isolate-dev-prod-\ *Initials*
-- **Purpose** - Isolate dev from prod-\ *Initials*
+- **Name** - *Initials*-Isolate-dev-prod
+- **Purpose** - *Initials* - Isolate dev from prod
 - **Isolate This Category** - Environment:Dev
-- **From This Category** - Environment:Prod-\ *Initials*
+- **From This Category** - Environment:*Initials*-Prod
 - Do **NOT** select **Apply this isolation only within a subset of the datacenter**. This option provides additional granularity by only applying to VMs assigned a third, mutual category.
 
 .. figure:: images/40.png
@@ -405,7 +405,7 @@ Deleting a Policy
 
 In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > Policies > Security Policies**.
 
-Select **Isolate-dev-prod-**\ *Initials* and click **Actions > Delete**.
+Select *Initials*-**Isolate-dev-prod-** and click **Actions > Delete**.
 
 Type **DELETE** in the confirmation dialogue and click **OK** to disable the policy.
 
@@ -426,7 +426,7 @@ Open a **Command Prompt** and run ``ping -t HAPROXY-VM-IP`` to verify connectivi
 
 .. note::
 
-  If the ping is unsuccessful you may need to update your Inbound Rule for **Environment:Dev** to **AppTier:TMLB-**\ *Initials* to include **Any** as the **Type** and **Code** for **ICMP** traffic as shown below. Apply the updated **AppTaskMan-**\ *Initials* policy and the ping should resume.
+  If the ping is unsuccessful you may need to update your Inbound Rule for **Environment:Dev** to **AppTier:**\ *Initials*-**TMLB** to include **Any** as the **Type** and **Code** for **ICMP** traffic as shown below. Apply the updated **AppTaskMan-**\ *Initials* policy and the ping should resume.
 
   .. figure:: images/41.png
 
@@ -480,7 +480,7 @@ Flow also integrates natively with Calm to define Categories at the Service (VM)
 
   Flow policies for Calm provisioned VMs should ensure that port 22 (for Linux VMs) and port 5985 (for Windows VMs) are open. This was done earlier in the lab when initially creating the **AppTaskMan** policy.
 
-First update the **AppTaskMan-**\ *Initials* security policy from **Whitelist Only** to **Allow All** for **Outbound** connections, as shown below.
+First update the *Initials*-**AppTaskMan** security policy from **Whitelist Only** to **Allow All** for **Outbound** connections, as shown below.
 
 .. figure:: images/46.png
 
@@ -496,7 +496,7 @@ Select the **WebServer** service.
 
 .. figure:: images/44.png
 
-On the **VM** tab, scroll to **Categories** and select the **AppType: TaskMan-**\ *Initials* and **AppTier: TMWeb-**\ *Initials* categories.
+On the **VM** tab, scroll to **Categories** and select the **AppType:**\ *Initials*-**TaskMan** and **AppTier:**\ *Initials*-**TMWeb** categories.
 
 .. figure:: images/45.png
 
