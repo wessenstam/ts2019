@@ -141,7 +141,7 @@ In **Prism Element> Storage**, click **Storage**, click **Table**, then click **
 
 Use the following specifications (with **Advance Settings**), and click **Save**:
 
-- **Name** - container-*initials*
+- **Name** - *initials*-container
 - **Advertised Capacity** - 5 GiB
 - **Compression** - Enabled (inline 0 mins)
 - **Deduplication** - Cache Only
@@ -241,7 +241,7 @@ Next click **VM Networks**, then click **+ Create Network**.
 
 Fill out the following fields and click **Save**:
 
-- **Name** - Network-*initials*
+- **Name** - *initials*-Network
 - **VLAN ID** - Something other than 0
 - **Enable IP Address Management** - unchecked
 
@@ -257,7 +257,7 @@ Create another network, but this time enable IPAM.
 
 Fill out the following fields and click **Save**:
 
-- **Name** - Network_IPAM-*initials*
+- **Name** - *initials*-Network_IPAM
 - **VLAN ID** - Something other than 0
 - **Enable IP Address Management** - Checked
 - **Network IP Address / Prefix Length** - 10.0.0.0/24
@@ -270,8 +270,40 @@ Fill out the following fields and click **Save**:
 
   It is possible to create multiple pool ranges for a network.
 
+Deploying Workloads
++++++++++++++++++++
+
+Creating a Linux VM
+...................
+
+Deploy a Linux VM from Prism Element.
+
+In **Prism Element > VM > Table**, click **+ Create VM**.
+
+Fill out the following fields and click **Save**:
+
+- **Name** - *initials*-Linux_VM
+- **Description** - (Optional) Description for your VM.
+- **vCPU(s)** - 1
+- **Number of Cores per vCPU** - 1
+- **Memory** - 2 GiB
+
+.. figure:: images/deploy_workloads_03.png
+
+- Select **+ Add New Disk**
+    - **Type** - DISK
+    - **Operation** - Clone from Image Service
+    - **Image** - CentOS7.qcow2
+    - Select **Add**
+
+- Select **Add New NIC**
+    - **VLAN Name** - Primary
+    - Select **Add**
+
+Click **Save** to create the VM.
+
 Creating a Windows VM
-+++++++++++++++++++++
+.....................
 
 Deploy a Windows VM from Prism Element.
 
@@ -283,7 +315,7 @@ In **Prism Element > VM > Table**, click **+ Create VM**.
 
 Fill out the following fields and click **Save**:
 
-- **Name** - Windows_VM-*initials*
+- **Name** - *initials*-Windows_VM
 - **Description** - (Optional) Description for your VM.
 - **vCPU(s)** - 2
 - **Number of Cores per vCPU** - 1
@@ -367,7 +399,7 @@ Explore VM power actions and console access.
 
 In **Prism Element > VM > Table**.
 
-Locate the Linux VM you created in the previous lab (Linux_VM-*initials*). (Use Prism’s search function if necessary)
+Locate the Linux VM you created in the previous lab (*initials*-Linux_VM). (Use Prism’s search function if necessary)
 
 .. note::
 
@@ -424,14 +456,14 @@ Clone a VM
 
 In **Prism Element > VM > Table**.
 
-Find and make two clones of the Linux-*initials* virtual machine you created earlier.
+Find and make two clones of the *initials*-Linux virtual machine you created earlier.
 
 Select the VM, then click **Clone** from the **Actions** drop-down menu.
 
 Fill out the following fields and click **Save**:
 
 - **Number of Clones** - 2
-- **Prefix Name**  - Linux-*initials*-Clone
+- **Prefix Name**  - *initials*-Linux-Clone
 - **Starting Index Number** - 1
 
 .. figure:: images/manage_workloads_02.png
@@ -443,7 +475,7 @@ Migrate a VM Between Hosts
 
 In **Prism Element > VM > Table**.
 
-Locate the Linux VMs from the previous lab (Linux_VM-*initials*).
+Locate the Linux VMs from the previous lab (*initials*-Linux_VM).
 
 - Use Search with the Initials you used.
 
@@ -466,7 +498,7 @@ Configure VM-to-Host Affinity Policies
 
 In **Prism Element > VM > Table**.
 
-Locate the Linux VMs from the previous lab (Linux_VM-*initials*).
+Locate the Linux VMs from the previous lab (*initials*-Linux_VM).
 
 - Use Search with the Initials you used.
 
