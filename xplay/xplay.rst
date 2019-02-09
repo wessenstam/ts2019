@@ -22,7 +22,7 @@ If you have not deployed this yet, please do the lab below before continuing.
 Automatically Add Memory to a VM When A Constraint is Detected
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-How often have you been on-call, and got that alert or service ticket for a VM that was having High memory or CPU?
+How often have you been on-call, and got that alert or service ticket for a VM that had high memory or CPU usage?
 Chances are a lot, and generally during dinner, while you are out with family, or sleeping.
 
 What if you could use X-Play in Prism Pro to automatically take care of this for you when Prism Pro detected the constraint?
@@ -121,7 +121,7 @@ Select **Source Entity** from the parameters.
 
 .. note::
 
-  Source entity means the entity triggers the alert.
+  Source entity means the entity that triggered the alert.
 
 - **Target VM** - {{trigger[0].source_entity_info}}
 - **Time To Live**  - 1 day(s)
@@ -154,7 +154,7 @@ Click **Add Action**, and select the :fa:`envelope` **Email** action.
 
   There is a bug right now that when you click a parameter in the **parameter** popup, the parameter string will be appended at the end of the text string, not at the place of the cursor.
 
-  You have to cut and paste it into the write place if that is the case.
+  You have to cut and paste it into the right place if that is the case.
 
 .. figure:: images/xplay_13.png
 
@@ -301,14 +301,10 @@ Click **Add Action**, and select the **VM Reduce CPU** action.
 Select **Source Entity** from the parameters.
 
 - **Target VM** - {{trigger[0].source_entity_info}}
-- **vCPUs to Remove**  -
+- **vCPUs to Remove**  - 1
 - **Minimum Number of vCPUs**  - 1
-- **Cores per vCPU to Remove**  -
-- **Minimum Number of Cores per vCPU**  -
-
-.. note::
-
-  There is a bug in 5.10 that missed the two fields allowing you change the vCPU counts. This is fixed in 5.11.
+- **Cores per vCPU to Remove**  - Leave Blank
+- **Minimum Number of Cores per vCPU**  - Leave Blank
 
   .. figure:: images/xplay_21.png
 
@@ -350,7 +346,7 @@ The **Restrict** label will change to **Restriction Set**. If you hover the mous
 
   The step above illustrate the way you can achieve this in 5.10 early access. However we made a major enhancement in 5.11.
 
-  You will see three action types that will replace and enhance the “restrict” in 5.10, **Wait for Some Time** / **Wait for Some Day of Month** / **Wait for Some Day of Week**.
+  You will see three action types that will replace and enhance the “restrict” in 5.10, **Wait for Some Time** / **Wait for Some Time / Wait until Day of Month / Wait until Day of Week**.
 
   .. figure:: images/xplay_24.png
 
@@ -358,8 +354,8 @@ The **Restrict** label will change to **Restriction Set**. If you hover the mous
 
   .. figure:: images/xplay_26.png
 
-  These action type can be used just any other regular action type in any part of the Playbook.
-  It helps unlock not only the maintenance window setting but also allow a human approval process happening for a playbook.
+  These action types can be used just any other regular action type in any part of the Playbook.
+  It helps unlock not only the maintenance window setting but also allow for human approval process for playbook execution.
 
 Click **Save & Close**, and fill out the following fields:
 

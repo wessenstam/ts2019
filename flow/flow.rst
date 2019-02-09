@@ -50,12 +50,11 @@ Select **Enable Flow** and click **Enable**.
 Securing An Application
 +++++++++++++++++++++++
 
-Now that you have... <app description blah blah>
+Flow provides multiple System categories out of the box, such as AppType, AppTier, and Environment, that are used to quickly group virtual machines into security policies.
+Start using these categories right away, or add your own categories for custom grouping.
 
 Defining Category Values
 ........................
-
-Flow provides multiple out of the box categories for... <?>
 
 In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > Categories**.
 
@@ -537,9 +536,9 @@ Getting Connected
 Have a question about **Nutanix Flow**? Please reach out to the resources below:
 
 +---------------------------------------------------------------------------------+
-|  Era Product Contacts                                                           |
+|  Flow Product Contacts                                                          |
 +================================+================================================+
-|  Slack Channel                 |  #era                                          |
+|  Slack Channel                 |  #flow                                         |
 +--------------------------------+------------------------------------------------+
 |  Product Manager               |  Abhishek Tiwari, abhishek.tiwari1@nutanix.com |
 +--------------------------------+------------------------------------------------+
