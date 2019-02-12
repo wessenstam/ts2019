@@ -13,6 +13,10 @@ Xi Epoch
 Overview
 ++++++++
 
+Application architectures are going through a paradigm shift. Monolithic architectures are giving way to loosely-coupled, API driven microservices based architectures. Applications are increasingly becoming distributed and relying on external services like open-source components, external SaaS providers, and solutions provided by different public cloud vendors, where code-instrumentation is not possible. This creates critical blind spots in monitoring the health and performance of modern distributed applications.
+
+Using network as the vantage point, Epoch can continue to observe and monitor applications as they go through architectural transitions. This makes our approach ‘future proof’ compared with the code-based monitoring approaches.
+
 Xi Epoch generates live application maps to provide instantaneous visibility into application health without the need for any code instrumentation. Epoch provides key health metrics and monitors various infrastructure and application components, without the dependency on specific language or framework. As a result, SRE and DevOps teams can quickly identify root causes and substantively improve application performance and uptime.
 
 **In this lab you will deploy Xi Epoch agent software to a multi-tier application, explore Maps, create a custom Dashboard to monitor key app metrics, and define Alerts that can be used in troubleshooting application health.**
@@ -125,7 +129,7 @@ Return to **Xi Epoch** and select **Settings > Collector Health**. What is the s
 Using Application Maps
 ++++++++++++++++++++++
 
-The Epoch Application Maps can be thought of as “Google Maps for Cloud Apps,” providing interactive visualization of interactions between services on the network. <What problems does it solve?>
+The Epoch Application Maps can be thought of as “Google Maps for Cloud Apps,” providing interactive visualization of interactions between services on the network. From the application maps, users can drill down and quickly diagnose a range of complex issues such as service configuration (e.g. Kubernetes DNS errors), service reachability issues (e.g. HTTP errors) and service creation problems (e.g. pod scheduling errors).
 
 Open \http://*HAPROXY-VM-IP*/ in your browser to access the Task Manager application. Add several sample tasks and then delete a few tasks.
 
@@ -135,17 +139,15 @@ This action will create calls from the client to HAProxy, from HAProxy to your W
 
 Return to the **AOC** and select **Maps > Hosts**.
 
-The timeline slider at the top of the map allows you to define the period of time during which you want to analyze data. Pause the **Live** display and select an interval of time that included your accessing the Task Manager application described above.
+The timeline slider at the top of the map allows you to define the period of time during which you want to analyze data. Pause the **Live** display and select an interval of time that included your accessing the Task Manager application described above. Epoch retains captured metrics for up to 1 year.
 
 .. figure:: images/8.png
-
-<How long does Epoch hold on to these stats?>
 
 Remove the default **Filters** and **Groups** options by clicking the **x** on each. This should display a **Merged Node** containing the consolidated statistics of all collectors.
 
 Select the **Merged Node** and explore to available metrics. What is the host count of the node?
 
-<Any context here of why someone would want to look at the merged node?>
+The **Merged Node** view is helpful in containerized environments to quickly understand the status of container hosts, number of containers, etc.
 
 Unselect the **Merged Node** (e.g. click the grey area outside the node) and click **Discard Changes > Discard Changes** to restore the Filter and GroupBy settings.
 
@@ -177,8 +179,6 @@ Unselect the *Initials*\ **-MYSQL...** node and click **Show 1-hop** in the tool
 .. figure:: images/11.png
 
 Finally, you can save your customized map view by clicking the **Clone And Save Map** button. This allows you to easily return to pre-filtered views of specific apps, regions, etc.
-
-<What value does this feature provide? Examples? "Without any changes to our application code, we are able to see...">
 
 Configuring Dashboards & Integrations
 +++++++++++++++++++++++++++++++++++++
@@ -306,29 +306,37 @@ Takeaways
 
 What are the key things you should know about **Nutanix Xi Epoch**?
 
-- Stuff
+- Xi Epoch gives you the ability to see inside any application or solution stack, at scale, on any cloud.
 
-- Goes
+- Epoch does **not** require any code change to generate maps and metrics. It monitors the service interactions and conducts a real-time analysis of packets to obtain deep application insights.
 
-- Here
+- Common use cases for Epoch include application monitoring, incident response, and capacity planning. It also gives you the intelligence to better manage deployments, scaling events and application or infrastructure migrations.
+
+- Epoch can be used with any public or private cloud, including Nutanix Enterprise Cloud, AWS, Azure, and Google Cloud Platform, and supports almost all popular containerized and non-containerized application environments including Kubernetes, Docker, Mesos, Debian, Ubuntu, and CentOS.
+
+- Epoch is currently delivered as a public SaaS offering with self-hosted and on-premises options available soon.
+
+- Prospects can sign up for a free trial of Xi Epoch `here <https://www.nutanix.com/products/epoch/signup/>`_.
+
+- Additional internal resources for Epoch are available `here <https://nutanixinc.sharepoint.com/sites/EpochHome36>`_.
 
 Getting Connected
 +++++++++++++++++
 
 Have a question about **Nutanix Xi Epoch**? Please reach out to the resources below:
 
-+---------------------------------------------------------------------------------+
-|  Xi Epoch Product Contacts                                                      |
-+================================+================================================+
-|  Slack Channel                 |                                                |
-+--------------------------------+------------------------------------------------+
-|  Product Manager               |                                                |
-+--------------------------------+------------------------------------------------+
-|  Product Marketing Manager     |                                                |
-+--------------------------------+------------------------------------------------+
-|  Technical Marketing Engineer  |                                                |
-+--------------------------------+------------------------------------------------+
-|  SME                           |                                                |
-+--------------------------------+------------------------------------------------+
-|  SME                           |                                                |
-+--------------------------------+------------------------------------------------+
++------------------------------------------------------------------------------------+
+|  Xi Epoch Product Contacts                                                         |
++================================+===================================================+
+|  Slack Channel                 |  #epoch                                           |
++--------------------------------+---------------------------------------------------+
+|  Product Manager               |  Adhiraj Singh, adhiraj.singh@nutanix.com         |
++--------------------------------+---------------------------------------------------+
+|  Product Manager               |  Rohan Shah, rohan.shah@nutanix.com               |
++--------------------------------+---------------------------------------------------+
+|  Product Marketing Manager     |  Chris Brown, cb@nutanix.com                      |
++--------------------------------+---------------------------------------------------+
+|  Head of Sales                 |  Jai Desai, jai.desai@nutanix.com                 |
++--------------------------------+---------------------------------------------------+
+|  SME                           |  Harkirat Randhawa, harkirat.randhawa@nutanix.com |
++--------------------------------+---------------------------------------------------+
