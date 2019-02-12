@@ -359,7 +359,7 @@ Select your bucket and and click **Get Info**.
 
 .. figure:: images/buckets_12.png
 
-Under ther **S3** tab, select **Bucket Versioning** and then close the window. This is equivalent to enabling versioning through Prism.
+Under the **S3** tab, select **Bucket Versioning** and then close the window. This is equivalent to enabling versioning through Prism.
 
 .. figure:: images/buckets_13.png
 

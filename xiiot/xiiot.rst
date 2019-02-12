@@ -13,9 +13,16 @@ Xi IoT
 Overview
 ++++++++
 
-The Nutanix Xi IoT platform delivers local compute and AI for IoT edge devices, converging the edge and cloud into one seamless data processing platform. The Xi IoT platform eliminates complexity, accelerates deployments, and elevates developers to focus on the business logic powering IoT applications and services. Now developers can use a low-code development platform to create application software via APIs instead of arduous programming methods.
+The Nutanix Xi IoT platform delivers local compute and AI for IoT edge devices, converging the edge and cloud into one seamless data processing platform.
+The Xi IoT platform eliminates complexity, accelerates deployments, and elevates developers to focus on the business logic powering IoT applications and services.
+Now developers can use a low-code development platform to create application software via APIs instead of arduous programming methods.
 
-**In this lab you’ll deploy an application called “Facefeed” using the Xi IoT SaaS control plane. The application and its data pipelines are deployed to a virtual Xi Edge device running as a virtual machine on your local cluster. This application ingests an RTSP video stream and uses machine learning to detect known faces.**
+**In this lab you’ll deploy an application called “Facefeed” using the Xi IoT SaaS control plane.
+The application and its data pipelines are deployed to a virtual Xi Edge device running as a virtual machine on your local cluster.
+This application ingests a video stream using the real time streaming protocol (RTSP), and uses machine learning to detect known faces.**
+
+Xi IoT Data Pipelines can natively ingest RTSP (video common for retail/security), GigE Vision (video common for manufacturing/industrial), and MQTT (common for sensors) protocols.
+For other industry specific protocols, numerous hardware & software “gateways” exist to translate those data formats & protocols into MQTT.
 
 Accessing Xi IoT
 ++++++++++++++++
@@ -28,14 +35,16 @@ Click **Log in with My Nutanix** and provide your **my.nutanix.com** credentials
 
   These are the same credentials used to access the Nutanix Support Portal.
 
-At this point you should have a dashboard with a default user (you), project, and category.
+At this point you should have a dashboard with a default User (you), Project, and Category.
 
 .. figure:: images/1.png
 
 Lab Setup
 +++++++++
 
-In this exercise you will deploy the Xi IoT Edge OS appliance. <Any worthwhile background on Edge OS? Virtual only or baremetal too?>
+In this exercise you will deploy virtual Xi Edge.
+The Xi Edge OS was written from the ground up to efficiently run edge applications, and at a high level, consists of a Linux OS and Kubernetes cluster capable of natively running functions written in several software languages and Applications (containers) deployed via a standard Kubernetes yaml definition.
+Xi Edge can be deployed as a virtual machine on AHV and ESXi, or bare metal on specialized server hardware when required.
 
 In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > VMs**.
 
@@ -76,7 +85,7 @@ Fill out the following fields and click **Add** to begin onboarding:
 - **IP Address** - *Edge VM IP Address*
 - **Subnet Mask** - 255.255.255.128
 - **Gateway** - 10.XX.YY.129
-- **Category** - Leave blank for now
+- **Category** - Leave blank for now (more on those later)
 
 .. figure:: images/3.png
 
@@ -91,13 +100,15 @@ The dot next to the Xi Edge's **Name** indicates status. A grey dot indicated th
 Defining Categories
 +++++++++++++++++++
 
-<Why do we define categories>
+In Xi IoT, categories help you assign various attributes to edges and data sources which can be further used to query and select them when creating Data Pipelines or deploying Applications.
+An example of a category could be “City” with values in [San Francisco, San Jose, San Diego] or “State” with values in [California, Washington, Oregon] and so on.
+It can be anything meaningful to your environment. For this lab, we’ll categorize types of cameras by their function.
 
 From the **Xi IoT** management portal, select :fa:`bars` **> Infrastructure > Categories**.
 
-Click on the default **Data Type** to explore the default values. Data Type can be used to categorize and sort that forms of data processed by an Edge.
+Click on the default **Data Type** to explore the default values. Data Type is one way to categorize and sort forms of data processed by an Edge.
 
-Return to **Categories** and click **+ Create** to add your own, custom category.
+Return to **Categories** and click **+ Create** to add your own, custom category with two values.
 
 Fill out the following fields and click **Create**:
 
@@ -105,13 +116,17 @@ Fill out the following fields and click **Create**:
 - **Purpose** - Identifies the intended use of the camera
 - Select **+ Add Value**
 - **Value** - Facial Recognition
+- Select **+ Add Value**
+- **Value** - Face Registration
 
 .. figure:: images/5.png
 
 Creating a Project
 ++++++++++++++++++
 
-<In Xi IoT, projects are used for...>
+In Xi IoT, Projects are used to segment resources such as applications and edges so that only assigned users can view and modify them.
+This allows different departments or teams to utilize shared data sources, edges, or cloud resources without interfering with each other.
+As part of this lab, you’ll create a new Project to deploy your sample Data Pipelines and Applications.
 
 From the **Xi IoT** management portal, select :fa:`bars` **> Projects > + Create**.
 
@@ -126,9 +141,12 @@ FIll out the following fields and click **Next**:
 
 Click **+ Add Edges** and select your Edge.
 
-<Cloud Profiles are...> This can be left blank.
+Xi IoT has the ability to natively output Data Pipelines from the edge to several public cloud services such as AWS S3, or GCP Cloud Datastore. For this lab, Cloud Profile Selection can be left blank because no cloud resources will be used.
 
-<Container Registry Selection is...> This can be left blank.
+Xi IoT can also natively run Applications (Docker containers) at the edge using Kubernetes formated yaml as the only required input.
+Each yaml definition refers to a container image stored in a public or private registry.
+Private registries can be accessed by creating a Xi IoT Container Registry Profile to store required access information.
+Because this lab utilizes containers hosted in a public registry, Container Registry Selection can be left blank.
 
 .. figure:: images/7.png
 
@@ -137,11 +155,14 @@ Click **Create**.
 Staging Source Data
 +++++++++++++++++++
 
-The lab depends on the availability of of a video stream from which to identify faces. Xi IoT supports direct ingest of RTSP and GigE Vision video streaming protocols (as well as `MQTT <http://mqtt.org/>`_ messaging protocol commonly used by IoT sensor devices).
+The lab depends on the availability of of a video stream from which to identify faces.
+Xi IoT supports direct ingest of RTSP and GigE Vision video streaming protocols (as well as `MQTT <http://mqtt.org/>`_ messaging protocol commonly used by IoT sensor devices).
 
-Outside of a lab environment, these video streams would likely run external to the Edge device. However, for the purposes of the lab, we can leverage Xi IoT's **Application** construct to deploy a pre-configured `RTSP video stream <https://hub.docker.com/r/xiiot/facefeed-rtsp-sample>`_ running directly on your Edge VM.
+Outside of a lab environment, these video streams would likely originate on a camera or network video recorder external to the Edge device.
+However, for the purposes of the lab, we can leverage Xi IoT's **Application** construct to deploy a pre-configured containerized application hosting an `RTSP video stream <https://hub.docker.com/r/xiiot/facefeed-rtsp-sample>`_ running directly on your Edge VM.
 
-<What are Xi IoT applications? Where do they live?...>
+As mentioned above, Xi IoT Applications are simply Docker containers that can be deployed to the edge using Kubernetes formated yaml as the only required input.
+This is considered Containers-as-a-Service (CaaS) functionality and is sold as a specific Xi IoT service SKU.
 
 Deploying RTSP Sample Feed Application
 ......................................
@@ -161,11 +182,11 @@ Click **Choose File** and select ``xi-iot-master\projects\facefeed\applications\
 
 .. figure:: images/14.png
 
-Note the environmental variables and values defined in the YAML file, namely **RTSP_USERNAME** and **RTSP_PASSWORD**.
+Note the environment variables and values defined in the YAML file, namely **RTSP_USERNAME** and **RTSP_PASSWORD**.
 
 Click **Create**.
 
-Click **facefeed-rtsp-sample** to see Summary of the application performance, alerts, deployments, etc. Edge Deployments should list "1 of 1 Running" on your Edge device once the application has successfully launched.
+Click **facefeed-rtsp-sample** to see a Summary of the application performance, alerts, deployments, etc. Edge Deployments should list "1 of 1 Running" on your Edge device once the application has successfully launched.
 
 .. figure:: images/15.png
 
@@ -210,7 +231,7 @@ Click :fa:`check` to add the data extraction field.
 
 Click **Next**.
 
-Finally you will assign the category attributes which will be used to identify the sample feed as the data source for the facial recognition engine you will build in later exercises.
+Finally you will assign the category attributes which will be used to identify the sample feed as the data source for the facial recognition Data Pipeline you will build in later exercises.
 
 From the **Attribute** drop down menu, select **Camera Type : Facial Recognition**.
 
@@ -221,15 +242,15 @@ Click **Add**.
 Deploying Functions
 +++++++++++++++++++
 
-<Xi IoT Functions are...>
+Xi IoT Functions allow developers to directly build and execute business logic to correlate, filter, or transform data in standard languages such as Python or Go without the burden of maintaining underlying operating systems or runtimes.
 
-The Facefeed application utilizes five Functions within two Data Pipelines to transform the incoming data (video feed)and draw inference (Face IDs) to identify faces. For convenience, these pre-made functions are available on GitHub:
+The Facefeed application utilizes five Functions within two Data Pipelines to transform the incoming data (RTSP video stream)and draw inference (Face IDs) to identify faces. For convenience, these pre-made functions are available on GitHub:
 
-- **aggregatefeed.py** - <brief explanation of what these do>
-- **face_register.py** -
-- **facematch.py** -
-- **facerecognition.py** -
-- **raw_to_jpeg.py** -
+- **aggregatefeed.py** - maintains a buffer of known and unknown faces for output
+- **face_register.py** - combines UI data inputs for storage in the database
+- **facematch.py** - matches inference results to database of registered faces
+- **facerecognition.py** - uses a tensorflow machine learning model to draw inference
+- **raw_to_jpeg.py** - converts the raw binary stream into a readable format
 
 Open https://github.com/nutanix/xi-iot in a new browser tab and click **Clone or download > Download ZIP**.
 
@@ -247,7 +268,8 @@ Fill out the following fields to create the first function:
 
 .. figure:: images/8.png
 
-<Xi Edge OS supports the following languages and runtimes... is there a reference link for this? What's the advantage of supporting multiple languages/environments?>
+Xi IoT Functions may be written in well known software languages most commonly used for edge computing and machine learning. These currently include Python, Go, and Node.js.
+This allows developers to re-use existing code, or quickly write new logic utilizing standard libraries, and without the burden of learning a new platform or language.
 
 Click **Next**.
 
@@ -271,7 +293,7 @@ Data Pipelines in Xi IoT allow you to transform data by injecting your own code.
 Data Pipeline 1 - faceregister
 ..............................
 
-<This Data Pipeline...>
+This Data Pipeline will source the frames from a local webcam or uploaded image (using a containerized UI application you’ll deploy), apply a TensorFlow machine learning model to detect faces, calculate a unique Face ID, and persist the data  in the local Elasticsearch instance running on your edge.
 
 From the **Xi IoT** management portal, select :fa:`bars` **> Projects > Facefeed > Apps & Data > Data Pipelines > + Create Data Pipeline**.
 
@@ -301,7 +323,8 @@ Click **Create**.
 Data Pipeline 2 - facerecognitionlivefeed
 ..............................
 
-This Data Pipeline will source the frames from a local webcam or uploaded image (using a containerized UI application you’ll deploy), apply a TensorFlow machine learning model to detect faces, calculate a unique Face ID, and persist the data in the local Elasticsearch instance running on your edge.
+This Data Pipeline will source from the RTSP sample feed you configured as a Data Source, apply a TensorFlow Machine Learning model to detect faces, calculate Face IDs, and search your Elasticsearch instance to find a match.
+The containerized UI application you’ll deploy will show the known vs unknown faces based on inference results.
 
 Click **+ Create** to define your next Data Pipeline.
 
@@ -333,16 +356,35 @@ Fill out the following fields to build the pipeline:
 
 Click **Create**.
 
-<More info on alternate endpoint types and destinations,. what's the cloud tie in? alternate use cases or scenarios?>
+At this point, your Data Sources, Functions, and Data Pipelines are all configured and automatically deployed by Xi IoT onto your edge based on your earlier Edge assignment within the Facefeed Project.
 
-<What is happening at this point? The data pipelines are immediately active, but the facial recognition pipeline does not have registered faces for which to search...>
+In this lab you’re outputting Data Pipeline results to an Elasticsearch instance hosted on your edge, but Xi IoT has native capability to output in many ways.
+From the Destination dropdown you’ll notice the ability to output to your edge, or to a cloud.
+
+Here’s a breakdown of options and typical use cases:
+
+- Edge
+    - Kafka - real-time streaming between edge local applications
+    - Elasticsearch - search and analytics database (NoSQL) for temporary data sharing between edge local applications
+    - MQTT - real-time streaming devices (actuators or other edge devices)
+    - Realtime Data Stream - real-time streaming between Xi IoT Data Pipelines
+- Cloud
+    - AWS
+        - Kinesis - real-time streaming for large volumes of data
+        - SQS - sending messages via web service applications
+        - S3 - simple file storage
+    - GCP
+        - PubSub - real-time streaming
+        - Cloud Datastore - simple file storage
+
 
 Deploying Facefeed
 ++++++++++++++++++
 
 So far you have deployed a data source, functions for processing that data, and pipelines to tie the functions together and direct output back to our Edge VM. The final step is to deploy the Facefeed application.
 
-Like the sample RTSP stream, Facefeed is a containerized application described by a YAML file provided in the Git repository. It provides the GUI used to upload images to be analyzed by the **faceregister** pipeline, as well as a log of all recognized and unrecognized faces output by the **facerecognitionlivefeed** pipeline.
+Like the sample RTSP stream, Facefeed is a containerized application described by a YAML file provided in the Git repository.
+It provides the GUI used to upload images to be analyzed by the **faceregister** pipeline, as well as a log of all recognized and unrecognized faces outputted by the **facerecognitionlivefeed** pipeline.
 
 From the **Xi IoT** management portal, select :fa:`bars` **> Projects > Facefeed > Apps & Data > Applications > + Create**.
 
@@ -390,20 +432,36 @@ Once the desired faces have been registered, click **Go to application >** to ac
 
 Return to the **Dashboard** for the summary view of both projects and infrastructure.
 
-Congratulations! You've successfully deployed a facial recognition application to your edge from Xi IoT. This base application could be modified for use in retail, banking, municipalities and more. Xi IoT would then make it simple to manage the deployment and monitoring of both the edge appliances as well as the applications and data residing on them.
+Congratulations! You've successfully deployed a facial recognition application to your edge from Xi IoT.
+This base application could be modified for use in retail, banking, municipalities and more. Xi IoT would then make it simple to manage the deployment and monitoring of both the edge servers as well as the applications and data residing on them.
 
-<Can we name some other app ideas that would be use cases for Xi IoT?>
+This lab is but one edge application example. Xi IoT has already been deployed by customers to:
+
+- Identify objects on a manufacturing assembly line and control a robot to remove unsanctioned ones automatically.
+- Collect multiple parameters from various sensors on a manufacturing assembly line, correlate them, and send aggregated data to the cloud.
+- Implement ‘Amazon Go’ for cafeterias. Ingesting camera data at the edge for real-time checkout processing and supply-chain updates.
+
 
 Takeaways
 +++++++++
 
 What are the key things you should know about **Nutanix Xi IoT**?
 
-- Stuff
+- A single platform that can run AI-based apps, containers, and functions as a service.
 
-- Goes
+- Easy to deploy containerized applications at scale with a SaaS control plane.
 
-- Here
+- Reduced time to setup and configure edge intelligence (i.e. kubernetes and analytics platform).
+
+- Operate edge locations offline with limited internet connectivity.
+
+- Can choose cloud connectivity without heavy lifting via learning APIs.
+
+- Supports serverless and development languages like Python, Node.js and Go and integrates into existing CI/CD pipelines.
+
+- Developer APIs and pluggable architecture enables bring your own framework and functions for simplified integrations without having to rewrite your code.
+
+- Additional information and content is available on the `Xi IoT page in Seismic <https://nutanix.seismic.com/X5/doccenter.aspx#/doccenter/3d301e27-091a-48d7-8289-723f1c5da5da/doc/%252Fddfc05babc-f097-4734-9e68-e955f90ce169%252Flf7de8bc77-7e57-49a7-b654-02b5156d81cf//?mode=view>`_ .
 
 Getting Connected
 +++++++++++++++++
@@ -413,23 +471,17 @@ Have a question about **Nutanix Xi IoT**? Please reach out to the resources belo
 +---------------------------------------------------------------------------------+
 |  Xi IoT Product Contacts                                                        |
 +================================+================================================+
-|  Slack Channel                 |                                                |
+|  Slack Channel                 |  #xi_iot_news & #xi_iot_support                |
 +--------------------------------+------------------------------------------------+
-|  Product Manager               |                                                |
+|  Product Manager               |  Amit Jain, amit.jain@nutanix.com              |
 +--------------------------------+------------------------------------------------+
-|  Product Marketing Manager     |                                                |
+|  Product Marketing Manager     |  Rohit Goyal, rohit.goyal@nutanix.com          |
 +--------------------------------+------------------------------------------------+
-|  Technical Marketing Engineer  |                                                |
+|  Solutions Architect           |  Andy Daniel, andy.daniel@nutanix.com          |
 +--------------------------------+------------------------------------------------+
-|  Solutions Architect           |  Brennan Conley, brennan.conley@nutanix.com    |
+|  Founders Team Manager         |  Jason Langone, jason@nutanix.com              |
 +--------------------------------+------------------------------------------------+
-|  Founders Team Manager         |  Diane Genova, diane.genova@nutanix.com        |
+|  Founders Team                 |  Phil Ditzel, philip.ditzel@nutanix.com        |
 +--------------------------------+------------------------------------------------+
-|  Founders Team                 |  Archish Dalal, archish.dalal@nutanix.com      |
-+--------------------------------+------------------------------------------------+
-|  Founders Team                 |  Norbert Thier, norbert.thier@nutanix.com      |
-+--------------------------------+------------------------------------------------+
-|  SME                           |                                                |
-+--------------------------------+------------------------------------------------+
-|  SME                           |                                                |
+|  Strategic Business            |  Tom Queen, thomas.queen@nutanix.com           |
 +--------------------------------+------------------------------------------------+
