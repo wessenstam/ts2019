@@ -9,6 +9,27 @@ Overview
 
 **Estimated time to complete: 60 MINUTES**
 
+Prism Pro is a product designed to make our customer IT operations smarter and automated.
+Today, there is no solution that is specifically designed for IT operations for the data center built around HCI.
+The infrastructure in this type of data center is dynamic, scalable, and highly performed.
+The traditional performance monitoring and IT OPS tools are built for the static infrastructure.
+When the IT admins use the traditional tool to manage HCI environment, they are overwhelmed by the complexity and noisy signal the tool brings.
+This decreases the productivity of the operations and reduces the ROI from adopting the HCI.
+
+Prism Pro takes a unique approach that maximizes the operation efficiency of a HCI based data center.
+First, Prism Pro uses purpose-built machine learning (X-FIT) to extract the insights from the mass amount of operations data the HCI produces.
+The first three use cases Prism Pro shipped are capacity forecast and planning, VM right sizing, and anomaly detection.
+These use cases help our customer detect problems and waste with actionable signal.
+Second, Prism Pro delivers an automation mechanism (X-Play) that enables customers to automate their operations tasks confidently to respond the signal X-FIT detects.
+
+X-Play is designed to address the number 1 pain point when customers deal with automation, the fear of amplified impact because of complexity of the automation.
+Not like the solution, such as Calm,  for the application lifecycle automation, X-Play’s goal is to automate the tasks that admins face daily.
+To eliminate the fear and give the control back to the admin, X-Play takes the codeless approach which has been proven in the companies such as IFTTT and Zapier that it is easy to adopt and extremely versatile.
+
+There is no other tools in the market taking this approach and has the power to combine the intelligence and codeless automation.
+The power of X-FIT and X-Play allows the customer to truly leverage the machine data the HCI infrastructure produces and operate it efficiently, confidently, and intelligently.
+
+
 Lab Setup
 +++++++++
 
@@ -18,6 +39,23 @@ If you have not deployed this yet, please do the lab below before continuing.
 
 :ref:`linux_tools_vm`
 
+You will also need to use the **Chrome** browser for this lab.
+
+For this lab You will also need to make a change in **Developer Tools**.
+
+In **Chrome > View > Developer > Developer Tools**.
+
+.. figure:: images/xplay_42.png
+
+Next Click on **Application**, and expand **Local Storage** under **Storage** on the right pane.
+
+Add the following:
+
+- **nutanix_ui_release**  - 5.11
+
+.. figure:: images/xplay_43.png
+
+Close **Developer Tools**.
 
 Automatically Add Memory to a VM When A Constraint is Detected
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
