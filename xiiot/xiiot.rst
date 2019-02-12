@@ -477,8 +477,6 @@ Have a question about **Nutanix Xi IoT**? Please reach out to the resources belo
 +--------------------------------+------------------------------------------------+
 |  Product Marketing Manager     |  Rohit Goyal, rohit.goyal@nutanix.com          |
 +--------------------------------+------------------------------------------------+
-|  Technical Marketing Engineer  |                                                |
-+--------------------------------+------------------------------------------------+
 |  Solutions Architect           |  Andy Daniel, andy.daniel@nutanix.com          |
 +--------------------------------+------------------------------------------------+
 |  Founders Team Manager         |  Jason Langone, jason@nutanix.com              |
