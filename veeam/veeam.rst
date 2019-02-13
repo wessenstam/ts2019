@@ -340,8 +340,6 @@ Click **Finish** and monitor the restore operation until successfully completed.
 
 .. figure:: images/21.png
 
-<The restore was crazy fast at 25 seconds, did it come from the backup repository or is it actually using local snapshots for the most recent restore points? An explanation of what's going on behind the scenes here would be helpful.>
-
 .. note::
 
   If the most recent restore point is selected, the restore operation will complete very rapidly. Veeam will retain the most recent, rolling snapshot of each VM and can restore directly from the local snapshot rather than the backup target storage.
@@ -391,7 +389,7 @@ Navigate to and select a file you wish to extract. Clicking **Copy To** will all
 
 Close the **Backup Browser** to unmount the backup.
 
-The **Backup Browser** can also be used in conjunction with the **Veeam Explorer** applications to perform application aware restores for Microsoft Active Directory, Exchange, SharePoint, SQL Server, and Oracle workloads. <Is this supported with AHV? I didn't see anything from a policy perspective about performing VSS snapshots, so I'm not sure how it could be supported.>
+The **Backup Browser** can also be used in conjunction with the **Veeam Explorer** applications to perform application aware restores for Microsoft Active Directory, Exchange, SharePoint, SQL Server, and Oracle workloads.
 
 -------------------------------------------------------------------------
 
@@ -399,7 +397,7 @@ Optionally, if you have access to an AWS or Azure account, Veeam can be leverage
 
 .. figure:: images/27.png
 
-This feature can address a number of use cases, including <???>
+This feature can address a number of use cases including DR and and cloud migration.
 
 .. figure:: images/29.png
 
