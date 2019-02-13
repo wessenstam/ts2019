@@ -164,8 +164,6 @@ Go back to the container you created above and edit it to add another 10 GiB to 
 Redundancy Factor (RF)
 .................
 
-We have discussed how Nutanix clusters handle data: reads, writes, CVM auto-pathing, data locality, intelligent tiering, and seamless VM migrations. While leveraging these features and capabilities, Nutanix clusters continuously monitor and handle data placement in order to optimize performance and allow clusters to maintain high availability during software upgrades and failures.
-
 You can locate the redundancy level of containers and the cluster within Prism.
 
 .. figure:: images/storage_config_03.png
