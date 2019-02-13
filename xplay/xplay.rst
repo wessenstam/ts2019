@@ -9,21 +9,21 @@ Overview
 
 **Estimated time to complete: 60 MINUTES**
 
-Prism Pro is a product designed to make our customer IT operations smarter and automated.
-Today, there is no solution that is specifically designed for IT operations for the data center built around HCI.
-The infrastructure in this type of data center is dynamic, scalable, and highly performed.
-The traditional performance monitoring and IT OPS tools are built for the static infrastructure.
-When the IT admins use the traditional tool to manage HCI environment, they are overwhelmed by the complexity and noisy signal the tool brings.
+Prism Pro is a product designed to make our customer IT operations smarter and automated through machine intelligence and automation.
+Today, there is no IT operations management (ITOM) solution that is specifically designed for the data center built around HCI.
+The modern data center is dynamic, scalable, and highly performed
+The traditional ITOM, performance monitoring, and IT OPS tools are built for the static infrastructure.
+When being used in the modern data center, these tools overwhelm IT admins with complexity and noisy signals.
 This decreases the productivity of the operations and reduces the ROI from adopting the HCI.
 
 Prism Pro takes a unique approach that maximizes the operation efficiency of a HCI based data center.
 First, Prism Pro uses purpose-built machine learning (X-FIT) to extract the insights from the mass amount of operations data the HCI produces.
-The first three use cases Prism Pro shipped are capacity forecast and planning, VM right sizing, and anomaly detection.
+Using X-FIT, Prism Pro shipped its first three use cases capacity forecast and planning, VM right sizing, and anomaly detection.
 These use cases help our customer detect problems and waste with actionable signal.
 Second, Prism Pro delivers an automation mechanism (X-Play) that enables customers to automate their operations tasks confidently to respond the signal X-FIT detects.
 
 X-Play is designed to address the number 1 pain point when customers deal with automation, the fear of amplified impact because of complexity of the automation.
-Not like the solution, such as Calm,  for the application lifecycle automation, X-Play’s goal is to automate the tasks that admins face daily.
+Not like other solutions, such as Calm, for the application lifecycle automation, X-Play’s goal is to automate the tasks that admins face daily.
 To eliminate the fear and give the control back to the admin, X-Play takes the codeless approach which has been proven in the companies such as IFTTT and Zapier that it is easy to adopt and extremely versatile.
 
 There is no other tools in the market taking this approach and has the power to combine the intelligence and codeless automation.
