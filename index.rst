@@ -6,9 +6,8 @@
   :name: _req_labs
   :hidden:
 
-  flow/flow
   era/era
-
+  flow/flow
 
 .. toctree::
   :maxdepth: 2
@@ -16,16 +15,17 @@
   :name: _introductory_labs
   :hidden:
 
-  nutanix101/nutanix101
-  karbon/karbon
   buckets/buckets
-  xplay/xplay
-  dr_runbooks/dr_runbooks
   calm_linux/calm_linux
-  files/files
-  xtract_aws/xtract_aws
+  dr_runbooks/dr_runbooks
   epoch/epoch
+  files/files
+  frame/frame
+  karbon/karbon
   xiiot/xiiot
+  xplay/xplay
+  xtract_aws/xtract_aws
+  nutanix101/nutanix101
 
 .. toctree::
   :maxdepth: 2
@@ -33,11 +33,11 @@
   :name: _advanced_labs
   :hidden:
 
+  apis/apis
   calm_day2/calm_day2
   calm_escript/calm_escript
   calm_win/calm_win
   cloud_native_lab/cloud_native_lab
-  apis/apis
 
 .. toctree::
   :maxdepth: 2
@@ -45,9 +45,9 @@
   :name: _sponsor_labs
   :hidden:
 
-  veeam/veeam
   hycu/hycu
   peer/peer
+  veeam/veeam
 
 .. toctree::
   :maxdepth: 2
