@@ -463,11 +463,11 @@ Takeaways
 
 What are the key things you should know about **Nutanix Calm**?
 
-- Stuff
+- Since 2008, Microsoft has focused on making every GUI task available through powershell, meaning anything you do can be automated.
 
-- Goes
+- Calm can call into existing tools, such as SCCM or a Citrix DDC, and use the configuration and tools stored there
 
-- Here
+- Calm abstracts the application from the infrastructure, allowing these configurations to be automatically used in places that would be difficult before.  For an example of this, see youtube for an example of vRA configuring AHV VMs though Calm integration.
 
 - Integration with other apps - leveraging Era, eScript, and an existing VM service
 
