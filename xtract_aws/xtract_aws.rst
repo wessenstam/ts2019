@@ -6,23 +6,19 @@ Xtract: AWS
 
 *The estimated time to complete this lab is 60 minutes.*
 
-.. raw:: html
-
-  <iframe src="https://drive.google.com/file/d/1sU4_1GPVTNGJwNDoy0kB04r-vz4-9Thq/preview" width="720" height="480" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
 Overview
 ++++++++
 
-Xtract is... <?>
+As customers adopt Nutanix AHV, they require a means of moving existing workloads on other platforms to Nutanix. While third-party tools capable of migrating workloads to AHV exist, they carry additional cost and complexity. Nutanix Xtract offers customers the same Prism-like simplicity they’ve come to expect from Nutanix, making adoption of Enterprise Cloud a breeze - all with no additional cost.
 
 **In this lab you will deploy and configure Nutanix Xtract and use it to migrate an AWS VM instance from the cloud to your Nutanix AHV cluster.**
 
-.. warning::
+.. note::
 
   This lab does require you to sign up for your own AWS Free Tier account. While there should be no charges incurred for the EC2 instances provisioned as part of the lab, signing up for an account does require you to provide a credit card and phone number for verification.
 
-AWS Environment Setup
-+++++++++++++++++++++
+Staging the AWS Environment
++++++++++++++++++++++++++++
 
 In order to make the lab a self-contained experience that you can take forward with you in the field and easily repeat for future demos, events, etc., you will need to provide your own AWS account details.
 
@@ -34,7 +30,7 @@ Follow the prompts to create a **Personal** account with a **Basic** (Free) supp
 
 .. figure:: images/1.png
 
-.. warning::
+.. note::
 
   This lab does require you to sign up for your own AWS Free Tier account. While there should be no charges incurred for the EC2 instances provisioned as part of the lab, signing up for an account does require you to provide a credit card and phone number for verification.
 
@@ -54,7 +50,7 @@ The first step is to choose the desired **Amazon Machine Image (AMI)**. `AMIs <h
 
   Xtract does **not** currently support AMIs with `product codes <https://docs.aws.amazon.com/marketplace/latest/userguide/ami-products.html>`_, such as Paid AMIs or AMIs found in the AWS Marketplace.
 
-Under **Quick Start**, search for the **"Free tier eligibile" Ubuntu Server 18.04 LTS (HVM) 64-bit x86** AMI and click the **Select** button.
+Under **Quick Start**, search for the **"Free tier eligible" Ubuntu Server 18.04 LTS (HVM) 64-bit x86** AMI and click the **Select** button.
 
 .. figure:: images/3.png
 
@@ -67,7 +63,7 @@ Under **Quick Start**, search for the **"Free tier eligibile" Ubuntu Server 18.0
   - CentOS 7.3 to 7.5
   - Ubuntu 14.04, 16.04, and 18.04
 
-  For future demonstrations if you wish to migrate a Windows Server image instead of a Linux image, be aware of the following:
+  For future tests/demonstrations, if you wish to migrate a Windows Server image instead of a Linux image, be aware of the following:
 
   - Select an appropriate instance type. Running Windows Server 2012 R2+ requires more resources than a t2.micro can offer.
   - WinRM must be enabled on the source VM as PowerShell Remoting is used for remote installation of the Nutanix Guest Tools on the source VM. Instructions for enabling WinRM on can be found in the Xtract User Guide `here <https://portal.nutanix.com/#/page/docs/details?targetId=Xtract-for-VMs-v20:v20-xtract-enable-winrm-t.html#ntask_mj1_xxw_cgb>`_.
@@ -308,7 +304,7 @@ Refresh your **EC2 Dashboard** and note that **NTNX-XTRACTLITE-INSTANCE** has be
 
 Once **Xtract Lite** is ready, you will be able to proceed with providing credentials for the source VMs.
 
-By default, **automatic** VM Preparation is selected. VM Preparation... <what does it do?>
+By default, **automatic** VM Preparation is selected. VM Preparation... <...what does it do?>
 
 Under **Linux VMs**, specify **ubuntu** as the **User Name** for the Ubuntu AMI.
 
@@ -348,7 +344,7 @@ Under **Migration Plans**, click **In Progress** to view to status of your migra
 
 .. figure:: images/18.png
 
-<Need background on what is happening in the background, initial VM snapshot, continuing to copy small chunks of data>.
+<...Need background on what is happening in the background, initial VM snapshot, continuing to copy small chunks of data>.
 
 The initial **Seeding Data** process will take ~15-30 minutes to complete for the VM in this exercise. Time to seed in other environments will be dependent on the amount of source data and bandwidth.
 
@@ -409,11 +405,11 @@ Takeaways
 
 What are the key things you should know about **Nutanix Xtract**?
 
-- Stuff
+- Xtract is licensed at no cost for any Nutanix customer.
 
-- Goes
+- Xtract for VMs simplifies bulk migration of existing VMs on AWS or ESXi to Nutanix, eliminating the friction associated with onboarding new IT infrastructure.
 
-- Here
+- Xtract features the ability to migrate all AHV certified OSes, scheduling data-seeding and migrations, multi-cluster migration management, and grouping/sorting VMs.
 
 Getting Connected
 +++++++++++++++++
@@ -427,11 +423,7 @@ Have a question about **Nutanix Xtract**? Please reach out to the resources belo
 +--------------------------------+------------------------------------------------+
 |  Product Manager               |  Jeremy Launier, jeremy.launier@nutanix.com    |
 +--------------------------------+------------------------------------------------+
-|  Product Marketing Manager     |                                                |
+|  Technical Marketing Engineer  |  GV Govindasamy, gv@nutanix.com                |
 +--------------------------------+------------------------------------------------+
-|  Technical Marketing Engineer  |                                                |
-+--------------------------------+------------------------------------------------+
-|  SME                           |                                                |
-+--------------------------------+------------------------------------------------+
-|  SME                           |                                                |
-+--------------------------------+------------------------------------------------+
+
+<... Any other relevant contacts an SE would care about for Xtract?>
