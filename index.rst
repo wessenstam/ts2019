@@ -15,17 +15,18 @@
   :name: _introductory_labs
   :hidden:
 
+  nutanix101/nutanix101
   buckets/buckets
   calm_linux/calm_linux
   dr_runbooks/dr_runbooks
-  epoch/epoch
   files/files
-  frame/frame
   karbon/karbon
-  xiiot/xiiot
   xplay/xplay
   xtract_aws/xtract_aws
-  nutanix101/nutanix101
+  epoch/epoch
+  frame/frame
+  xiiot/xiiot
+
 
 .. toctree::
   :maxdepth: 2
