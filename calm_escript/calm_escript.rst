@@ -316,6 +316,10 @@ Takeaways
 
 What are the key things you should know about **Nutanix Calm**?
 
+- The task library allows commonly used operations to be written once and reused over and over again.  As time goes on more objects will be integrated into the task library, from Nutanix-provided common tasks to entire service objects
+
+- Calm 2.7 introduced the HTTP task, allowing the most common use of Escript to be more easily implemented (sending API calls)
+
 - In addition to being able to use Bash and Powershell scripts, Nutanix Calm can use EScript, which is a sandboxed Python interpreter, to provide application lifecycle management.
 
 - EScript tasks are run directly within the Calm engine, rather than being executed on the remote machine.

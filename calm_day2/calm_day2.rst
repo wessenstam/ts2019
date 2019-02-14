@@ -320,6 +320,12 @@ Takeaways
 
 What are the key things you should know about **Nutanix Calm**?
 
+- Calm is not just for provisioning, rather any repetitive task can be automated.  Even saving 10 minutes a day adds up to a week of saved time over the year.
+
+- Expertise and skills can be shared between teams quickly by integrating that knowledge into a blueprint.  Security teams can ensure patches and rules are applied, application teams can see what's changed, developers can automatically have builds deployed.
+
+- Calm can be integrated with external tools to improve the experience - see the Jenkins integration video on youtube for an example of code going automatically from 'git commit' to running on Calm-provided infrastructure.
+
 - Not only can Calm orchestrate complex application deployments, it can manage applications throughout their entire lifecycle, by modeling complex Day 2 operations.
 
 - Whether it's a built in task, like scaling, or a custom task, like upgrades, Calm can be directed to perform the operations in specific order, or if order doesn't matter, perform them in parallel to save on time.

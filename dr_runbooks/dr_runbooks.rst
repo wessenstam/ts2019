@@ -343,9 +343,9 @@ What are the key things you should know about **Nutanix Leap DR Runbooks**?
 
 - The last octet of IP address can be kept the same in a new subnet in case DNS doesn't work.
 
-- Tech Note - https://portal.nutanix.com/#/page/solutions/details?targetId=TN-2027_Data_Protection_and_Disaster_Recovery:TN-2027_Data_Protection_and_Disaster_Recovery
+- `Tech Note 2027 <https://portal.nutanix.com/#/page/solutions/details?targetId=TN-2027_Data_Protection_and_Disaster_Recovery:TN-2027_Data_Protection_and_Disaster_Recovery>`_
 
-- Best Practice Guide - https://portal.nutanix.com/#/page/solutions/details?targetId=BP-2005_Data_Protection:BP-2005_Data_Protection - best practice
+- `Best Practice Guide <https://portal.nutanix.com/#/page/solutions/details?targetId=BP-2005_Data_Protection:BP-2005_Data_Protection - best practice>`_
 
 Getting Connected
 +++++++++++++++++
