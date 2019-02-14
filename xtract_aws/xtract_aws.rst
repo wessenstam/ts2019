@@ -304,7 +304,15 @@ Refresh your **EC2 Dashboard** and note that **NTNX-XTRACTLITE-INSTANCE** has be
 
 Once **Xtract Lite** is ready, you will be able to proceed with providing credentials for the source VMs.
 
-By default, **automatic** VM Preparation is selected. VM Preparation... <...what does it do?>
+By default, **automatic** VM Preparation is selected. VM Preparation refers to installing the **virtio** drivers within the source VM prior to migration beginning. The **virtio** drivers provide a high performance I/O interface for disk and network devices on KVM, and allow VMs that were originally deployed on an alternate hypervisor to boot on AHV.
+
+.. note::
+
+  While Xtract installs **virtio** drivers, it does **not** install the full Nutanix Guest Tools (NGT) package.
+
+.. note::
+
+  VMs can be manually prepared by an administrator if they wish to avoid providing Xtract with guest credentials to allow for automatic installation of **virtio** drivers.
 
 Under **Linux VMs**, specify **ubuntu** as the **User Name** for the Ubuntu AMI.
 
@@ -344,7 +352,7 @@ Under **Migration Plans**, click **In Progress** to view to status of your migra
 
 .. figure:: images/18.png
 
-<...Need background on what is happening in the background, initial VM snapshot, continuing to copy small chunks of data>.
+An initial VM will be taken of the VM, at which point data based on that snapshot is transferred from the source, through the Xtract VM, and to the target. As the VM can change (new data written, new applications installed, etc.) during data seeding, subsequent snapshots will be taken to continuously copy deltas to the target cluster.
 
 The initial **Seeding Data** process will take ~15-30 minutes to complete for the VM in this exercise. Time to seed in other environments will be dependent on the amount of source data and bandwidth.
 
@@ -425,5 +433,3 @@ Have a question about **Nutanix Xtract**? Please reach out to the resources belo
 +--------------------------------+------------------------------------------------+
 |  Technical Marketing Engineer  |  GV Govindasamy, gv@nutanix.com                |
 +--------------------------------+------------------------------------------------+
-
-<... Any other relevant contacts an SE would care about for Xtract?>
