@@ -397,7 +397,7 @@ Return to the *Initials*\ **-WinClient-0** console.
 
 Is the Task Manager application accessible? Why not?
 
-Using these simple policies it is possible to... <?>
+Using these simple policies it is possible to block traffic between groups of VMs such as production and development, to isolate a lab system, or provide isolation for compliance.
 
 Deleting a Policy
 .................
@@ -443,7 +443,7 @@ In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > Policies > 
 
 Click **Update** to edit the Quarantine policy.
 
-To illustrate the capabilities of this special Flow policy, you will add your client VM as a "forensic tool." In other environments, VMs allowed inbound access to quarantined VMs could be used to host forensic tools such as... <?>
+To illustrate the capabilities of this special Flow policy, you will add your client VM as a "forensic tool". In production, VMs allowed inbound access to quarantined VMs could be used to run security and forensic suites such as Kali Linux or SANS SIFT.
 
 Under **Inbound**, click **+ Add Source**.
 
