@@ -24,11 +24,11 @@ In **Prism > File Server**, click **+ File Server** to open the **New File Serve
 
 .. figure:: images/1.png
 
-For the purpose of saving time, the Files 3.2.0 package has already been uploaded to your cluster. Files binaries can be downloaded directly through Prism or uploaded manually.
+For the purpose of saving time, the Files 3.2.0.1 package has already been uploaded to your cluster. Files binaries can be downloaded directly through Prism or uploaded manually.
 
 .. figure:: images/2.png
 
-Additionally, the cluster's **Data Services** IP Address has already been configured (*10.21.xxx.38*). In a Files cluster, storage is presented to the Files VMs as a Volume Group via iSCSI, hence the dependency on the Data Services IP.
+Additionally, the cluster's **Data Services** IP Address has already been configured (*10.XX.YY.38*). In a Files cluster, storage is presented to the Files VMs as a Volume Group via iSCSI, hence the dependency on the Data Services IP.
 
 .. note::
 
@@ -57,7 +57,13 @@ Fill out the following fields:
 
 Click **Next**.
 
-Select the **Secondary - Managed** VLAN for the Client Network. Each Files VM will consume a single IP on the client network.
+Select the **Secondary - Managed** VLAN for the **Client Network**. Each Files VM will consume a single IP on the client network.
+
+.. note::
+
+  In the HPOC environment it is critical to use the secondary VLAN for the client network if using separate client and storage networks.
+
+  It is typically desirable in production environments to deploy Files with dedicated virtual networks for client and storage traffic. When using two networks, Files will, by design, disallow client traffic the storage network, meaning VMs assigned to the primary network will be unable to access shares.
 
 .. note::
 
@@ -65,9 +71,9 @@ Select the **Secondary - Managed** VLAN for the Client Network. Each Files VM wi
 
   .. figure:: images/6.png
 
-Specify your cluster's **DC** VM IP as the **DNS Resolver IP** (e.g. 10.21.xxx.40).
+Specify your cluster's **DC** VM IP as the **DNS Resolver IP** (e.g. 10.XX.YY.40).
 
-.. warning::
+.. note::
 
   In order for the Files cluster to successfully find and join the **NTNXLAB.local** domain it is critical that the **DNS Resolver IP** is set to the **DC** VM IP **FOR YOUR CLUSTER**. By default, this field is set to the primary **Name Server** IP configured for the Nutanix cluster, **this value is incorrect and will not work.**
 
@@ -80,10 +86,6 @@ Select the **Primary - Managed** VLAN for the Storage Network. Each Files VM wil
 .. figure:: images/8.png
 
 Click **Next**.
-
-.. note::
-
-  It is typically desirable to deploy Files with dedicated networks for client and storage. By design, however, Files does not allow client connections from the storage network in this configuration.
 
 Fill out the following fields:
 
@@ -114,7 +116,7 @@ Monitor deployment progress in **Prism > Tasks**. Deployment should take approxi
 
   If you receive a warning regarding DNS record validation failure, this can be safely ignored. The shared cluster does not use the same DNS servers as your Files cluster, and as a result is unable to resolve the DNS entries created when deploying Files.
 
-Upon completion, return to **Prism > File Server** and select the *Initials*\ **Files** server and click **Protect**.
+Upon completion, return to **Prism > File Server** and select the *Initials*\ **-Files** server and click **Protect**.
 
 .. figure:: images/12.png
 
@@ -125,7 +127,7 @@ Observe the default Self Service Restore schedules, this feature controls the sn
 Using SMB Shares
 ++++++++++++++++
 
-In this exercise you will...
+In this exercise you will create and test a SMB share, used to support home directories, user profiles, and other unstructured file data such as departmental shares commonly accessed by Windows clients.
 
 Creating the Share
 ..................
@@ -229,7 +231,7 @@ Wit the Marketing share still selected, review the **Share Details**, **Usage** 
 Using NFS Exports
 +++++++++++++++++
 
-In this exercise you will...
+In this exercise you will create and test a NFSv4 export, used to support clustered applications, store application data such as logging, or storing other unstructured file data commonly accessed by Linux clients.
 
 Creating the Export
 ...................
@@ -339,7 +341,7 @@ Return to **Prism > File Server > Share > logs** to monitor performance and usag
 (Optional) Expanding a Files Cluster
 ++++++++++++++++++++++++++++++++++++
 
-Files offers the ability to scale up and scale out a deployment. Scaling up the CPU and memory of Files VMs allows an environment to support higher storage throughtput and number of concurrent sessions. <Anything we want to note on limitations for scaling up?>
+Files offers the ability to scale up and scale out a deployment. Scaling up the CPU and memory of Files VMs allows an environment to support higher storage throughtput and number of concurrent sessions. Currently, Files VMs can be scaled up to a maximum of 12 vCPU and 96GB of RAM each.
 
 The true power of Files scalability is the ability to simply add more Files VMs, scaling out much like the underlying Nutanix distributed storage fabric. An individual Files cluster can scale out up to the number of physical nodes in the Nutanix cluster, ensuring that no more than 1 Files VM runs on a single node during normal operation.
 
