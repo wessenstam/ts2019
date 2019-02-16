@@ -41,14 +41,9 @@ Buckets allows users to store petabytes of unstructured data on the Nutanix plat
 Lab Setup
 +++++++++
 
-This lab requires BOTH the Windows-ToolsVM and the Linux-ToolsVM.
+This lab requires applications provisioned as part of the :ref:`windows_tools_vm` **and** :ref:`linux_tools_vm`.
 
-If you have not yet deployed these VMs, see the steps linked below before proceeding with the lab.
-
-:ref:`windows_tools_vm`
-
-:ref:`linux_tools_vm`
-
+If you have not yet deployed **both** of these VMs, see the linked steps before proceeding with the lab.
 
 Getting Familiar with Object Storage
 ++++++++++++++++++++++++++++++++++++
@@ -230,7 +225,7 @@ User creation will be in the UI in Buckets GA. In the early access software, we 
 
 In this exercise you will create two users that will be used throughout the lab.
 
-Login to the *Initials*-**Linux-ToolsVM** via SSH using the following credentials:
+Login to the *Initials*\ **-Linux-ToolsVM** via SSH using the following credentials:
 
 - **Username** - root
 - **password** - nutanix/4u
@@ -271,7 +266,7 @@ You will also use the built-in Buckets Object Browser, which is an easy way to t
 Download the Sample Images
 ..........................
 
-Login to *Initials*-**Windows-ToolsVM** via RDP using the following credentials:
+Login to *Initials*\ **-Windows-ToolsVM** via RDP using the following credentials:
 
 - **Username** - NTNXLAB\\Administrator
 - **password** - nutanix/4u
@@ -363,7 +358,7 @@ Under the **S3** tab, select **Bucket Versioning** and then close the window. Th
 
 .. figure:: images/buckets_13.png
 
-Leave the Cyberduck connection open, and open Notepad in your Tools VM.
+Leave the Cyberduck connection open, and open Notepad in *Initials*\ **-Windows-ToolsVM**.
 
 Type “version 1.0” in Notepad, then save the file.
 
@@ -412,7 +407,7 @@ Grant Access to Another Bucket
 
 Access policy configuration will be in the UI in Buckets GA. In the early access software, we will use the following Linux command line ``mc`` tool to modify access to buckets.
 
-From the *initials*-**Linux-ToolsVM**, run the following command to authenticate **MC** and allow the tool to configure the Object Store instance:
+From the *Initials*\ **-Linux-ToolsVM**, run the following command to authenticate **MC** and allow the tool to configure the Object Store instance:
 
 .. code-block:: bash
 
@@ -600,7 +595,7 @@ Listing and Creating Buckets with Python
 
 In this exercise, you will modify a sample script to match your environment, which will list all the buckets available to that user. You will then modify the script to create a new bucket using the existing S3 connection.
 
-From the *initials*-**Linux-ToolsVM**, run ``vi list-buckets.py`` and paste in the script below. You will need to modify the **endpoint_ip**, **access_key_id**, and **secret_access_key** values before saving the script.
+From the *Initials*\ **-Linux-ToolsVM**, run ``vi list-buckets.py`` and paste in the script below. You will need to modify the **endpoint_ip**, **access_key_id**, and **secret_access_key** values before saving the script.
 
 .. note::
 
@@ -641,7 +636,7 @@ Using the previous script as a base, and the `Boto 3 documentation <https://boto
 Uploading Multiple Files to Buckets with Python
 ...............................................
 
-From the *initials*-**Linux-ToolsVM**, run the following to create 100 1KB files to be used as sample data for uploading:
+From the *Initials*\ **-Linux-ToolsVM**, run the following to create 100 1KB files to be used as sample data for uploading:
 
 .. code-block:: bash
 
