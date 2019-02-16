@@ -17,6 +17,8 @@ Traditionally, file storage has been yet another silo within IT, introducing unn
 
 **In this lab you will step through a Files deployment, manage SMB shares and NFS exports, scale out the environment, and explore upcoming Files features. The lab will provide key considerations around deployment, configuration, and use cases.**
 
+.. _deploying_files:
+
 Deploying Files
 +++++++++++++++
 

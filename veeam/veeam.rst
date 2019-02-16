@@ -79,7 +79,7 @@ Open **PowerShell** and execute the following command:
   # Initializes and formats the 250GB disk added to the VeeamServer VM
   Get-Disk | Where partitionstyle -eq 'raw' | Initialize-Disk -PartitionStyle MBR -PassThru | New-Partition -AssignDriveLetter -UseMaximumSize | Format-Volume -FileSystem NTFS -NewFileSystemLabel "Backups" -Confirm:$false
 
-Download the temporary :download:`Veeam license file<./veeam_availability_suite_nfr_6_6.lic>` to apply during installation.
+Download the temporary Veeam Availability Suite license file from http://10.42.8.50/veeam/ to apply during installation.
 
 Open the **Veeam Backup and Replication 9.5** Setup from the mounted .iso image. Click **Install**.
 
@@ -87,7 +87,7 @@ Open the **Veeam Backup and Replication 9.5** Setup from the mounted .iso image.
 
 Accept the license agreements and click **Next**.
 
-Click **Browse** and select the downloaded Veeam NFS license file. Click **Next > Next**.
+Click **Browse** and select the downloaded Veeam NFR license file. Click **Next > Next**.
 
 If prompted for missing pre-requisite components, click **Install**. After completion, click **Next**.
 
@@ -180,7 +180,7 @@ When prompted about the missing license, click **OK**.
 
   For personal lab or HPOC deployments, Veeam licenses can be requested by Nutanix employees and partners by contacting Ronn.Martin@veeam.com.
 
-To license the appliance, click :fa:`cog` **> Appliance Settings > Summary > License** and install `this temporary license <>`_.
+To license the appliance, click :fa:`cog` **> Appliance Settings > Summary > License** and install the temporary Veeam Nutanix NFS license from http://10.42.8.50/veeam/.
 
 .. figure:: images/6.png
 
