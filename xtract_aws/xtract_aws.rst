@@ -13,9 +13,9 @@ As customers adopt Nutanix AHV, they require a means of moving existing workload
 
 **In this lab you will deploy and configure Nutanix Xtract and use it to migrate an AWS VM instance from the cloud to your Nutanix AHV cluster.**
 
-.. note::
+.. raw:: html
 
-  This lab does require you to sign up for your own AWS Free Tier account. While there should be no charges incurred for the EC2 instances provisioned as part of the lab, signing up for an account does require you to provide a credit card and phone number for verification.
+  <strong><font color="red">This lab does require you to sign up for your own AWS Free Tier account. While there should be no charges incurred for the EC2 instances provisioned as part of the lab, signing up for an account does require you to provide a credit card and phone number for verification.</font></strong>
 
 Staging the AWS Environment
 +++++++++++++++++++++++++++
