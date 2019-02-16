@@ -68,8 +68,15 @@ Kubernetes aggressive, quarterly release cycle (where releases are deprecated by
 
 As previously stated, Nutanix Karbon provides a turn-key solution to address these critical Kubernetes challenges.
 
-Create a Karbon Kubernetes Cluster
-++++++++++++++++++++++++++++++++++
+Lab Setup
++++++++++
+
+This lab requires applications provisioned as part of the :ref:`windows_tools_vm`.
+
+If you have not yet deployed this VM, see the linked steps before proceeding with the lab.
+
+Creating a Karbon Cluster
++++++++++++++++++++++++++
 
 In this exercise you will create a production ready Kubernetes cluster with Nutanix Karbon.
 
@@ -210,13 +217,13 @@ Getting Started with Kubectl
 
 In this exercise you will use ``kubectl`` to perform basic operations against your newly provisioned Karbon cluster.
 
-Using your **Tools VM**, browse to **Prism Central** and open **Karbon**.
+From within your *Initials*\ **-Windows-ToolsVM** VM, browse to **Prism Central** and open **Karbon**.
 
 Select your **wordpress-**\ *Initials* cluster and click **Download kubeconfig**.
 
 .. figure:: images/12.png
 
-Using your **Tools VM**, open **PowerShell**.
+Open **PowerShell**.
 
 .. note::
 
@@ -251,7 +258,7 @@ Deploying an Application
 
 Now that you have successfully run commands against your Kubernetes cluster using ``kubectl``, you are now ready to deploy an application. In this exercise you will be deploying the popular open-source content management system used for websites and blogs, Wordpress.
 
-Using your **Tools VM**, open **PowerShell** and create a **wordpress** directory using the following command:
+Using *Initials*\ **-Windows-ToolsVM**, open **PowerShell** and create a **wordpress** directory using the following command:
 
 .. code-block:: PowerShell
 
@@ -264,7 +271,7 @@ Kubernetes depends on YAML files to provision applications and define dependenci
 
   To learn more about Kubernetes application deployment and YAML files, click `here <https://www.mirantis.com/blog/introduction-to-yaml-creating-a-kubernetes-deployment/>`_.
 
-Using your **Tools VM** browser, download the following YAML files for Wordpress and the MySQL deployment used by Wordpress:
+Using your *Initials*\ **-Windows-ToolsVM** web browser, download the following YAML files for Wordpress and the MySQL deployment used by Wordpress:
 
 - https://kubernetes.io/examples/application/wordpress/mysql-deployment.yaml
 - https://kubernetes.io/examples/application/wordpress/wordpress-deployment.yaml
@@ -280,7 +287,7 @@ Open the **wordpress-deployment.yaml** file with your preferred text editor.
 
 .. note::
 
-  **Sublime Text** has been pre-installed on the **Tools VM**.
+  **Sublime Text** has been pre-installed on *Initials*\ **-Windows-ToolsVM**.
 
 .. figure:: images/13.png
 

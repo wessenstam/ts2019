@@ -19,6 +19,13 @@ With One Click database provisioning and Copy Data Management (CDM) as its first
 
 **In this lab you will explore how Era can be used to standardize database deployment, allow for rapid cloning from a production database to a clone used for application development, updating that clone based on production data, and finally leveraging the REST API to understand how Era can integrate with a customer's existing automation tools.**
 
+Lab Setup
++++++++++
+
+This lab requires applications provisioned as part of the :ref:`windows_tools_vm`.
+
+If you have not yet deployed this VM, see the linked steps before proceeding with the lab.
+
 Deploying Era
 +++++++++++++
 
@@ -236,7 +243,7 @@ Note the IP Address of your **Database Server**.
 
 .. figure:: images/5b.png
 
-Using your **Tools VM**, open **pgAdmin**.
+Using *Initials*\ **-Windows-ToolsVM**, open **pgAdmin**.
 
 .. note::
 
@@ -382,11 +389,11 @@ Refreshing A Cloned Database
 
 The ability to easily refresh a cloned database using new data from the source database improves development, test, and other use cases by ensuring they have access to new and relevant data. In this section you will add a new table for storing data to your source database, and refresh the existing clone.
 
-Using your **Tools VM**, open **pgAdmin**.
+Using *Initials*\ **-Windows-ToolsVM**, open **pgAdmin**.
 
 Select your source database (**NOT** the cloned database), and from the menu bar click **Tools > Query Tool**.
 
-Start pgAdmin, select your source database instance, go to the Tools menu and select Query Tool
+Start pgAdmin, select your source database instance, go to the **Tools** menu and select **Query Tool**.
 
 .. figure:: images/25a.png
 
