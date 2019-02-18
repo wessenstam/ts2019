@@ -1,7 +1,7 @@
 .. _xtract_aws:
 
 -----------
-Xtract: AWS
+Move: AWS
 -----------
 
 *The estimated time to complete this lab is 60 minutes.*
@@ -9,9 +9,9 @@ Xtract: AWS
 Overview
 ++++++++
 
-As customers adopt Nutanix AHV, they require a means of moving existing workloads on other platforms to Nutanix. While third-party tools capable of migrating workloads to AHV exist, they carry additional cost and complexity. Nutanix Xtract offers customers the same Prism-like simplicity they’ve come to expect from Nutanix, making adoption of Enterprise Cloud a breeze - all with no additional cost.
+As customers adopt Nutanix AHV, they require a means of moving existing workloads on other platforms to Nutanix. While third-party tools capable of migrating workloads to AHV exist, they carry additional cost and complexity. Nutanix Move (previously Nutanix Xtract) offers customers the same Prism-like simplicity they’ve come to expect from Nutanix, making adoption of Enterprise Cloud a breeze - all with no additional cost.
 
-**In this lab you will deploy and configure Nutanix Xtract and use it to migrate an AWS VM instance from the cloud to your Nutanix AHV cluster.**
+**In this lab you will deploy and configure Nutanix Move and use it to migrate an AWS VM instance from the cloud to your Nutanix AHV cluster.**
 
 .. raw:: html
 
@@ -48,7 +48,7 @@ The first step is to choose the desired **Amazon Machine Image (AMI)**. `AMIs <h
 
 .. note::
 
-  Xtract does **not** currently support AMIs with `product codes <https://docs.aws.amazon.com/marketplace/latest/userguide/ami-products.html>`_, such as Paid AMIs or AMIs found in the AWS Marketplace.
+  Move does **not** currently support AMIs with `product codes <https://docs.aws.amazon.com/marketplace/latest/userguide/ami-products.html>`_, such as Paid AMIs or AMIs found in the AWS Marketplace.
 
 Under **Quick Start**, search for the **"Free tier eligible" Ubuntu Server 18.04 LTS (HVM) 64-bit x86** AMI and click the **Select** button.
 
@@ -56,7 +56,7 @@ Under **Quick Start**, search for the **"Free tier eligible" Ubuntu Server 18.04
 
 .. note::
 
-  Xtract has qualified support for the following 64-bit guest operating systems for migration from AWS:
+  Move has qualified support for the following 64-bit guest operating systems for migration from AWS:
 
   - Windows Server 2012 R2, 2016
   - RHEL 7.3 to 7.5
@@ -79,7 +79,7 @@ Under **Instance Details**, note that a default **Virtual Private Cloud (VPC)** 
 
 A `VPC <https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html>`_ is a virtual network dedicated to your AWS account that is logically isolated from other AWS virtual networks. Within a VPC you can define your own subnets and routing, as well as choose whether or not a subnet has `access to the internet <https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#d0e22943>`_.
 
-In order to migrate a VM from AWS using Xtract, the source VM must have a public IP configured.
+In order to migrate a VM from AWS using Move, the source VM must have a public IP configured.
 
 Click **Launch** to deploy the instance.
 
@@ -101,17 +101,17 @@ Under **Description > Root device type**, not the storage used is **Elastic Bloc
 
 .. note::
 
-  Xtract does **not** currently support EC2 `Instance Stores <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html>`_ (temporary block-level storage used for ephemeral caches, scratch data, etc.) or `EFS <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEFS.html>`_ (file server style storage mounted to an EC2 instance).
+  Move does **not** currently support EC2 `Instance Stores <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html>`_ (temporary block-level storage used for ephemeral caches, scratch data, etc.) or `EFS <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEFS.html>`_ (file server style storage mounted to an EC2 instance).
 
-The final step to prepare your source environment is to create credentials for Xtract to access the AWS environment. Similar to using keypairs for VM access, AWS **Identity and Access Management (IAM)** uses access ID/secret pairs to control user and/or programmatic access. `IAM <https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html>`_ is used to provide role based access to a shared AWS account, defining what services, actions, and resources an account can control.
+The final step to prepare your source environment is to create credentials for Move to access the AWS environment. Similar to using keypairs for VM access, AWS **Identity and Access Management (IAM)** uses access ID/secret pairs to control user and/or programmatic access. `IAM <https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html>`_ is used to provide role based access to a shared AWS account, defining what services, actions, and resources an account can control.
 
-To define the permissions required by Xtract, click the **Services** drop down menu in the top toolbar and search for **IAM**.
+To define the permissions required by Move, click the **Services** drop down menu in the top toolbar and search for **IAM**.
 
 Click **Users > Add user**.
 
 .. figure:: images/6.png
 
-Specify a **User name** (e.g. **Xtract**) and select **Programmatric access** as this will be used purely as a service account.
+Specify a **User name** (e.g. **Xtract**) and select **Programmatic access** as this will be used purely as a service account.
 
 Click **Next: Permissions**.
 
@@ -164,7 +164,7 @@ In the **Create policy** wizard, select the **JSON** tab and copy/paste the poli
 
 .. note::
 
-  The permissions above provide the bare minimum access required by Xtract to migrate the resources. In a product environment, the **Resource** node could be further constrained to only allow Xtract access to very specific EC2 resources.
+  The permissions above provide the bare minimum access required by Move to migrate the resources. In a product environment, the **Resource** node could be further constrained to only allow Move access to very specific EC2 resources.
 
   The permission requirements are documented in the Xtract User Guide `here <https://portal.nutanix.com/#/page/docs/details?targetId=Xtract-for-VMs-v20:v20-xtract-requirements-aws-r.html>`_.
 
@@ -182,14 +182,12 @@ Click **Close**.
 
 You have now completed staging the AWS source environment for your migration.
 
-Deploying Xtract
+Deploying Move
 ++++++++++++++++
 
-If you have already completed the :ref:`xtract_esxi` lab, skip to the `Configuring a Source Environment`_ section.
+Move is a .qcow2 virtual appliance, similar to other Nutanix tools. It is distributed as a .zip package and can be downloaded from the `Nutanix Support Portal <https://portal.nutanix.com/#/page/xtract>`_. The .zip package includes the .qcow2 disk image, as well as command line tools for Windows, macOS, and Linux that can be used to script the deployment and IP assignment of the Move VM.
 
-Xtract is a .qcow2 virtual appliance, similar to other Nutanix tools. It is distributed as a .zip package and can be downloaded from the `Nutanix Support Portal <https://portal.nutanix.com/#/page/xtract>`_. The .zip package includes the .qcow2 disk image, as well as command line tools for Windows, macOS, and Linux that can be used to script the deployment and IP assignement of the Xtract VM.
-
-In this exercise, you will deploy Xtract from a disk image that has already been populated on your Nutanix cluster. **It is not necessary to download the Xtract package from the Support Portal.**
+In this exercise, you will deploy Move from a disk image that has already been populated on your Nutanix cluster. **It is not necessary to download the Move package from the Support Portal.**
 
 In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > VMs**.
 
@@ -199,7 +197,7 @@ Click **Create VM**.
 
 Fill out the following fields:
 
-- **Name** - *Initials*\ -Xtract
+- **Name** - *Initials*\ -Move
 - **Description** - (Optional) Description for your VM.
 - **vCPU(s)** - 2
 - **Number of Cores per vCPU** - 2
@@ -217,17 +215,17 @@ Fill out the following fields:
 
 Click **Save** to create the VM.
 
-Select your Xtract VM and click **Power On**.
+Select your Move VM and click **Power On**.
 
-In **Prism Central > VMs > List**, identify the IP address assigned to your Xtract VM using the **IP Addresses** column.
+In **Prism Central > VMs > List**, identify the IP address assigned to your Move VM using the **IP Addresses** column.
 
 .. note::
 
-  By default, the X-Ray appliance will obtain an IP address via DHCP. If a static IP address is required, it can be configured via the local Xtract VM console by following the instructions `here <https://portal.nutanix.com/#/page/docs/details?targetId=Xtract-for-VMs-v20:v20-xtract-assign-ip-addresses-t.html#ntask_vlz_f1t_f1b>`_.
+  By default, the X-Ray appliance will obtain an IP address via DHCP. If a static IP address is required, it can be configured via the local Move VM console by following the instructions `here <https://portal.nutanix.com/#/page/docs/details?targetId=Xtract-for-VMs-v20:v20-xtract-assign-ip-addresses-t.html#ntask_vlz_f1t_f1b>`_.
 
-Open \https://*XTRACT-VM-IP*/ in a new browser tab.
+Open \https://*Move-VM-IP*/ in a new browser tab.
 
-Accept the End User License Agreement and provide a new password to log into the Xtract web interface (e.g. **techX2019!**).
+Accept the End User License Agreement and provide a new password to log into the Move web interface (e.g. **techX2019!**).
 
 Specify your new password and click **Log In**.
 
@@ -236,7 +234,7 @@ Specify your new password and click **Log In**.
 Configuring a Target Environment
 ++++++++++++++++++++++++++++++++
 
-The target environment is the Nutanix AHV cluster to which you plan to migrate VMs. A single Xtract deployment can support migrations between multiple source and target environments.
+The target environment is the Nutanix AHV cluster to which you plan to migrate VMs. A single Move deployment can support migrations between multiple source and target environments.
 
 Under **Target Environments**, click **+ Add Target**.
 
@@ -249,7 +247,7 @@ Fill out the following fields and click **Add**:
 
 .. figure:: images/10.png
 
-Xtract will confirm the specified PC/cluster can be accessed using the IP/FQDN and credentials provided.
+Move will confirm the specified PC/cluster can be accessed using the IP/FQDN and credentials provided.
 
 Adding a Prism Central target has the added benefit of being able to target any clusters registered to that Prism Central.
 
@@ -271,7 +269,7 @@ Fill out the following fields and click **Add**:
 
 .. figure:: images/11.png
 
-Xtract will confirm your AWS account can be accessed using the keys provided, as well as validating the access key has all of the required permissions.
+Move will confirm your AWS account can be accessed using the keys provided, as well as validating the access key has all of the required permissions.
 
 Migrating VMs
 +++++++++++++
@@ -280,13 +278,13 @@ Click **Create a Migration Plan**, enter a **Plan Name** (e.g. *Initials*\ -Migr
 
 Select your AWS environment from the **Select Source** drop down.
 
-Under **Region**, select the automatically populated region. Xtract will only display AWS regions with running EC2 instances.
+Under **Region**, select the automatically populated region. Move will only display AWS regions with running EC2 instances.
 
 Select the **Default** storage container as the **Target Container** for your cluster.
 
 .. figure:: images/12.png
 
-While a single Xtract deployment can support migrations between multiple source and target environments, only a single source and target can be used in an individual Migration Plan.
+While a single Move deployment can support migrations between multiple source and target environments, only a single source and target can be used in an individual Migration Plan.
 
 Click **Next**.
 
@@ -296,7 +294,7 @@ Click the :fa:`plus-circle` icon to add your VM to the migration plan. Multiple 
 
 Click **Next**.
 
-As indicated earlier in the UI, Xtract will provision an additional t2.micro instance in the source EC2 Region (e.g. US-EAST-1). The **Xtract Lite** VM is used to establish a secure connection between the Xtract appliance and the source AWS VMs, working with AWS APIs to take snapshots and transfer data from source to target.
+As indicated earlier in the UI, Move will provision an additional t2.micro instance in the source EC2 Region (e.g. US-EAST-1). The **Xtract Lite** VM is used to establish a secure connection between the Move appliance and the source AWS VMs, working with AWS APIs to take snapshots and transfer data from source to target.
 
 Refresh your **EC2 Dashboard** and note that **NTNX-XTRACTLITE-INSTANCE** has been automatically deployed and started. This process should take ~2 minutes.
 
@@ -308,11 +306,11 @@ By default, **automatic** VM Preparation is selected. VM Preparation refers to i
 
 .. note::
 
-  While Xtract installs **virtio** drivers, it does **not** install the full Nutanix Guest Tools (NGT) package.
+  While Move installs **virtio** drivers, it does **not** install the full Nutanix Guest Tools (NGT) package.
 
 .. note::
 
-  VMs can be manually prepared by an administrator if they wish to avoid providing Xtract with guest credentials to allow for automatic installation of **virtio** drivers.
+  VMs can be manually prepared by an administrator if they wish to avoid providing Move with guest credentials to allow for automatic installation of **virtio** drivers.
 
 Under **Linux VMs**, specify **ubuntu** as the **User Name** for the Ubuntu AMI.
 
@@ -320,7 +318,7 @@ Under **Linux VMs**, specify **ubuntu** as the **User Name** for the Ubuntu AMI.
 
   The default user has sudo (root) priveleges, but the actual root account is disabled by default. This is common practice for Linux generic cloud images.
 
-Select **Use Private (.PEM) file to authenticate** and **Upload** the .pem file downloaded when provisioning your AWS instance. As password based authentication is disabled on the AMI, Xtract will use the provided private key to authenticate when connecting via SSH.
+Select **Use Private (.PEM) file to authenticate** and **Upload** the .pem file downloaded when provisioning your AWS instance. As password based authentication is disabled on the AMI, Move will use the provided private key to authenticate when connecting via SSH.
 
 .. note::
 
@@ -330,9 +328,9 @@ Select **Use Private (.PEM) file to authenticate** and **Upload** the .pem file 
 
 Click **Next**.
 
-Xtract will verify the credentials against all VMs in the migration plan and alert you if any VMs fail to authenticate properly.
+Move will verify the credentials against all VMs in the migration plan and alert you if any VMs fail to authenticate properly.
 
-Next, Xtract will begin the process of automatically installing the Nutanix Guest Tools in each VM added to the plan. This process should take ~2-3 minutes.
+Next, Move will begin the process of automatically installing the Nutanix Guest Tools in each VM added to the plan. This process should take ~2-3 minutes.
 
 .. figure:: images/16.png
 
@@ -352,11 +350,11 @@ Under **Migration Plans**, click **In Progress** to view to status of your migra
 
 .. figure:: images/18.png
 
-An initial VM will be taken of the VM, at which point data based on that snapshot is transferred from the source, through the Xtract VM, and to the target. As the VM can change (new data written, new applications installed, etc.) during data seeding, subsequent snapshots will be taken to continuously copy deltas to the target cluster.
+An initial VM will be taken of the VM, at which point data based on that snapshot is transferred from the source, through the Move VM, and to the target. As the VM can change (new data written, new applications installed, etc.) during data seeding, subsequent snapshots will be taken to continuously copy deltas to the target cluster.
 
 The initial **Seeding Data** process will take ~15-30 minutes to complete for the VM in this exercise. Time to seed in other environments will be dependent on the amount of source data and bandwidth.
 
-**You can now proceed to an alternate lab and return to Xtract once the Migration Status has reached Ready to Cutover**.
+**You can now proceed to an alternate lab and return to Move once the Migration Status has reached Ready to Cutover**.
 
 Once a Migration plan has reached **Ready to Cutover** it will still continue to update data as changes are made on the source. This activity keeps the source and target close to being in sync to decrease downtime during cutover. Additionally, VMs can be selected on an individual basis for cutover to allow for flexibility and planning on any brief application outages.
 
@@ -368,7 +366,7 @@ Note that proceeding will shutdown the source VM and disconnect any of its netwo
 
 Click **Continue**.
 
-Return to your **EC2 Dashboard** and validate that the source VM is being powered off. Xtract automates a graceful shutdown of the source VM and transfers the remaining delta data to the target environment. This process will take ~2-5 minutes.
+Return to your **EC2 Dashboard** and validate that the source VM is being powered off. Move automates a graceful shutdown of the source VM and transfers the remaining delta data to the target environment. This process will take ~2-5 minutes.
 
 .. figure:: images/20.png
 
@@ -392,15 +390,15 @@ Cleaning Up Your Source Environment
 
 The following steps should be taken to prevent any unexpected AWS charges.
 
-Return to **Xtract**, under **Migration Plans**, select **Action > Delete > Continue** to remove your completed AWS Migration Plan.
+Return to **Move**, under **Migration Plans**, select **Action > Delete > Continue** to remove your completed AWS Migration Plan.
 
-Once the final migration plan configured for a given AWS region has been removed, Xtract will automatically power down the Xtract Lite VM.
+Once the final migration plan configured for a given AWS region has been removed, Move will automatically power down the Xtract Lite VM.
 
 Return to your **EC2 Dashboard** and verify that **NTNX-XTRACTLITE-INSTANCE** has been stopped.
 
-Return to **Xtract**, under **Source Environments**, select **... > Remove > Remove** to remove your AWS source environment.
+Return to **Move**, under **Source Environments**, select **... > Remove > Remove** to remove your AWS source environment.
 
-Once the source has been removed, Xtract will automatically terminate (delete) the **NTNX-XTRACTLITE-INSTANCE** for that region.
+Once the source has been removed, Move will automatically terminate (delete) the **NTNX-XTRACTLITE-INSTANCE** for that region.
 
 Return to your **EC2 Dashboard** and verify that **NTNX-XTRACTLITE-INSTANCE** has been terminated.
 
@@ -411,21 +409,21 @@ The final step is to terminate your source Ubuntu instance by right-clicking the
 Takeaways
 +++++++++
 
-What are the key things you should know about **Nutanix Xtract**?
+What are the key things you should know about **Nutanix Move**?
 
-- Xtract is licensed at no cost for any Nutanix customer.
+- Move is licensed at no cost for any Nutanix customer.
 
-- Xtract for VMs simplifies bulk migration of existing VMs on AWS or ESXi to Nutanix, eliminating the friction associated with onboarding new IT infrastructure.
+- Move for VMs simplifies bulk migration of existing VMs on AWS or ESXi to Nutanix, eliminating the friction associated with onboarding new IT infrastructure.
 
-- Xtract features the ability to migrate all AHV certified OSes, scheduling data-seeding and migrations, multi-cluster migration management, and grouping/sorting VMs.
+- Move features the ability to migrate all AHV certified OSes, scheduling data-seeding and migrations, multi-cluster migration management, and grouping/sorting VMs.
 
 Getting Connected
 +++++++++++++++++
 
-Have a question about **Nutanix Xtract**? Please reach out to the resources below:
+Have a question about **Nutanix Move**? Please reach out to the resources below:
 
 +---------------------------------------------------------------------------------+
-|  Xtract Product Contacts                                                        |
+|  Move Product Contacts                                                        |
 +================================+================================================+
 |  Slack Channel                 |  #xtract                                       |
 +--------------------------------+------------------------------------------------+
