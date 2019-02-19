@@ -7,7 +7,9 @@
   :hidden:
 
   era/era
+  files/files
   flow/flow
+  frame/frame
 
 .. toctree::
   :maxdepth: 2
@@ -19,12 +21,10 @@
   buckets/buckets
   calm_linux/calm_linux
   dr_runbooks/dr_runbooks
-  files/files
   karbon/karbon
   xplay/xplay
   xtract_aws/xtract_aws
   epoch/epoch
-  frame/frame
   xiiot/xiiot
 
 

@@ -61,14 +61,6 @@
   taskman/taskman
   wordpress/wordpress
 
-.. toctree::
-  :maxdepth: 2
-  :caption: Tech Summit Index's
-  :name: _index
-  :hidden:
-
-  index_apac
-  index_emea
 
 .. _welcome:
 

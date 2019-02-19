@@ -19,7 +19,7 @@ Karbon provides a consumer-grade experience for delivering Kubernetes on-prem pr
 
 **In this lab you will deploy a Kubernetes cluster using Karbon and then deploy multiple containers, referred to as Kubernetes pods, to run a sample application.**
 
-If you already have an understanding of containers, Kubernetes, challenges, and use cases, jump to `Create a Karbon Cluster`_.
+If you already have an understanding of containers, Kubernetes, challenges, and use cases, jump to `Lab Setup`_ and `Creating a Karbon Cluster`_.
 
 What are Containers?
 ....................
@@ -75,6 +75,8 @@ This lab requires applications provisioned as part of the :ref:`windows_tools_vm
 
 If you have not yet deployed this VM, see the linked steps before proceeding with the lab.
 
+It is **highly recommended** that you connect to the Tools VM using the Microsoft Remote Desktop client rather than the VM console launched via Prism. An RDP connection will allow you to copy and paste between your device and the VMs.
+
 Creating a Karbon Cluster
 +++++++++++++++++++++++++
 
@@ -100,7 +102,7 @@ To begin provisioning a Karbon cluster, click **+ Create Cluster**.
 
 On the **Name and Environment** tab, fill out the following fields:
 
-- **Name** - wordpress-*Initials*
+- **Name** - *Initials*-karbon
 - **Cluster** - Select *Your Nutanix cluster*
 - **Kubernetes Version** - 1.10.3
 - **Host OS Image** - centos
@@ -177,7 +179,7 @@ Click **Next**.
 
 On the **Storage Class** tab, fill out the following fields:
 
-- **Storage Class Name** - default-storageclass-*xyz*
+- **Storage Class Name** - default-storageclass-*Initials*
 - **Prism Element Cluster** - *Your Nutanix cluster*
 - **Nutanix Cluster Username** - admin
 - **Nutanix Cluster Password** - techX2019!
@@ -190,7 +192,7 @@ Click **Create**.
 
 Deployment of the cluster should take approximately 10 minutes. During this time, Karbon is pulling images from public image repositories for the **master**, **etcd**, and **worker** nodes, as well as **flannel**, the Nutanix Volumes plugin, and any additional Karbon plugins. Support for authenticated proxy and dark site image repositories will be added post-GA.
 
-Filtering VMs for **wordpress-**\ *Initials* in **Prism Central** will display the master, etcd, and worker VMs provisioned by Karbon.
+Filtering VMs for *Initials*\ **-karbon** in **Prism Central** will display the master, etcd, and worker VMs provisioned by Karbon.
 
 .. figure:: images/8.png
 
@@ -202,7 +204,7 @@ The Karbon cluster has finished provisioning when the **Status** of the cluster 
 
 .. figure:: images/10.png
 
-Click on your cluster name (**wordpress-**\ *Initials*) to access the Summary Page for your cluster.
+Click on your cluster name (*Initials*\ **-karbon**) to access the Summary Page for your cluster.
 
 .. figure:: images/11.png
 
@@ -219,7 +221,7 @@ In this exercise you will use ``kubectl`` to perform basic operations against yo
 
 From within your *Initials*\ **-Windows-ToolsVM** VM, browse to **Prism Central** and open **Karbon**.
 
-Select your **wordpress-**\ *Initials* cluster and click **Download kubeconfig**.
+Select your *Initials*\ **-karbon** cluster and click **Download kubeconfig**.
 
 .. figure:: images/12.png
 
@@ -280,7 +282,7 @@ Move both files to the **wordpress** directory using the following command:
 
 .. code-block:: PowerShell
 
-	mv ~\Downloads\*.yaml
+	mv ~\Downloads\*.yaml ~\wordpress\
 	cd ~\wordpress\
 
 Open the **wordpress-deployment.yaml** file with your preferred text editor.
@@ -299,7 +301,11 @@ Under **spec: > type:**, change the value from **LoadBalancer** to **NodePort** 
 
   You can learn more about Kubernetes publishing service types `here <https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types>`_.
 
-Next you will need to define a **secret** to be used as the MySQL password. Run the following command to create the secret:
+Open the **mysql-deployment.yaml** file and note that it requires an environmental variable to define the **MYSQL_ROOT_PASSWORD** as part of deployment. **No changes are required to this file.**
+
+.. figure:: images/14b.png
+
+Define the **secret** to be used as the MySQL password by running the following command:
 
 .. code-block:: bash
 
@@ -331,7 +337,7 @@ In addition to the MySQL service, the **mysql-deployment.yaml** also specifies t
 
 You will note that the **STORAGECLASS** matches the **default-storageclass-**\ *Initials* provisioned by Karbon.
 
-The volume also appears in **Karbon** under **wordpress-**\ *Initials* **> Volume**.
+The volume also appears in **Karbon** under *Initials*\ **-karbon > Volume**.
 
 .. figure:: images/16.png
 
@@ -380,7 +386,7 @@ Open \http://*WORKER-VM-IP:WORDPRESS SERVICE PORT*/ in a new browser tab to acce
 
 Click **Continue** and fill out the following fields:
 
-- **Site Title** - Karbon Blog
+- **Site Title** - *Initials*\ 's Karbon Blog
 - **Username** - admin
 - **Password** - nutanix/4u
 - **Your Email** - noreply@nutanix.com
@@ -404,7 +410,7 @@ Elasticsearch is commonly deployed alongside Kibana, a powerful data visualizati
 
 Fluentd is a popular data collector that runs on all Kubernetes nodes to tail container log files, filter and transform the log data, and deliver it to the Elasticsearch cluster, where it will be indexed and stored.
 
-Return to the **Karbon Console** and select your **wordpress-**\ *Initials* cluster.
+Return to the **Karbon Console** and select your *Initials*\ **-karbon** cluster.
 
 Select **Add-on** from the sidebar to view and manage available Karbon plugins.
 
