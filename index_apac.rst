@@ -8,6 +8,7 @@
 
   era/era
   flow/flow
+  buckets/buckets
 
 .. toctree::
   :maxdepth: 2
@@ -16,7 +17,6 @@
   :hidden:
 
   nutanix101/nutanix101
-  buckets/buckets
   calm_linux/calm_linux
   dr_runbooks/dr_runbooks
   files/files
