@@ -82,7 +82,7 @@ Login to the *Initials*\ **-Linux-ToolsVM** via ssh or Console session.
 
 .. note::
 
-  It will take roughly 5min for Stress to generate the memory load to cause the alert.
+  It will take approximately 5 minutes for **stress** to generate the memory load to cause the alert.
 
 Create Alert Policy
 ...................
@@ -842,7 +842,7 @@ Open a console session or SSH into Prism Central, and run the **paintrigger.py**
 
 After 2-5 minutes you should receive an email from Prism.
 
-You also should receive the slack message. Check the message content.
+You also should receive the Slack message. Check the message content.
 
 Check the memory capacity on your *Initials*\ **-Linux-ToolsVM** VM now, you should see that it has increased.
 

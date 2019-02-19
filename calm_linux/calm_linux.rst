@@ -30,9 +30,9 @@ Click **+ Create Blueprint > Multi VM/Pod Blueprint**.
 
 Fill out the following fields:
 
-**Name** - *Initials*-CalmLinuxIntro
-**Description** - * [Task Manager Application](http://@@{HAProxy.address}@@/)
-**Project** - default
+- **Name** - *Initials*-CalmLinuxIntro
+- **Description** - [Task Manager Application](\http://@@{HAProxy.address}@@/)
+- **Project** - default
 
 .. figure:: images/2.png
 
@@ -162,7 +162,7 @@ In **Application Overview > Services**, click :fa:`plus-circle` to add a new Ser
 
 By default, the Application Overview is located in the lower right-hand corner of the Blueprint Editor and is used to create and manage Blueprint layers such as Services, Application Profiles, and Actions.
 
-.. figure:: image/7.png
+.. figure:: images/7.png
 
 Note **Service1** appears in the **Workspace** and the **Configuration Pane** reflects the configuration of the selected Service.
 
@@ -217,7 +217,7 @@ Click **Save**.
 
   If errors or warnings are presented after saving the blueprint, hover over the icon in the top toolbar to see a list of issues. Resolve any issues and **Save** the blueprint again.
 
-  .. figure:: image/8.png
+  .. figure:: images/8.png
 
 Now that you have completed the deployment details for the VM associated with the service, the next step is to tell Calm how the application will be installed on the VM.
 
@@ -225,7 +225,7 @@ With the **MySQL** service icon selected in the Workspace pane, scroll to the to
 
 Specify **MySQL_PACKAGE** as the **Package Name** and click **Configure install**.
 
-.. figure:: image/9.png
+.. figure:: images/9.png
 
 Note the **Package install** field that appears on the MySQL service in the Workspace pane.
 
@@ -638,7 +638,9 @@ Once the application reaches a **Running** status, navigate to the **Services** 
 
 In a new browser tab or window, navigate to http://<HAProxy-IP>, and verify your Task Manager application is functioning.
 
-** You can also click the link in the Description of the Application.**
+.. note::
+
+  You can also click the link in the Description of the Application.
 
 .. figure:: images/17.png
 

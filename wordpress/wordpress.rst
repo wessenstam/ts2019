@@ -26,7 +26,7 @@ Click |blueprints| **Blueprints** in the left hand toolbar to view available Cal
 
   Mousing over an icon will display its title.
 
-Click **Upload Blueprint** and select the **TaskManager.json** file previously downloaded.
+Click **Upload Blueprint** and select the **Wordpress.json** file previously downloaded.
 
 Fill out the following fields:
 

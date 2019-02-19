@@ -1,4 +1,4 @@
-.. title:: Tech Summit 2019
+.. title:: EMEA Tech Summit 2019
 
 .. toctree::
   :maxdepth: 2
@@ -61,14 +61,6 @@
   taskman/taskman
   wordpress/wordpress
 
-.. toctree::
-  :maxdepth: 2
-  :caption: Tech Summit Index's
-  :name: _index
-  :hidden:
-
-  index_apac
-  index_emea
 
 .. _welcome:
 

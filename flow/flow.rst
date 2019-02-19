@@ -258,7 +258,7 @@ Select ONLY the *Initials*\ **-HAProxy** VM, select **Actions > Manage Categorie
 
 Repeat this procedure to assign **AppTier:**\ *Initials*-**TMWeb** to your web tier VMs.
 
-Repeat this procedure to assign ***AppTier:**\ *Initials*-**TMLB** to your MySQL VM.
+Repeat this procedure to assign **AppTier:**\ *Initials*-**TMDB** to your MySQL VM.
 
 Finally, repeat this procedure to assign **Environment:Dev** to your Windows client VM.
 
@@ -511,9 +511,7 @@ Integrating Flow with Calm allows automated deployment of applications that are 
 When an application is deployed from a blueprint the proper categories can be assigned as the VMs are created.
 As soon as a VM is powered on for the first time it will automatically be part of the right category and security policy without any manual intervention.
 
-The application of categories can be performed programmatically via the v3 REST API in Prism Central. Categories are a metadata property of the v3/vms API_ .
-
-.. _API https://developer.nutanix.com/reference/prism_central/v3/#definitions-vm_metadata
+The application of categories can be performed programmatically via the v3 REST API in Prism Central. Categories are a metadata property of the `v3/vms API <https://developer.nutanix.com/reference/prism_central/v3/#definitions-vm_metadata>`_ .
 
 Takeaways
 +++++++++

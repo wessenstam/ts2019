@@ -66,7 +66,7 @@ Under **Quick Start**, search for the **"Free tier eligible" Ubuntu Server 18.04
   For future tests/demonstrations, if you wish to migrate a Windows Server image instead of a Linux image, be aware of the following:
 
   - Select an appropriate instance type. Running Windows Server 2012 R2+ requires more resources than a t2.micro can offer.
-  - WinRM must be enabled on the source VM as PowerShell Remoting is used for remote installation of the Nutanix Guest Tools on the source VM. Instructions for enabling WinRM on can be found in the Xtract User Guide `here <https://portal.nutanix.com/#/page/docs/details?targetId=Xtract-for-VMs-v20:v20-xtract-enable-winrm-t.html#ntask_mj1_xxw_cgb>`_.
+  - WinRM must be enabled on the source VM as PowerShell Remoting is used for remote installation of the **virtio** drivers on the source VM. Instructions for enabling WinRM on can be found in the Xtract User Guide `here <https://portal.nutanix.com/#/page/docs/details?targetId=Xtract-for-VMs-v20:v20-xtract-enable-winrm-t.html#ntask_mj1_xxw_cgb>`_. Alternatively, the VM can be manually prepared.
   - You must add Inbound Rules for the instance Security Policy to allow TCP ports 5985 and 5986 for WinRM.
 
 The CPU, memory, storage, and networking profile of the instance are defined by the **instance type**.
@@ -128,34 +128,36 @@ In the **Create policy** wizard, select the **JSON** tab and copy/paste the poli
              "Sid": "VisualEditor0",
              "Effect": "Allow",
              "Action": [
-                "ec2:DetachVolume",
-                "ec2:AttachVolume",
-                "ec2:DeleteSnapshot",
-                "ec2:TerminateInstances",
-                "ec2:DeleteTags",
-                "ec2:CreateTags",
-                "ec2:*Describe*",
-                "ec2:RunInstances",
-                "ec2:StopInstances",
-                "ec2:CreateVolume",
-                "ec2:DeleteVolume",
-                "iam:SimulatePrincipalPolicy",
-                "ec2:StartInstances",
-                "ssm:DescribeInstanceInformation",
-                "ec2:CreateSnapshot",
-                "iam:GetUser",
-                "ec2:KeyPair",
-                "route53:CreateHostedZone",
-                "route53:UpdateHostedZoneComment",
-                "route53:GetHostedZone",
-                "route53:ListHostedZones",
-                "route53:DeleteHostedZone",
-                "route53:AssociateVPCWithHostedZone",
-                "route53:ChangeResourceRecordSets",
-                "route53:DisassociateVPCFromHostedZone",
-                "route53:ListResourceRecordSets",
-                "route53:GetHostedZoneCount",
-                "route53:ListHostedZonesByName"
+                 "ec2:DetachVolume",
+                 "ec2:AttachVolume",
+                 "ec2:DeleteSnapshot",
+                 "ec2:CreateSecurityGroup",
+                 "ec2:AuthorizeSecurityGroup*",
+                 "ec2:TerminateInstances",
+                 "ec2:DeleteTags",
+                 "ec2:CreateTags",
+                 "ec2:*Describe*",
+                 "ec2:RunInstances",
+                 "ec2:StopInstances",
+                 "ec2:CreateVolume",
+                 "ec2:DeleteVolume",
+                 "ec2:StartInstances",
+                 "iam:SimulatePrincipalPolicy",
+                 "ssm:DescribeInstanceInformation",
+                 "ec2:CreateSnapshot",
+                 "iam:GetUser",
+                 "ec2:*KeyPair*",
+                 "route53:CreateHostedZone",
+                 "route53:UpdateHostedZoneComment",
+                 "route53:GetHostedZone",
+                 "route53:ListHostedZones",
+                 "route53:DeleteHostedZone",
+                 "route53:AssociateVPCWithHostedZone",
+                 "route53:ChangeResourceRecordSets",
+                 "route53:DisassociateVPCFromHostedZone",
+                 "route53:ListResourceRecordSets",
+                 "route53:ListHostedZonesByName",
+                 "route53:GetHostedZoneCount"
              ],
              "Resource": "*"
          }
@@ -221,7 +223,7 @@ In **Prism Central > VMs > List**, identify the IP address assigned to your Move
 
 .. note::
 
-  By default, the X-Ray appliance will obtain an IP address via DHCP. If a static IP address is required, it can be configured via the local Move VM console by following the instructions `here <https://portal.nutanix.com/#/page/docs/details?targetId=Xtract-for-VMs-v20:v20-xtract-assign-ip-addresses-t.html#ntask_vlz_f1t_f1b>`_.
+  By default, the Move appliance will obtain an IP address via DHCP. If a static IP address is required, it can be configured via the local Move VM console by following the instructions `here <https://portal.nutanix.com/#/page/docs/details?targetId=Xtract-for-VMs-v20:v20-xtract-assign-ip-addresses-t.html#ntask_vlz_f1t_f1b>`_.
 
 Open \https://*Move-VM-IP*/ in a new browser tab.
 
@@ -290,6 +292,10 @@ Click **Next**.
 
 Click the :fa:`plus-circle` icon to add your VM to the migration plan. Multiple VMs can be migrated as part of a single Migration Plan.
 
+.. note::
+
+  Unlike Move migrations from ESXi to AHV which leverage VM snapshots for data migration, AWS migrations require that the source VM is powered on. This is because Move leverages an IO capture driver inside of the guest OS.
+
 .. figure:: images/13.png
 
 Click **Next**.
@@ -330,7 +336,7 @@ Click **Next**.
 
 Move will verify the credentials against all VMs in the migration plan and alert you if any VMs fail to authenticate properly.
 
-Next, Move will begin the process of automatically installing the Nutanix Guest Tools in each VM added to the plan. This process should take ~2-3 minutes.
+Next, Move will begin the process of automatically installing the **virtio** drivers in each VM added to the plan. This process should take ~2-3 minutes.
 
 .. figure:: images/16.png
 
@@ -413,7 +419,7 @@ What are the key things you should know about **Nutanix Move**?
 
 - Move is licensed at no cost for any Nutanix customer.
 
-- Move for VMs simplifies bulk migration of existing VMs on AWS or ESXi to Nutanix, eliminating the friction associated with onboarding new IT infrastructure.
+- Move for VMs simplifies bulk migration of existing VMs on ESXi, Hyper-V, and AWS to Nutanix AHV, eliminating the friction associated with onboarding new IT infrastructure.
 
 - Move features the ability to migrate all AHV certified OSes, scheduling data-seeding and migrations, multi-cluster migration management, and grouping/sorting VMs.
 
