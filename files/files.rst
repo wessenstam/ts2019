@@ -73,7 +73,7 @@ Select the **Secondary - Managed** VLAN for the **Client Network**. Each Files V
 
   .. figure:: images/6.png
 
-Specify your cluster's **DC** VM IP as the **DNS Resolver IP** (e.g. 10.XX.YY.40).
+Specify your cluster's **DC** VM IP (found in :ref:`stagingdetails`) as the **DNS Resolver IP** (e.g. 10.XX.YY.40).
 
 .. note::
 
@@ -190,7 +190,7 @@ Select the **Security** tab and click **Advanced**.
 
 .. figure:: images/18.png
 
-Select **Users (*Intials*\ -Files\\Users)** and click **Remove**.
+Select **Users (**\ *Initials*\ **-Files\\Users)** and click **Remove**.
 
 Click **Add**.
 
@@ -273,6 +273,10 @@ Testing the Export
 ..................
 
 You will first provision a CentOS VM to use as a client for your Files export.
+
+.. note::
+
+  If you have already deployed the :ref:`linux_tools_vm` as part of another lab, you may use this VM as your NFS client instead.
 
 In **Prism > VM > Table**, click **+ Create VM**.
 

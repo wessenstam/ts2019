@@ -271,20 +271,20 @@ Select your *initials*-\**Recovery** recovery plan and select **Failover** from 
 
 .. figure:: images/drrunbooks_11.png
 
-You should see your assigned HPOC PC as the **Primary Location**, and your assigned DR PC (that you are logged into) as the **Recovery Location).
+You should see your assigned HPOC PC as the **Primary Location**, and your assigned DR PC (that you are logged into) as the **Recovery Location**.
 
 .. figure:: images/drrunbooks_12.png
 
 Click **Failover**.
 
-Change the **Action** to **Execute Anyway**, and click **Proceed** when se the licensing error.
+Change the **Action** to **Execute Anyway**, and click **Proceed**..
 
 .. figure:: images/drrunbooks_13.png
 
 Check Failover Status
 .....................
 
-Click the *initials*-\**Recovery** recovery plan to see the status and details.
+Click the *Initials*-**Recovery** recovery plan to see the status and details.
 
 .. figure:: images/drrunbooks_14.png
 
@@ -309,7 +309,7 @@ In **Prism Central** > select :fa:`bars` **> Policies > Recovery Plans**.
 
 Select your *initials*-\**Recovery** recovery plan and select **Failover** from the **Actions** dropdown.
 
-You should see your assigned DR PC as the **Primary Location**, and your assigned HPOC PC (that you are logged into) as the **Recovery Location).
+You should see your assigned DR PC as the **Primary Location**, and your assigned HPOC PC (that you are logged into) as the **Recovery Location**.
 
 Click **Failover**.
 

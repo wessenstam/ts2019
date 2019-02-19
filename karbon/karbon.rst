@@ -19,7 +19,7 @@ Karbon provides a consumer-grade experience for delivering Kubernetes on-prem pr
 
 **In this lab you will deploy a Kubernetes cluster using Karbon and then deploy multiple containers, referred to as Kubernetes pods, to run a sample application.**
 
-If you already have an understanding of containers, Kubernetes, challenges, and use cases, jump to `Create a Karbon Kubernetes Cluster`_.
+If you already have an understanding of containers, Kubernetes, challenges, and use cases, jump to `Create a Karbon Cluster`_.
 
 What are Containers?
 ....................
@@ -121,7 +121,7 @@ Click **Next**.
 
 Next you will define the number of container host VMs and compute requirements, starting with **Worker** VMs.
 
-Worker nodes are responsible for running containers deployed onto the Kubernetes cluster. Each Worker node runs the `kubelet <https://kubernetes.io/docs/admin/kubelet/>`_ and `kube-proxy https://kubernetes.io/docs/admin/kube-proxy/>`_ services.
+Worker nodes are responsible for running containers deployed onto the Kubernetes cluster. Each Worker node runs the `kubelet <https://kubernetes.io/docs/admin/kubelet/>`_ and `kube-proxy <https://kubernetes.io/docs/admin/kube-proxy/>`_ services.
 
 .. raw:: html
 
@@ -329,7 +329,7 @@ In addition to the MySQL service, the **mysql-deployment.yaml** also specifies t
 
 	kubectl get pvc
 
-You will note that the **STORAGECLASS** matches the **default-storageclass**\ *Initials* provisioned by Karbon.
+You will note that the **STORAGECLASS** matches the **default-storageclass-**\ *Initials* provisioned by Karbon.
 
 The volume also appears in **Karbon** under **wordpress-**\ *Initials* **> Volume**.
 
@@ -374,7 +374,7 @@ Open \http://*WORKER-VM-IP:WORDPRESS SERVICE PORT*/ in a new browser tab to acce
 
 .. note::
 
-  In the example shown, you would browse to http://10.21.78.72:23160. You environment will have a different IP and port.
+  In the example shown, you would browse to http://10.21.78.72:32160. You environment will have a different IP and port.
 
 .. figure:: images/19.png
 
@@ -412,7 +412,7 @@ Select **Add-on** from the sidebar to view and manage available Karbon plugins.
 
 Select **Logging** to launch the Kibana user interface.
 
-Select **Discover** from the sidebar and define **\ * ** as the **Index Pattern**. This wildcard will retrieve all available indices within Elastisearch, including **etcd**, **kubernetes**, and **systemd**.
+Select **Discover** from the sidebar and define ``*`` as the **Index Pattern**. This wildcard will retrieve all available indices within Elastisearch, including **etcd**, **kubernetes**, and **systemd**.
 
 .. figure:: images/22.png
 

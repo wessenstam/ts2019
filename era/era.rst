@@ -126,7 +126,7 @@ The initial release of Era supports the following Operating Systems and Database
 
 Era can be used to provision database servers and databases on the registered Nutanix cluster, or you can register an existing source database running on the cluster. In this lab, you will provision a new PostgreSQL database server and database.
 
-Era makes it even simpler to provision a simple PostgreSQL database by providing sample profiles the detail **Software**, **Compute**, and **Database Parameters**. You will explore each of these profiles to understand how they are configured.
+Era makes it even simpler to provision a simple PostgreSQL database by providing sample profiles for **Software**, **Compute**, and **Database Parameters**. You will explore each of these profiles to understand how they are configured.
 
 Select the **Era > Getting Started** drop down menu and click **Profiles**.
 
@@ -263,7 +263,7 @@ On the **Connection** tab, fill out the following fields:
 
 .. figure:: images/5d.png
 
-Expand Initials*-**DBServer **> Databases** and note an empty database has been created by Era.
+Expand *Initials*\ **-DBServer > Databases** and note an empty database has been created by Era.
 
 .. figure:: images/5h.png
 

@@ -105,7 +105,7 @@ The installer will also create a Veeam Backup Repository to act as a backup targ
 
 For storing backups of Nutanix AHV VMs, Veeam currently supports the use of simple backup repositories (any Windows-compatible file or block storage), scale-out backup repositories, and ExaGrid appliances. DellEMC Data Domain DD Boost and HPE StoreOnce Catalyst proprietary storage protocols are not currently supported for Veeam Availability for Nutanix, but each of these storage targets can still be used as standard CIFS repositories.
 
-While waiting for installation to complete, proceed to `Deploying Veeam Proxy Appliance`_.
+While waiting for installation to complete, proceed to `Deploying Veeam Backup Proxy`_.
 
 Deploying Veeam Backup Proxy
 ++++++++++++++++++++++++++++

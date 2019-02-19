@@ -385,7 +385,7 @@ Have a question about **Nutanix Frame**? Please reach out to the resources below
 |                                |  Jon Eugenio, jon.eugenio@nutanix.com          |
 +--------------------------------+------------------------------------------------+
 
-For sales-related questions, including requests for sales assistance or quote reviews, contact fram-sales@nutanix.com.
+For sales-related questions, including requests for sales assistance or quote reviews, contact frame-sales@nutanix.com.
 
 Additional Internal Resources
 +++++++++++++++++++++++++++++
