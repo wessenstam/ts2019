@@ -55,7 +55,7 @@ Click **Upload**.
 Configuring the Blueprint
 +++++++++++++++++++++++++
 
-Before you can launch the blueprint, you must first provide credentials, as this information is not stored in exported Calm blueprints.
+Before you can launch the blueprint, you must first provide specify the information not stored in exported Calm blueprints, including credentials.
 
 In the **Application Profile** pane on the right, fill out the following field:
 

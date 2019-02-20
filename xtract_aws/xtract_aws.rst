@@ -208,7 +208,7 @@ Fill out the following fields:
 - Select **+ Add New Disk**
     - **Type** - DISK
     - **Operation** - Clone from Image Service
-    - **Image** - xtract-vm-2.0.2.qcow2
+    - **Image** - xtract-vm-\*.qcow2
     - Select **Add**
 
 - Select **Add New NIC**
@@ -429,9 +429,9 @@ Getting Connected
 Have a question about **Nutanix Move**? Please reach out to the resources below:
 
 +---------------------------------------------------------------------------------+
-|  Move Product Contacts                                                        |
+|  Move Product Contacts                                                          |
 +================================+================================================+
-|  Slack Channel                 |  #xtract                                       |
+|  Slack Channel                 |  #move                                         |
 +--------------------------------+------------------------------------------------+
 |  Product Manager               |  Jeremy Launier, jeremy.launier@nutanix.com    |
 +--------------------------------+------------------------------------------------+

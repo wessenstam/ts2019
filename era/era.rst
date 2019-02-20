@@ -1,8 +1,8 @@
 .. _era:
 
------------
+---
 Era
------------
+---
 
 *The estimated time to complete this lab is 60 minutes.*
 
@@ -522,3 +522,14 @@ Have a question about **Nutanix Era**? Please reach out to the resources below:
 +--------------------------------------------+------------------------------------------------------+
 |  Solutions Architect EMEA - Oracle/Era     |  Karsten Zimmermann, karsten.zimmermann@nutanix.com  |
 +--------------------------------------------+------------------------------------------------------+
+
+Cleanup
++++++++
+
+.. raw:: html
+
+  <strong><font color="red">Once your lab completion has been validated, PLEASE do your part to remove any unneeded VMs to ensure resources are available for all users on your shared cluster.</font></strong>
+
+**IF** you **DO NOT** intend on completing either the :ref:`cloud_native_lab` or :ref:`calm_win` labs, **THEN** you should delete the *Initials*-**Era**, *Initials*-**DBServer**, and *Initials*-**DBServer-Clone** VMs deployed as part of this exercise.
+
+**IF** you **DO** intend on completing either the :ref:`cloud_native_lab` or :ref:`calm_win` labs, **THEN** you should only delete the *Initials*-**DBServer** and *Initials*-**DBServer-Clone** VMs deployed as part of this exercise. Both VMs should be removed via the Era web interface but will still need to be powered off and deleted through Prism.
