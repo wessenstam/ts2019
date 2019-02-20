@@ -9,7 +9,9 @@ HYCU
 Overview
 ++++++++
 
-HYCU is the only solution built from the ground up to deliver a full suite of backup capabilities for Nutanix AHV, eliminating a key barrier to entry for AHV prospects. Additionally, as pure software, HYCU can help grow Nutanix deals as additional nodes are positioned to act as a backup target for workloads.
+HYCU is the only solution built from the ground up to deliver a full suite of backup capabilities for Nutanix AHV and ESXi clusters, eliminating a key barrier to entry for AHV prospects. HYCU can be used to backup Nutanix Volumes VGs and Nutanix Files deployments.
+
+Additionally, as pure software, HYCU can help grow Nutanix deals as additional nodes are positioned to act as a backup target for workloads.
 
 **In this lab you will deploy and configure a HYCU appliance and explore different workflows for backup and recovery of data within a Nutanix environment.**
 
@@ -47,7 +49,7 @@ Fill out the following fields and click **Save**:
 
 Select the *Initials*\ **-HYCU** VM and click **Power on**.
 
-The CPU and memory resources of the backup appliance can be scaled up depending on the number of VM backups managed by HYCU. Complete sizing details are provided in the `HYCU User Guide <https://licensing.hycu.com/downloadarea/HYCU/release/3.5.0/docs/HYCU_UserGuide.pdf>`_.
+The CPU and memory resources of the backup appliance can be scaled up depending on the number of VM backups managed by HYCU. Complete sizing details are provided in the `HYCU User Guide <https://support.hycu.com/hc/en-us/sections/115001018365-Product-documentation>`_.
 
 The secondary disk added to the appliance is used as a data disk for the local HYCU database as well as maintenance operations. It is not used for storing VM backup data.
 
@@ -96,7 +98,7 @@ Click **+ New** and fill out the following fields:
 
 Click **Save**.
 
-After the cluster is successfully added, click **Close**. You may need to refresh your browser for the source cluster to appear.
+After the job has been initiated, click **Close**. All jobs are launched asynchronously and can be tracked on the **Jobs** page.
 
 .. figure:: images/4.png
 
@@ -105,7 +107,7 @@ From the **HYCU** sidebar, click :fa:`bars` **> Virtual Machines** and validate 
 Adding A Backup Target
 ++++++++++++++++++++++
 
-The target is used for storing backups coordinated by HYCU. HYCU supports S3 (including Nutanix Buckets), Azure, NFS, SMB (including Nutanix Files), and iSCSI storage targets (including Nutanix Volumes).
+The target is used for storing backups coordinated by HYCU. HYCU supports AWS, S3 (including Nutanix Buckets), Azure, NFS (including Nutanix Files), SMB (including Nutanix Files), and iSCSI storage targets (including Nutanix Volumes).
 
 In this exercise you will create a Nutanix Volume group to use as a target for VM backup data. In a production environment the HYCU appliance and target storage would not reside on the same cluster as the source VMs.
 
@@ -150,11 +152,7 @@ Fill out the following fields and click **Save**:
 
 .. figure:: images/7.png
 
-By default, HYCU's recommendation is 1 disk per Volume Group. Customers can utilize > 1 disk per Volume Group today to increase throughput to support a greater number of concurrent backups.
-
-.. note::
-
-  HYCU Support should be engaged to configure > 1 disk per Volume Group.
+HYCU's current recommendation is to use 1 disk per Volume Group.
 
 Select *Initials*\ **-HYCU-Target** VG and note the **Target IQN Prefix** in the **Volume Group Details** table. Triple-click this value to fully select it. Copy the value to your clipboard.
 
@@ -169,7 +167,7 @@ From the **HYCU** sidebar, click :fa:`bars` **> Targets**.
 Click **+ New**, fill out the following fields, and click **Save**:
 
 - **Name** - NutanixVG
-- **Concurrent Backups** - 1
+- **Concurrent Backups** - 4
 - **Description** - *Nutanix Cluster Name* HYCU-Target VG
 - **Type** - iSCSI
 - **Target Portal** - *Nutanix cluster iSCSI Data Services IP*
@@ -179,7 +177,7 @@ Click **+ New**, fill out the following fields, and click **Save**:
 
 .. figure:: images/10.png
 
-Maximum concurrent backups is a factor of how much disk throughput the backup target is capable of providing. HYCU is currently developing guidance for concurrent backups based on Nutanix hardware configuration.
+Maximum concurrent backups is the number of backup or restore jobs that will run in parallel, and is a factor of how much disk throughput the backup target is capable of providing. A default of 4 can be safely configured for a single vDisk VG target.
 
 Multiple backup targets can be added to support backup jobs.
 
@@ -217,9 +215,9 @@ HYCU supports multiple advanced configurations for backup policies, including:
 
 - **Backup Windows** - Allows an administrator to define granular time of day and day of week schedules to enforce backup policy.
 - **Copy** - Asyncronously copies data from the primary backup target to a configurable secondary backup target during periods of non-peak utilization.
-- **Archiving** - Allows an administrator to target slower, cold storage for long term retention.
+- **Archiving** - Allows an administrator to target slower, cold storage for long term retention of **full** backups.
 - **Fast Restore** - Retains and restores from local snapshots on the Nutanix cluster for rapid restore operations.
-- **Backup from Replica** - For VMs that use native Nutanix replication from a primary cluster to a secondary cluster, this feature will backup VMs from the replicated snapshots on the secondary cluster. This functionality can significantly reduce data movement for scenarios such as Remote Office Branch Office. It also removes the need for management of agents/proxies within the remote site.
+- **Backup from Replica** - For VMs that use native Nutanix replication from a primary cluster to a secondary cluster, this feature will backup VMs from the replicated snapshots on the secondary cluster. This functionality can significantly reduce data movement for scenarios such as Remote Office Branch Office. It also removes the need for deployment of agents/proxies within the remote site.
 
 HYCU is also unique in its ability for administrators to define desired RTO. By specifying a desired **Recover Within** period and selecting **Automatic** target selection, HYCU will compute the right target to send the VM. The performance of the target is constantly monitored to ensure it can recover the data within the configured window. If a HYCU instance has several targets configured, a subset can be selected and HYCU will still intelligently choose between the selected targets.
 
@@ -359,9 +357,9 @@ In the **Details** table below, mouse over the **Compliancy** and **Backup Statu
 
 .. figure:: images/21.png
 
-Select the most recent incremental snapshot and click **Restore VM or vDisks**.
+Select the most recent incremental restore point and click **Restore VM or vDisks**.
 
-HYCU offers the ability to overwrite or clone the entire VM, as well as the ability to selectively restore or clone individual volume groups. Restoring volume groups is helpful in use cases where you would prefer to mount a disk to an existing VM.
+HYCU offers the ability to overwrite or clone the entire VM, as well as the ability to selectively restore or clone individual VM disks or volume groups. Restoring volume groups is helpful in use cases where you would prefer to mount a disk to an existing VM.
 
 Additionally, both local disks and volume groups for a given restore point can be exported to an SMB share of NFS mount.
 
@@ -423,10 +421,14 @@ Launch a console for *Initials*\ **-HYCUBackupTest** and verify the file was res
 
 HYCU provides flexibility for restoring Nutanix VMs, VGs, and file data while maintaining very simple "Prism-like" workflows. HYCU takes advantage of native Nutanix storage APIs to allow for fast and efficient backup and restore operations.
 
+.. _hycu-files:
+
 (Optional) Nutanix Files Integration
 ++++++++++++++++++++++++++++++++++++
 
-HYCU is the first solution to provide fully integrated backup and restore capabilities for Nutanix Files using native Nutanix Change File Tracking (CFT) APIs. <Could use a comparison of advantages of CFT over NDMP here>
+HYCU is the first solution to provide fully integrated backup and restore capabilities for Nutanix Files using native Nutanix Change File Tracking (CFT) APIs.
+
+While classic backup solutions heavily burden the file server by using the Network Data Management Protocol (NDMP) approach, needing to traverse the whole file tree to identify changed files, HYCU uses Nutanix storage layer snapshots and CFT to get the changed files instantly. This means HYCU backups remove impact on the file server and significantly reduce the data-loss risk by backing up file share changes on hourly basis, compared to classic, nightly file share backups.
 
 This exercise requires completion of the :ref:`files` lab to properly stage the environment. In this exercise you will configure Nutanix Files as a backup source, as well as target a Nutanix Files SMB share for backup data.
 
@@ -435,7 +437,7 @@ Adding SMB Share Target
 
 For the purposes of this exercise, you will back up one Files share source to a Files share target. First you will define a share on your Files cluster that can be used as a target for backup data.
 
-Files backups require either an SMB share or S3 target, meaning Nutanix Buckets could also be used. iSCSI targets are currently unsupported as the files being backed up cannot be written directly to block storage.
+Files backups require either a NFS export, SMB share or S3 (Cloud) target, meaning Nutanix Buckets could also be used. iSCSI targets are currently unsupported as the files being backed up cannot be written directly to block storage.
 
 In **Prism > File Server**, click **+ Share/Export**.
 
@@ -484,7 +486,7 @@ Adding Nutanix Files Source
 
 Protecting Files is similar to adding a hypervisor source to HYCU, with the exception that adding a Files source will provision an additional HYCU instance on the Nutanix cluster running Files. The purpose of this additional instance is to offload the file copy operations from the HYCU backup controller.
 
-For AHV clusters with DHCP enabled, the additional HYCU instance can be provisioned automatically when adding the Files source. For ESXi or non-DHCP environments, the additional HYCU instance must be provisioned manually (similar to the original HYCU backup controller deployment). For complete details on manual deployment, see the `HYCU User Guide <https://licensing.hycu.com/downloadarea/HYCU/release/3.5.0/docs/HYCU_UserGuide.pdf>`_.
+For AHV clusters with DHCP enabled, the additional HYCU instance can be provisioned automatically when adding the Files source. For ESXi or non-DHCP environments, the additional HYCU instance must be provisioned manually (similar to the original HYCU backup controller deployment). For complete details on manual deployment, see the `HYCU User Guide <https://support.hycu.com/hc/en-us/sections/115001018365-Product-documentation>`_.
 
 From the **HYCU** toolbar, click :fa:`cog` **> Nutanix Files**.
 
@@ -492,7 +494,7 @@ Click **+ New** and fill out the following fields:
 
 - **URL** - https://\ *Initials*\ -files.ntnxlab.local:9440
 - **Nutanix Files Server Credentials > Username** - hycu
-- **Nutanix Files Server Credentials > Password** - techX2019!
+- **Nutanix Files Server Credentials > Password** - nutanix/4u
 - **Backup Credentials > Username** - NTNXLAB\\Administrator
 - **Backup Credentials > Password** - nutanix/4u
 
@@ -564,13 +566,13 @@ Takeaways
 
 What are the key things you should know about **HYCU**?
 
-- HYCU provides a full suite of VM and application backup capabilities for AHV & ESXi.
+- HYCU provides a full suite of VM, VG, and application backup capabilities for AHV & ESXi.
 
 - HYCU is the first product to leverage Nutanix snapshots for both backup and recovery, eliminating VM stun and making it possible to recover rapidly from local Nutanix snapshots.
 
 - HYCU can also use Nutanix nodes as a backup storage target, providing Nutanix sellers an opportunity to increase deal size.
 
-- Similar to Prism, HYCU offers an easy, streamlined user experience.
+- Similar to Prism, HYCU offers an easy to use HTML5 management console.
 
 - HYCU is the only solution for ROBO customers that reduces network bandwidth by 50% by backing up from VM replicas.
 
@@ -590,12 +592,9 @@ Have a question about **HYCU**? Please reach out to the resources below:
 +--------------------------------+------------------------------------------------+
 |  Technical Marketing Engineer  | Dwayne Lessner, dwayne@nutanix.com             |
 +--------------------------------+------------------------------------------------+
-|  SME                           | ???                                            |
-+--------------------------------+------------------------------------------------+
 
-Looking to connect with your local HYCU rep or SE? Reach out to <???>
+Looking to connect with your local HYCU rep or SE? Reach out to:
 
-Additional Resources
-++++++++++++++++++++
+Americas – Subbiah Sundaram, Subbiah.Sundaram@hycu.com
 
-- Are there any documents, case studies, training, promotions, etc. that we want to link to here?
+International – Marko Ljubanović, Marko.Ljubanovic@hycu.com

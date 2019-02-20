@@ -11,20 +11,35 @@ Overview
 
 **This exercise walks you through importing and launching a Calm blueprint to deploy a simple Task Manager application used in multiple labs. You do not need to complete this exercise unless directed to do so as staging for another lab.**
 
-Importing the Blueprint
-+++++++++++++++++++++++
-
-Right-click on :download:`this link <TaskManager.json>` and **Save Link As...** to download the blueprint for the example application used in this exercise.
+Verifying the Default Project
++++++++++++++++++++++++++++++
 
 In **Prism Central**, select :fa:`bars` **> Services > Calm**.
 
 .. figure:: images/0.png
 
-Click |blueprints| **Blueprints** in the left hand toolbar to view available Calm blueprints.
+Click |projects| **Projects** in the left hand toolbar and select the **default** project.
 
 .. note::
 
   Mousing over an icon will display its title.
+
+Under **AHV Cluster** verify your assigned cluster is selected from the drop-down list, otherwise select it.
+
+.. figure:: images/1.png
+
+Under **Network**, verify the **Primary** and **Secondary** networks are selected and the **Primary** network is the default. Otherwise, make the selections as shown below.
+
+.. figure:: images/2.png
+
+If changes were made, click **Save**.
+
+Importing the Blueprint
++++++++++++++++++++++++
+
+Right-click on :download:`this link <TaskManager.json>` and **Save Link As...** to download the blueprint for the example application used in this exercise.
+
+Click |blueprints| **Blueprints** in the left hand toolbar to view available Calm blueprints.
 
 Click **Upload Blueprint** and select the **TaskManager.json** file previously downloaded.
 
@@ -37,16 +52,28 @@ Fill out the following fields:
 
 Click **Upload**.
 
-Defining Credentials
-++++++++++++++++++++
+Configuring the Blueprint
++++++++++++++++++++++++++
 
-Before you can launch the blueprint, you must first provide credentials, as this information is not stored in exported Calm blueprints.
+Before you can launch the blueprint, you must first provide specify the information not stored in exported Calm blueprints, including credentials.
 
 In the **Application Profile** pane on the right, fill out the following field:
 
 - **Mysql_password** - nutanix/4u
 
 .. figure:: images/4.png
+
+Select the **WinClient** service and in the pane on the right, under the **VM** tab, ensure the **Image** is set to the **Windows10** disk image as shown below.
+
+.. figure:: images/4b.png
+
+Under **Network Adapters (NICs)**, ensure that **NIC 1** is set to **Primary** as shown below.
+
+.. figure:: images/4c.png
+
+Select the **WebServer**, **HAProxy**, and **MySQL** services and ensure each has **NIC 1** set to **Primary**.
+
+.. figure:: images/4d.png
 
 Click **Save**.
 
@@ -98,7 +125,10 @@ Once the blueprint has been saved, click **Back**.
 
 .. figure:: images/8.png
 
-Note that after the credentials have been provided, **Publish**, **Download**, and **Launch** are now available from the toolbar. Click **Launch**.
+Launching the Blueprint
++++++++++++++++++++++++
+
+After the credentials have been provided, **Publish**, **Download**, and **Launch** are now available from the toolbar. Click **Launch**.
 
 Fill out the following fields:
 
@@ -113,5 +143,6 @@ You can monitor the status of your application deployment by clicking |applicati
 
 Provisioning the complete application will take approximately 15 minutes. Proceed to the next section of the lab while the application is provisioning.
 
+.. |projects| image:: images/projects.png
 .. |blueprints| image:: images/blueprints.png
 .. |applications| image:: images/applications.png

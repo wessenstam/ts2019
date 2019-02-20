@@ -1,23 +1,37 @@
 .. _calm_day2:
 
---------------------------------------
+----------------------
 Calm: Day 2 Operations
---------------------------------------
+----------------------
 
 Overview
 ++++++++
 
-Thus far we've seen how Calm can model complex applicaions in an easy to consume blueprint, and orchestrate their deployment.  However, Calm can manage applications throughout their *entire* lifecycle, not just creation.  In this lab, we'll create several custom actions which cover typical day 2 application operations.
+In the :ref:`calm_linux` and :ref:`calm_win` labs you explored how Calm can be used to model and deploy complex applications using a blueprint. Calm, however, it capable of managing applications throughout their **entire** lifecycle.
 
+**In this lab you will implement custom actions within Calm to address "Day 2" operations, including scaling out, scaling in, and upgrading your application.**
 
-Scale Out
-.........
+Lab Setup
++++++++++
 
-Imagine you're the administrator of the Task Manager Application that we've been building, and you're currently unsure of the amount of demand for this application by your end users.  Or imagine you expect the demand to ebb and flow due to the time of the year.  How can we easily scale to meet this changing demand?
+This lab depends on the availability of a multi-tier **Task Manger** web application implemented during the :ref:`calm_linux` lab.
 
-If you recall in a previous step, we set the minimum number of **WebServer** replicas to 2, and our maximum to 4.  In current versions of Calm, the minimum number is always the starting point.  In the event our default 2 replicas of our **WebServer** web server is not enough to handle the load of your end users, we can perform a **Scale Out** Action.
+If you already have basic Calm familiarity and have not completed the :ref:`calm_linux` lab, please refer to the :ref:`taskman` lab for instructions on importing the base **Task Manager** blueprint.
 
-In the **Application Overview > Application Profile** section, expand the **Default** Application Profile.  Then, select :fa:`plus-circle` next to the **Actions** section.  On the **Configuration Panel** to the right, rename the new Action to be **Scale Out**.
+**You do NOT need to launch the Task Manager blueprint once imported.**
+
+Scaling Out
++++++++++++
+
+Imagine you're the administrator of the Task Manager application that we've been building, and you're currently unsure of the amount of demand for this application by your end users. Or, potentially, you expect the demand to ebb and flow due to the time of the year. How can we easily scale to meet this changing demand?
+
+During the creation of the Task Manager blueprint, the **WebServer** service was configured with a minimum number of 2 replicas, with a maximum of 4. As a result, Calm will create 2 WebServer VMs during the initial deployment. In the event the 2 replicas are not enough to handle the load of your end users, a **Scale Out** operation is required.
+
+In the **Application Overview > Application Profile** section, expand the **Default** Application Profile.
+
+.. figure:: images/510scaleout0.png
+
+Select :fa:`plus-circle` next to **Actions** to add a new, custom action.  On the **Configuration Pane** to the right, rename the new Action to be **Scale Out**.
 
 .. figure:: images/510scaleout1.png
 
@@ -28,6 +42,10 @@ In the box **below** the **WebServer** service tile, click the **+ Task** button
 - **Scaling Count** - 1
 
 .. figure:: images/510scaleout2.png
+
+.. note::
+
+  The **+ Task** button that appears below the service tile is only used for scaling the number of replicas up and down, so it is important to select the correct option.
 
 When a user later runs the **Scale Out** task, a new **WebServer** VM will get created, and the **Package Install** tasks for that service will be executed.  However, we do need to modify the **HAProxy** configuration in order to start taking advantage of this new web server.
 
@@ -52,16 +70,20 @@ Copy and paste the following script into the **Script** field:
   sudo systemctl daemon-reload
   sudo systemctl restart haproxy
 
-That script will grab the last address in the WebServer address array, and add it to the haproxy.cfg file.  However, we want to be sure that this doesn't happen until **after** the new WebServer is fully up, otherwise the HAProxy server may send requests to a non-functioning WebServer.
+The script will parse the last IP address in the WebServer address array and append it to the haproxy.cfg file.  However, we want to be sure that this doesn't happen until **after** the new WebServer is fully up, otherwise the HAProxy server may send requests to a non-functioning WebServer.
 
-To solve this issue, on the **Workspace**, click on the **web_scale_out** task, then the **Create Edge** arrow icon, and finally click on the **add_webserver** task to draw the edge.  Afterwards your **Workspace** should look like this:
+To solve this issue, create an edge to force a dependency on the **web_scale_out** task completing prior to the **add_webserver** task.
+
+Your **Workspace** should now look like this:
 
 .. figure:: images/510scaleout3.png
 
-Scale In
-........
+Scaling In
+++++++++++
 
-Again imagine you're the administrator of this Task Manager Application we're building.  It's the end of your busy season, and you'd like to scale the Web Server back in to save on resource utilization.  To accomplish this, navigate to the **Application Overview > Application Profile** section, expand the **Default** Application Profile.  Then, select :fa:`plus-circle` next to the **Actions** section.  On the **Configuration Panel** to the right, rename the new Action to be **Scale In**.
+It's the end of your busy season, and you'd like to optimize your resource utilization by scaling back the number of deployed Web Servers.
+
+Select :fa:`plus-circle` to add a custom action named **Scale In** to the Default **Application Profile**.
 
 .. figure:: images/510scalein1.png
 
@@ -95,20 +117,24 @@ Copy and paste the following script into the **Script** field:
   sudo systemctl daemon-reload
   sudo systemctl restart haproxy
 
-That script will grab the last address in the WebServer address array, and remove it from the haproxy.cfg file.  Similar to the last step, we want to be sure that this happens **before** the new WebServer is destroyed, otherwise the HAProxy server may send requests to a non-functioning WebServer.
+Similar to the scale out script, this script will parse the last IP in the WebServer address array and use the `sed <http://www.grymoire.com/Unix/Sed.html>`_ command to remove the corresponding entry from haproxy.cfg.
 
-To solve this issue, on the **Workspace**, click on the **del_webserver** task, then the **Create Edge** arrow icon, and finally click on the **web_scale_in** task to draw the edge.  Afterwards your **Workspace** should look like this:
+Again, similar to the scale out script, we want to ensure requests stop being sent to the VM **before** it is removed.
+
+To solve this issue, create an edge to force a dependency on the **del_webserver** task completing prior to the **web_scale_in** task.
+
+Your **Workspace** should now look like this:
 
 .. figure:: images/510scalein3.png
 
-Click **Save** and ensure no errors or warnings pop-up.  If they do, resolve the issue, and **Save** again.
+Click **Save** and ensure no errors or warnings pop-up. If they do, resolve the issue, and **Save** again.
 
-Upgrades
-........
+Upgrading
++++++++++
 
-Again, let's imagine we're the administrator of this web application.  Your company has a mandate to keep all application code up to date, to help minimize security vulnerabilities.  Your company also has a strict change control process, meaning you can only update your application during the weekend.  You're tired of doing a straightforward, yet time consuming, upgrade procedure one Saturday of every month.  Let's get your Saturday back by modeling the application upgrade with Nutanix Calm.
+Your company has a mandate to keep all application code up to date, to help minimize security vulnerabilities. Your company also has a strict change control process, meaning you can only update your application during the weekend. You currently spend a significant portion of your time on one Saturday every month completing application update procedures during a maintenance window. Let's look at how you can reclaim your weekend by modeling the application upgrade with Calm.
 
-In the **Application Overview > Application Profile** section, expand the **Default** Application Profile.  Then, select :fa:`plus-circle` next to the **Actions** section.  On the **Configuration Panel** to the right, rename the new Action to be **Upgrade**.
+Select :fa:`plus-circle` to add a custom action named **Upgrade** to the Default **Application Profile**.
 
 The first thing we're going to need to do is to stop the respective processes on each of our Services.  **Within each** of our 3 Services, click the **+ Task** button to add a new task, and fill in the following information:
 
@@ -154,11 +180,13 @@ The first thing we're going to need to do is to stop the respective processes on
 
    sudo systemctl stop haproxy
 
-Once complete, our blueprint canvas should look like this:
+Once complete, your **Workspace** should look like this:
 
 .. figure:: images/upgrade1.png
 
-However, as we saw during the scaling section, we do not want to get into a situation where the WebServer goes down before the HAProxy, nor do we want the MySQL database to go down before the WebServers.  So let's manually draw orchestration edges so our HAProxy stops first, then the WebServers, then the MySQL database:
+Similar to both scaling and initial deployment operations, we do not want to get into a situation where the WebServer goes down before the HAProxy, nor do we want the MySQL database to go down before the WebServers.
+
+Create edges between services such that HAProxy stops before WebServers, and all WebServers stop before MySQL:
 
 .. figure:: images/upgrade2.png
 
@@ -187,15 +215,19 @@ Now that our critical services are stopped, we'll want to perform our updates.  
 
    sudo yum update -y
 
-Afterwards, your blueprint canvas should look like this:
+This script will use the Red Hat/CentOS package management tool, `yum <https://access.redhat.com/solutions/9934>`_ to search for and install updates to all installed packages.
+
+Your **Workspace** should now look like this:
 
 .. figure:: images/upgrade3.png
 
-From an a task ordering perpective, do we need to draw any orchestration edges?  Notice in the screenshot above that Calm automatically draws and edge from the Stop task to the Upgrade task, which is good as that's required.  However, do we need any side to side dependencies?
+From an a task ordering perspective, do we need to draw any orchestration edges? Notice in the screenshot above that Calm automatically draws and edge from the **Stop** task to the **Upgrade** task, which is good as that's required. However, do we need any side to side dependencies?
 
-If you said "no", you're correct.  The critical components are starting and stopping of the Services, there's no reason to have each Service upgrade one at a time.  **Unless** you specifically tell Calm **not** to, Calm will always run tasks in parallel to save time.
+If you said "no", you're correct. The critical components are starting and stopping of the Services, there's no reason to have each Service upgrade one at a time.
 
-Now that our Services have been upgraded, it's time to start them back up.  Again, we'll add a Task **within each** Service, with the following values:
+Unless you specify otherwise, Calm will always run tasks in parallel to save time.
+
+Now that our Services have been upgraded, it's time to start them. Again, we'll add a Task **within each** Service, with the following values:
 
 +------------------+--------------+------------------+----------------+
 | **Service Name** | MySQL        | WebServer        | HAProxy        |
@@ -239,27 +271,60 @@ Now that our Services have been upgraded, it's time to start them back up.  Agai
 
    sudo systemctl start haproxy
 
-Once complete, our blueprint canvas should look like this:
+Your **Workspace** should now look like this:
 
 .. figure:: images/upgrade4.png
 
-This time, we *do* need to draw orchestration edges.  As we talked about earlier, we would not want our HAProxy service up before our WebServers, or our WebServers up before our MySQL database.  So let's draw orchestration edges, starting MySQL, then the WebServers, and lastly the HAProxy:
+This time, we **DO** require additional orchestration edges. As previously discussed, we would not want our HAProxy service up before our WebServers, or our WebServers up before our MySQL database.
+
+Create orchestration edges starting with MySQL, then the WebServers, and lastly the HAProxy:
 
 .. figure:: images/upgrade5.png
 
 Click **Save** and ensure no errors or warnings pop-up.  If they do, resolve the issue, and **Save** again.
 
 Launching and Managing the Application
-......................................
+++++++++++++++++++++++++++++++++++++++
 
-Within the blueprint editor, click Launch. Specify a unique Application Name (e.g. Calm3TWA*<INITIALS>*-3) and click Create. Monitor the application as it deploys.
+From the upper toolbar in the Blueprint Editor, click **Launch**.
 
-Once the application changes into a RUNNING state, navigate to the **Manage** tab, and run the **Scale Out** action.  Monitor the Scale Out tasks performed.  Once complete, run the **Upgrade** actin, and monitor the Upgrade tasks performed.
+Specify a unique **Application Name** (e.g. *Initials*\ -CalmLinuxIntro1) and your **User_initials** Runtime variable value for VM naming.
+
+Click **Create**.
+
+Once the application reaches a **Running** status, navigate to the **Manage** tab, and run the **Scale Out** action.
+
+Changes to the application can be monitored on the **Audit** tab.
+
+Once the scaling operation has completed, you can log into the HAProxy VM and verify the new Web Server has been added to ``/etc/haproxy/haproxy.cfg``.
+
+Run the **Upgrade** action to update each service.
+
+Finally, run the **Scale In** action to remove the additional Web Server VM.
+
+(Optional) Variable Scaling
++++++++++++++++++++++++++++
+
+In this lab you configured scaling operations that expanded or shrank the WebServer service array by a single VM.
+
+When creating a new custom action, additional variables can be defined in the Configuration Pane specific to that action.
+
+.. figure:: images/optional1.png
+
+Leveraging a runtime variable, can you modify the scale out or scale in actions to perform a variable scaling operation?
+
+This will require some bash scripting experience to ensure the appropriate number of entries are being added and/or removed from the haproxy.cfg file.
 
 Takeaways
 +++++++++
 
 What are the key things you should know about **Nutanix Calm**?
+
+- Calm is not just for provisioning, rather any repetitive task can be automated.  Even saving 10 minutes a day adds up to a week of saved time over the year.
+
+- Expertise and skills can be shared between teams quickly by integrating that knowledge into a blueprint.  Security teams can ensure patches and rules are applied, application teams can see what's changed, developers can automatically have builds deployed.
+
+- Calm can be integrated with external tools to improve the experience - see the Jenkins integration video on youtube for an example of code going automatically from 'git commit' to running on Calm-provided infrastructure.
 
 - Not only can Calm orchestrate complex application deployments, it can manage applications throughout their entire lifecycle, by modeling complex Day 2 operations.
 
@@ -283,3 +348,34 @@ Have a question about **Nutanix Calm**? Please reach out to the resources below:
 +--------------------------------+------------------------------------------------+
 |  Technical Marketing Engineer  |  Michael Haigh, michael.haigh@nutanix.com      |
 +--------------------------------+------------------------------------------------+
+|  Solutions Architect           |  Ben Peterson, bp@nutanix.com                  |
++--------------------------------+------------------------------------------------+
+|  Solutions Architect           |  Mark Lavi, mark.lavi@nutanix.com              |
++--------------------------------+------------------------------------------------+
+|  Solutions Architect           |  Andy Schmid, andy.schmid@nutanix.com          |
++--------------------------------+------------------------------------------------+
+|  Founders Team Manager         |  Mike Masterson, mike.masterson@nutanix.com    |
++--------------------------------+------------------------------------------------+
+|  Founders Team                 |  Akbar Aziz, akbar.aziz@nutanix.com            |
++--------------------------------+------------------------------------------------+
+|  Founders Team                 |  David Roberts, dave.roberts@nutanix.com       |
++--------------------------------+------------------------------------------------+
+|  Founders Team                 |  Sachin Malhotra, sachin.malhotra@nutanix.com  |
++--------------------------------+------------------------------------------------+
+|  SME Americas                  |  Alex Lott, alex.lott@nutanix.com              |
++--------------------------------+------------------------------------------------+
+|  SME APAC                      |  Lei Ming Pan, leiming.pan@nutanix.com         |
++--------------------------------+------------------------------------------------+
+|  SME APAC                      |  Chris Rasmussen, crasmussen@nutanix.com       |
++--------------------------------+------------------------------------------------+
+|  SME EMEA                      |  Christophe Jauffret, christophe@nutanix.com   |
++--------------------------------+------------------------------------------------+
+|  SME EMEA                      |  Jose Gomez, jose.gomez@nutanix.com            |
++--------------------------------+------------------------------------------------+
+
+.. |proj-icon| image:: ../images/projects_icon.png
+.. |mktmgr-icon| image:: ../images/marketplacemanager_icon.png
+.. |mkt-icon| image:: ../images/marketplace_icon.png
+.. |bp-icon| image:: ../images/blueprints_icon.png
+.. |blueprints| image:: images/blueprints.png
+.. |applications| image:: images/blueprints.png

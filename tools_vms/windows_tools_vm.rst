@@ -7,16 +7,26 @@ Windows Tools VM
 Overview
 +++++++++
 
-In this section we will deploy the Windows Tools VM on your assigned HPOC for TechSummit.
+This Windows Server 2012 R2 image comes pre-installed with a number of tools, including:
 
-Deploy Windows VM
-.................
+- Microsoft Remote Server Administration Tools (RSAT)
+- PuTTY, CyberDuck, WinSCP
+- Sublime Text 3, Visual Studio Code
+- OpenOffice
+- Python
+- pgAdmin
+- Chocolatey Package Manager
+
+Deploy this VM on your assigned cluster if directed to do so as part of **Lab Setup**. Only deploy the VM once.
+
+Deploying Tools VM
+++++++++++++++++++
 
 In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click **Create VM**.
 
 Fill out the following fields:
 
-- **Name** - *initials*-Windows-ToolsVM
+- **Name** - *Initials*-Windows-ToolsVM
 - **Description** - (Optional) Description for your VM.
 - **vCPU(s)** - 1
 - **Number of Cores per vCPU** - 2
@@ -36,13 +46,7 @@ Click **Save** to create the VM.
 
 Power On the VM.
 
-Install Tools Software
-......................
+Login to the VM via RDP or Console session, using the following credentials:
 
-Make sure CyberDuck is installed.
-
-https://cyberduck.io/download/
-
-You will also need to download the connection profile for S3 over HTTP, as we don’t support HTTPS yet.
-
-https://cyberduck.io/s3/
+- **Username** - NTNXLAB\\Administrator
+- **password** - nutanix/4u

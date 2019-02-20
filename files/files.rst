@@ -13,9 +13,11 @@ Files
 Overview
 ++++++++
 
-Nutanix Files is...
+Traditionally, file storage has been yet another silo within IT, introducing unnecessary complexity and suffering from the same issues of scale and lack of continuous innovation seen in SAN storage. Nutanix believes there is no room for silos in the Enterprise Cloud. By approaching file storage as an app, running in software on top of a proven HCI core, Nutanix Files  delivers high performance, scalability, and rapid innovation through One Click management.
 
-**In this lab you will...**
+**In this lab you will step through a Files deployment, manage SMB shares and NFS exports, scale out the environment, and explore upcoming Files features. The lab will provide key considerations around deployment, configuration, and use cases.**
+
+.. _deploying_files:
 
 Deploying Files
 +++++++++++++++
@@ -24,11 +26,11 @@ In **Prism > File Server**, click **+ File Server** to open the **New File Serve
 
 .. figure:: images/1.png
 
-For the purpose of saving time, the Files 3.2.0 package has already been uploaded to your cluster. Files binaries can be downloaded directly through Prism or uploaded manually.
+For the purpose of saving time, the Files 3.2.0.1 package has already been uploaded to your cluster. Files binaries can be downloaded directly through Prism or uploaded manually.
 
 .. figure:: images/2.png
 
-Additionally, the cluster's **Data Services** IP Address has already been configured (*10.21.xxx.38*). In a Files cluster, storage is presented to the Files VMs as a Volume Group via iSCSI, hence the dependency on the Data Services IP.
+Additionally, the cluster's **Data Services** IP Address has already been configured (*10.XX.YY.38*). In a Files cluster, storage is presented to the Files VMs as a Volume Group via iSCSI, hence the dependency on the Data Services IP.
 
 .. note::
 
@@ -57,7 +59,13 @@ Fill out the following fields:
 
 Click **Next**.
 
-Select the **Secondary - Managed** VLAN for the Client Network. Each Files VM will consume a single IP on the client network.
+Select the **Secondary - Managed** VLAN for the **Client Network**. Each Files VM will consume a single IP on the client network.
+
+.. note::
+
+  In the HPOC environment it is critical to use the secondary VLAN for the client network if using separate client and storage networks.
+
+  It is typically desirable in production environments to deploy Files with dedicated virtual networks for client and storage traffic. When using two networks, Files will, by design, disallow client traffic the storage network, meaning VMs assigned to the primary network will be unable to access shares.
 
 .. note::
 
@@ -65,9 +73,9 @@ Select the **Secondary - Managed** VLAN for the Client Network. Each Files VM wi
 
   .. figure:: images/6.png
 
-Specify your cluster's **DC** VM IP as the **DNS Resolver IP** (e.g. 10.21.xxx.40).
+Specify your cluster's **DC** VM IP (found in :ref:`stagingdetails`) as the **DNS Resolver IP** (e.g. 10.XX.YY.40).
 
-.. warning::
+.. note::
 
   In order for the Files cluster to successfully find and join the **NTNXLAB.local** domain it is critical that the **DNS Resolver IP** is set to the **DC** VM IP **FOR YOUR CLUSTER**. By default, this field is set to the primary **Name Server** IP configured for the Nutanix cluster, **this value is incorrect and will not work.**
 
@@ -80,10 +88,6 @@ Select the **Primary - Managed** VLAN for the Storage Network. Each Files VM wil
 .. figure:: images/8.png
 
 Click **Next**.
-
-.. note::
-
-  It is typically desirable to deploy Files with dedicated networks for client and storage. By design, however, Files does not allow client connections from the storage network in this configuration.
 
 Fill out the following fields:
 
@@ -114,7 +118,7 @@ Monitor deployment progress in **Prism > Tasks**. Deployment should take approxi
 
   If you receive a warning regarding DNS record validation failure, this can be safely ignored. The shared cluster does not use the same DNS servers as your Files cluster, and as a result is unable to resolve the DNS entries created when deploying Files.
 
-Upon completion, return to **Prism > File Server** and select the *Initials*\ **Files** server and click **Protect**.
+Upon completion, return to **Prism > File Server** and select the *Initials*\ **-Files** server and click **Protect**.
 
 .. figure:: images/12.png
 
@@ -125,7 +129,7 @@ Observe the default Self Service Restore schedules, this feature controls the sn
 Using SMB Shares
 ++++++++++++++++
 
-In this exercise you will...
+In this exercise you will create and test a SMB share, used to support home directories, user profiles, and other unstructured file data such as departmental shares commonly accessed by Windows clients.
 
 Creating the Share
 ..................
@@ -186,7 +190,7 @@ Select the **Security** tab and click **Advanced**.
 
 .. figure:: images/18.png
 
-Select **Users (*Intials*\ -Files\\Users)** and click **Remove**.
+Select **Users (**\ *Initials*\ **-Files\\Users)** and click **Remove**.
 
 Click **Add**.
 
@@ -229,7 +233,7 @@ Wit the Marketing share still selected, review the **Share Details**, **Usage** 
 Using NFS Exports
 +++++++++++++++++
 
-In this exercise you will...
+In this exercise you will create and test a NFSv4 export, used to support clustered applications, store application data such as logging, or storing other unstructured file data commonly accessed by Linux clients.
 
 Creating the Export
 ...................
@@ -269,6 +273,10 @@ Testing the Export
 ..................
 
 You will first provision a CentOS VM to use as a client for your Files export.
+
+.. note::
+
+  If you have already deployed the :ref:`linux_tools_vm` as part of another lab, you may use this VM as your NFS client instead.
 
 In **Prism > VM > Table**, click **+ Create VM**.
 
@@ -339,11 +347,9 @@ Return to **Prism > File Server > Share > logs** to monitor performance and usag
 (Optional) Expanding a Files Cluster
 ++++++++++++++++++++++++++++++++++++
 
-Files offers the ability to scale up and scale out a deployment. VMs can be scaled up until...
+Files offers the ability to scale up and scale out a deployment. Scaling up the CPU and memory of Files VMs allows an environment to support higher storage throughtput and number of concurrent sessions. Currently, Files VMs can be scaled up to a maximum of 12 vCPU and 96GB of RAM each.
 
-An individual Files cluster can scale out up to the number of physical nodes in the Nutanix cluster, ensuring that no more than 1 Files VM runs on a single node during normal operation.
-
-<?>
+The true power of Files scalability is the ability to simply add more Files VMs, scaling out much like the underlying Nutanix distributed storage fabric. An individual Files cluster can scale out up to the number of physical nodes in the Nutanix cluster, ensuring that no more than 1 Files VM runs on a single node during normal operation.
 
 Return to **Prism > File Server** and select *Initials*\ **-Files**.
 
@@ -390,18 +396,40 @@ Open **DC.ntnxlab.local > Forward Lookup Zones > ntnxlab.local** and verify ther
 Coming Soon!
 ++++++++++++
 
-Need content/video about changes coming to Files 3.5
+In the upcoming Files 3.5 launch, Files will introduce:
+
+- Support for NFSv3
+
+- Support for Self-Service File Restore for NFS (currently supported for SMB shares)
+
+- Support for Change File Tracking (CFT) Backup for NFS (currently supported for SMB shares)
+
+- Support for Nutanix software-based Data-At-Rest Encryption
+
+- Support for multi-protocol access to shares
+
+- A new File Analytics dashboard, providing a comprehensive view into Files usage for the purposes of capacity planning, security, and compliance.
+
+**Check out the video below for a look at the upcoming Files enhancements!**
+
+.. raw:: html
+
+  <iframe width="640" height="360" src="https://www.youtube.com/embed/thkOoPHQHNE?rel=0&amp;showinfo=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Takeaways
 +++++++++
 
 What are the key things you should know about **Nutanix Files**?
 
-- Stuff
+- Files can be rapidly deployed on top of existing Nutanix clusters, providing SMB and NFS storage for user shares, home directories, departmental shares, applications, and any other general purpose file storage needs.
 
-- Goes
+- Files is not a point solution. VM, File, Block, and Object storage can all be delivered by the same platform using the same management tools, reducing complexity and management silos.
 
-- Here
+- Files can scale up and scale out with One Click performance optimization.
+
+- Files is a standalone license, <some background on the current Files licensing model>
+
+- <Any others?>
 
 Getting Connected
 +++++++++++++++++
@@ -419,15 +447,12 @@ Have a question about **Nutanix Files**? Please reach out to the resources below
 +--------------------------------+------------------------------------------------+
 |  Technical Marketing Engineer  |                                                |
 +--------------------------------+------------------------------------------------+
-|  Founders Team Manager         |  Mark Sommer, mark.sommer@nutanix.com          |
+|  Founders Team Lead            |                                                |
 +--------------------------------+------------------------------------------------+
-|  Founders Team                 |  Peter Brass, peter@nutanix.com                |
-+--------------------------------+------------------------------------------------+
-|  Founders Team                 |  Eric Tornwall, eric.tornwall@nutanix.com      |
-+--------------------------------+------------------------------------------------+
-|  Founders Team                 |  Vlad Pejovic, vladimi.pejovic@nutanix.com     |
-+--------------------------------+------------------------------------------------+
-|  SME                           |                                                |
-+--------------------------------+------------------------------------------------+
-|  SME                           |                                                |
-+--------------------------------+------------------------------------------------+
+
+<Any other SMEs that should be listed here?>
+
+Additional Resources
+++++++++++++++++++++
+
+<links for Sizing docs, links to case studies, etc.?>

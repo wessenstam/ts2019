@@ -271,20 +271,20 @@ Select your *initials*-\**Recovery** recovery plan and select **Failover** from 
 
 .. figure:: images/drrunbooks_11.png
 
-You should see your assigned HPOC PC as the **Primary Location**, and your assigned DR PC (that you are logged into) as the **Recovery Location).
+You should see your assigned HPOC PC as the **Primary Location**, and your assigned DR PC (that you are logged into) as the **Recovery Location**.
 
 .. figure:: images/drrunbooks_12.png
 
 Click **Failover**.
 
-Change the **Action** to **Execute Anyway**, and click **Proceed** when se the licensing error.
+Change the **Action** to **Execute Anyway**, and click **Proceed**..
 
 .. figure:: images/drrunbooks_13.png
 
 Check Failover Status
 .....................
 
-Click the *initials*-\**Recovery** recovery plan to see the status and details.
+Click the *Initials*-**Recovery** recovery plan to see the status and details.
 
 .. figure:: images/drrunbooks_14.png
 
@@ -309,7 +309,7 @@ In **Prism Central** > select :fa:`bars` **> Policies > Recovery Plans**.
 
 Select your *initials*-\**Recovery** recovery plan and select **Failover** from the **Actions** dropdown.
 
-You should see your assigned DR PC as the **Primary Location**, and your assigned HPOC PC (that you are logged into) as the **Recovery Location).
+You should see your assigned DR PC as the **Primary Location**, and your assigned HPOC PC (that you are logged into) as the **Recovery Location**.
 
 Click **Failover**.
 
@@ -337,11 +337,15 @@ Takeaways
 
 What are the key things you should know about **Nutanix Leap DR Runbooks**?
 
-- stuff
+- All new Runbook functionality is in PC and required on both sides.
 
-- goes
+- Runbooks don't require you to setup remote sites or storage mappings anymore.
 
-- here
+- The last octet of IP address can be kept the same in a new subnet in case DNS doesn't work.
+
+- `Tech Note 2027 <https://portal.nutanix.com/#/page/solutions/details?targetId=TN-2027_Data_Protection_and_Disaster_Recovery:TN-2027_Data_Protection_and_Disaster_Recovery>`_
+
+- `Best Practice Guide <https://portal.nutanix.com/#/page/solutions/details?targetId=BP-2005_Data_Protection:BP-2005_Data_Protection - best practice>`_
 
 Getting Connected
 +++++++++++++++++
@@ -358,6 +362,12 @@ Have a question about **Nutanix Leap DR Runbooks**? Please reach out to the reso
 |  Product Marketing Manager     |  Mayank Gupta, mayank.gupta@nutanix.com        |
 +--------------------------------+------------------------------------------------+
 |  Technical Marketing Engineer  |  Dwayne Lessner, dwayne@nutanix.com            |
++--------------------------------+------------------------------------------------+
+|  Founders Team Manager         |  Diane Genova, diane.genova@nutanix.com        |
++--------------------------------+------------------------------------------------+
+|  Founders Team                 |  Archish Dalal, archish.dalal@nutanix.com      |
++--------------------------------+------------------------------------------------+
+|  Founders Team                 |  Norbert Thier, norbert.thier@nutanix.com      |
 +--------------------------------+------------------------------------------------+
 |  SME                           |                                                |
 +--------------------------------+------------------------------------------------+

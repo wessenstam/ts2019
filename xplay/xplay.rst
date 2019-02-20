@@ -9,25 +9,61 @@ Overview
 
 **Estimated time to complete: 60 MINUTES**
 
+Prism Pro is a product designed to make our customer IT operations smarter and automated through machine intelligence and automation.
+Today, there is no IT operations management (ITOM) solution that is specifically designed for the data center built around HCI.
+The modern data center is dynamic, scalable, and highly performed
+The traditional ITOM, performance monitoring, and IT OPS tools are built for the static infrastructure.
+When being used in the modern data center, these tools overwhelm IT admins with complexity and noisy signals.
+This decreases the productivity of the operations and reduces the ROI from adopting the HCI.
+
+Prism Pro takes a unique approach that maximizes the operation efficiency of a HCI based data center.
+First, Prism Pro uses purpose-built machine learning (X-FIT) to extract the insights from the mass amount of operations data the HCI produces.
+Using X-FIT, Prism Pro shipped its first three use cases capacity forecast and planning, VM right sizing, and anomaly detection.
+These use cases help our customer detect problems and waste with actionable signal.
+Second, Prism Pro delivers an automation mechanism (X-Play) that enables customers to automate their operations tasks confidently to respond the signal X-FIT detects.
+
+X-Play is designed to address the number 1 pain point when customers deal with automation, the fear of amplified impact because of complexity of the automation.
+Not like other solutions, such as Calm, for the application lifecycle automation, X-Play’s goal is to automate the tasks that admins face daily.
+To eliminate the fear and give the control back to the admin, X-Play takes the codeless approach which has been proven in the companies such as IFTTT and Zapier that it is easy to adopt and extremely versatile.
+
+There is no other tools in the market taking this approach and has the power to combine the intelligence and codeless automation.
+The power of X-FIT and X-Play allows the customer to truly leverage the machine data the HCI infrastructure produces and operate it efficiently, confidently, and intelligently.
+
+
 Lab Setup
 +++++++++
 
+This lab requires applications provisioned as part of the :ref:`linux_tools_vm`.
 
+If you have not yet deployed this VM, see the linked steps before proceeding with the lab.
 
-For this lab you will need the Linux-ToolsVM.
+Enabling X-Play
+...............
 
-If you have not deployed this yet, please do the lab below before continuing.
+X-Play is available as a hidden, Tech Preview in AOS 5.10 and will GA in AOS 5.11. Follow the steps below to enable X-Play on AOS 5.10:
 
-:ref:`linux_tools_vm`
+Open **Google Chrome** and select **View > Developer > Developer Tools**.
 
+.. figure:: images/xplay_42.png
+
+Next Click on **Application**, and expand **Local Storage** under **Storage** on the right pane.
+
+Add the following:
+
+- **nutanix_ui_release**  - 5.11
+
+.. figure:: images/xplay_43.png
+
+Close **Developer Tools**.
 
 Automatically Add Memory to a VM When A Constraint is Detected
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-How often have you been on-call, and got that alert or service ticket for a VM that was having High memory or CPU?
+How often have you been on-call, and got that alert or service ticket for a VM that had high memory or CPU usage?
 Chances are a lot, and generally during dinner, while you are out with family, or sleeping.
 
 What if you could use X-Play in Prism Pro to automatically take care of this for you when Prism Pro detected the constraint?
+
 Good news, you can. Let's walk through how to set that up.
 
 Run Stress Test
@@ -35,7 +71,7 @@ Run Stress Test
 
 Lets add some load by initiating a stress test.
 
-Login to the *initials*-**Linux-ToolsVM** via ssh or Console session.
+Login to the *Initials*\ **-Linux-ToolsVM** via ssh or Console session.
 
 - **Username** - root
 - **password** - nutanix/4u
@@ -46,12 +82,12 @@ Login to the *initials*-**Linux-ToolsVM** via ssh or Console session.
 
 .. note::
 
-  It will take roughly 5min for Stress to generate the memory load to cause the alert.
+  It will take approximately 5 minutes for **stress** to generate the memory load to cause the alert.
 
 Create Alert Policy
 ...................
 
-In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click *initials*-**Linux-ToolsVM**.
+In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click *Initials*\ **-Linux-ToolsVM**.
 
 Next select **Metrics > Memory Usage**.
 
@@ -65,10 +101,10 @@ You will see the  **Create Alert Policy** window, fill out the following fields:
 
 - **Entity Type** - VM
 - **Entity (Line 1)** - One VM
-- **Entity (Line 2)** - *initials*-**Linux-ToolsVM**
+- **Entity (Line 2)** - *Initials*\ **-Linux-ToolsVM**
 - **Metric** - Memory Usage
 - **Impact Type** - Performance
-- **Policy Name** - *initials* - VM Memory Constrained
+- **Policy Name** - *Initials* - VM Memory Constrained
 - **Description** - Optional
 - **Auto Resolve Alerts** - Checked
 - **Enable Policy** - **Unchecked**
@@ -109,7 +145,7 @@ Select :fa:`bell` **Alert** as Trigger, and click **Select**.
 
   .. figure:: images/xplay_07.png
 
-Search “VM Memory Constrained” in **Alert Policy**, and select *initials* - **VM Memory Constrained**.
+Search “VM Memory Constrained” in **Alert Policy**, and select *Initials* - **VM Memory Constrained**.
 
 .. figure:: images/xplay_08.png
 
@@ -123,7 +159,7 @@ Select **Source Entity** from the parameters.
 
 .. note::
 
-  Source entity means the entity triggers the alert.
+  Source entity means the entity that triggered the alert.
 
 - **Target VM** - {{trigger[0].source_entity_info}}
 - **Time To Live**  - 1 day(s)
@@ -156,7 +192,7 @@ Click **Add Action**, and select the :fa:`envelope` **Email** action.
 
   There is a bug right now that when you click a parameter in the **parameter** popup, the parameter string will be appended at the end of the text string, not at the place of the cursor.
 
-  You have to cut and paste it into the write place if that is the case.
+  You have to cut and paste it into the right place if that is the case.
 
 .. figure:: images/xplay_13.png
 
@@ -170,7 +206,7 @@ Select **Alert** from the parameters.
 
 Click **Save & Close**, and fill out the following fields:
 
-- **Name**  - *initials* - Auto Remove Memory Constraint
+- **Name**  - *Initials* - Auto Remove Memory Constraint
 - **Description** - Optional
 - **Status**  - Enabled
 
@@ -181,15 +217,15 @@ Click **Save**.
 Cause Memory Constraint
 .......................
 
-In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click *initials*-**Linux-ToolsVM**.
+In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click *Initials*\ **-Linux-ToolsVM**.
 
-Take note of your *initials*-**Linux-ToolsVM** VM's memory capacity (should be 2 GiB).
+Take note of your *Initials*\ **-Linux-ToolsVM** VM's memory capacity (should be 2 GiB).
 
 Click **Alerts**, Select **Alert Policy** from **Configure** Dropdown.
 
 .. figure:: images/xplay_16.png
 
-Select *initials* - **VM Memory Constrained**, and **Enable** the policy.
+Select *Initials* - **VM Memory Constrained**, and **Enable** the policy.
 
 .. figure:: images/xplay_17.png
 
@@ -210,14 +246,14 @@ After 2-5 minutes you should receive an email from Prism.
 
 Check the email to see that its subject and email body have filled the real value for the parameters you set up earlier.
 
-Check the memory capacity on your *initials*-**Linux-ToolsVM** VM now, you should see that it has increased.
+Check the memory capacity on your *Initials*\ **-Linux-ToolsVM** VM now, you should see that it has increased.
 
 Review the Playbook Play
 ........................
 
 In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
 
-Select your *initials* - **Auto Remove Memory Constraint**, and **disable** it.
+Select your *Initials* - **Auto Remove Memory Constraint**, and **disable** it.
 
 Click **Plays**.
 
@@ -230,7 +266,7 @@ Click the Play, and examine the details.
 Reset VM Memory
 ...............
 
-Change your *initials*-**Linux-ToolsVM** memory back to 2gb.
+Change your *Initials*\ **-Linux-ToolsVM** memory back to 2gb.
 
 Reduce CPU Capacity For A VM During A Maintenance Window
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -256,10 +292,10 @@ You will see the  **Create Alert Policy** window, fill out the following fields:
 
 - **Entity Type** - VM
 - **Entity (Line 1)** - One VM
-- **Entity (Line 2)** - *initials*-**Linux-ToolsVM**
+- **Entity (Line 2)** - *Initials*\ **-Linux-ToolsVM**
 - **Metric** - CPU Usage
 - **Impact Type** - Performance
-- **Policy Name** - *initials* - VM CPU Overprovisioned
+- **Policy Name** - *Initials* - VM CPU Overprovisioned
 - **Description** - Optional
 - **Auto Resolve Alerts** - Checked
 - **Enable Policy** - **Unchecked**
@@ -285,7 +321,7 @@ Click **Create Playbook**.
 
 Select :fa:`bell` **Alert** as Trigger, and click **Select**.
 
-Search “VM CPU Overprovisioned” in **Alert Policy**, and select *initials* - **VM CPU Overprovisioned**.
+Search “VM CPU Overprovisioned” in **Alert Policy**, and select *Initials* - **VM CPU Overprovisioned**.
 
 Click **Add Action**, and select the :fa:`power-off` **Power Off VM** action.
 
@@ -303,14 +339,10 @@ Click **Add Action**, and select the **VM Reduce CPU** action.
 Select **Source Entity** from the parameters.
 
 - **Target VM** - {{trigger[0].source_entity_info}}
-- **vCPUs to Remove**  -
+- **vCPUs to Remove**  - 1
 - **Minimum Number of vCPUs**  - 1
-- **Cores per vCPU to Remove**  -
-- **Minimum Number of Cores per vCPU**  -
-
-.. note::
-
-  There is a bug in 5.10 that missed the two fields allowing you change the vCPU counts. This is fixed in 5.11.
+- **Cores per vCPU to Remove**  - Leave Blank
+- **Minimum Number of Cores per vCPU**  - Leave Blank
 
   .. figure:: images/xplay_21.png
 
@@ -352,7 +384,7 @@ The **Restrict** label will change to **Restriction Set**. If you hover the mous
 
   The step above illustrate the way you can achieve this in 5.10 early access. However we made a major enhancement in 5.11.
 
-  You will see three action types that will replace and enhance the “restrict” in 5.10, **Wait for Some Time** / **Wait for Some Day of Month** / **Wait for Some Day of Week**.
+  You will see three action types that will replace and enhance the “restrict” in 5.10, **Wait for Some Time** / **Wait for Some Time / Wait until Day of Month / Wait until Day of Week**.
 
   .. figure:: images/xplay_24.png
 
@@ -360,12 +392,12 @@ The **Restrict** label will change to **Restriction Set**. If you hover the mous
 
   .. figure:: images/xplay_26.png
 
-  These action type can be used just any other regular action type in any part of the Playbook.
-  It helps unlock not only the maintenance window setting but also allow a human approval process happening for a playbook.
+  These action types can be used just any other regular action type in any part of the Playbook.
+  It helps unlock not only the maintenance window setting but also allow for human approval process for playbook execution.
 
 Click **Save & Close**, and fill out the following fields:
 
-- **Name**  - *initials* - Reduce VM CPU
+- **Name**  - *Initials* - Reduce VM CPU
 - **Description** - Optional
 - **Status**  - Enabled
 
@@ -374,13 +406,13 @@ Click **Save**.
 Cause CPU Over-Provision
 ........................
 
-In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click *initials*-**Linux-ToolsVM**.
+In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click *Initials*\ **-Linux-ToolsVM**.
 
-Take note of your *initials*-**Linux-ToolsVM** VM's CPU Cores (should be 2).
+Take note of your *Initials*\ **-Linux-ToolsVM** VM's CPU Cores (should be 2).
 
 Click **Alerts**, Select **Alert Policy** from **Configure** Dropdown.
 
-Select *initials* - **VM CPU Overprovisioned**, and **Enable** the policy.
+Select *Initials* - **VM CPU Overprovisioned**, and **Enable** the policy.
 
 Open a console session or SSH into Prism Central, and run the **paintrigger.py** script.
 
@@ -397,7 +429,7 @@ Open a console session or SSH into Prism Central, and run the **paintrigger.py**
 
 In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
 
-Select your *initials* - **Reduce VM CPU -**, and Click **Plays**.
+Select your *Initials* - **Reduce VM CPU -**, and Click **Plays**.
 
 You should see that there is a play with your playbook name is in **scheduled** status.
 
@@ -405,7 +437,7 @@ Wait for 1-2 minutes past the start time you set earlier, and you should receive
 
 Check the email to see that its subject and email body have filled the real value for the parameters you set up earlier.
 
-Check the CPU Cores on your *initials*-**Linux-ToolsVM** VM now, you should now see the **Virtual CPU Count** is “1” (instead of “2”).
+Check the CPU Cores on your *Initials*\ **-Linux-ToolsVM** VM now, you should now see the **Virtual CPU Count** is “1” (instead of “2”).
 
 This means that the trigger happened and the rest of the play is waiting for the window to execute. You can select this play and abort it (from the action button).
 
@@ -414,7 +446,7 @@ Review the Playbook Play
 
 In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
 
-Select your *initials* - **Reduce VM CPU**, and **disable** it.
+Select your *Initials* - **Reduce VM CPU**, and **disable** it.
 
 Click **Plays**.
 
@@ -439,7 +471,7 @@ Use X-Play with Other Nutanix Products
 
 Let's see how we can use X-Play with other Nutanix products by creatinga playbook to automatically quarantine a bully VM.
 
-Login to the *initials*-**Linux-ToolsVM** via ssh or Console session.
+Login to the *Initials*\ **-Linux-ToolsVM** via ssh or Console session.
 
 - **Username** - root
 - **password** - nutanix/4u
@@ -491,10 +523,10 @@ You will see the  **Create Alert Policy** window, fill out the following fields:
 
 - **Entity Type** - VM
 - **Entity (Line 1)** - One VM
-- **Entity (Line 2)** - *initials*-**Linux-ToolsVM**
+- **Entity (Line 2)** - *Initials*\ **-Linux-ToolsVM**
 - **Metric** - Controller IO Bandwidth
 - **Impact Type** - Performance
-- **Policy Name** - *initials* - Bully VM
+- **Policy Name** - *Initials* - Bully VM
 - **Description** - Optional
 - **Auto Resolve Alerts** - Checked
 - **Enable Policy** - **Unchecked**
@@ -525,7 +557,7 @@ Select **REST API** action, and then select **Clone** from the **Action** dropdo
 
 Fill in the following fields:
 
-- **Name**  - *initials* - Quarantine a VM
+- **Name**  - *Initials* - Quarantine a VM
 - **Description** - Quarantine a VM using Flow API
 - **Method**  - PUT
 - **URL** - https://*<your PC IP>*:9440/api/nutanix/v3/vms/{{trigger[0].source_entity_info.uuid}}
@@ -544,7 +576,7 @@ Click **Create Playbook**.
 
 Select :fa:`bell` **Alert** as Trigger, and click **Select**.
 
-Search “Bully VM” in **Alert Policy**, and select *initials* - **Bully VM**.
+Search “Bully VM” in **Alert Policy**, and select *Initials* - **Bully VM**.
 
 Click **Add Action**, and select the :fa:`terminal` **REST API** action.
 
@@ -555,7 +587,7 @@ Click **Add Action**, and select the :fa:`terminal` **REST API** action.
 
   There is a bug in 5.10 that you have to click the “GET” in the drop list once even though “GET” is shown as the default value)
 
-Click **Add Action**, and select the :fa:`terminal` *initials* - **Quarantine a VM** action.
+Click **Add Action**, and select the :fa:`terminal` *Initials* - **Quarantine a VM** action.
 
 .. note::
 
@@ -575,7 +607,7 @@ Select **Alert** from the parameters.
 
 Click **Save & Close**, and fill out the following fields:
 
-- **Name**  - *initials* - Auto Quarantine A Bully VM
+- **Name**  - *Initials* - Auto Quarantine A Bully VM
 - **Description** - Optional
 - **Status**  - Enabled
 
@@ -584,13 +616,13 @@ Click **Save**.
 Cause Bully VM Condition
 ........................
 
-In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click *initials*-**Linux-ToolsVM**.
+In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click *Initials*\ **-Linux-ToolsVM**.
 
 Click **Categories**, and make sure it is not currently quarantined and associated with any categories.
 
 In **Prism Central** > select :fa:`bars` **> Activity > Alerts**, and Select **Alert Policy** from **Configure** Dropdown.
 
-Select *initials* - **Bully VM**, and **Enable** the policy.
+Select *Initials* - **Bully VM**, and **Enable** the policy.
 
 Open a console session or SSH into Prism Central, and run the **paintrigger.py** script.
 
@@ -605,16 +637,16 @@ Open a console session or SSH into Prism Central, and run the **paintrigger.py**
 
   This will resolve all the alerts, force NCC check to run immediately and trigger the alert.
 
-After 1-2 minutes check *initials*-**Linux-ToolsVM**, you should now see the VM is quarantined.
+After 1-2 minutes check *Initials*\ **-Linux-ToolsVM**, you should now see the VM is quarantined.
 
 Cleanup Bully VM Condition
 ..........................
 
-Un-quarantine your *initials*-**Linux-ToolsVM**.
+Un-quarantine your *Initials*\ **-Linux-ToolsVM**.
 
 In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
 
-Click the *initials* - **Auto Quarantine A Bully VM** playbook, and click the **Disable** button.
+Click the *Initials* - **Auto Quarantine A Bully VM** playbook, and click the **Disable** button.
 
 Click the **Play** tab, you should see that a play has just completed.
 
@@ -629,7 +661,7 @@ We will using IFTTT as the example of the 3rd party tool to send a Slack message
 
 Before we setup IFTTT, ensure your *initial*-**Linux-ToolsVM** has memory size of 2gb, and if not change it to 2GB (power off, update, and power on).
 
-If not still logged in, Login to the *initials*-**Linux-ToolsVM** via ssh or Console session.
+If not still logged in, Login to the *Initials*\ **-Linux-ToolsVM** via ssh or Console session.
 
 Run stress again to generate load.
 
@@ -756,7 +788,7 @@ Select **REST API** action, and then select **Clone** from the **Action** dropdo
 
 Fill in the following fields:
 
-- **Name**  - *initials* - Slack an X-Play Message by IFTTT
+- **Name**  - *Initials* - Slack an X-Play Message by IFTTT
 - **Description** - Using with IFTTT
 - **Method**  - Post
 - **URL** - Your IFTTT URL, will be something like this *https://maker.ifttt.com/trigger/xplay/with/key/xxxxxyyyzzz*
@@ -772,13 +804,13 @@ Create Playbook
 
 In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
 
-Select *initials* - **Auto Remove Memory Constraint** created in the earlier lab, and click **Update** from the **Action** dropdown.
+Select *Initials* - **Auto Remove Memory Constraint** created in the earlier lab, and click **Update** from the **Action** dropdown.
 
 Click :fa:`ellipsis-v` next to the action **Email** and then choose **Add Action Before**.
 
 .. figure:: images/xplay_41.png
 
-Select the :fa:`terminal` *initials* - **Slack an X-Play Message by IFTTT** action.
+Select the :fa:`terminal` *Initials* - **Slack an X-Play Message by IFTTT** action.
 
 Click **Save & Close**
 
@@ -787,13 +819,13 @@ Toggle to **Enabled**, and click **Save**.
 Cause Memory Constraint
 .......................
 
-In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click *initials*-**Linux-ToolsVM**.
+In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**, and click *Initials*\ **-Linux-ToolsVM**.
 
-Take note of your *initials*-**Linux-ToolsVM** VM's memory capacity (should be 2 GiB).
+Take note of your *Initials*\ **-Linux-ToolsVM** VM's memory capacity (should be 2 GiB).
 
 Click **Alerts**, Select **Alert Policy** from **Configure** Dropdown.
 
-Select *initials* - **VM Memory Constrained**, and **Enable** the policy.
+Select *Initials* - **VM Memory Constrained**, and **Enable** the policy.
 
 Open a console session or SSH into Prism Central, and run the **paintrigger.py** script.
 
@@ -810,16 +842,16 @@ Open a console session or SSH into Prism Central, and run the **paintrigger.py**
 
 After 2-5 minutes you should receive an email from Prism.
 
-You also should receive the slack message. Check the message content.
+You also should receive the Slack message. Check the message content.
 
-Check the memory capacity on your *initials*-**Linux-ToolsVM** VM now, you should see that it has increased.
+Check the memory capacity on your *Initials*\ **-Linux-ToolsVM** VM now, you should see that it has increased.
 
 Review the Playbook Play
 ........................
 
 In **Prism Central** > select :fa:`bars` **> Operations > Playbooks**.
 
-Select your *initials* - **Auto Remove Memory Constraint**, and **disable** it.
+Select your *Initials* - **Auto Remove Memory Constraint**, and **disable** it.
 
 Click **Plays**.
 
@@ -830,7 +862,7 @@ Click the Play, and examine the details.
 Reset VM Memory
 ...............
 
-Change your *initials*-**Linux-ToolsVM** memory back to 2gb.
+Change your *Initials*\ **-Linux-ToolsVM** memory back to 2gb.
 
 Takeaways
 +++++++++

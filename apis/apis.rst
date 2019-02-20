@@ -1,4 +1,4 @@
-initialization.. _apis:
+.. _apis:
 
 --------------------
 APIs: Python Example
@@ -19,13 +19,9 @@ The Nutanix Python API Lab will cover a couple of key points.
 Lab Setup
 +++++++++
 
-For this lab you will need the Linux-ToolsVM or the Windows-ToolsVM (your choice based on what you are comfortable with).
+This lab requires a Python environment provisioned as part of either the :ref:`windows_tools_vm` **or** :ref:`linux_tools_vm`. You can choose which environment with which you are most comfortable.
 
-If you have not deployed this yet, please do the lab below before continuing.
-
-:ref:`linux_tools_vm`
-
-:ref:`windows_tools_vm`
+If you have not yet deployed **either** of these VMs, see the linked steps before proceeding with the lab.
 
 Project Location
 ................
@@ -703,7 +699,7 @@ At this point, Python Flask tells us exactly what to do in order to test the beg
 
   * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
 
-Browse to http://<*initials*-Linux-ToolsVM IP>:5000 on your local machine, or open a browser on your Windows-ToolsVM and point to http://<*initials*-Windows-ToolsVM IP>:5000.
+Browse to \http://<*Initials*-Linux-ToolsVM IP>:5000 on your local machine, or open a browser on your Windows-ToolsVM and point to \http://<*Initials*-Windows-ToolsVM IP>:5000.
 
 If everything is working, you'll get an HTTP 404 (Not Found) error.
 
@@ -1355,7 +1351,7 @@ If you don't currently have your virtual environment activated or if the applica
   nutanix\Scripts\activate.bat
   flask run --host 0.0.0.0
 
-Browse to http://<*initials*-Linux-ToolsVM IP>:5000 on your local machine to view your application,  or open a browser on your Windows-ToolsVM and point to http://<*initials*-Windows-ToolsVM IP>:5000.
+Browse to \http://<*Initials*-Linux-ToolsVM IP>:5000 on your local machine to view your application,  or open a browser on your Windows-ToolsVM and point to \http://<*Initials*-Windows-ToolsVM IP>:5000.
 
 If everything is setup correctly, you will see a basic HTML form prompting for a **Cluster/CVM IP**, your **Cluster Username** and **Cluster Password**.
 
