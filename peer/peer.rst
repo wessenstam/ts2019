@@ -9,15 +9,23 @@ Peer Global File Service
 Overview
 ++++++++
 
-Peer Global File Service (PeerGFS) in an enterprise solution that solves file service challenges in multi-site and multi-vendor environments, integrating with both on-prem and cloud storage platforms. PeerGFS creates a single unified globally accessible file system to provide all users with fast local access to their data, while simultaneously enabling Real-time Backup and High Availability.
+The explosive growth of unstructured data has driven organizations to seek solutions to efficiently store, share, manage and protect an ever-growing universe of data while deriving new value and intelligence. Since 1993, Peer Software has focused on these requirements and more by building best-of-breed data management and real-time replication solutions for distributed on-premises and cloud storage environments.
 
-PeerGFS is powered by DFSR+®, Peer's patented and proprietary enterprise-class replication and file locking technology. Integration with most major storage platforms, *including support for Nutanix Files*, enables real-time file replication between different storage systems so that administrators can freely copy and move data wherever it needs to be. Integrated distributed file locking prevents version conflicts in collaborative environments where the same file exists in multiple locations to allow users fast local access to project files.
+Peer’s flagship offering, Peer Global File Service (PeerGFS), features enterprise-class replication technology with integrated file locking, and a globally accessible namespace that powers multi-site, multi-vendor, and multi-cloud deployment.
+
+PeerGFS enables fast local data access for users and applications at different locations, protects against version conflicts, makes data highly available, and allows Nutanix Files to co-exist with legacy NAS platforms to ease adoption of Files into existing environments.
+
+Key use cases for combining Peer Software with Nutanix Files include:
+
+- **Global File Sharing and Collaboration** - Deliver fast local access to shared project files for distributed teams while ensuring version integrity and high availability.
+- **HA and Load Balancing for VDI and Application Data** - Enable high availability and load balancing of end user data for VDI implementations as well as custom application data.
+- **Storage Interoperability and Migration** - Introduce Nutanix Files into an existing environment by allowing replication between storage vendors and helping migrate off of existing platforms.
 
 *How does it work?*
 
 .. figure:: images/integration.png
 
-Working from left to right, users interact with the SMB shares on the Nutanix Files cluster via a public LAN. When SMB activity occurs on the Files cluster through these shares, the Peer Partner Server (referred to as a Peer Agent) is notified via the File Activity Monitoring API from Files. The Peer Partner Server interacts with the same content via SMB then facilitates the flow of data to one or many remote and/or local file servers.
+Working from left to right, users interact with the SMB shares on the Nutanix Files cluster via a public LAN. When SMB activity occurs on the Files cluster through these shares, the Peer Partner Server (referred to as a Peer Agent) is notified via the File Activity Monitoring API from Files. The Peer Agent access the updated content via SMB then facilitates the flow of data to one or many remote and/or local file servers.
 
 **In this lab you will deploy and configure the Peer Global File Service software to create an Active/Active file services solution with Nutanix Files.**
 
@@ -205,7 +213,7 @@ The following illustration shows necessary ports and communication flow for the 
 
 .. note::
 
-  For complete details on firewall requirements for Nutanix Files, Peer Agents, and Peer Management Center, see <...can we link to this somewhere?...>
+  For complete details on firewall requirements for Nutanix Files, Peer Agents, and Peer Management Center, click `here <https://kb.peersoftware.com/tb/firewall-ports-and-communication-flow-for-nutanix-files>`_.
 
 Configuring Nutanix Files
 +++++++++++++++++++++++++
@@ -244,7 +252,7 @@ Installing Peer Management Center
 
 In this exercise you'll walk through the installation of Peer Management Center (PMC). PMC serves as the centralized management component for the Peer Global File Service.
 
-<... Any other context we want to throw in here about PMC - capability to manage X number of agents/sites, etc.?>
+PMC does not store any file data but does facilitate communication between locations so it should be deployed at a location with the best connectivity. A single deployment of PMC can manage 50 or more Agents/file servers.
 
 Connect to your *Initials*\ -**PeerMgmt** VM on your **Primary** cluster via RDP or VM console using the following credentials:
 
@@ -255,9 +263,9 @@ Within the VM, download **PMC_Installer_Win64.exe** AND **PeerGlobalFileService\
 
 Run **PMC_Installer_Win64.exe** and proceed with the default selections **UNTIL** you reach **Peer Management Center Web Server Configuration**.
 
-Note that for security purposes the PMC Web Service can be restricted to only allow access from the host on which the PMC is installed. **Leave the default configuration, as shown below**.
+While this lab uses the rich client included with the PMC, the installer also offers a web service that mirrors all the capabilities of the rich client with the addition of role-based web access.
 
-<...Would be helpful to explain what the Web Service is...>
+Note that for security purposes the PMC Web Service can be restricted to only allow access from the host on which the PMC is installed. **Leave the default configuration, as shown below**.
 
 .. figure:: images/9.png
 
@@ -349,11 +357,22 @@ Creating a New Job
 Peer Global File Service utilizes a job-based configuration engine. Several different job types are available to help tackle different file management challenges. A job represents a combination of:
 
 - Peer Agents.
--	The file servers that are being monitored by those Agents.
--	A specific share/volume/folder of data on each file server.
--	Various settings tied to replication, synchronization and/or locking.
+- The file servers that are being monitored by those Agents.
+- A specific share/volume/folder of data on each file server.
+- Various settings tied to replication, synchronization and/or locking.
 
-When creating a new job, you will be prompted by a dialog outlining the different job types with graphics and text outlining why you would use each type. For this lab, we will focus on **File Collaboration**.
+When creating a new job, you will be prompted by a dialog outlining the different job types with graphics and text outlining why you would use each type.
+
+Available job types include:
+
+- **Cloud Sync** - Real-time replication from enterprise NAS devices to public and private object storage with support for volume-wide point-in-time recovery. Each file is stored as a single, transparent object with optional version tracking.
+- **DFS-N Management** - Manages new and existing Microsoft DFS Namespaces. Can be combined with File Collaboration, File Synchronization, and/or File Replication jobs to automate DFS failover and failback.
+- **File Collaboration** - Real-time synchronization combined with distributed file locking to power global collaboration and project sharing across enterprise NAS platforms, locations, cloud infrastructures, and organizations.
+- **File Locking** - Distributed file locking between Windows File Servers. This can be paired with Microsoft DFS Replication for a basic collaboration solution.
+- **File Replication** - One-way real-time replication from enterprise NAS platforms to any SMB destination.
+- **File Synchronization** - Multi-directional real-time synchronization powering high availability of user and application data across enterprise NAS platforms, locations, cloud infrastructures, and organizations.
+
+In this lab, we will focus on **File Collaboration**.
 
 In the **PMC Client**, click **File > New Job**.
 
@@ -554,15 +573,100 @@ The changes that are performed on the Nutanix Files share will be sent to its pa
 
 **Congratulations!** You have successfully deployed an Active/Active file share replicated across 2 sites. Using Peer, this same approach can be leveraged to support file collaboration across sites, migrations from legacy solutions to Nutanix Files, or disaster recovery for use cases such as VDI, where user data and profiles need to be accessible from multiple sites for business continuity.
 
+Integrating with Microsoft DFS Namespace
+++++++++++++++++++++++++++++++++++++++++
+
+Peer Global File Service includes the ability to create and manage Microsoft DFS Namespaces (DFS-N). When this DFS-N integration is combined with its real-time replication and file locking engine, PeerGFS powers a true global namespace that spans locations and storage devices.
+
+As part of its DFS namespace management capabilities, PeerGFS will also automatically redirect users away from a failed file server. When that failed server comes back online, PeerGFS will bring this file server back in-sync then re-enable user access to it. *This is a must have Disaster Recovery feature for any deployment looking to leverage Nutanix Files for user profile & user data shares for VDI environments.*
+
+The following screenshot shows the PMC with a DFS Namespace under management.
+
+.. figure:: images/dfsn.png
+
+While this lab is not designed to showcase DFS Namespace management, we encourage you to reach out to us on Slack via the **#_peer_software_ext** channel for more information. We are happy to give you NFR licenses for your own lab and can walk you through DFS-N integration.
+
 (Optional) Analyzing Existing Environments
 ++++++++++++++++++++++++++++++++++++++++++
 
-<...TBD...>
+As the capacity of file server environments increase at a record pace, storage admins often do not know how users and applications are leveraging these file server environments. This fact becomes most evident when it is time to migrate to a new storage platform. The File System Analyzer is a tool from Peer Software that is designed to help partners discover and analyze existing file and folder structures for the purpose of planning and optimization.
 
-(Optional) Integrating with Microsoft DFS Namespace
-+++++++++++++++++++++++++++++++++++++++++++++++++++
+The File System Analyzer performs a very fast scan of one or more specified paths, uploads results to Amazon S3, assembles key pieces of information into one or more Excel workbooks, and emails reports with links to access the workbooks.
 
-<...TBD...>
+As this tool is primarily for our partners, we would love to hear any feedback you have on it. Reach out to us on Slack via the **#_peer_software_ext** channel with comments and suggestions.
+
+Connect to your *Initials*\ -**PeerAgentA** VM on your **Primary** cluster via RDP or VM console using the following credentials:
+
+- **Username** - NTNXLAB\\Administrator
+- **Password** - nutanix/4u
+
+Within the VM, download the File System Analyzer installer: https://www.peersoftware.com/downloads/fsa/FileSystemAnalyzer_Installer_v1.1.3.4.exe.
+
+Run the installer and select **Standard Installation**.
+
+.. figure:: images/fsa1.png
+
+Once the installation is complete, the File System Analyzer wizard will automatically be launched.
+
+The **Introduction** screen provides details on information collected and reported by the utility. Click **Next**.
+
+.. figure:: images/fsa2.png
+
+The **Contact Information** screen collects information used to organize the output of the File System Analyzer and to send the final reports. Fill out the following fields:
+
+- **Company** – Enter your company name.
+- **Location** – Enter the physical location of the server that is running the File System Analyzer. In multi-site environments, this could be a city or state name. A data center name also works.
+- **Project** – Enter a project name or business reason for running this analysis. This (and the Company and Location fields) are strictly used to organize the final reports.
+- **Name/Phone/Title** – *Optionally* enter your name and contact information.
+- **Email** – Enter the email address to which the final reports will be sent. This can include more than one address in a comma separated list.
+- **Upload Region** – Select US, EU, or APAC to tell the File System Analyzer which S3 location to use for uploading the final reports.
+
+.. figure:: images/fsa3.png
+
+Click **Next**.
+
+The File System Analyzer can be configured to scan one or more paths. These paths can be local (e.g. D:\MyData) or a remote UNC Path (e.g. \\files01\homes1).
+
+Add the following paths:
+
+- ``C:\`` - The local C: drive of *Initials*\ -**PeerAgentA**
+- ``\\<Initials>-Files\<Initials>-Peer\`` - The share previously created on your Files cluster
+
+.. figure:: images/fsa4.png
+
+Click **Next**.
+
+The File System Analyzer will automatically begin scanning the entered paths. When all scans, analyses, and uploads are complete, you will see a status that is similar to the following:
+
+.. figure:: images/fsa5.png
+
+File System Analyzer will also e-mail the report to all configured addresses. To view the full report, click the hyperlink(s) listed under **Detailed Reports** in the e-mail. If multiple paths were scanned, you will also see a link to a cumulative report across all paths.
+
+.. figure:: images/fsa6.png
+
+.. note::
+
+  Report download links are only active for **24 hours**. Contact Peer Software to access any expired reports.
+
+The full report contains the following information:
+
+- **InfoSheet** – Details about this specific scan.
+- **OverallStats** – Overall statistics for the folder that was scanned. This includes total bytes, files, folders, etc.
+- **FileExtSize** – A list of all discovered extensions, sorted by total bytes.
+- **FileExtCount** – A list of all discovered extensions, sorted by total files.
+- **TreeDepth** – A tally of bytes, folders, and files found at each depth level of the folder structure.
+- **ReparsePoints** – A list of all folder reparse points discovered.
+- **ReparsePointsSummary** – A summary of all reparse points discovered, regardless of file or folder.
+- **HighSubFolderCounts** – A list of all folders containing more than 1000 child directories.
+- **HighByteCounts** – A list of all folders containing more than 100GB of child file data.
+- **HighFileCounts** – A list of all folders containing more than 10,000 child files.
+- **LargeFiles** – A list of all discovered files that are 10GB or larger.
+- **FileAttributes** – A summary of all file and folder attributes found.
+- **TimeAnalysis** – A breakdown of total files, folders, and bytes by age.
+- **TLDAnalysis** - A list of each folder immediately under a specified path with statistics for each of these subfolders. In a user home directory environment, each of these subfolders should represent a different user.
+
+.. figure:: images/fsa7.png
+
 
 Takeaways
 +++++++++
@@ -573,11 +677,13 @@ Takeaways
 
 - Peer can directly manage Microsoft Distributed File Services (DFS) namespaces, allowing multiple file servers to be presented through a single namespace. This is a key component for supporting true active/active DR solutions for file sharing.
 
-- Peer Global File Service is licensed by <...?...>
+- Peer offers tools for analyzing existing file servers to help with resource planning, optimization, and migration.
+
+- Peer Global File Service is licensed per Nutanix Files cluster or storage device with a TB-based package structure.
 
 - The latest Peer prerequisities for Nutanix Files can be found `here <https://kb.peersoftware.com/tb/nutanix-files-prerequisites>`_.
 
-- <...Anything else in terms of value prop/features/spotting opportunities we want to summarize?...>
+- NFR licenses are available for lab environments. Reach out via the #_peer_software_ext Slack channel to request one.
 
 Getting Connected
 +++++++++++++++++

@@ -132,7 +132,7 @@ Worker nodes are responsible for running containers deployed onto the Kubernetes
 On the **Worker Configuration** tab, fill out the following fields:
 
 - **Number of Workers** - 3 (Default)
-- **Memory** - 4 GiB
+- **Memory** - 6 GiB
 - **Size** - 120 GiB (Default)
 - **VCPU** - 4 (Default)
 
@@ -526,3 +526,14 @@ Additional Kubernetes Training Resources
 - `Play with Kubernetes <https://training.play-with-kubernetes.com/>`_ - Free introductory training and lab environment by Docker
 
 - `Scalable Microservices with Kubernetes <https://www.udacity.com/course/scalable-microservices-with-kubernetes--ud615>`_ - Free intermediate training by Google
+
+Cleanup
++++++++
+
+.. raw:: html
+
+  <strong><font color="red">Once your lab completion has been validated, PLEASE do your part to remove any unneeded VMs to ensure resources are available for all users on your shared cluster.</font></strong>
+
+**IF** you **DO NOT** intend on completing either the :ref:`cloud_native_lab` or :ref:`epoch` labs, **THEN** you should delete the *Initials*-**karbon** cluster deployed as part of this exercise. This can be done directly from the Karbon web interface.
+
+**IF** you **DO** intend on completing either the :ref:`cloud_native_lab` or :ref:`epoch` labs, **THEN** you should leave your *Initials*-**karbon** cluster in place.
