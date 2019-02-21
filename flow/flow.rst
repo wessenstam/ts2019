@@ -160,8 +160,6 @@ Fill out the following fields:
 
   The **/32** denotes a single IP as opposed to a subnet range.
 
-  This step also could have been achieved by assigning a relevant category to your Prism Central VM. This would also simplify the policy if dealing with multiple Prism Central VMs as you would have 1 rule applied to multiple IPs.
-
 .. figure:: images/23.png
 
 Click **Add**.
@@ -338,7 +336,7 @@ Isolating Environments
 ++++++++++++++++++++++
 
 Use isolation policies when one group of VMs must be completely blocked from communicating with another group of VMs without any whitelist exceptions.
-One great example of using isolation policies is to block VMs tagged Environment:Dev from talking to VMs in Environment:Production.
+One great example of using isolation policies is to block VMs tagged Environment\:Dev from talking to VMs in Environment\:Production.
 Do not use isolation policies if you want to create exceptions between the two groups, instead use an Application Policy which allows a whitelist model.
 
 In this exercise you will create a new environment category and assign this to the Task Manager application. Then you will create and implement an isolation security policy that uses the newly created category in order to restrict unauthorized access.
