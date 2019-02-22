@@ -75,7 +75,7 @@ View the existing object store you are assigned and take a note of the name and 
 
 Click **Explore > VMs**.
 
-For a small deployment, you will see 8 VMs, each preceded with the name of the object store.
+For a small deployment, you will see 4 VMs, each preceded with the name of the object store.
 
 For example, if the name of the object store is **object-store-demo**, there will be a VM with the name **object-store-demo-envoy-1**.
 
@@ -84,30 +84,20 @@ We are using a small deployment, the deployed VMs are listed in the following ta
 +----------------+-------------------------------+---------------+-------------+
 |  VM            |  Purpose                      |  vCPU / Cores |  Memory     |
 +================+===============================+===============+=============+
-|  k8s-master    |  Kubernetes Master            |  2 / 2        |  8 GiB      |
+|  default-0     |  Kubernetes Node              |  4 / 2        |  8 GiB      |
 +----------------+-------------------------------+---------------+-------------+
-|  k8s-worker-0  |  Kubernetes Worker            |  6 / 1        |  13.02 GiB  |
+|  default-1     |  Kubernetes Node              |  4 / 2        |  8 GiB      |
 +----------------+-------------------------------+---------------+-------------+
-|  k8s-worker-1  |  Kubernetes Worker            |  6 / 1        |  13.02  GiB |
-+----------------+-------------------------------+---------------+-------------+
-|  k8s-worker-2  |  Kubernetes Worker            |  6 / 1        |  13.02  GiB |
+|  default-2     |  Kubernetes Node              |  4 / 2        |  8 GiB      |
 +----------------+-------------------------------+---------------+-------------+
 |  envoy-1       |  Load Balancer / Endpoint     |  2 / 2        |  4 GiB      |
 +----------------+-------------------------------+---------------+-------------+
-|  etcd-0        |  Kubernetes Metadata          |  2 / 1        |  4 GiB      |
-+----------------+-------------------------------+---------------+-------------+
-|  etcd-1        |  Kubernetes Metadata          |  2 / 1        |  4 GiB      |
-+----------------+-------------------------------+---------------+-------------+
-|  etcd-2        |  Kubernetes Metadata          |  2 / 1        |  4 GiB      |
-+----------------+-------------------------------+---------------+-------------+
 
-All of these VMs are deployed by the Microservices Platform which is built on Kubernetes technology. The service that controls the MSP runs on Prism Central. Note that the VM layout will change in GA - some services (such as etcd) which are currently running as VMs will become containerized and be built into the worker VMs themselves.
+All of these VMs are deployed by the Microservices Platform which is built on Kubernetes technology. The service that controls the MSP runs on Prism Central.
 
-The envoy VM is the load balancer and endpoint. The IP address of this VM is the IP used by clients to access the object store. It is the first point of entry for an object request (for example, an S3 GET or PUT). It then forwards this request to one of the worker VMs (specifically, the S3 adapter service running as part of the object-controller pod).
+The **default** VMs run the Kubernetes cluster. The Kubernetes cluster consists of one or more master nodes, which provides the control plane for the Kubernetes cluster, as well as worker nodes. Kubernetes is running in multi-master mode, which allows for any node to become the master if needed.
 
-The master VM is the Kubernetes master, which provides the control plane for the Kubernetes cluster. In GA the architecture is moving to a multi-master format, and will be distributed across the worker nodes.
-
-The worker VMs run the object store components. This includes:
+These nodes run etcd, which is a Kubernetes-level distributed key-value store for storing and replicating the Kubernetes-cluster level metadata. The nodes also run the object store components. This includes:
 
 - S3 adapter (minio-based) - this translates the S3 language into our internal language.
 - Object controller - this handles all the I/O. Think of it as like Stargate in AOS.
@@ -117,11 +107,7 @@ The worker VMs run the object store components. This includes:
 - Zookeeper - this manages the configuration for the object storage cluster.
 - IAM service - handles user authentication for accessing buckets.
 
-The etcd VMs are a Kubernetes-level distributed key-value store. This stores and replicates the Kubernetes cluster level metadata, including networks, pod names & ID numbers, storage volumes, etc. As mentioned before, these services will be containerized in GA and will be running within the worker VMs.
-
-.. note::
-
-  In GA, the VM layout will be drastically different, consisting of simply 3 or more Service VMs (which will encompass everything currently in the worker VMs, plus etcd and the Kubernetes master) and 1 or more load balancer (envoy) VMs.
+The envoy VM is the load balancer and endpoint. The IP address of this VM is the IP used by clients to access the object store. It is the first point of entry for an object request (for example, an S3 GET or PUT). It then forwards this request to one of the worker VMs (specifically, the S3 adapter service running as part of the object-controller pod).
 
 Walk Through the Object Store Deployment
 ........................................
@@ -136,8 +122,6 @@ In this exercise you will walk through the steps of creating an Object Store.
 
   In the Tech Summit Buckets environment, you will **not** be able to actually deploy the object store, but you will be able to see the workflow and how simple it is for users to deploy an object store.
 
-  Note that the interface and workflow will be slightly different in GA.
-
 In **Prism Central > Explore > Nutanix Buckets**, click **Create Object Store**.
 
 .. figure:: images/buckets_01.png
@@ -145,20 +129,15 @@ In **Prism Central > Explore > Nutanix Buckets**, click **Create Object Store**.
 Fill out the following fields:
 
 - **Object Store Name** - *initials*-oss
-- **Domain**  - ntnxlab.local
-- **IP Address**  - 1.1.1.1
+- **Domain**  - ntnxlab.com
 
 .. figure:: images/buckets_02.png
-
-.. note::
-
-  In a live environment, the IP address you assign to the Object Store will be the endpoint IP to which applications will connect.
 
 Click **Next**.
 
 Next you will be able to configure the capacity of your object store.
 
-The chosen option determines how many object controllers will be deployed and the size of each.
+The chosen option determines how many nodes will be deployed and the size of each.
 
 .. note::
 
@@ -172,11 +151,21 @@ Select Small (10TiB), and click **Next**.
 
 .. figure:: images/buckets_03.png
 
-On the final screen, you will see the clusters managed by Prism Central and their corresponding networks.
+On the final screen, you will see the clusters managed by Prism Central.
 
 .. note::
 
   Note that a user can easily see which of the clusters are licensed for encryption and the CPU, Memory, and Storage runways for each of the clusters.
+
+Select the assigned cluster and notice the Network dialog expands.
+
+**Infrastructure Network:** This is the network where the MSP VMs will communicate, which requires 18 IP addresses to be reserved (for scale out). Select the **Primary** Network.
+
+**Domain Name Server / Infrastructure Management IP:** These are additional IPs for internal communication and are required to be static. You can enter anything here.
+
+**Client Access Network:** This is the network for client access. This network can be the same as the Infrastructure Network.
+
+**Client Access IPs:** These are the endpoint IPs that the external applications will connect to. Enter a minimum of 4.
 
 Close the **Create Object Store** wizard.
 
@@ -200,6 +189,8 @@ Click **Create Bucket**, and fill out the following fields:
 
 Click **Create**.
 
+.. note:: Buckets created via Prism Central are owned by the Prism Central admin.
+
 If versioning is enabled, new versions can be uploaded of the same object for required changes, without losing the original data.
 
 Lifecycle policies define how long to keep data in the system.
@@ -212,54 +203,49 @@ WORM (Write Once, Read Many) storage prevents the editing, overwriting, renaming
 
   Note that if WORM is enabled on the bucket, this will supersede any lifecycle policy.
 
-Select your *your-name*-**my-bucket** bucket, and click **Configure WORM**. Note you have the ability to define a WORM data retention period on a per bucket basis.
+Check the box next to your *your-name*-**my-bucket** bucket, and click **Configure WORM**. Note you have the ability to define a WORM data retention period on a per bucket basis.
 
 .. note::
 
-  In the EA version, the WORM UI is not yet fully functional, so you won’t be able to apply the WORM policy to your bucket.
+  In the EA version, WORM is not yet fully functional.
+
+Check the box next to your your-name*-**my-bucket** bucket, and click **Share**. This is where you will be able to share your bucket with other users. You can configure read access (download), write access (upload), or both, on a per user or AD group basis (the latter at GA).
+
+.. figure:: images/buckets_share.png
 
 User Management
 +++++++++++++++
 
-User creation will be in the UI in Buckets GA. In the early access software, we will use the following Linux command line ``iam_util`` tool to create users.
+In this exercise you will create generate your access and secret key to access the object store, that will be used throughout the lab.
 
-In this exercise you will create two users that will be used throughout the lab.
+From the Buckets UI, click on **Access Keys** and click **Add People**.
 
-Login to the *Initials*\ **-Linux-ToolsVM** via SSH using the following credentials:
+.. figure:: images/buckets_add_people.png
 
-- **Username** - root
-- **password** - nutanix/4u
+Select **Add people not in Active Directory** and enter your e-mail address.
 
-Run the following command to create your first user account, replacing **YOUR-NAME** with your name (e.g. John-Smith):
+.. figure:: images/buckets_add_people2.png
 
-.. code-block:: bash
+.. note:: In GA, you will also be able to generate keys for a entire Active Directory group.
 
-  ./iam_util -url http://<OBJECT-STORE-IP>:5556 -username YOUR-NAME
+Click **Next**.
 
-The output will contain the access and secret keys for the user.
+Click **Download Keys** to download a .csv file containing the **Secret Key**.
 
-.. code-block:: bash
+.. figure:: images/buckets_add_people3.png
 
-  2019/01/10 20:31:29 Creating Access and Secret key for user John-Smith
-  2019/01/10 20:31:29 Access Key Ke2hEtehmOZoXYCrQnzUn_2EDD9Eqf0L
-  Secret Key p6sxh_FhxEyIteslQJKfDlezKrtJro9C
+.. figure:: images/buckets_csv_file.png
 
-Run the command again to create a second user account, replacing **YOUR-NAME-2** with your name (e.g. John-Smith-2):
+Click **Close**.
 
-.. code-block:: bash
+.. note::
 
-  ./iam_util -url http://<object-store-ip>:5556 -username John-Smith-2
-
-Copy and paste the output lines for each user into a text file for later use.
-
-.. warning::
-
-  It is critical that you save both the Access and Secret keys for each user account created, as you will not be able to retrieve the Secret key later.
+  Save both .csv files created so that you have the access and secret keys readily available for future labs.
 
 Accessing & Creating Buckets
 ++++++++++++++++++++++++++++
 
-In this exercise you will use `Cyberduck <https://cyberduck.io/>`_ to create and use buckets in the object store. Cyberduck is a multi-platform GUI application that supports multiple protocols including FTP, SFTP, WebDAV, and S3.
+In this exercise you will use `Cyberduck <https://cyberduck.io/>`_ to create and use buckets in the object store using your generated access key. Cyberduck is a multi-platform GUI application that supports multiple protocols including FTP, SFTP, WebDAV, and S3.
 
 You will also use the built-in Buckets Object Browser, which is an easy way to test that your object store is functional and can be used to quickly to demo IAM access controls.
 
@@ -276,19 +262,15 @@ Login to *Initials*\ **-Windows-ToolsVM** via RDP using the following credential
 Use Cyberduck to Create A Bucket
 ................................
 
-`Click here <https://svn.cyberduck.io/trunk/profiles/S3%20(HTTP).cyberduckprofile>`_ to download the S3/HTTP profile for Cyberduck.
+Launch **Cyberduck** (Click the Window icon > Down Arrow > Cyberduck).
 
-Once the download is complete, open the file to launch **Cyberduck** and add the profile.
+If you are prompted to update Cyberduck, click **Skip This Version**.
 
-.. note::
-
-  Buckets does not currently support HTTPS connections, but this will be supported at GA.
-
-Close the **s3.amazonaws.com** default profile, and click on **Open Connection**.
+Click on **Open Connection**.
 
 .. figure:: images/buckets_06.png
 
-Select **S3 (HTTP)** from the dropdown list.
+Select **Amazon S3** from the dropdown list.
 
 .. figure:: images/buckets_07.png
 
@@ -301,7 +283,9 @@ Enter the following fields for user Bob created earlier, and click **Connect**:
 
 .. figure:: images/buckets_08.png
 
-Click **Continue** to proceed with the unsecured connection.
+Check the box **Always Trust** and then click **Continue** on the **The certificate is not valid** dialog box.
+
+.. figure:: images/invalid_certificate.png
 
 Once connected, right-click anywhere inside the pane and select **New Folder**.
 
@@ -321,8 +305,6 @@ Double-click into the bucket, and right click and select **Upload**.
 
 Navigate to your downloads directory and find the Sample Pictures folder. Upload one or more pictures to your bucket.
 
-Click **Continue** to proceed with the unsecured connection.
-
 Browse Bucket and Objects in Object Browser
 ...........................................
 
@@ -330,7 +312,7 @@ Browse Bucket and Objects in Object Browser
 
   Object browser is not the recommended way to use the object store, but is an easy way to test that your object store is functional and can be used to quickly demo IAM access controls.
 
-From a web browser, navigate to http://\ *OBJECT-STORE-IP*\ :7200.
+From a web browser, navigate to https://\ *OBJECT-STORE-IP*\ :7200.
 
 Login with the Access and Secret keys for the first user account you created.
 
@@ -348,7 +330,9 @@ Object versioning allows the upload of new versions of the same object for requi
 Object Versioning
 .................
 
-Return to Cyberduck and re-connect using your first user's access and secret keys.
+Return to Cyberduck and re-connect using your first user's access and secret keys. If you are already connected, make sure you are on the bucket listing page (the root folder in Cyberduck).
+
+.. figure:: images/root_folder.png
 
 Select your bucket and and click **Get Info**.
 
@@ -378,73 +362,75 @@ Notice that all versions are shown with their individual timestamps. Toggle **Vi
 
 .. figure:: images/buckets_15.png
 
-User Access Control
-+++++++++++++++++++
+..  +++++++++++++++++++++++++++++++++++++++++++++++
 
-In this exercise we will demonstrate user access controls and how to apply permissions so that other users or applications can access your bucket. For programmatic access to object storage, it is common for each application or service accessing the bucket to have its own access/secret key pair, so that access can be controlled granularly.
+  User Access Control
+  +++++++++++++++++++
 
-Verify Current Access
-.....................
+  In this exercise we will demonstrate user access controls and how to apply permissions so that other users or applications can access your bucket. For programmatic access to object storage, it is common for each application or service accessing the bucket to have its own access/secret key pair, so that access can be controlled granularly.
 
-In Cyberduck, click **Open Connection** and provide the Access and Secret Keys created for your second user account.
+  Verify Current Access
+  .....................
 
-Note that you do not see the bucket created using your first user's credentials.
+  In Cyberduck, click **Open Connection** and provide the Access and Secret Keys created for your second user account.
 
-Click **Go > Go To Folder…**
+  Note that you do not see the bucket created using your first user's credentials.
 
-.. figure:: images/buckets_16.png
+  Click **Go > Go To Folder…**
 
-Type in the name of User 1's bucket and click **Go**.
+  .. figure:: images/buckets_16.png
 
-.. figure:: images/buckets_17.png
+  Type in the name of User 1's bucket and click **Go**.
 
-You should receive an Access Denied error.
+  .. figure:: images/buckets_17.png
 
-Leave your Cyberduck connection open for the following exercises.
+  You should receive an Access Denied error.
 
-Grant Access to Another Bucket
-..............................
+  Leave your Cyberduck connection open for the following exercises.
 
-Access policy configuration will be in the UI in Buckets GA. In the early access software, we will use the following Linux command line ``mc`` tool to modify access to buckets.
+  Grant Access to Another Bucket
+  ..............................
 
-From the *Initials*\ **-Linux-ToolsVM**, run the following command to authenticate **MC** and allow the tool to configure the Object Store instance:
+  Access policy configuration will be in the UI in Buckets GA. In the early access software, we will use the following Linux command line ``mc`` tool to modify access to buckets.
 
-.. code-block:: bash
+  From the *Initials*\ **-Linux-ToolsVM**, run the following command to authenticate **MC** and allow the tool to configure the Object Store instance:
 
-  ./mc config host add NutanixBuckets http://<OBJECT-STORE-IP>:7200 USER-1-ACCESS-KEY USER-1-SECRET-KEY
+  .. code-block:: bash
 
-Replacing **YOUR-NAME**, run the following command to grant User 2 full access to User 1’s bucket.
+    ./mc config host add NutanixBuckets http://<OBJECT-STORE-IP>:7200 USER-1-ACCESS-KEY USER-1-SECRET-KEY
 
-.. code-block:: bash
+  Replacing **YOUR-NAME**, run the following command to grant User 2 full access to User 1’s bucket.
 
-  ./mc policy --user=YOUR-NAME-2 grant public NutanixBuckets/YOUR-NAME-bucket
+  .. code-block:: bash
 
-Example output:
+    ./mc policy --user=YOUR-NAME-2 grant public NutanixBuckets/YOUR-NAME-bucket
 
-.. code-block:: bash
+  Example output:
 
-  ./mc policy --user=John-Smith-2 grant public NutanixBuckets/john-smith-bucket
-  Running grant command for bucket NutanixBuckets/john-smith-bucket Permission public User John-Smith-2 Policy public
-  Setting policy readwrite public
+  .. code-block:: bash
 
-Buckets supports the following policies, which can be configured on a per user, per bucket basis:
+    ./mc policy --user=John-Smith-2 grant public NutanixBuckets/john-smith-bucket
+    Running grant command for bucket NutanixBuckets/john-smith-bucket Permission public User John-Smith-2 Policy public
+    Setting policy readwrite public
 
-  - **download** - Grants read only access to configured users.
-  - **upload** - Grants write only access to configured users.
-  - **public** - Grants read/write access to configured users.
-  - **worm** - Enables write once, read many access. This supersedes all other policies.
-  - **none** - Users have no access.
+  Buckets supports the following policies, which can be configured on a per user, per bucket basis:
 
-View Bucket with Different Users Credentials
-............................................
+    - **download** - Grants read only access to configured users.
+    - **upload** - Grants write only access to configured users.
+    - **public** - Grants read/write access to configured users.
+    - **worm** - Enables write once, read many access. This supersedes all other policies.
+    - **none** - Users have no access.
 
-In Cyberduck, notice that User 1’s bucket still does not show up in the directory listing. However, you can now navigate directly to the bucket.
+  View Bucket with Different Users Credentials
+  ............................................
 
-Click **Go > Go To Folder…**
+  In Cyberduck, notice that User 1’s bucket still does not show up in the directory listing. However, you can now navigate directly to the bucket.
 
-Type in the name of User 1's bucket and click **Go**.
+  Click **Go > Go To Folder…**
 
-Verify you can now read and write to User 1's bucket.
+  Type in the name of User 1's bucket and click **Go**.
+
+  Verify you can now read and write to User 1's bucket.
 
 ..  +++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -610,14 +596,16 @@ From the *Initials*\ **-Linux-ToolsVM**, run ``vi list-buckets.py`` and paste in
   #!/usr/bin/python
 
   import boto3
+  import warnings
+  warnings.filterwarnings("ignore")
 
   endpoint_ip= "OBJECT-STORE-IP" #Replace this value
   access_key_id="ACCESS-KEY" #Replace this value
   secret_access_key="SECRET-KEY" #Replace this value
-  endpoint_url= "http://"+endpoint_ip+":7200"
+  endpoint_url= "https://"+endpoint_ip+":7200"
 
   session = boto3.session.Session()
-  s3client = session.client(service_name="s3", aws_access_key_id=access_key_id, aws_secret_access_key=secret_access_key, endpoint_url=endpoint_url)
+  s3client = session.client(service_name="s3", aws_access_key_id=access_key_id, aws_secret_access_key=secret_access_key, endpoint_url=endpoint_url, verify=False)
 
   # list the buckets
   response = s3client.list_buckets()
@@ -640,8 +628,8 @@ From the *Initials*\ **-Linux-ToolsVM**, run the following to create 100 1KB fil
 
 .. code-block:: bash
 
-  mkdir ~/sample-files
-  for i in {1..100}; do dd if=/dev/urandom of=~/sample-files/file$i bs=1024 count=1; done
+  mkdir sample-files
+  for i in {1..100}; do dd if=/dev/urandom of=sample-files/file$i bs=1024 count=1; done
 
 While the sample files contain random data, these could just as easily be log files that need to be rolled over and automatically archived, surveillance video, employee records, and so on.
 
@@ -654,6 +642,8 @@ Modify your existing script or create a new script based on the example below:
   import boto3
   import glob
   import re
+  import warnings
+  warnings.filterwarnings("ignore")
 
   # user defined variables
   endpoint_ip= "OBJECT-STORE-IP" #Replace this value
@@ -663,12 +653,12 @@ Modify your existing script or create a new script based on the example below:
   name_of_dir="sample-files"
 
   # system variables
-  endpoint_url= "http://"+endpoint_ip+":7200"
+  endpoint_url= "https://"+endpoint_ip+":7200"
   filepath = glob.glob("%s/*" % name_of_dir)
 
   # connect to object store
   session = boto3.session.Session()
-  s3client = session.client(service_name="s3", aws_access_key_id=access_key_id, aws_secret_access_key=secret_access_key, endpoint_url=endpoint_url)
+  s3client = session.client(service_name="s3", aws_access_key_id=access_key_id, aws_secret_access_key=secret_access_key, endpoint_url=endpoint_url, verify=False)
 
   # go through all the files in the directory and upload
   for current in filepath:
