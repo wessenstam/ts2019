@@ -4,17 +4,12 @@
 APIs: Python Example
 --------------------
 
+*The estimated time to complete this lab is 90 minutes.*
+
 Overview
 ++++++++
 
-**Estimated time to complete: 60 MINUTES**
-
-The Nutanix Python API Lab will cover a couple of key points.
-
-- Creation of a simple application running on Python Flask.
-- Creation of a single basic view to display information to the user.
-- A backend model to talk to the Nutanix APIs.
-- JavaScript to create the interface between the front- and back-end parts of the application.
+**In this lab you will be introduced to different versions of the Nutanix APIs and utilize them to create a simple application using the** `Python Flask <http://flask.pocoo.org/>`_ **microframework. The application will provide a web front-end to display information to the user and a back-end model to communicate with Nutanix APIs. JavaScript will be used to create the interface between the front- and back-end parts of the application.**
 
 Lab Setup
 +++++++++
@@ -73,11 +68,7 @@ Even though virtual environments (venv) are now included with Python 3, we'll us
 
 .. note::
 
-  Windows systems:** As at January 2019, a **default** installation of Python 3.6 will be installed in the following folder:
-
-  .. code-block:: bash
-
-    C:\Users\<username>\AppData\Local\Programs\Python\Python36
+  **Windows:** As at January 2019, a **default** installation of Python 3.6 will be installed in the following folder: ``C:\Users\<username>\AppData\Local\Programs\Python\Python36``
 
 Running these commands to setup and activate a new virtual environment will look similar to the following screenshot.
 
@@ -113,16 +104,12 @@ If you wish to delete the virtual environment at any stage, simply delete the `n
 
 .. note::
 
-  For more information on virtual environments, please see the official Python virtual environment documentation_.
-
-  .. _documentation: https://docs.python.org/3/tutorial/venv.html
+  For more information on virtual environments, please see the official Python virtual environment `documentation <https://docs.python.org/3/tutorial/venv.html>`_.
 
 App Dependencies
 ................
 
-Our application will require additional Python modules beyond those that are included in the Python Standard Library_.
-
-.. _Library: https://docs.python.org/3.6/library/
+Our application will require additional Python modules beyond those that are included in the `Python Standard Library <https://docs.python.org/3.6/library/>`_.
 
 The easiest way to ensure these are available is by using a Python Setup Script.
 
@@ -169,7 +156,9 @@ Create a file in the project folder named `MANIFEST.in` and add the following co
 
 Now, to ensure our dependencies are available, let's install our app for the first time.  This process makes use of both *setup.py* and *MANIFEST.in*.
 
-**Note:** The trailing period (`.`) is required.
+.. note::
+
+  The trailing period (`.`) is required.
 
 .. figure:: images/linux_logo_32x32.png
 .. figure:: images/osx_logo_32x32.png
@@ -199,7 +188,7 @@ Nutanix API Intro
 
 Before we start creating our app, let's take a look at how Nutanix describes the APIs we'll use today.
 
-**Those familiar with the Nutanix APIs may wish to skip this section.**
+**Those familiar with the Nutanix APIs may wish to skip directly to** `App Structure`_.
 
 The Nutanix REST APIs allow you to create scripts that run system administration commands against the Nutanix cluster.
 The API enables the use of HTTP requests to get information about the cluster as well as make changes to the configuration.
@@ -237,14 +226,18 @@ The API versions available today are as follows.
 - v2.0
 - v3
 
-**Note re security:** In the sample commands below you'll see use of the `--insecure` cURL parameter.  This is used to get around SSL/TLS verification issues when using self-signed certificates.  Please consider the potential pitfalls and security implications of bypassing certificate verification before using `--insecure` in a production environment.  The same precautions apply when providing a username and password on the command-line.  This should be avoided when possible, since this method shows both the username and password in clear text.
+.. note::
 
-**Note re Windows systems:** When running the cURL sample commands on Windows 10, single-quote characters (`'`) may need to be replaced with double-quote characters (`"`).
+  In the sample commands below you'll see use of the `--insecure` cURL parameter.  This is used to get around SSL/TLS verification issues when using self-signed certificates.  Please consider the potential pitfalls and security implications of bypassing certificate verification before using `--insecure` in a production environment.  The same precautions apply when providing a username and password on the command-line.  This should be avoided when possible, since this method shows both the username and password in clear text.
+
+.. note::
+
+  When running the cURL sample commands on Windows 10, single-quote characters (`'`) may need to be replaced with double-quote characters (`"`).
 
 API v0.8
 ~~~~~~~~
 
-Status: Super-ceded by API v2.0
+*Status: Super-ceded by API v2*
 
 This set of APIs was available when API v1 didn’t yet have the capability to carry out some VM management operations, e.g. VM power state.
 
@@ -270,7 +263,7 @@ Alternatively, this HTTPS API request can be carried out using the `curl` comman
 API v1
 ~~~~~~
 
-Status: Available
+*Status: Available*
 
 This set of APIs, chronologically, was released before the v0.8 APIs. They were used, for example, to manipulate and view VMs, storage containers, storage pools etc. For some time, the v1 and v0.8 APIs were the only way we, as developers, had to interact with Nutanix clusters. Some of the API endpoints could only be used with the AHV hypervisor and some could be used across multiple hypervisors e.g. AHV and ESXi.
 
@@ -293,14 +286,14 @@ Alternatively, this HTTPS API request can be carried out using the `curl` comman
 
 One of the reasons to use API v1 today is to collect entity performance information.  For example, the application we are building in this lab contains API v1 requests to collect storage performance.  An upcoming Nutanix Developer blog article will discuss the API v1 performance metrics and how to use them.
 
-API v2.0
-~~~~~~~~
+API v2
+~~~~~~
 
-Status: Available
+*Status: Available*
 
 The v0.8 and v1 APIs worked really well. In fact, they were (and still are, in some respects) how the Prism UI gathers data from the cluster. Another over-simplification would be to say that the v2 APIs are where the v0.8 and v1 APIs came together. Many of the entities and endpoints available in v0.8 and v1 were made available in v2, along with a huge amount of backend cleanup, endpoint renaming and generally making the APIs better. The v2 APIs are also the first officially GA API made available by Nutanix.
 
-If you have some exposure to the previous v0.8 and v1 APIs, moving to the v2 APIs will highlight a number of differences. For example “containers” got renamed to “storage_containers” and “storagePools” got renamed to “storage_pools”. The difference? A consistent naming convention in the form of snake-case across all entities.
+If you have some exposure to the previous v0.8 and v1 APIs, moving to the v2 APIs will highlight a number of differences. For example “containers” got renamed to “storage_containers” and “storagePools” got renamed to “storage_pools”. The difference? A consistent naming convention in the form of `snake-case <https://en.wikipedia.org/wiki/Snake_case>`_ across all entities.
 
 Here’s a basic example of a v2 API request to list all **storage_containers** on a cluster:
 
@@ -329,9 +322,9 @@ Also, all the requests above are basic HTTP GET requests and do not require a pa
 API v3
 ~~~~~~
 
-Status: Available
+*Status: Available*
 
-The v3 APIs, which were released as GA on April 17th 2018, are the first departure from how things were done before.
+The v3 APIs, which were released in April 2018, are a departure from the previous API design.
 
 We had standard GET requests to get data from a cluster and standard POST methods to make changes - the v3 APIs are a bit different. All the previous APIs still required the developer to tell the system what to do and how to do it. The v3 APIs, on the other hand, are the first APIs built around an Intentful paradigm, that is, `move the programming from the user to the machine`. Instead of writing a ton of code to get something done, we tell the system what the desired state is and the system will “figure out” the best way to get there. This will sound somewhat familiar to those using configuration management frameworks like Salt, Puppet, Chef, Ansible, PowerShell DSC etc.
 
@@ -384,7 +377,7 @@ API Version Use Cases
 With what we know about the various API versions now, let's take a look at why you might use each API.
 
 - **v1**: Legacy application support and cluster-wide performance metrics.
-- **v2.0**: Migration away from legacy APIs, combination of older v0.8 and v1 APIs into single GA API, <em>cluster-specific</em> tasks e.g. storage container information & management.
+- **v2**: Migration away from legacy APIs, combination of older v0.8 and v1 APIs into single GA API, <em>cluster-specific</em> tasks e.g. storage container information & management.
 - **v3 on Prism Element**: Latest supported API aimed at managing <em>cluster-specific</em> entities such as VMs.
 - **v3 on Prism Central**: Latest supported API aimed at managing <em>environment-wide</em> configuration and entities.  Unlike API v3 on Prism Element, this includes a vast array of entities such as Nutanix Calm Blueprints, RBAC, Applications, Nutanix Flow Network Security Rules.
 
@@ -766,7 +759,9 @@ From the URLs below, grab the relevant file, make sure the name is correct and e
 
   curl -L https://s3.amazonaws.com/get-ahv-images/js-lib.zip -o js-lib.zip
 
-**Note**: When extracting the ZIP files, ensure they are extracted **directly** to the directories above and not into subdirectories.
+.. note::
+
+  When extracting the ZIP files, ensure they are extracted **directly** to the directories above and not into subdirectories.
 
 .. figure:: images/linux_logo_32x32.png
 .. figure:: images/osx_logo_32x32.png
@@ -816,9 +811,9 @@ Referencing Supporting Files
 
 - Open `lab/__init__.py` and, under the line that reads `assets = Environment(app)`, add the following Python code.
 
-**Important note:** Python has strict indentation_ requirements.  For the code below, make sure the indentation begins at the same point as the `assets = Environment(app)` line.
+.. note::
 
-.. _indentation: https://docs.python.org/3.6/reference/lexical_analysis.html
+  Python has strict `indentation <https://docs.python.org/3.6/reference/lexical_analysis.html>`_ requirements.  For the code below, make sure the indentation begins at the same point as the `assets = Environment(app)` line.
 
 .. code-block:: python
 
@@ -1283,7 +1278,9 @@ Here are the most important steps carried out by this function:
 - `get_form()` - Get the user data available in the POST request.  This includes the CVM/Cluster IP address, username and password.
 - `client = apiclient.ApiClient('get', cvmAddress,'vms','',username,password,'v2.0')` - Create an instance of our `ApiClient` class and set the properties we'll need to execute the API request.
 
-**Note:** You'll notice a few parameters being passed during instantiation of the ApiClient class.  As an optional step, open `lab/util/apiclient/__init__py` and look at the other parameters that can be passed.  For example, you can specify the API endpoint we're interested and the API version.  These are useful options for using the same ApiClient class with different versions of the APIs.
+.. note::
+
+  You'll notice a few parameters being passed during instantiation of the ApiClient class.  As an optional step, open `lab/util/apiclient/__init__py` and look at the other parameters that can be passed.  For example, you can specify the API endpoint we're interested and the API version.  These are useful options for using the same ApiClient class with different versions of the APIs.
 
 - `results = client.get_info()` - Execute the actual API request.
 - `return jsonify(results)` - Convert the API request results to JSON format and return the JSON back to the calling JavaScript, where it will be processed and displayed in our app.
@@ -1295,7 +1292,9 @@ Because the Nutanix REST APIs are designed to be simple to use, it's very easy t
 
 In the **Intro** section of this lab, we looked at the various Nutanix API versions that are available to you.  In the example above, we are using Nutanix API v2.0 to get a count of VMs running on our cluster.  The JavaScript making the AJAX call and the Python executing the API request, are constructing the following GET request.
 
-**Note:** The request coming from the JavaScript to our Python view is an HTTP POST request.  The request to the API itself, in this example, is an HTTP GET request.
+.. note::
+
+  The request coming from the JavaScript to our Python view is an HTTP POST request.  The request to the API itself, in this example, is an HTTP GET request.
 
 .. code-block:: html
 
@@ -1303,12 +1302,14 @@ In the **Intro** section of this lab, we looked at the various Nutanix API versi
 
 If you were to change `<cluster_virtual_ip>` to your cluster IP address and browse to that URL, you would probably see an error saying `"An Authentication object was not found in the SecurityContext"`.  That's because we haven't specified the credentials that should be used for the request.
 
-**Note:** If you have an open browser tab where you are already logged in and authenticated with an active Nutanix Prism session, it is possible the request may succeed.
+.. note::
+
+  If you have an open browser tab where you are already logged in and authenticated with an active Nutanix Prism session, it is possible the request may succeed.
 
 Now that we have our API request URL, we can add HTTP Basic Authentication in the form of a username and password, then simulate the entire request using cURL.  For this quick test we will assume the following:
 
 - **Cluster virtual IP address** - *your HPOC Cluser IP*
-- *Cluster username** - admin
+- **Cluster username** - admin
 - **Cluster password** - techX2019!
 
 .. code-block:: bash
@@ -1376,11 +1377,9 @@ Final Thoughts
 
 With this app built from scratch, you should now have a solid idea of how a Python Flask web application can be built to integrate with the Nutanix APIs.
 
-For further information on the Nutanix REST API versions and the data that is exposed by them, please see the Nutanix Developer Portal_.  There will you find code samples, documentation and information on everything from the APIs we used today (v1 and v2.0) through to v3 APIs, the current "intentful" API implementation.
+For further information on the Nutanix REST API versions and the data that is exposed by them, please see the `Nutanix Developer Portal <https://developer.nutanix.com>`_.  There will you find code samples, documentation and information on everything from the APIs we used today (v1 and v2.0) through to v3 APIs, the current "intentful" API implementation.
 
-Thanks for attending this lab with us.
-
-.. _Portal: https://developer.nutanix.com
+Thanks for attending this lab.
 
 Takeaways
 +++++++++

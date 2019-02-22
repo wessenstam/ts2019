@@ -18,7 +18,7 @@ Xi Frame is **multi-cloud**. Customers can choose to deliver their applications 
 
 Frame platform as a service makes it easy for customers to respond quickly and easily to end user needs for applications and desktops. Frame is **easy to administer**. Nutanix operates the control plane in the cloud. IT administrators use a web browser to create Frame accounts, install their applications, and publish apps and desktops to production pools for users in minutes.
 
-Because Frame leverages the public cloud, IT administrators can grow and shrink capacity on the fly without having to commit to spending OpEx or CapEx upfront to account for possible future growth. With AHV coming soon, IT administrators can keep predictable application/desktop workloads on-premises while putting variable/seasonal/project-driven application/desktop workloads in the public cloud. They can also host environments to control access by third-party partners and remote users to specific applications and datasets.
+Because Frame leverages the public cloud, IT administrators can grow and shrink capacity on the fly without having to commit to spending OpEx or CapEx upfront to anticipate possible future growth. With AHV coming soon, IT administrators can keep predictable application/desktop workloads on-premises while putting their variable/seasonal/project-driven workloads in the public cloud. They can also host environments to control access by third-party partners and remote users to specific applications and datasets.
 
 **In this lab you will access a Frame environment similar to Frame Test Drive, allowing you to walk through the same experience as a prospect who has signed up for access to the** `free 2-hour Test Drive <https://fra.me/test-drive>`_. **The environment will allow you to access sample applications, add your own apps, invite users, customize settings, and more.**
 
@@ -31,7 +31,7 @@ A separate environment has been created with pre-provisioned accounts to elimina
 
 .. raw:: html
 
-  <strong><font color="red">Before beginning the lab, you must see a GTS proctor to be provided with administrator credentials for a dedicated Frame tenant account.</font></strong>
+  <strong><font color="red">Before beginning the lab, you must see a GTS proctor who will provide you with administrator credentials for a dedicated Frame account.</font></strong>
 
 Running Apps & Desktops
 +++++++++++++++++++++++
@@ -40,9 +40,9 @@ Once you have received your custom credentials, open https://frame.nutanix.com/ 
 
 Select **Sign in with Email and Password** and enter your administrator credentials.
 
-Accept the usage agreements and you will be taken to the Test Drive Launchpad. Launchpads provide a way of organizing and presenting applications and desktops to Frame users. As you will see later in the lab, a user can have access to multiple Launchpads - potentially even spanning different organizations utilizing the same credentials.
+Accept the usage agreements and you will be taken to your Test Drive Launchpad. Launchpads provide a way of organizing and presenting applications and desktops to Frame users. As you will see later in the lab, a user can have access to multiple Launchpads - potentially even spanning different organizations and accounts utilizing the same credentials.
 
-Multiple applications have been pre-published, allowing a user to quickly test the user experience of accessing a desktop via their browser.
+Multiple applications have been pre-published, allowing you to quickly test the user experience of accessing desktop applications via their browser.
 
 .. figure:: images/1b.png
 
@@ -50,7 +50,7 @@ Note the status bar at the bottom at the bottom of the Launchpad.
 
 .. figure:: images/2b.png
 
-The **Air 4GB** denotes the **Instance Type**. An Instance Type is the VM configuration which will be launched to run applications. The Test Drive environment limits the account to a 2 vCPU/4GB RAM Instance Type, appropriate for general purpose 2D applications. Full accounts can take advantage of other configurations, including:
+The **Air 4GB** denotes the **Instance Type**. An Instance Type is the VM configuration which will be launched to run applications. The Test Drive environment limits the account to a 2 vCPU/4GB RAM Instance Type, appropriate for general purpose 2D applications. Full accounts can take advantage of other Instance Types, including:
 
 - **Air 8GB** - 2 vCPU/8GB RAM (e.g. AWS t2.large, Azure Standard_D2_v2)
 - **Pro 16GB** - 4 vCPU/16GB RAM/1 NVIDIA GRID GPU (e.g. AWS g2.2xlarge)
@@ -62,19 +62,19 @@ Log in with your new user credentials and you should be presented with your appl
 
 Click on **Google Chrome** to launch your first Frame session. You will be launching Google Chrome in “application mode,” as opposed to full desktop delivery.
 
-Your initial session may take ~2 minutes to launch, this is because a VM used to run the application is provisioned and booted on-demand at the time of clicking the application. Later in the exercise you will explore options for powering on VMs ahead of time, allowing administrators to balance user experience and the cost overhead of idle, public cloud resources.
+Your initial session may take ~2 minutes to launch. This is because the VM used to run the application is booted on-demand at the time of clicking the application. Later in the exercise you will explore options for powering on VMs ahead of time, allowing administrators to balance user experience and the cost overhead of idle, public cloud resources.
 
-Once your browser is connected into your Frame session, you will see Chrome within your browser. Maximize the application to occupy the entire browser tab.
+Once your browser is connected into your Frame session, you will see Chrome within your browser. Notice that you can resize the Chrome window and maximize the Chrome application to occupy the entire browser tab. However, there is no underlying desktop visible.
 
-Note the changes to the status bar that appears at the bottom of your session.
+Note the changes to the status bar that appears at the bottom of your local browser window.
 
 .. figure:: images/13.png
 
 Click the :fa:`gear` icon on the status bar to explore the actions available to a user during the session, such as launching and switching to other applications and network QoS settings.
 
-Click :fa:`gear` **> Show/hide stats**. Try playing a YouTube video with the highest available FPS and video bit rate values versus a max of 5 FPS and 0.5 Mbps bit rate. Note that when the display is not changing, the Frame Remoting Protocol will adapt to drop frame rate to 0. Consumed bandwidth will fall to 1 kbps.
+Click :fa:`gear` **> Show/hide stats**. Try playing a YouTube video with the highest available FPS and video bit rate values versus a max of 5 FPS and 0.5 Mbps bit rate. Note that when the display is not changing, the Frame Remoting Protocol will adapt and drop the frame rate to 0. Consumed bandwidth will fall to 1 kbps.
 
-*Fun Fact: Did you know that last year Autodesk streamed their 3D applications to their entire user conference in Dubai from AWS Singapore?*
+*Fun Fact: Did you know that last year Autodesk streamed their 3D CAD applications to their entire user conference in Dubai from AWS Singapore?*
 
 Hover over the remaining elements in the status bar to see what they do.
 
@@ -121,7 +121,7 @@ Open **Frame Explorer** and note your cloud storage has been automatically mount
 
 .. figure:: images/19.png
 
-Try opening a document from your cloud storage account. Files are not synced, only files you open are temporarily transferred to your Frame session for use.
+Try opening a document from your cloud storage account. Only the metadata is synced when the cloud storage is mounted as a network drive. Files are not synced. When you open a file, the file is temporarily transferred to your Frame session for use. When you save a file, the file is saved to cloud storage.
 
 Corporate Files
 ...............
@@ -149,15 +149,15 @@ Frame makes it very simple to customize your "Gold" image and add new applicatio
 
   Microsoft has made some adjustments in their Windows licensing so Xi Frame will be able to support Windows 10 on Azure and Nutanix AHV. Customers must confirm that they have the appropriate enterprise license agreement that allows them to do so.
 
-Select **Systems** from the sidebar and **Power On** your **Sandbox** VM. The Sandbox is a special instance that allows you to make changes to your master image.
+Select **Systems** from the sidebar and **Power On** your **Sandbox** VM. The Sandbox is a special instance that allows you to make changes to your master image. Any changes you make are persistent.
 
 .. figure:: images/8b.png
 
 Once your Sandbox VM is **Running**, click **Start Session** to connect through your browser.
 
-Download your application installer to the Sandbox desktop (the example below uses the `Atom <https://atom.io/`_ text editor) and install the new application. Frame will recognize that you just installed an application and ask you if you wish to onboard the application (for application delivery). Alternatively, you can simply right-click the application icon and select **Onboard to Frame**.
+Download an application installer to the Sandbox desktop (the example below uses the `Atom <https://atom.io/`_ text editor) and install the new application. Frame will recognize that you just installed an application and ask you if you wish to onboard the application (for application delivery). Alternatively, you can simply right-click the application icon and select **Onboard to Frame**.
 
-Instead of downloading and running an application installer, you could onboard another application already installed within the image such as OneNote or MSPaint.
+Instead of downloading and running an application installer, you can onboard another application already installed within the image such as OneNote or MSPaint.
 
 .. figure:: images/9b.png
 
@@ -183,7 +183,7 @@ Under **Sandbox**, click :fa:`ellipsis-v` **> Close Session** to end the active 
 
 Under **Applications**, click **Publish > Publish**.
 
-Publishing typically takes ~15 minutes or more, depending on the number of VMs that need to be provisioned with the Sandbox image. When the Account Administrator publishes the Sandbox, Frame Platform will backup the Sandbox image and prepare the image. Next, Frame Platform will provision VMs in a shadow pool using the new image. The max capacity for a given production pool determines the number of VMs provisioned.
+Publishing typically takes ~15 minutes or more, depending on the number of VMs that need to be provisioned with the Sandbox image. When the Account Administrator publishes the Sandbox, Frame Platform will backup the Sandbox image and prepare the image. Next, Frame Platform will provision VMs in a shadow pool using the new image. The max capacity value for a given production pool determines the number of VMs provisioned.
 
 During this process you will still be able to connect to and use your original production pool – *zero end-user downtime!* If a user was connected to a session when you initiated a publish, they could continue to work, uninterrupted. Once a user closes (not just disconnect) their session, the instance will be terminated and replaced with a VM from the shadow pool.
 
@@ -192,6 +192,10 @@ Each time you publish an updated version of your Sandbox image, Frame will autom
 .. figure:: images/12b.png
 
 While you wait for the publishing operation to complete, continue to explore the Frame Dashboard.
+
+.. note::
+
+  What if a customer needs to run a file server, license server, or database server within the Frame account? In those situations, the customer can add a **Utility Server** from the **Dashboard > Systems** page. Utility servers can be of different instance types and are intended to run 24x7. Account administrators need to power them off and on. They do not automatically get powered off, unlike Sandbox and production VMs, under Session Settings.
 
 Configuring Capacity
 ++++++++++++++++++++
@@ -212,7 +216,7 @@ Increasing **Buffer instances** to 1 directs Frame to have at least one VM power
 
 .. note::
 
-  Each VM that is powered on results in a VM charge by AWS or Azure, regardless of whether the VM is being used. Unless there are justifiable reasons, the **Minimum number of instances** powered on and **Buffer instances** values should be set to 0 for Default capacity. If these two parameters are greater than 0, then AWS or Azure will be charging for any powered on VMs.
+  Each VM that is powered on results in a VM charge by AWS or Azure, regardless of whether the VM is being used. Unless there are justifiable reasons, the **Minimum number of instances** powered on and **Buffer instances** values should be set to 0 for Default capacity. If these two parameters are greater than 0, then AWS or Azure will charge for those powered on VMs.
 
 Configuring Launchpads
 ++++++++++++++++++++++
