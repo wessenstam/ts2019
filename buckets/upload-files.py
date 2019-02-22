@@ -12,12 +12,12 @@ bucket="<bucket-name-to-upload-to>"
 name_of_dir="sample-files"
 
 # system variables
-endpoint_url= "http://"+endpoint_ip+":7200"
+endpoint_url= "https://"+endpoint_ip+":7200"
 filepath = glob.glob("%s/*" % name_of_dir)
 
 # connect to object store
 session = boto3.session.Session()
-s3client = session.client(service_name="s3", aws_access_key_id=access_key_id, aws_secret_access_key=secret_access_key, endpoint_url=endpoint_url)
+s3client = session.client(service_name="s3", aws_access_key_id=access_key_id, aws_secret_access_key=secret_access_key, endpoint_url=endpoint_url, verify=False)
 
 # go through all the files in the directory and upload
 for current in filepath:
