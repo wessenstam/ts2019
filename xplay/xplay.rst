@@ -56,6 +56,8 @@ Add the following:
 
 Close **Developer Tools**.
 
+**Refresh The Browser**
+
 Automatically Add Memory to a VM When A Constraint is Detected
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -236,7 +238,7 @@ Open a console session or SSH into Prism Central, and run the **paintrigger.py**
 
 .. code-block:: bash
 
-  python PrismProLab/paintrigger.py
+  python paintrigger.py
 
 .. note::
 
@@ -328,11 +330,7 @@ Click **Add Action**, and select the :fa:`power-off` **Power Off VM** action.
 Select **Source Entity** from the parameters.
 
 - **Target VM** - {{trigger[0].source_entity_info}}
-- **Type of Power Off Action**  - Guest Shutdown
-
-.. note::
-
-  If VM does not have NGT installed, select **Power Off** instead.
+- **Type of Power Off Action**  - Power Off
 
 Click **Add Action**, and select the **VM Reduce CPU** action.
 
@@ -421,7 +419,7 @@ Open a console session or SSH into Prism Central, and run the **paintrigger.py**
 
 .. code-block:: bash
 
-  python PrismProLab/paintrigger.py
+  python paintrigger.py
 
 .. note::
 
@@ -631,7 +629,7 @@ Open a console session or SSH into Prism Central, and run the **paintrigger.py**
 
 .. code-block:: bash
 
-  python PrismProLab/paintrigger.py
+  python paintrigger.py
 
 .. note::
 
@@ -834,7 +832,7 @@ Open a console session or SSH into Prism Central, and run the **paintrigger.py**
 
 .. code-block:: bash
 
-  python PrismProLab/paintrigger.py
+  python paintrigger.py
 
 .. note::
 
