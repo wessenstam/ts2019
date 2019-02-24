@@ -105,51 +105,75 @@ Open https://10.42.71.42:9440/ in a new browser tab and log in using the followi
 
 Select :fa:`bars` **> Services > Buckets**.
 
-Select **Access Keys** and click **Add People**.
+Select the pre-deployed **techsummit2019** Object Store.
 
-.. figure:: images/buckets_add_people.png
+Click **Create Bucket** and fill out the following fields:
 
-Select **Add people not in Active Directory** and provide your e-mail address.
+- **Name** - *initialsLowerCase*-**oscarstatic**
 
-.. figure:: images/buckets_add_people2.png
+.. figure:: images/buckets_create1.png
 
-Click **Next**.
+Click **Create**.
 
-Click **Download Keys** to download a .csv file containing your **Secret Key**.
+Buckets created via Prism use the default Access Key account, **poseidon_access**.
 
-.. figure:: images/buckets_add_people4.png
+You can verify access to these buckets via the Buckets Object Store Browser for the **techsummit2019 Object Store** at https://10.42.71.42:7200/ using the following credentials:
 
-Click **Close**.
+- **Access Key** - poseidon_access
+- **Secret Key** - poseidon_secret
 
-Record the **Access Key** associated with your e-mail.
-
-.. figure:: images/buckets_add_people5.png
-
-Log in to the Buckets Object Store Browser for the **techsummit2019 Object Store** at https://10.42.71.42:7200/ using your **Access Key** and **Secret Key**.
-
-.. figure:: images/buckets_add_people6.png
+.. figure:: images/buckets_create2.png
 
 .. note::
 
-  If you mistakenly did not download your **Secret Key**, **Regenerate** the keys from the Buckets web interface.
+  Similar to the default **nutanix/4u** password, it is recommended the default **poseidon** credentials be changed following deployment.
 
-Click the :fa:`circle-plus` icon in the lower-right and select **Create bucket**.
 
-.. figure:: images/object-create-ovm.png
+..  Select **Access Keys** and click **Add People**.
 
-In the pop-up that appears, fill in the following and press **Enter**:
+  .. figure:: images/buckets_add_people.png
 
-- **Bucket Name** - *initialsLowerCase*-oscarstatic
+  Select **Add people not in Active Directory** and provide your e-mail address.
 
-.. note::
+  .. figure:: images/buckets_add_people2.png
 
-  Record your **Bucket Name** entry, as the will be used later in the lab for the django-jet/django-configmap.yaml file.
+  Click **Next**.
 
-.. figure:: images/object-create-ovm-2.png
+  Click **Download Keys** to download a .csv file containing your **Secret Key**.
 
-Ensure your newly created bucket appears in the Object Browser sidebar.
+  .. figure:: images/buckets_add_people4.png
 
-.. figure:: images/object-create-ovm-2.png
+  Click **Close**.
+
+  Record the **Access Key** associated with your e-mail.
+
+  .. figure:: images/buckets_add_people5.png
+
+  Log in to the Buckets Object Store Browser for the **techsummit2019 Object Store** at https://10.42.71.42:7200/ using your **Access Key** and **Secret Key**.
+
+  .. figure:: images/buckets_add_people6.png
+
+  .. note::
+
+    If you mistakenly did not download your **Secret Key**, **Regenerate** the keys from the Buckets web interface.
+
+  Click the :fa:`circle-plus` icon in the lower-right and select **Create bucket**.
+
+  .. figure:: images/object-create-ovm.png
+
+  In the pop-up that appears, fill in the following and press **Enter**:
+
+  - **Bucket Name** - *initialsLowerCase*-oscarstatic
+
+  .. note::
+
+    Record your **Bucket Name** entry, as the will be used later in the lab for the django-jet/django-configmap.yaml file.
+
+  .. figure:: images/object-create-ovm-2.png
+
+  Ensure your newly created bucket appears in the Object Browser sidebar.
+
+  .. figure:: images/object-create-ovm-2.png
 
 Configuring the Application YAML Files
 ++++++++++++++++++++++++++++++++++++++
@@ -171,26 +195,37 @@ In *Initials*\ **-Windows-ToolsVM**, open and review the contents of the **bucke
 
 This file provides the **Access Key** and **Secret Key** required for the application to access the previously configured bucket.
 
+**No modifications are necessary.**
+
 `Kubernetes secrets <https://kubernetes.io/docs/concepts/configuration/secret/>`_ store obfuscate credential data as base64-encoded strings.
 
-Substituting your **Access Key** and **Secret Key** values, execute the following in PowerShell to convert your keys into base64-encoded strings:
+You can verify that **buckets-secrets.yaml** is using the **poseidon** keys used to create your bucket with the following PowerShell command:
 
 .. code-block:: powershell
 
-  [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes("YOUR-ACCESS-KEY"))
-  [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes("YOUR-SECRET-KEY"))
+  [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes("ACCESS-KEY-STRING"))
+  [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes("SECRET-KEY-STRING"))
 
-.. figure:: images/buckets-base64.png
+.. figure:: images/buckets_create3.png
 
-.. note::
+..  Substituting your **Access Key** and **Secret Key** values, execute the following in PowerShell to convert your keys into base64-encoded strings:
 
-  To convert to base64 on macOS or Linux, use ``echo -n "YOUR-STRING-HERE" | base64``
+  .. code-block:: powershell
 
-Update the **access:** and **secret:** values in **buckets-secrets.yaml** using the base64-encoded strings.
+    [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes("YOUR-ACCESS-KEY"))
+    [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes("YOUR-SECRET-KEY"))
 
-.. figure:: images/buckets-base64-2.png
+  .. figure:: images/buckets-base64.png
 
-Save and close **buckets-secrets.yaml**.
+  .. note::
+
+    To convert to base64 on macOS or Linux, use ``echo -n "YOUR-STRING-HERE" | base64``
+
+  Update the **access:** and **secret:** values in **buckets-secrets.yaml** using the base64-encoded strings.
+
+  .. figure:: images/buckets-base64-2.png
+
+Close **buckets-secrets.yaml**.
 
 Review era-secret.yaml File
 ...........................
