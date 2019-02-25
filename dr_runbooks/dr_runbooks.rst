@@ -4,27 +4,27 @@
 Leap: DR Runbooks
 ------------------------
 
+*The estimated time to complete this lab is 60 minutes.*
+
+.. raw:: html
+
+  <iframe width="640" height="360" src="https://www.youtube.com/embed/bWuW4nHIL9M?rel=0&amp;showinfo=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 Overview
 ++++++++
 
-**Estimated time to complete: 60 MINUTES**
+Legacy disaster recovery configurations, created in Prism Element, use Protection Domains and third-party integrations to protect VMs, and they replicate data between on-premises Nutanix clusters. Protection Domains provide limited flexibility in terms of supporting operations such as VM boot order and require you to perform manual tasks to protect new VMs as an application scales up.
 
-Legacy disaster recovery configurations, which are created with Prism Element, use protection domains and third-party integrations to protect VMs, and they replicate data between on-premises Nutanix clusters.
-Protection domains provide limited flexibility in terms of supporting operations such as VM boot order and require you to perform manual tasks to protect new VMs as an application scales up.
+Leap uses an entity-centric approach and runbook-like automation to recover applications. It uses categories to group the entities to be protected and to automate the protection of new entities as the application scales. Application recovery is more flexible with network mappings, configurable stages to enforce a boot order, and optional inter-stage delays. Application recovery can also be validated and tested without affecting production workloads. All the configuration information that an application requires upon failover are synchronized to the recovery location.
 
-Leap uses an entity-centric approach and runbook-like automation to recover applications.
-It uses categories to group the entities to be protected and to automate the protection of new entities as the application scales.
-Application recovery is more flexible with network mappings, configurable stages to enforce a boot order, and optional inter-stage delays. Application recovery can also be validated and tested without affecting production workloads. All the configuration information that an application requires upon failover are synchronized to the recovery location.
+Leap can be used between clusters spanning multiple customer-operated datacenters or between a datacenter and Xi Cloud Services.
 
-You can use Leap between two physical data centers or between a physical data center and Xi Cloud Services.
-Leap works with pairs of physically isolated locations called availability zones.
-One availability zone serves as the primary location for an application while a paired availability zone serves as the recovery location.
-While the primary availability zone is an on-premises Prism Central instance, the recovery availability zone can be either on-premises or in Xi Cloud Services.
+**In this lab you will configure Leap to protect a multi-VM application and test its failover to a secondary Nutanix cluster.**
 
 Lab Setup
 +++++++++
 
-For this lab you will be using the HPOC you were assigned, as well as the secondary Prism Central you were assigned.
+For this lab you will be using the **Prism Central IP** you were assigned as your primary site, as well as the **Secondary PC IP** assigned in :ref:`clusterassignments`.
 
 This lab depends on the availability of a multi-tier **Wordpress** web application.
 
@@ -80,6 +80,8 @@ Leap is built into Prism Central and requires no additional appliances or consol
 
 Enable Leap and Connect Availability Zone (Local)
 .................................................
+
+Leap works with pairs of physically isolated locations called availability zones. Each availability zone must run its own instance of Prism Central. One availability zone serves as the primary location for an application while a paired availability zone serves as the recovery location.
 
 In **Prism Central**, click the **?** drop down menu, expand **New in Prism Central** and select **Leap**.
 
@@ -339,13 +341,22 @@ What are the key things you should know about **Nutanix Leap DR Runbooks**?
 
 - All new Runbook functionality is in PC and required on both sides.
 
-- Runbooks don't require you to setup remote sites or storage mappings anymore.
+- Runbooks don't require you to setup remote sites or storage mappings.
 
 - The last octet of IP address can be kept the same in a new subnet in case DNS doesn't work.
 
 - `Tech Note 2027 <https://portal.nutanix.com/#/page/solutions/details?targetId=TN-2027_Data_Protection_and_Disaster_Recovery:TN-2027_Data_Protection_and_Disaster_Recovery>`_
 
 - `Best Practice Guide <https://portal.nutanix.com/#/page/solutions/details?targetId=BP-2005_Data_Protection:BP-2005_Data_Protection - best practice>`_
+
+Cleanup
++++++++
+
+.. raw:: html
+
+  <strong><font color="red">Once your lab completion has been validated, PLEASE do your part to remove any unneeded VMs to ensure resources are available for all users on your shared cluster.</font></strong>
+
+Ensure your **Wordpress** VMs have been powered off or removed from both the primary and secondary clusters.
 
 Getting Connected
 +++++++++++++++++
@@ -368,8 +379,4 @@ Have a question about **Nutanix Leap DR Runbooks**? Please reach out to the reso
 |  Founders Team                 |  Archish Dalal, archish.dalal@nutanix.com      |
 +--------------------------------+------------------------------------------------+
 |  Founders Team                 |  Norbert Thier, norbert.thier@nutanix.com      |
-+--------------------------------+------------------------------------------------+
-|  SME                           |                                                |
-+--------------------------------+------------------------------------------------+
-|  SME                           |                                                |
 +--------------------------------+------------------------------------------------+

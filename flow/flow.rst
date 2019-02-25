@@ -8,16 +8,15 @@ Flow
 
 .. raw:: html
 
-  <iframe width="640" height="360" src="https://www.youtube.com/watch?v=50edygfpBvw/preview" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
+  <iframe width="640" height="360" src="https://www.youtube.com/embed/aJsB4DQbk1I?rel=0&amp;showinfo=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 Overview
 ++++++++
 
-Flow is a software-defined networking product tightly integrated into Nutanix AHV and Prism Central.
-Flow provides rich visualization, automation, and security for VMs running on AHV.
-Microsegmentation is a component of Flow that simplifies policy management.
-Using multiple Prism Central categories (logical groups), you can create a powerful distributed firewall that gives administrators an application-centric policy management tool for securing VM traffic.
+Flow is a software-defined networking product tightly integrated into Nutanix AHV and Prism Central. Flow provides rich visualization, automation, and security for VMs running on AHV.
+Microsegmentation is a component of Flow that simplifies policy management. Using multiple Prism Central categories (logical groups), you can create a powerful distributed firewall that gives administrators an application-centric policy management tool for securing VM traffic.
 Combining this with Calm allows automated deployment of applications that are secured as they are created.
+
+**In this lab you will use Flow to build a microsegmentation policy for a multi-tier web application, isolate groups of VMs from one another, and quarantine a problematic VM.**
 
 Lab Setup
 +++++++++
@@ -270,7 +269,7 @@ Testing the Application
 
 From **Prism Central > Virtual Infrastructure > VMs**, note the IP address of your *Initials*\ **-HAPROXY-0...** and *Initials*\ **-MYSQL-0...** VMs.
 
-Launch the console for your *Initials*\ **-WinClient-0** VM.
+Launch the console for your *Initials*\ **-WinClient-0** VM. This Vm was provisioned as part of the Task Manager application blueprint.
 
 From the *Initials*\ **-WinClient-0** console open a browser and access \http://*HAPROXY-VM-IP*/.
 
@@ -524,7 +523,16 @@ What are the key things you should know about **Nutanix Flow**?
 
 - Security Policies are evaluated in order, and this precedence allows for creation of complex policies.
 
--Calm can use Categories created in Prism Central to automatically deploy VMs into a pre-existing security policy by default.
+- Calm can use Categories created in Prism Central to automatically deploy VMs into a pre-existing security policy by default.
+
+Cleanup
++++++++
+
+.. raw:: html
+
+  <strong><font color="red">Once your lab completion has been validated, PLEASE do your part to remove any unneeded VMs to ensure resources are available for all users on your shared cluster.</font></strong>
+
+If you do **NOT** intend to complete the :ref:`epoch` lab, delete your application deployment in Calm. Otherwise the same deployment can be used, but be sure to change your security policy back to **Monitor** mode.
 
 Getting Connected
 +++++++++++++++++
@@ -550,10 +558,5 @@ Have a question about **Nutanix Flow**? Please reach out to the resources below:
 +--------------------------------+------------------------------------------------+
 |  Founders Team                 |  Jon Jones, jon.jones@nutanix.com              |
 +--------------------------------+------------------------------------------------+
-|  SME                           |                                                |
-+--------------------------------+------------------------------------------------+
-|  SME                           |                                                |
-+--------------------------------+------------------------------------------------+
 
 .. |blueprints| image:: images/blueprints.png
-.. |applications| image:: images/applications.png

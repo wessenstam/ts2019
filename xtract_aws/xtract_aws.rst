@@ -97,7 +97,7 @@ Click the :fa:`pencil` icon in the **Name** field to provide a name for your Ubu
 
 Under **Description > Security groups**, click **view inbound rules** and note that the VM is only reachable via TCP port 22 (SSH) from any source (0.0.0.0/0).
 
-Under **Description > Root device type**, not the storage used is **Elastic Block Sotrage (EBS)**. `EBS <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html>`_ is block storage attached to an EC2 instance and commonly used as the primary storage for file systems and databases.
+Under **Description > Root device type**, not the storage used is **Elastic Block Storage (EBS)**. `EBS <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html>`_ is block storage attached to an EC2 instance and commonly used as the primary storage for file systems and databases.
 
 .. note::
 
