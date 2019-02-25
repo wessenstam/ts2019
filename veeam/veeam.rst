@@ -427,6 +427,15 @@ What are the key things you should know about **Veeam** and the **Backup Proxy f
 
 - Veeam has advanced restore capabilities including support for file level restore, Microsoft Active Directory, Microsoft Exchange, Microsoft SQL Server, and Oracle.
 
+Cleanup
++++++++
+
+.. raw:: html
+
+  <strong><font color="red">Once your lab completion has been validated, PLEASE do your part to remove any unneeded VMs to ensure resources are available for all users on your shared cluster.</font></strong>
+
+Delete your *Initials*\ **-VeeamBackupTest** and *Initials*\ **-VeeamBackupTest_restored** VMs.
+
 Getting Connected
 +++++++++++++++++
 

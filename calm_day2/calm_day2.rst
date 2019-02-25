@@ -320,17 +320,20 @@ Takeaways
 
 What are the key things you should know about **Nutanix Calm**?
 
-- Calm is not just for provisioning, rather any repetitive task can be automated.  Even saving 10 minutes a day adds up to a week of saved time over the year.
-
-- Expertise and skills can be shared between teams quickly by integrating that knowledge into a blueprint.  Security teams can ensure patches and rules are applied, application teams can see what's changed, developers can automatically have builds deployed.
-
-- Calm can be integrated with external tools to improve the experience - see the Jenkins integration video on youtube for an example of code going automatically from 'git commit' to running on Calm-provided infrastructure.
-
 - Not only can Calm orchestrate complex application deployments, it can manage applications throughout their entire lifecycle, by modeling complex Day 2 operations.
 
 - Whether it's a built in task, like scaling, or a custom task, like upgrades, Calm can be directed to perform the operations in specific order, or if order doesn't matter, perform them in parallel to save on time.
 
 - What operation are you currently doing on a regular basis?  It's likely that it can be modeled in Calm, saving you countless hours.  Take back your weekend!
+
+Cleanup
++++++++
+
+.. raw:: html
+
+  <strong><font color="red">Once your lab completion has been validated, PLEASE do your part to remove any unneeded VMs to ensure resources are available for all users on your shared cluster.</font></strong>
+
+Delete your application deployment in Calm.
 
 Getting Connected
 +++++++++++++++++
@@ -348,34 +351,3 @@ Have a question about **Nutanix Calm**? Please reach out to the resources below:
 +--------------------------------+------------------------------------------------+
 |  Technical Marketing Engineer  |  Michael Haigh, michael.haigh@nutanix.com      |
 +--------------------------------+------------------------------------------------+
-|  Solutions Architect           |  Ben Peterson, bp@nutanix.com                  |
-+--------------------------------+------------------------------------------------+
-|  Solutions Architect           |  Mark Lavi, mark.lavi@nutanix.com              |
-+--------------------------------+------------------------------------------------+
-|  Solutions Architect           |  Andy Schmid, andy.schmid@nutanix.com          |
-+--------------------------------+------------------------------------------------+
-|  Founders Team Manager         |  Mike Masterson, mike.masterson@nutanix.com    |
-+--------------------------------+------------------------------------------------+
-|  Founders Team                 |  Akbar Aziz, akbar.aziz@nutanix.com            |
-+--------------------------------+------------------------------------------------+
-|  Founders Team                 |  David Roberts, dave.roberts@nutanix.com       |
-+--------------------------------+------------------------------------------------+
-|  Founders Team                 |  Sachin Malhotra, sachin.malhotra@nutanix.com  |
-+--------------------------------+------------------------------------------------+
-|  SME Americas                  |  Alex Lott, alex.lott@nutanix.com              |
-+--------------------------------+------------------------------------------------+
-|  SME APAC                      |  Lei Ming Pan, leiming.pan@nutanix.com         |
-+--------------------------------+------------------------------------------------+
-|  SME APAC                      |  Chris Rasmussen, crasmussen@nutanix.com       |
-+--------------------------------+------------------------------------------------+
-|  SME EMEA                      |  Christophe Jauffret, christophe@nutanix.com   |
-+--------------------------------+------------------------------------------------+
-|  SME EMEA                      |  Jose Gomez, jose.gomez@nutanix.com            |
-+--------------------------------+------------------------------------------------+
-
-.. |proj-icon| image:: ../images/projects_icon.png
-.. |mktmgr-icon| image:: ../images/marketplacemanager_icon.png
-.. |mkt-icon| image:: ../images/marketplace_icon.png
-.. |bp-icon| image:: ../images/blueprints_icon.png
-.. |blueprints| image:: images/blueprints.png
-.. |applications| image:: images/blueprints.png

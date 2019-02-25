@@ -685,6 +685,15 @@ Takeaways
 
 - NFR licenses are available for lab environments. Reach out via the #_peer_software_ext Slack channel to request one.
 
+Cleanup
++++++++
+
+.. raw:: html
+
+  <strong><font color="red">Once your lab completion has been validated, PLEASE do your part to remove any unneeded VMs to ensure resources are available for all users on your shared cluster.</font></strong>
+
+Delete your *Initials*\ **-PeerAgentA**, *Initials*\ **-PeerAgentB**, and *Initials*\ **-PeerMgmt** VMs.
+
 Getting Connected
 +++++++++++++++++
 

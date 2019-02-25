@@ -4,6 +4,12 @@
 Calm: Windows Workloads
 -----------------------
 
+*The estimated time to complete this lab is 60 minutes.*
+
+.. raw:: html
+
+  <iframe width="640" height="360" src="https://www.youtube.com/embed/aEKzpMvjObk?rel=0&amp;showinfo=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 Overview
 ++++++++
 
@@ -461,15 +467,18 @@ Can you build a version of this Blueprint that leverages an Era clone of your SQ
 Takeaways
 +++++++++
 
-What are the key things you should know about **Nutanix Calm**?
+- Calm provides the same application deployment and lifecycle management benefits for Windows workloads as it does for Linux workloads.
 
-- Since 2008, Microsoft has focused on making every GUI task available through powershell, meaning anything you do can be automated.
+- Calm can natively execute remote PowerShell scripts on Windows endpoints without the need for a Windows-based proxy.
 
-- Calm can call into existing tools, such as SCCM or a Citrix DDC, and use the configuration and tools stored there
+Cleanup
++++++++
 
-- Calm abstracts the application from the infrastructure, allowing these configurations to be automatically used in places that would be difficult before.  For an example of this, see youtube for an example of vRA configuring AHV VMs though Calm integration.
+.. raw:: html
 
-- Integration with other apps - leveraging Era, eScript, and an existing VM service
+  <strong><font color="red">Once your lab completion has been validated, PLEASE do your part to remove any unneeded VMs to ensure resources are available for all users on your shared cluster.</font></strong>
+
+If you do **NOT** intend to complete any of the *Optional* sections above, delete your application deployment in Calm.
 
 Getting Connected
 +++++++++++++++++

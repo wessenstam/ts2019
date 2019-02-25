@@ -4,10 +4,16 @@
 Calm: Linux Workloads
 ---------------------
 
+*The estimated time to complete this lab is 60 minutes.*
+
+.. raw:: html
+
+  <iframe width="640" height="360" src="https://www.youtube.com/embed/aEKzpMvjObk?rel=0&amp;showinfo=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 Overview
 ++++++++
 
-**In this exercise you will explore the basics of Nutanix Calm by building and deploying a blueprint that installs and configures a multi-tier Task Manager web app using MySQL, nginix, and HAProxy.**
+**In this lab you will explore the basics of Nutanix Calm by building and deploying a blueprint that installs and configures a multi-tier Task Manager web app using MySQL, nginix, and HAProxy.**
 
 Creating a Blueprint
 ++++++++++++++++++++
@@ -644,8 +650,6 @@ In a new browser tab or window, navigate to http://<HAProxy-IP>, and verify your
 
 .. figure:: images/17.png
 
-If you are interested in learning about additional Calm capabilities, check out :ref:`day-2-labs`.
-
 Takeaways
 +++++++++
 
@@ -676,6 +680,17 @@ What are the key things you should know about **Nutanix Calm**?
 - Dependencies between services can be easily modeled in the Blueprint Editor.
 
 - Users can quickly provision entire application stacks for production or testing for repeatable results without time lost to manual configuration.
+
+- Interested in using Calm for more app lifecycle operations? Check out the :ref:`calm_day2`!
+
+Cleanup
++++++++
+
+.. raw:: html
+
+  <strong><font color="red">Once your lab completion has been validated, PLEASE do your part to remove any unneeded VMs to ensure resources are available for all users on your shared cluster.</font></strong>
+
+Delete your application deployment in Calm. If you intend to complete the :ref:`calm_day2` lab, do **NOT** delete your blueprint, as you will continue to add actions to your existing blueprint.
 
 Getting Connected
 +++++++++++++++++

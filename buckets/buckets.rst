@@ -8,7 +8,7 @@ Buckets
 
 .. raw:: html
 
-  <iframe src="https://drive.google.com/file/d/1sU4_1GPVTNGJwNDoy0kB04r-vz4-9Thq/preview" width="720" height="480" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  <iframe width="640" height="360" src="https://www.youtube.com/embed/2-AGtHhpFs8?rel=0&amp;showinfo=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Overview
 ++++++++
@@ -60,7 +60,7 @@ This exercise will familiarize you with the Nutanix Buckets environment. You wil
 - What constitutes the Microservices Platform (MSP) and the services that make up Nutanix Buckets.
 - How to deploy an object store
 
-.. warning::
+.. note::
 
   At the time of development, Buckets is still pre-GA and has been deployed to a dedicated Nutanix cluster running non-GA AOS/Prism Central. This environment will be shared by all attendees completing this lab. Please be respectful.
 
@@ -112,7 +112,7 @@ The envoy VM is the load balancer and endpoint. The IP address of this VM is the
 Walk Through the Object Store Deployment
 ........................................
 
-In this exercise you will walk through the steps of creating an Object Store.
+In this exercise you will walk through the steps of creating an Object Store. As this is a shared environment running an EA version of Buckets, please do not complete the **Create Object Store** wizard.
 
 .. note::
 
@@ -167,9 +167,9 @@ Select the assigned cluster and notice the Network dialog expands.
 
 **Client Access IPs:** These are the endpoint IPs that the external applications will connect to. Enter a minimum of 4.
 
-Close the **Create Object Store** wizard.
+.. raw:: html
 
-**Do NOT click Deploy**.
+  <strong><font color="red">Close the Create Object Store wizard, do NOT click Deploy.</font></strong>
 
 .. figure:: images/buckets_04.png
 
@@ -695,17 +695,6 @@ What are the key things you should know about **Nutanix Buckets**?
 
 - Buckets will be enabled and deployed from Prism Central. Upgrades will be done via Lifecycle Manager (LCM).
 
-References
-++++++++++
-
-Right-click to open in a new tab.
-
-- `Buckets FAQ <https://docs.google.com/document/d/1xEkrB5EOGu5-8yCB7EUYuy95TTgnuBE2s2DWWmVRJw4/edit?usp=sharing>`_
-- `Buckets Admin Guide (Draft) <https://docs.google.com/document/d/1l0fekqhDH-q3snlBmogfEAOg2MVoGMveiNa6fw6VOeM/edit?usp=sharing>`_
-- `Buckets Tech Note (Draft) <https://docs.google.com/document/d/1jYud1z6JV1TwmJj5gon4Cs-Syq7J4jBn3BhvWfSCBeU/edit?usp=sharing>`_
-- `SE Deck <https://nutanixinc-my.sharepoint.com/:p:/g/personal/priyadarshi_nutanix_com/EZof9glUu31Jlu6lG1JAUVUBxSrmYBNcjaeiCmTz8iXSyQ?e=eAvhB5>`_
-
-
 Getting Connected
 +++++++++++++++++
 
@@ -728,3 +717,11 @@ Have a question about **Nutanix Buckets**? Please reach out to the resources bel
 +--------------------------------+------------------------------------------------------------+
 |  SME                           |  Dheer Moghe, dheer.moghe@nutanix.com                      |
 +--------------------------------+------------------------------------------------------------+
+
+Additional Resources (Internal)
++++++++++++++++++++++++++++++++
+
+- `Buckets FAQ <https://docs.google.com/document/d/1xEkrB5EOGu5-8yCB7EUYuy95TTgnuBE2s2DWWmVRJw4/edit?usp=sharing>`_
+- `Buckets Admin Guide (Draft) <https://docs.google.com/document/d/1l0fekqhDH-q3snlBmogfEAOg2MVoGMveiNa6fw6VOeM/edit?usp=sharing>`_
+- `Buckets Tech Note (Draft) <https://docs.google.com/document/d/1jYud1z6JV1TwmJj5gon4Cs-Syq7J4jBn3BhvWfSCBeU/edit?usp=sharing>`_
+- `SE Deck <https://nutanixinc-my.sharepoint.com/:p:/g/personal/priyadarshi_nutanix_com/EZof9glUu31Jlu6lG1JAUVUBxSrmYBNcjaeiCmTz8iXSyQ?e=eAvhB5>`_
