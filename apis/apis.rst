@@ -1383,3 +1383,30 @@ Thanks for attending this lab.
 
 Takeaways
 +++++++++
+
+What are the key things you should know about **Nutanix APIs**?
+
+- Nutanix REST APIs are aimed at anyone wanting to automate cluster or application operations.
+- Custom applications can be integrated with Nutanix products using the APIs.
+- The APIs are designed to be simple and easy to consume.
+- Nearly all operations that can be carried out in Prism can be carried out via API.
+- The Nutanix REST APIs are always evolving, with new features being added all the time.
+- Customer and prospect API Labs are a great way to introduce others to the APIs.
+- The API Labs can be run self-paced i.e. on the attendee’s own device or as an SE-led event.
+
+Getting Connected
++++++++++++++++++
+
+Have a question about **Nutanix APIs**? Please reach out to the resources below:
+
++------------------------------------------------------------------------------------+
+|  Xi Epoch Product Contacts                                                         |
++================================+===================================================+
+|  Slack Channel                 |  #rest-api, #developer-ecosystem                  |
++--------------------------------+---------------------------------------------------+
+|  Product Manager               |  Tarak Parekh, tarak.parekh@nutanix.com           |
++--------------------------------+---------------------------------------------------+
+|  Developer Marketing           |  Luke Kilpatrick, luke.kilpatrick@nutanix.com     |
++--------------------------------+---------------------------------------------------+
+|  Developer Marketing           |  Chris Rasmussen, crasmussen@nutanix.com          |
++--------------------------------+---------------------------------------------------+

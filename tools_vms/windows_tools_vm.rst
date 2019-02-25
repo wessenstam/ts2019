@@ -17,7 +17,11 @@ This Windows Server 2012 R2 image comes pre-installed with a number of tools, in
 - pgAdmin
 - Chocolatey Package Manager
 
-Deploy this VM on your assigned cluster if directed to do so as part of **Lab Setup**. Only deploy the VM once.
+Deploy this VM on your assigned cluster if directed to do so as part of **Lab Setup**.
+
+.. raw:: html
+
+  <strong><font color="red">Only deploy the VM once, it does not need to be cleaned up as part of any lab completion.</font></strong>
 
 Deploying Tools VM
 ++++++++++++++++++

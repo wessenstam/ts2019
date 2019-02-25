@@ -52,6 +52,10 @@ Fill out the following fields:
 
 Click **Upload**.
 
+.. note::
+
+  If you receive an error trying to upload the blueprint, refresh your browser and try again.
+
 Configuring the Blueprint
 +++++++++++++++++++++++++
 

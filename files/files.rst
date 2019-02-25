@@ -19,6 +19,13 @@ Traditionally, file storage has been yet another silo within IT, introducing unn
 
 .. _deploying_files:
 
+Lab Setup
++++++++++
+
+This lab requires applications provisioned as part of the :ref:`windows_tools_vm`.
+
+If you have not yet deployed this VM, see the linked steps before proceeding with the lab.
+
 Deploying Files
 +++++++++++++++
 
@@ -73,7 +80,7 @@ Select the **Secondary - Managed** VLAN for the **Client Network**. Each Files V
 
   .. figure:: images/6.png
 
-Specify your cluster's **DC** VM IP (found in :ref:`stagingdetails`) as the **DNS Resolver IP** (e.g. 10.XX.YY.40).
+Specify your cluster's **DC** VM IP (found in :ref:`stagingdetails`) as the **DNS Resolver IP** (e.g. 10.XX.YY.40). Leave the default (cluster) NTP Server.
 
 .. note::
 
