@@ -39,7 +39,7 @@ In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > Categories
 
 Fill out the following fields:
 
-- **Name**  - *initials*-DR
+- **Name**  - *Initials*-DR
 - **Purpose** - DR Runbooks
 - **Values**  - DB
 - **Values**  - web
@@ -51,13 +51,13 @@ Click **Save**.
 Assign Category
 ...............
 
-In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**
+In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**.
 
 Select the DRDB VM you created, and click **Manage Categories** from the **Actions** dropdown.
 
 .. figure:: images/drrunbooks_02.png
 
-Search for *initials*-**DR** you just created, and select *initials*-**DR:DB**.
+Search for *Initials*-**DR** you just created, and select *Initials*-**DR:DB**.
 
 .. figure:: images/drrunbooks_03.png
 
@@ -65,7 +65,7 @@ Click **Save**.
 
 Select the DRWeb VM you created, and click **Manage Categories** from the **Actions** dropdown.
 
-Search for *initials*-**DR** you just created, and select *initials*-**DR:Web**.
+Search for *Initials*-**DR** you just created, and select *Initials*-**DR:Web**.
 
 Click **Save**.
 
@@ -90,6 +90,12 @@ In **Prism Central** > select :fa:`bars` **> Administration > Availability Zones
 .. note::
 
   You can only setup the **Connect to Availability Zone** once to a given Prism Central.
+
+Refer to :ref:`clusterassignments` to determine your **Secondary PC IP**, this will be used as the **DR PC** for this exercise.
+
+.. note::
+
+  The DR PC IP is entered on the local cluster because you are instantiating the connection to the DR cluster, and vice versa for the remote cluster.
 
 Fill out the following fields:
 
@@ -135,7 +141,7 @@ In **Prism Central** > select :fa:`bars` **> Policies > Protection Policies**, a
 
 Fill out the following fields:
 
-- **Name**  - *initials*-Protection
+- **Name**  - *Initials*-Protection
 - **Primary Location**  - Local AZ
 - **Remote Location** - Assigned DR PC
 - **Target Cluster**  - Assigned DR HPOC
@@ -145,8 +151,8 @@ Fill out the following fields:
 - **Local Retention**  - 2
 
 - Select **+ Add Categories**
-    - **Select Categories - *initials*-**DR:Web**
-    - **Select Categories - *initials*-**DR:DB**
+    - **Select Categories** - *Initials*-**DR:Web**
+    - **Select Categories** - *Initials*-**DR:DB**
     Select **Save**
 
 .. figure:: images/drrunbooks_06.png
@@ -167,7 +173,7 @@ Click **Proceed**
 
 Fill out the following fields:
 
-- **Name**  - *initials*-Recover
+- **Name**  - *Initials*-Recovery
 - **Recovery Plan Description** - optional
 
 Click **Next**
@@ -269,7 +275,7 @@ Perform Failover
 
 In **DR Prism Central** > select :fa:`bars` **> Policies > Recovery Plans**.
 
-Select your *initials*-\**Recovery** recovery plan and select **Failover** from the **Actions** dropdown.
+Select your *Initials*-**Recovery** recovery plan and select **Failover** from the **Actions** dropdown.
 
 .. figure:: images/drrunbooks_11.png
 
@@ -302,14 +308,14 @@ In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**.
 
 You can make sure that the DB and Web VMs are up.
 
-You can also go to the Wordpress url in your *initials*-**Windows-ToolsVM**, http://drweb1.ntnxlab.local and check that the service is up.
+You can also go to the Wordpress url in your *Initials*-**Windows-ToolsVM**, http://drweb1.ntnxlab.local and check that the service is up.
 
 Fail Back to the Original AZ (PC)
 +++++++++++++++++++++++++++++++++
 
 In **Prism Central** > select :fa:`bars` **> Policies > Recovery Plans**.
 
-Select your *initials*-\**Recovery** recovery plan and select **Failover** from the **Actions** dropdown.
+Select your *Initials*-**Recovery** recovery plan and select **Failover** from the **Actions** dropdown.
 
 You should see your assigned DR PC as the **Primary Location**, and your assigned HPOC PC (that you are logged into) as the **Recovery Location**.
 
@@ -320,7 +326,7 @@ Change the **Action** to **Execute Anyway**, and click **Proceed** when se the l
 Check Failover Status
 .....................
 
-Click the *initials*-\**Recovery** recovery plan to see the status and details.
+Click the *Initials*-**Recovery** recovery plan to see the status and details.
 
 .. note::
 
@@ -332,7 +338,7 @@ In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**.
 
 You can make sure that the DB and Web VMs are up.
 
-You can also go to the Wordpress url in your *initials*-**Windows-ToolsVM**, http://drweb1.ntnxlab.local and check that the service is up.
+You can also go to the Wordpress url in your *Initials*-**Windows-ToolsVM**, http://drweb1.ntnxlab.local and check that the service is up.
 
 Takeaways
 +++++++++

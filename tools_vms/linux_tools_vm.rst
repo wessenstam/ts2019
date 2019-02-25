@@ -9,7 +9,11 @@ Overview
 
 This CentOS VM image will be staged with packages used to support multiple lab exercises.
 
-Deploy this VM on your assigned cluster if directed to do so as part of **Lab Setup**. Only deploy the VM once.
+Deploy this VM on your assigned cluster if directed to do so as part of **Lab Setup**.
+
+.. raw:: html
+
+  <strong><font color="red">Only deploy the VM once, it does not need to be cleaned up as part of any lab completion.</font></strong>
 
 Deploying CentOS
 ++++++++++++++++

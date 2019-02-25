@@ -45,6 +45,8 @@ This lab requires applications provisioned as part of the :ref:`windows_tools_vm
 
 If you have not yet deployed **both** of these VMs, see the linked steps before proceeding with the lab.
 
+As Buckets is not yet GA, the lab will leverage an existing Buckets Object Store deployment accessible from the following cluster: https://10.42.71.39:9440
+
 Getting Familiar with Object Storage
 ++++++++++++++++++++++++++++++++++++
 
@@ -67,13 +69,16 @@ This exercise will familiarize you with the Nutanix Buckets environment. You wil
 View the Object Storage Services
 ................................
 
-Login into Prism Central hosting Buckets - \https://*Buckets-PC-IP:8443*/
+Login into Prism Central hosting Buckets (https://10.42.71.39:9440) using the following credentials:
 
-Click **Explore > Nutanix Buckets**.
+- **Username** - admin
+- **Password** - Nutanix.123
 
-View the existing object store you are assigned and take a note of the name and IP.
+Select :fa:`bars` **> Services > Buckets**.
 
-Click **Explore > VMs**.
+View the existing Object Store and take a note of the name and IP.
+
+Select :fa:`bars` **> Virtual Infrastructure > VMs**.
 
 For a small deployment, you will see 4 VMs, each preceded with the name of the object store.
 
@@ -122,7 +127,7 @@ In this exercise you will walk through the steps of creating an Object Store. As
 
   In the Tech Summit Buckets environment, you will **not** be able to actually deploy the object store, but you will be able to see the workflow and how simple it is for users to deploy an object store.
 
-In **Prism Central > Explore > Nutanix Buckets**, click **Create Object Store**.
+In :fa:`bars` **> Services > Buckets**, click **Create Object Store**.
 
 .. figure:: images/buckets_01.png
 
@@ -178,7 +183,7 @@ Walk through Bucket Creation and Policies
 
 A bucket is a sub-repository within an object store which can have policies applied to it, such as versioning, WORM, etc. By default a newly created bucket is a private resource to the creator. The creator of the bucket by default has read/write permissions, and can grant permissions to other users.
 
-Click the **Name** of the existing Object Store to manage it.
+Click the **Name** of the existing Object Store (**techsummit2019**) to manage it.
 
 Click **Create Bucket**, and fill out the following fields:
 
@@ -209,7 +214,7 @@ Check the box next to your *your-name*-**my-bucket** bucket, and click **Configu
 
   In the EA version, WORM is not yet fully functional.
 
-Check the box next to your your-name*-**my-bucket** bucket, and click **Share**. This is where you will be able to share your bucket with other users. You can configure read access (download), write access (upload), or both, on a per user or AD group basis (the latter at GA).
+Check the box next to your *your-name*-**my-bucket** bucket, and click **Share**. This is where you will be able to share your bucket with other users. You can configure read access (download), write access (upload), or both, on a per user or AD group basis (the latter at GA).
 
 .. figure:: images/buckets_share.png
 
@@ -226,7 +231,9 @@ Select **Add people not in Active Directory** and enter your e-mail address.
 
 .. figure:: images/buckets_add_people2.png
 
-.. note:: In GA, you will also be able to generate keys for a entire Active Directory group.
+.. note::
+
+  In GA, you will also be able to generate keys for a entire Active Directory group.
 
 Click **Next**.
 
@@ -272,14 +279,12 @@ Click on **Open Connection**.
 
 Select **Amazon S3** from the dropdown list.
 
-.. figure:: images/buckets_07.png
+Enter the following fields for the user created earlier, and click **Connect**:
 
-Enter the following fields for user Bob created earlier, and click **Connect**:
-
-- **Server**  - *Object Store IP*
+- **Server**  - 10.42.71.42
 - **Port**  - 7200
-- **Access Key ID**  - *Generated When First User Created*
-- **Password (Secret Key)** - *Generated When First User Created*
+- **Access Key ID**  - *Generated When User Created*
+- **Password (Secret Key)** - *Generated When User Created*
 
 .. figure:: images/buckets_08.png
 
@@ -312,9 +317,9 @@ Browse Bucket and Objects in Object Browser
 
   Object browser is not the recommended way to use the object store, but is an easy way to test that your object store is functional and can be used to quickly demo IAM access controls.
 
-From a web browser, navigate to https://\ *OBJECT-STORE-IP*\ :7200.
+From a web browser, navigate to https://10.42.71.42:7200.
 
-Login with the Access and Secret keys for the first user account you created.
+Login with the Access and Secret keys for the user account you created.
 
 .. figure:: images/buckets_10.png
 
@@ -330,7 +335,7 @@ Object versioning allows the upload of new versions of the same object for requi
 Object Versioning
 .................
 
-Return to Cyberduck and re-connect using your first user's access and secret keys. If you are already connected, make sure you are on the bucket listing page (the root folder in Cyberduck).
+Return to Cyberduck and re-connect using your user's access and secret keys. If you are already connected, make sure you are on the bucket listing page (the root folder in Cyberduck).
 
 .. figure:: images/root_folder.png
 
@@ -574,7 +579,7 @@ Amazon Web Services's S3 (Simple Storage Service) is the largest public cloud st
 
 In this exercise you will use **Boto 3**, the AWS SDK for Python, to manipulate your buckets using Python scripts.
 
-You will need the **Access Key** and **Secret Key** for the first user account created earlier in this lab.
+You will need the **Access Key** and **Secret Key** for the user account created earlier in this lab.
 
 Listing and Creating Buckets with Python
 ........................................

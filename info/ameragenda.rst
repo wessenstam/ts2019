@@ -270,3 +270,24 @@ Public Cloud & Xi Beam Overview
 *Wednesday, 3:30PM - 5:30PM - Grand Ballroom 2*
 
 Want to know more about offerings from AWS, Azure, and others? Technical knowledge about public cloud solutions are critical to being able to effectively position on-premises alternatives, and well as complimentary Nutanix services. In addition to providing a "crash course" on the public cloud, this session will provide details on how Xi Beam can provide additional value in these environments.
+
+Breakout Q&A
+++++++++++++
+
+You can ask questions for any of the breakout sessions using the web app below. You do not need to attend a session to submit or vote on questions.
+
+Open https://app2.sli.do/event/lxc4cpju on your laptop or mobile device.
+
+.. note::
+
+  You can also access the app through https://www.slido.com using **#GTS19** as the **Event Code**.
+
+Select the desired breakout session from the list.
+
+.. figure:: images/slido1.png
+
+Review existing questions and upvote any similar questions by clicking the :fa:`thumbs-up` icon before potentially submitting a duplicate question. Questions with the most votes will be prioritized by speakers.
+
+.. figure:: images/slido2.png
+
+ If a similar question does not already exist, click **Ask** to submit your own question.
