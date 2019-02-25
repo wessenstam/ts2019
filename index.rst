@@ -86,7 +86,7 @@ Labs are designed to be completed by each individual, not in groups. Each Nutani
   <strong><font color="red">REVIEW THE FOLLOWING SECTIONS BEFORE BEGINNING ANY LABS:</font></strong>
 
 - :ref:`clusteraccess` - *VPN configuration for accessing the Nutanix Hosted POC network*
-- :ref:`clusterinfo` - *Your individual cluster assignment and details on how your cluster was staged*
+.. - :ref:`clusterinfo` - *Your individual cluster assignment and details on how your cluster was staged*
 - :ref:`validation` - *How to get assistance with a lab or validate you have completed a lab*
 
 .. Announcements
