@@ -8,7 +8,7 @@ Prism Pro: X-Play
 
 .. raw:: html
 
-  <iframe width="640" height="360" src="https://www.youtube.com/embed/qaLX6jJm9y8?rel=0&amp;showinfo=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe width="640" height="360" src="https://www.youtube.com/embed/7Uh-5XbDk_Y?rel=0&amp;showinfo=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Overview
 ++++++++
