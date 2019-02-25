@@ -97,7 +97,7 @@ The lab guides will explicitly share any unique credentials, the table below con
     - Password
   * - **Prism Element**
     - admin
-    - techX2019
+    - techX2019!
   * - **Prism Central**
     - admin
     - techX2019!
