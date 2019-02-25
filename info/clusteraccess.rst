@@ -25,7 +25,7 @@ Connect using your Okta credentials.
 
 .. note::
 
-  Connect to a Split Tunnel (ST) gateway to ensure only network traffic targeting the Hosted POC environment is sent over the VPN.
+  Using the **Gateway** dropdown, select a Split Tunnel (ST) gateway to ensure only network traffic targeting the Hosted POC environment is sent over the VPN. Otherwise **Best Available** will default to a full VPN tunnel.
 
 Partners
 ........
