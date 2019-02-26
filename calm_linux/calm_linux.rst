@@ -254,6 +254,8 @@ With the **MySQL** service icon selected in the Workspace pane, scroll to the to
 
 Specify **MySQL_PACKAGE** as the **Package Name** and click **Configure install**.
 
+- **Package Name** - MYSQL_PACKAGE
+
 .. figure:: images/9.png
 
 Note the **Package install** field that appears on the MySQL service in the Workspace pane.
@@ -373,6 +375,8 @@ Select the new service and fill out the following **VM** fields in the **Configu
 Select the **Package** tab.
 
 Specify a **Package Name** and click **Configure install**.
+
+- **Package Name** - WebServer_PACKAGE
 
 Select **+ Task**, and fill out the following fields in the **Configuration Panel**:
 
@@ -528,6 +532,8 @@ Select the new service and fill out the following **VM** fields in the **Configu
 Select the **Package** tab.
 
 Specify a **Package Name** and click **Configure install**.
+
+- **Package Name** - HAPROXY_PACKAGE
 
 Select **+ Task**, and fill out the following fields in the **Configuration Panel**:
 
