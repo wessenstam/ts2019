@@ -457,3 +457,5 @@ Zero to Protect SE Challenge!
 +++++++++++++++++++++++++++++
 
 Check out http://zerotoprotect.com/ for details on how Nutanix and Veeam SEs can enter to win a Trek bicycle for deploying Veeam and AHV.
+
+.. figure:: images/ztp.png

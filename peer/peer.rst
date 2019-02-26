@@ -25,9 +25,9 @@ Key use cases for combining Peer Software with Nutanix Files include:
 
 .. figure:: images/integration.png
 
-Working from left to right, users interact with the SMB shares on the Nutanix Files cluster via a public LAN. When SMB activity occurs on the Files cluster through these shares, the Peer Partner Server (referred to as a Peer Agent) is notified via the File Activity Monitoring API from Files. The Peer Agent access the updated content via SMB then facilitates the flow of data to one or many remote and/or local file servers.
+Working from left to right, users interact with the SMB shares on the Nutanix Files cluster via a public LAN. When SMB activity occurs on the Files cluster through these shares, the Peer Partner Server (referred to as a Peer Agent) is notified via the File Activity Monitoring API from Files. The Peer Agent accesses the updated content via SMB then facilitates the flow of data to one or many remote and/or local file servers.
 
-**In this lab you will deploy and configure the Peer Global File Service software to create an Active/Active file services solution with Nutanix Files.**
+**In this lab you will deploy and configure the Peer Global File Service software to create an Active-Active file services solution with Nutanix Files.**
 
 Lab Setup
 +++++++++
@@ -109,7 +109,7 @@ Click **Save** to create the VM.
 
 Repeat the above steps to create a second VM named *Initials*\ **-PeerAgentA**.
 
-**Power On** your *Initials*\ **-PeerMgmt** and *Initials*\ **-PeerAgentB** VMs.
+**Power On** your *Initials*\ **-PeerMgmt** and *Initials*\ **-PeerAgentA** VMs.
 
 --------------------------------------------------------
 
@@ -175,7 +175,7 @@ Execute the following to join the domain and reboot *Initials*\ **PeerAgentB**:
 Windows File Server
 ...................
 
-The final step of staging the lab is configuring *Initials*\ **-PeerAgentB** as a Windows File Server. Peer is capable of leveraging its agent software to perform...
+The final step of staging the lab is configuring *Initials*\ **-PeerAgentB** as a Windows File Server. Peer is capable of replicating between multiple Files clusters as well as between a mix of Files and other NAS platforms. For this lab, you will be replicating between your Nutanix Files cluster and a Windows File Server.
 
 Connect to *Initials*\ **-PeerAgentB** via RDP using the following credentials:
 
@@ -228,7 +228,7 @@ Click **Manage roles**.
 
 .. figure:: images/6.png
 
-Under **Add admins**, **NTNXLAB\\Administrator** should already be added as a **Filer Server Admin**. If not, click **+ New user** and add **NTNXLAB\\Administrator**.
+Under **Add admins**, **NTNXLAB\\Administrator** should already be added as a **File Server Admin**. If not, click **+ New user** and add **NTNXLAB\\Administrator**.
 
 .. figure:: images/7.png
 
@@ -571,7 +571,19 @@ The changes that are performed on the Nutanix Files share will be sent to its pa
 
 .. figure:: images/33.png
 
-**Congratulations!** You have successfully deployed an Active/Active file share replicated across 2 sites. Using Peer, this same approach can be leveraged to support file collaboration across sites, migrations from legacy solutions to Nutanix Files, or disaster recovery for use cases such as VDI, where user data and profiles need to be accessible from multiple sites for business continuity.
+To test file locking, create a new OpenDocument Text file within the root of your Nutanix Files share, e.g. ``\\Initials-Files\Initials-Peer``.
+
+.. figure:: images/34.png
+
+Give the file a name. Within a few seconds, it should appear under your Windows File Server share, e.g. ``\\Initials-PeerAgentB-IP\Data``.
+
+.. figure:: images/35.png
+
+Open the file under the Nutanix Files share with OpenOffice Writer. Then open the file by the same name under ``\\Initials-PeerAgentB-IP\Data``. You should see the following warning that the file is locked.
+
+.. figure:: images/36.png
+
+**Congratulations!** You have successfully deployed an Active-Active file share replicated across 2 sites. Using Peer, this same approach can be leveraged to support file collaboration across sites, migrations from legacy solutions to Nutanix Files, or disaster recovery for use cases such as VDI, where user data and profiles need to be accessible from multiple sites for business continuity.
 
 Integrating with Microsoft DFS Namespace
 ++++++++++++++++++++++++++++++++++++++++
@@ -625,7 +637,7 @@ The **Contact Information** screen collects information used to organize the out
 
 Click **Next**.
 
-The File System Analyzer can be configured to scan one or more paths. These paths can be local (e.g. D:\MyData) or a remote UNC Path (e.g. \\files01\homes1).
+The File System Analyzer can be configured to scan one or more paths. These paths can be local (e.g. ``D:\MyData``) or a remote UNC Path (e.g. ``\\files01\homes1``).
 
 Add the following paths:
 
@@ -671,17 +683,19 @@ The full report contains the following information:
 Takeaways
 +++++++++
 
-- Peer Global File Service is the only solution which can provide active/active replication for Nutanix Files clusters.
+- Peer Global File Service is the only solution which can provide Active-Active replication for Nutanix Files clusters.
 
 - Peer also supports multiple legacy NAS platforms, allowing for replication within mixed environments or easing migration to Nutanix Files.
 
-- Peer can directly manage Microsoft Distributed File Services (DFS) namespaces, allowing multiple file servers to be presented through a single namespace. This is a key component for supporting true active/active DR solutions for file sharing.
+- Peer can directly manage Microsoft Distributed File Services (DFS) namespaces, allowing multiple file servers to be presented through a single namespace. This is a key component for supporting true Active-Active DR solutions for file sharing.
 
 - Peer offers tools for analyzing existing file servers to help with resource planning, optimization, and migration.
 
 - Peer Global File Service is licensed per Nutanix Files cluster or storage device with a TB-based package structure.
 
 - The latest Peer prerequisities for Nutanix Files can be found `here <https://kb.peersoftware.com/tb/nutanix-files-prerequisites>`_.
+
+- An in-dept Peer/Nutanix battlecard can be found `here <https://gpnportal.peersoftware.com/engage/peer-nutanix-battle-card-for-nutanix-files-afs/?sales_rep=aVFZUU9VZDVvbWZFNGhCTDBmM2lMZz09>`_.
 
 - NFR licenses are available for lab environments. Reach out via the #_peer_software_ext Slack channel to request one.
 
@@ -697,16 +711,20 @@ Delete your *Initials*\ **-PeerAgentA**, *Initials*\ **-PeerAgentB**, and *Initi
 Getting Connected
 +++++++++++++++++
 
-Have a question about **Peer Software**? Please reach out to the resources below:
+Have a question about **Nutanix + Peer Software**? Please reach out to the resources below:
 
 +---------------------------------------------------------------------------------+
 |  Peer Product Contacts                                                          |
 +================================+================================================+
 |  Slack Channel                 | #_peer_software_ext                            |
 +--------------------------------+------------------------------------------------+
-|  Nutanix Product Manager       |                                                |
+|  Product Manager               | Vikram Gupta, vikram.gupta@nutanix.com         |
 +--------------------------------+------------------------------------------------+
-|  Etc.                          |                                                |
+|  Technical Marketing Engineer  | Mike McGhee, mike.mcghee@nutanix.com           |
++--------------------------------+------------------------------------------------+
+|  Product Marketing Manager     | Devon Helms, devon.helms@nutanix.com           |
++--------------------------------+------------------------------------------------+
+|  Alliance Manager              | Abbas Sura, abbas.sura@nutanix.com             |
 +--------------------------------+------------------------------------------------+
 
-Looking to get connected with your **Peer Software** field counterpart? Reach out to <...?...>
+Looking to get connected with your **Peer Software** field counterpart? Reach out to kevinh@peersoftware.com.
