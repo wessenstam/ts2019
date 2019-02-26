@@ -254,6 +254,10 @@ Accessing & Creating Buckets
 
 In this exercise you will use `Cyberduck <https://cyberduck.io/>`_ to create and use buckets in the object store using your generated access key. Cyberduck is a multi-platform GUI application that supports multiple protocols including FTP, SFTP, WebDAV, and S3.
 
+.. note::
+
+  Cyberduck is already installed on the Windows Tools VM you deployed Earlier.
+
 You will also use the built-in Buckets Object Browser, which is an easy way to test that your object store is functional and can be used to quickly to demo IAM access controls.
 
 Download the Sample Images
