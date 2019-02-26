@@ -15,6 +15,29 @@ Overview
 
 **In this lab you will explore the basics of Nutanix Calm by building and deploying a blueprint that installs and configures a multi-tier Task Manager web app using MySQL, nginix, and HAProxy.**
 
+Verifying the Default Project
++++++++++++++++++++++++++++++
+
+In **Prism Central**, select :fa:`bars` **> Services > Calm**.
+
+.. figure:: images/project0.png
+
+Click |projects| **Projects** in the left hand toolbar and select the **default** project.
+
+.. note::
+
+  Mousing over an icon will display its title.
+
+Under **AHV Cluster** verify your assigned cluster is selected from the drop-down list, otherwise select it.
+
+.. figure:: images/project1.png
+
+Under **Network**, verify the **Primary** and **Secondary** networks are selected and the **Primary** network is the default. Otherwise, make the selections as shown below.
+
+.. figure:: images/project2.png
+
+If changes were made, click **Save**.
+
 Creating a Blueprint
 ++++++++++++++++++++
 
@@ -739,3 +762,4 @@ Have a question about **Nutanix Calm**? Please reach out to the resources below:
 .. |bp-icon| image:: ../images/blueprints_icon.png
 .. |blueprints| image:: images/blueprints.png
 .. |applications| image:: images/blueprints.png
+.. |projects| image:: images/projects.png
