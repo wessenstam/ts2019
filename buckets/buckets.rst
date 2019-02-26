@@ -256,7 +256,8 @@ In this exercise you will use `Cyberduck <https://cyberduck.io/>`_ to create and
 
 .. note::
 
-  Cyberduck is already installed on the Windows Tools VM you deployed Earlier.
+  Cyberduck ver 6.8.3 is already installed on the Windows Tools VM you deployed Earlier.
+  ** Do NOT install Cyberduck** issues with ver. 6.9.3
 
 You will also use the built-in Buckets Object Browser, which is an easy way to test that your object store is functional and can be used to quickly to demo IAM access controls.
 
