@@ -80,13 +80,15 @@ Labs are designed to be completed by each individual, not in groups. Each Nutani
 
 **For each lab you complete & validate, you'll be entered into a raffle to win a** `complete Raspberry Pi 3 kit <https://www.aboxtek.com/products/abox-raspberry-pi-3b-16gb>`_!
 
+**Proctors will be regularly checking in with each table to validate completed labs.**
+
 .. raw:: html
 
   <strong><font color="red">REVIEW THE FOLLOWING SECTIONS BEFORE BEGINNING ANY LABS:</font></strong>
 
 - :ref:`clusteraccess` - *VPN configuration for accessing the Nutanix Hosted POC network*
 - :ref:`clusterinfo` - *Your individual cluster assignment and details on how your cluster was staged*
-- :ref:`validation` - *How to get assistance with a lab or validate you have completed a lab*
+- :ref:`validation` - *How to get assistance with a lab*
 
 .. Announcements
   +++++++++++++
