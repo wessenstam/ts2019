@@ -592,7 +592,7 @@ Click **Parameters** and select **Response Body** into the request body field.
 
 .. figure:: images/xplay_31.png
 
-Fill in the username and password for your Prism Central.
+Fill in the **Username** and **Password** for your **Prism Central**.
 
 Click **Add Action**, and select the **Acknowledge Alert** action.
 
