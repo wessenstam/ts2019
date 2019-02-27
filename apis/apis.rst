@@ -454,16 +454,16 @@ Create the `lab/util/apiclient/` folders.
 
   (nutanix) [root@centos python-lab]# mkdir -p lab/util/apiclient
 
-Create the file `lab/util/apiclient/__init__py`.
+Create the file `lab/util/apiclient/__init__.py`.
 
 .. figure:: images/linux_logo_32x32.png
 .. figure:: images/osx_logo_32x32.png
 
 .. code-block:: bash
 
-  vi lab/util/apiclient/__init__py
+  vi lab/util/apiclient/__init__.py
 
-  (nutanix) [root@centos python-lab]# vi lab/util/apiclient/__init__py
+  (nutanix) [root@centos python-lab]# vi lab/util/apiclient/__init__.py
 
 The `__init__.py` file is a reserved filename that Python looks for when instantiating a class.
 
@@ -1280,7 +1280,7 @@ Here are the most important steps carried out by this function:
 
 .. note::
 
-  You'll notice a few parameters being passed during instantiation of the ApiClient class.  As an optional step, open `lab/util/apiclient/__init__py` and look at the other parameters that can be passed.  For example, you can specify the API endpoint we're interested and the API version.  These are useful options for using the same ApiClient class with different versions of the APIs.
+  You'll notice a few parameters being passed during instantiation of the ApiClient class.  As an optional step, open `lab/util/apiclient/__init__.py` and look at the other parameters that can be passed.  For example, you can specify the API endpoint we're interested and the API version.  These are useful options for using the same ApiClient class with different versions of the APIs.
 
 - `results = client.get_info()` - Execute the actual API request.
 - `return jsonify(results)` - Convert the API request results to JSON format and return the JSON back to the calling JavaScript, where it will be processed and displayed in our app.

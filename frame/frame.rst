@@ -339,6 +339,17 @@ That's all there is to it! With simple administration and a SaaS control plane, 
 Takeaways
 +++++++++
 
+- Frame is Desktop-as-a-Service (DaaS) offering by Nutanix.
+
+- Frame is Service, not Software. It can not be "installed."
+
+- Frame Pricing is per user. There are 2 models:
+
+  - Named User ($24/User before discounts)
+  - Concurrent User ($48/Concurrent User before discounts)
+
+- Virtual desktop VMs need to be on the network connected to the Internet.
+
 - Multi-cloud to take advantage of pay as you go workloads on AWS and Azure and soon predictable workloads with Nutanix AHV on-premises.
 
 - Simple Day 1 setup and Day 2+ operations.
