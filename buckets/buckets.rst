@@ -47,6 +47,8 @@ If you have not yet deployed **both** of these VMs, see the linked steps before 
 
 As Buckets is not yet GA, the lab will leverage an existing Buckets Object Store deployment accessible from the following cluster: https://10.42.71.39:9440
 
+**Please use Chrome Browser for this lab**
+
 Getting Familiar with Object Storage
 ++++++++++++++++++++++++++++++++++++
 
