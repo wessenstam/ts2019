@@ -98,7 +98,7 @@ Creating the Object Storage Bucket
 
 In this exercise you will create an object storage bucket utilizing Nutanix Buckets. This bucket will be used to store all of our web app’s images.
 
-Open https://10.42.71.42:9440/ in a new browser tab and log in using the following credentials to access the *shared* Nutanix Buckets deployment:
+Open https://10.42.71.39:9440/ in a new browser tab and log in using the following credentials to access the *shared* Nutanix Buckets deployment:
 
 - **Username** - admin
 - **Password** - Nutanix.123
