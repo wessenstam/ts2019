@@ -200,7 +200,11 @@ Click **Share > Done > Close**.
 
 Finally, you will populate your newly created Windows file share with sample data.
 
-Within your *Initials*\ **-PeerAgentB** VM, download the **SampleData_Small.zip** file from http://10.42.8.50/peer/ and extract its contents in ``C:\Data\``. When complete, your Data directory should resemble the screenshot below:
+Within your *Initials*\ **-PeerAgentB** VM, download the **SampleData_Small.zip** file and extract its contents in ``C:\Data\``. When complete, your Data directory should resemble the screenshot below:
+
+**SampleData_Small.zip**
+- **PHX Clusters** - http://10.42.8.50/peer/
+- **RTP Clusters** - https://peerresources.blob.core.windows.net/sample-data/SampleData_Small.zip
 
 .. figure:: images/5.png
 
