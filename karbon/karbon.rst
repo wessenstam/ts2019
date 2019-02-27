@@ -432,10 +432,6 @@ Select **Discover** again from the sidebar to view all logs from the Karbon clus
 
 .. figure:: images/23.png
 
-Using ``kubectl`` to get your Wordpress pod name, add a filter to search for logs specific to that pod.
-
-.. figure:: images/24.png
-
 Advanced Kibana usage, including time series data visualization that can answer questions such as "What is the difference in service error rates between our last 3 application upgrades," is covered in the `Kibana User Guide <https://www.elastic.co/guide/en/kibana/6.2/index.html>`_.
 
 Coming Soon!
