@@ -112,7 +112,7 @@ Download Xi IoT
 
 Open https://github.com/nutanix/xi-iot in a new browser tab and click **Clone or download > Download ZIP**.
 
-Extract the .zip file to a directory.
+Extract the .zip file to a directory. These are required when referencing .yaml and .py files later in this lab.
 
 Defining Categories
 +++++++++++++++++++
