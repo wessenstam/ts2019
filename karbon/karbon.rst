@@ -107,6 +107,10 @@ On the **Name and Environment** tab, fill out the following fields:
 - **Kubernetes Version** - 1.10.3
 - **Host OS Image** - centos
 
+.. raw:: html
+
+  <strong><font color="red">Do NOT use the 1.8.x Kubernetes Version selected by default.</font></strong>
+
 .. figure:: images/3.png
 
 .. note::
