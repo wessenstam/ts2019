@@ -54,7 +54,7 @@ Fill out the following fields:
 - Select **+ Add New Disk**
     - **Type** - DISK
     - **Operation** - Clone from Image Service
-    - **Image** - XiIoTEdge.qcow2
+    - **Image** - sherlock-k8s-base-image_320.qcow2
     - Select **Add**
 
 - Select **Add New NIC**
@@ -65,7 +65,7 @@ Click **Save** to create the VM.
 
 Select your Edge VM and click **Power On**.
 
-Once the VM has booted, open \https://*EDGE-VM-IP:8080*/v1/sn in a new browser tab to determine the serial number of the appliance. Record this value as it will be required to onboard the appliance.
+Once the VM has booted, open \http://*EDGE-VM-IP:8080*/v1/sn in a new browser tab to determine the serial number of the appliance. Record this value as it will be required to onboard the appliance.
 
 Return to the **Xi IoT** management portal and select :fa:`bars` **> Infrastructure > Edges > + Add Edge**.
 
