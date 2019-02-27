@@ -144,7 +144,7 @@ Select :fa:`bell` **Alert** as Trigger, and click **Select**.
 
   .. figure:: images/xplay_07.png
 
-Search “VM Memory Constrained” in **Alert Policy**, and select *Initials* - **VM Memory Constrained**.
+Start typing to Search “VM Memory Constrained” in **Alert Policy**, and select *Initials* - **VM Memory Constrained**.
 
 .. figure:: images/xplay_08.png
 
@@ -320,7 +320,7 @@ Click **Create Playbook**.
 
 Select :fa:`bell` **Alert** as Trigger, and click **Select**.
 
-Search “VM CPU Overprovisioned” in **Alert Policy**, and select *Initials* - **VM CPU Overprovisioned**.
+Start typing to Search “VM CPU Overprovisioned” in **Alert Policy**, and select *Initials* - **VM CPU Overprovisioned**.
 
 Click **Add Action**, and select the :fa:`power-off` **Power Off VM** action.
 
@@ -571,7 +571,7 @@ Click **Create Playbook**.
 
 Select :fa:`bell` **Alert** as Trigger, and click **Select**.
 
-Search “Bully VM” in **Alert Policy**, and select *Initials* - **Bully VM**.
+Start typing to Search “Bully VM” in **Alert Policy**, and select *Initials* - **Bully VM**.
 
 Click **Add Action**, and select the :fa:`terminal` **REST API** action.
 
