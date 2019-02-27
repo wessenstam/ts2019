@@ -453,7 +453,7 @@ To what targets can this source be connected? What is the difference between the
 
 Note that adding a VM to the **Strict** Quarantine policy disables all inbound and outbound communication to a VM. The **Strict** policy would apply to an VMs whose presence on the network poses a threat to the environment.
 
-Click the :fa:`plus-circle` icon to the right of **Quarantine: Forensic** to create an Inbound Rule.
+Click the :fa:`plus-circle` icon to the left of **Quarantine: Forensic** to create an Inbound Rule.
 
 Click **Save** to allow any protocol on any port between the client VM and the **Quarantine: Forensic** category.
 
