@@ -184,7 +184,7 @@ The application is an implementation of `Oscar <https://github.com/django-oscar/
 
 You will review each of the individual YAML files, and make some minor modifications.
 
-Using your *Initials*\ **-Windows-ToolsVM** web browser, download  :download:`NutanixCloudNativeLab.zip <NutanixCloudNativeLab.zip>`, which contains all YAML files required for the lab.
+Using your *Initials*\ **-Windows-ToolsVM** web browser, download `NutanixCloudNativeLab.zip <https://github.com/nutanixworkshops/ts2019/raw/master/cloud_native_lab/NutanixCloudNativeLab.zip>`_, which contains all YAML files required for the lab.
 
 Once the download has completed, extract the **NutanixCloudNativeLab-master** directory.
 
