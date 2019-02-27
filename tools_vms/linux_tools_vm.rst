@@ -58,8 +58,7 @@ Install the software needed by running the following commands:
   yum install -y ntp ntpdate unzip stress nodejs python-pip s3cmd awscli
   npm install -g request
   npm install -g express
-  pip install -U pip
-  pip install boto3
+
 
 Configuring NTP
 ...............
@@ -95,3 +94,5 @@ If completing the :ref:`apis` lab using the Linux Tools VM, install Python by ru
   yum -y install python36
   python3.6 -m ensurepip
   yum -y install python36-setuptools
+  pip install -U pip
+  pip install boto3
