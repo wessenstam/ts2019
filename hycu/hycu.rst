@@ -60,7 +60,7 @@ Fill out the following fields, highlight **OK** and press **Return**:
 - **Hostname** - *Initials*\ **-HYCU**
 - **IPv4 address** - *IP Assigned by DHCP*
 - **Subnet mask** - 255.255.255.128
-- **Default gateway** - *Secondary VLAN Gateway*
+- **Default gateway** - *Secondary VLAN Gateway* (e.g. 10.XX.YY.129)
 - **DNS server** - *Your DC VM IP*
 - **Search domain** - ntnxlab.local
 
