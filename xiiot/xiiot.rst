@@ -39,6 +39,9 @@ At this point you should have a dashboard with a default User (you), Project, an
 Lab Setup
 +++++++++
 
+Deploy Xi Edge
+..............
+
 In this exercise you will deploy virtual Xi Edge.
 
 The Xi Edge OS was written from the ground up to efficiently run edge applications. At a high level, it consists of a Linux OS and Kubernetes cluster capable of natively running functions written in several software languages and Applications (containers) deployed via a standard Kubernetes yaml definition.
@@ -103,6 +106,9 @@ The Facefeed application utilizes five Functions within two Data Pipelines to tr
 - **facematch.py** - matches inference results to database of registered faces
 - **facerecognition.py** - uses a tensorflow machine learning model to draw inference
 - **raw_to_jpeg.py** - converts the raw binary stream into a readable format
+
+Download Xi IoT
+...............
 
 Open https://github.com/nutanix/xi-iot in a new browser tab and click **Clone or download > Download ZIP**.
 
