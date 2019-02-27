@@ -80,11 +80,11 @@ Select the **Secondary - Managed** VLAN for the **Client Network**. Each Files V
 
   .. figure:: images/6.png
 
-Specify your cluster's **DC** VM IP (found in :ref:`stagingdetails`) as the **DNS Resolver IP** (e.g. 10.XX.YY.40). Leave the default (cluster) NTP Server.
+Specify your cluster's **Domain Controller** VM IP (found in :ref:`stagingdetails`) as the **DNS Resolver IP** (e.g. 10.XX.YY.40). Leave the default (cluster) NTP Server.
 
-.. note::
+.. raw:: html
 
-  In order for the Files cluster to successfully find and join the **NTNXLAB.local** domain it is critical that the **DNS Resolver IP** is set to the **DC** VM IP **FOR YOUR CLUSTER**. By default, this field is set to the primary **Name Server** IP configured for the Nutanix cluster, **this value is incorrect and will not work.**
+  <strong><font color="red">In order for the Files cluster to successfully find and join the NTNXLAB.local domain it is critical that the DNS Resolver IP is set to the Domain Controller VM IP FOR YOUR CLUSTER. By default, this field is set to the primary Name Server IP configured for the Nutanix cluster, this value is incorrect and will not work.</font></strong>
 
 .. figure:: images/7.png
 
@@ -329,7 +329,7 @@ Execute the following:
     tmpfs                           1.9G     0  1.9G   0% /sys/fs/cgroup
     /dev/sda1                       494M  141M  353M  29% /boot
     tmpfs                           377M     0  377M   0% /run/user/0
-    *intials*-Files.ntnxlab.local:/             1.0T  7.0M  1.0T   1% /filesmnt
+    *intials*-Files.ntnxlab.local:/             1.0T  7.0M  1.0T   1% /afsmnt
     [root@CentOS ~]# ls -l /filesmnt/
     total 1
     drwxrwxrwx. 2 root root 2 Mar  9 18:53 logs
@@ -340,7 +340,7 @@ Reboot the VM and observe the export is no longer mounted. To persist the mount,
 
   .. code-block:: bash
 
-    echo '*intials*-Files.ntnxlab.local:/ /filesmnt nfs4' >> /etc/fstab
+    echo '*intials*-Files.ntnxlab.local:/logs /filesmnt nfs4' >> /etc/fstab
 
 The following command will add 100 2MB files filled with random data to ``/filesmnt/logs``:
 
