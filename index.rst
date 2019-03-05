@@ -76,11 +76,55 @@ Welcome to Nutanix Global Tech Summit 2019!
 
 Following the General Session on Tuesday morning, you will be able to access the **Hands on Learning** lab content.
 
-Labs are designed to be completed by each individual, not in groups. Each Nutanix employee registered for the **Hands on Learning** track must complete the **Era** and **Flow** labs, as well as a minimum of 1 **Sponsored Lab**. You should be able to complete 2-4 additional labs by the end of the day Wednesday.
+Labs are designed to be completed by each individual, not in groups. Each Nutanix employee registered for the **Hands on Learning** track must complete the **Era** , **Flow** , **Files**
+and **Prism PRO X-Play** labs. You should be able to complete 2-4 additional labs by the end of the day Wednesday.
 
-**For each lab you complete & validate, you'll be entered into a raffle to win a** `complete Raspberry Pi 3 kit <https://www.aboxtek.com/products/abox-raspberry-pi-3b-16gb>`_!
+In addition, all **New Hire SE < 1 year** will be required to complete the Nutanix 101 labs and **HYCU** Labs
 
+
+**For each lab you complete & validate, you'll be entered into a raffle to win a** Gift Voucher 
 **Proctors will be regularly checking in with each table to validate completed labs.**
+
+Nutanix Core Labs
+
+- Nutanix 101 
+
+Nutanix Essential Labs
+
+- Calm: Linux Workloads
+- Files
+- Flow
+- Prism Pro: X-Play
+- DR Runbooks
+
+Nutanix Enterprise Labs
+- Buckets
+-  Era
+- Karbon
+- Move: AWS
+- Xi Epoch
+- Xi Frame
+- Xi IoT
+
+Advanced Labs
+
+- APIs: Python Example
+- Calm: Day 2 Operations
+- Calm: EScript and Task Library
+- Calm: Windows Workloads
+- Cloud Native
+
+Sponsor Labs
+
+- HYCU
+
+Appendix
+
+- Windows Tools VM
+- Linux Tools VM
+- Deploying Task Manager
+- Deploying Wordpress
+
 
 .. raw:: html
 
