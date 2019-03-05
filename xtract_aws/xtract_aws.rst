@@ -408,9 +408,13 @@ Once the source has been removed, Move will automatically terminate (delete) the
 
 Return to your **EC2 Dashboard** and verify that **NTNX-XTRACTLITE-INSTANCE** has been terminated.
 
-The final step is to terminate your source Ubuntu instance by right-clicking the instance and selecting **Instance State > Terminate > Yes, Terminate**.
+You can now terminate your source Ubuntu instance by right-clicking the instance and selecting **Instance State > Terminate > Yes, Terminate**.
 
 .. figure:: images/22.png
+
+Finally, under **AWS Services > Route 53**, delete the **xtract.com.** Private Hosted Zone created automatically during Move deployment.
+
+.. figure:: images/23.png
 
 Takeaways
 +++++++++
