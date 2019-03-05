@@ -14,20 +14,34 @@
 
 .. toctree::
   :maxdepth: 2
-  :caption: Introductory Labs
-  :name: _introductory_labs
+  :caption: Nutanix Core Labs
+  :name: _core_labs
   :hidden:
 
   nutanix101/nutanix101
-  buckets/buckets
+
+.. toctree::
+  :maxdepth: 2
+  :caption: Nutanix Essentials Labs
+  :name: _essentials_labs
+  :hidden:
+
   calm_linux/calm_linux
-  dr_runbooks/dr_runbooks
-  era/era
   files/files
   flow/flow
+  xplay/xplay
+  dr_runbooks/dr_runbooks
+
+.. toctree::
+  :maxdepth: 2
+  :caption: Nutanix Enterprise Labs
+  :name: _enterprise_labs
+  :hidden:
+
+  buckets/buckets
+  era/era
   karbon/karbon
   xtract_aws/xtract_aws
-  xplay/xplay
   epoch/epoch
   frame/frame
   xiiot/xiiot
@@ -52,8 +66,6 @@
   :hidden:
 
   hycu/hycu
-  peer/peer
-  veeam/veeam
 
 .. toctree::
   :maxdepth: 2
@@ -82,12 +94,12 @@ and **Prism PRO X-Play** labs. You should be able to complete 2-4 additional lab
 In addition, all **New Hire SE < 1 year** will be required to complete the Nutanix 101 labs and **HYCU** Labs
 
 
-**For each lab you complete & validate, you'll be entered into a raffle to win a** Gift Voucher 
+**For each lab you complete & validate, you'll be entered into a raffle to win a Gift Voucher**
 **Proctors will be regularly checking in with each table to validate completed labs.**
 
 Nutanix Core Labs
 
-- Nutanix 101 
+- Nutanix 101
 
 Nutanix Essential Labs
 
@@ -99,7 +111,7 @@ Nutanix Essential Labs
 
 Nutanix Enterprise Labs
 - Buckets
--  Era
+- Era
 - Karbon
 - Move: AWS
 - Xi Epoch
