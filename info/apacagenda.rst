@@ -217,7 +217,7 @@ Ask the Product Team - Storage and HCI
 
 Join this session for an opportunity to engage in live Q&A with Nutanix Product Managers and Engineers responsible for core AOS, data protection, performance, and security. Session topics include storage performance, capacity and resiliency, disaster recovery, encryption, key management, and security.
 
-For all Q&A during the session : #apac_pm_qa_breakout_1
+For all Q&A during the session, use this slack channel: `#apac_pm_qa_breakout_1`_
 
 Panelists include:
 
@@ -242,7 +242,7 @@ Panelists include:
 - **Ayon Gosh** -member of technical Staff
 - **Priyanka Mahipala** -member of technical Staff
 
-For all Q&A during the session : #apac_pm_qa_breakout_2
+For all Q&A during the session, use this slack channel: `#apac_pm_qa_breakout_2`_
 
 
 Delivering API Workshops
@@ -272,7 +272,7 @@ Ask the Product Team - Supportability and Operations
 
 Join this session for an opportunity to engage in live Q&A with Nutanix Product Managers and Engineers responsible for Prism and Prism Pro. Session topics include Lifecycle Manager (LCM), monitoring, and auditing.
 
-For all Q&A during the session : #apac_pm_qa_breakout_3
+For all Q&A during the session, use this slack channel: `#apac_pm_qa_breakout_3`_
 
 - **Harry Yang** - Director, Product Management
 - **Pranav Gupta** - member of technical Staff
