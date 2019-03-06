@@ -8,10 +8,10 @@
 
   info/apacagenda
   info/clusteraccess
-  info/clusterinfo
+  .. info/clusterinfo
   info/validation
   info/hackerearth
-
+..
 .. toctree::
   :maxdepth: 2
   :caption: Nutanix Core Labs
@@ -77,6 +77,7 @@
   tools_vms/linux_tools_vm
   taskman/taskman
   wordpress/wordpress
+..
 
 .. _welcome:
 
