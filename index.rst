@@ -6,7 +6,7 @@
   :name: _info
   :hidden:
 
-  info/ameragenda
+  info/apacagenda
   info/clusteraccess
   info/clusterinfo
   info/validation
