@@ -12,72 +12,72 @@
   info/validation
   info/hackerearth
 ..
-.. toctree::
-  :maxdepth: 2
-  :caption: Nutanix Core Labs
-  :name: _core_labs
-  :hidden:
+  .. toctree::
+    :maxdepth: 2
+    :caption: Nutanix Core Labs
+    :name: _core_labs
+    :hidden:
 
-  nutanix101/nutanix101
+    nutanix101/nutanix101
 
-.. toctree::
-  :maxdepth: 2
-  :caption: Nutanix Essentials Labs
-  :name: _essentials_labs
-  :hidden:
+  .. toctree::
+    :maxdepth: 2
+    :caption: Nutanix Essentials Labs
+    :name: _essentials_labs
+    :hidden:
 
-  calm_linux/calm_linux
-  files/files
-  flow/flow
-  xplay/xplay
-  dr_runbooks/dr_runbooks
+    calm_linux/calm_linux
+    files/files
+    flow/flow
+    xplay/xplay
+    dr_runbooks/dr_runbooks
 
-.. toctree::
-  :maxdepth: 2
-  :caption: Nutanix Enterprise Labs
-  :name: _enterprise_labs
-  :hidden:
+  .. toctree::
+    :maxdepth: 2
+    :caption: Nutanix Enterprise Labs
+    :name: _enterprise_labs
+    :hidden:
 
-  buckets/buckets
-  era/era
-  karbon/karbon
-  xtract_aws/xtract_aws
-  epoch/epoch
-  frame/frame
-  xiiot/xiiot
+    buckets/buckets
+    era/era
+    karbon/karbon
+    xtract_aws/xtract_aws
+    epoch/epoch
+    frame/frame
+    xiiot/xiiot
 
 
-.. toctree::
-  :maxdepth: 2
-  :caption: Advanced Labs
-  :name: _advanced_labs
-  :hidden:
+  .. toctree::
+    :maxdepth: 2
+    :caption: Advanced Labs
+    :name: _advanced_labs
+    :hidden:
 
-  apis/apis
-  calm_day2/calm_day2
-  calm_escript/calm_escript
-  calm_win/calm_win
-  cloud_native_lab/cloud_native_lab
+    apis/apis
+    calm_day2/calm_day2
+    calm_escript/calm_escript
+    calm_win/calm_win
+    cloud_native_lab/cloud_native_lab
 
-.. toctree::
-  :maxdepth: 2
-  :caption: Sponsor Labs
-  :name: _sponsor_labs
-  :hidden:
+  .. toctree::
+    :maxdepth: 2
+    :caption: Sponsor Labs
+    :name: _sponsor_labs
+    :hidden:
 
-  hycu/hycu
+    hycu/hycu
 
-.. toctree::
-  :maxdepth: 2
-  :caption: Appendix
-  :name: _appendix
-  :hidden:
+  .. toctree::
+    :maxdepth: 2
+    :caption: Appendix
+    :name: _appendix
+    :hidden:
 
-  tools_vms/windows_tools_vm
-  tools_vms/linux_tools_vm
-  taskman/taskman
-  wordpress/wordpress
-..
+    tools_vms/windows_tools_vm
+    tools_vms/linux_tools_vm
+    taskman/taskman
+    wordpress/wordpress
+
 
 .. _welcome:
 
