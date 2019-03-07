@@ -95,7 +95,7 @@ and **Prism PRO X-Play** labs. You should be able to complete 2-4 additional lab
 In addition, all **New Hire SE < 1 year** will be required to complete the Nutanix 101 labs and **HYCU** Labs
 
 
-**For each lab you complete & validate, you'll be entered into a raffle to win a Gift Voucher**
+**For each lab you complete & validate, you'll be entered into a raffle to win a Gift Voucher.**
 **Proctors will be regularly checking in with each table to validate completed labs.**
 
 Nutanix Core Labs
@@ -111,6 +111,7 @@ Nutanix Essential Labs
 - DR Runbooks
 
 Nutanix Enterprise Labs
+
 - Buckets
 - Era
 - Karbon
