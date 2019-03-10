@@ -40,7 +40,7 @@ Fill out the following fields:
 
 Click **Save** to create the VM.
 
-Power On the VM.
+Power on the VM.
 
 Installing Tools
 ++++++++++++++++

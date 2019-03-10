@@ -40,93 +40,93 @@ Deploying the App Database
 
 In this exercise, you will use Nutanix Era to provision a database server which contains a PostgreSQL database, and set up **Time Machine** which provides data copy management.  This Postgres DB will store the persistent data for our web application.
 
-Open \https://*ERA-VM-IP:8443*/ in a new browser tab and log in using these credentials:
+#. Open \https://*ERA-VM-IP:8443*/ in a new browser tab and log in using these credentials:
 
-- **Username** - admin
-- **Password** - techX2019!
+   - **Username** - admin
+   - **Password** - techX2019!
 
-Click on the **Dashboard** drop-down menu in the toolbar and select **Databases**.
+#. Click on the **Dashboard** drop-down menu in the toolbar and select **Databases**.
 
-Select **Sources** from the sidebar and click **+ Provision** to begin provisioning a new database.
+#. Select **Sources** from the sidebar and click **+ Provision** to begin provisioning a new database.
 
-Select the **PostgreSQL** engine and click **Next**.
+#. Select the **PostgreSQL** engine and click **Next**.
 
-Fill out the following **Database Server** fields:
+#. Fill out the following **Database Server** fields:
 
-- **Database Server** - Select **Create New Server**
-- **Database Server Name** - *Initials*-PostgreSQL
-- **Compute Profile** - Lab
-- **Network Profile** - DEFAULT_OOB_NETWORK
-- **Software Profile** - POSTGRES_10.4_OOB
-- **Description** - Cloud Native App DB
-- **SSH Public Key for Node Access** -
+   - **Database Server** - Select **Create New Server**
+   - **Database Server Name** - *Initials*-PostgreSQL
+   - **Compute Profile** - Lab
+   - **Network Profile** - DEFAULT_OOB_NETWORK
+   - **Software Profile** - POSTGRES_10.4_OOB
+   - **Description** - Cloud Native App DB
+   - **SSH Public Key for Node Access** -
 
-.. code-block:: text
+   .. code-block:: text
 
-  ssh-rsa
-  AAAAB3NzaC1yc2EAAAADAQABAAABAQDDoJlPj+ACPyHGm0f+FyTQPRt+m1H6JstyLtvFJUntDyF2/dqpcQ9QfKKw1QcjzGdSS8B6HrdOOjKZz42j01/YLWFy2YrDLQOHcNJi6XowCQ059C7bHehP5lqNN6bRIzdQnqGZGYi8iKYzUChMVusfsPd5ZZo0rHCAiCAP1yFqrcSmq83QNN1X8FZ1COoMB66vKyD2rEoeKz4lilEeWKyP4RLmkOc1eMYQNdyMOCNFFbKmC1nPJ+Mpxo1HfNR84R7WNl5oEaNQOORN+NaOzu5Bxim2hhJvU37J+504azZ1PCUiHiC0+zBw4JfeOKMvtInmkEZQEd3y4RrIHLXKB4Yb centos@nutanix.com
+     ssh-rsa
+     AAAAB3NzaC1yc2EAAAADAQABAAABAQDDoJlPj+ACPyHGm0f+FyTQPRt+m1H6JstyLtvFJUntDyF2/dqpcQ9QfKKw1QcjzGdSS8B6HrdOOjKZz42j01/YLWFy2YrDLQOHcNJi6XowCQ059C7bHehP5lqNN6bRIzdQnqGZGYi8iKYzUChMVusfsPd5ZZo0rHCAiCAP1yFqrcSmq83QNN1X8FZ1COoMB66vKyD2rEoeKz4lilEeWKyP4RLmkOc1eMYQNdyMOCNFFbKmC1nPJ+Mpxo1HfNR84R7WNl5oEaNQOORN+NaOzu5Bxim2hhJvU37J+504azZ1PCUiHiC0+zBw4JfeOKMvtInmkEZQEd3y4RrIHLXKB4Yb centos@nutanix.com
 
-.. figure:: images/era-provision-2.png
+   .. figure:: images/era-provision-2.png
 
-Click **Next**.
+#. Click **Next**.
 
-Fill out the following **Database** fields:
+#. Fill out the following **Database** fields:
 
-.. note::
+   .. note::
 
-  Record your **Database Name** and **POSTGRES Password** entries, as the will be used later in the lab.
+     Record your **Database Name** and **POSTGRES Password** entries, as the will be used later in the lab.
 
-- **Database Name** - *initialsLowerCase*_oscar_django
-- **Description** - (Optional) Description
-- **POSTGRES Password** - Nutanix/4u!
-- **Database Parameter Profile** - DEFAULT_POSTGRES_PARAMS
-- **Listener Port** - 5432
-- **Size (GiB)** - 200
+   - **Database Name** - *initialsLowerCase*_oscar_django
+   - **Description** - (Optional) Description
+   - **POSTGRES Password** - Nutanix/4u!
+   - **Database Parameter Profile** - DEFAULT_POSTGRES_PARAMS
+   - **Listener Port** - 5432
+   - **Size (GiB)** - 200
 
-.. figure:: images/era-provision-3.png
+   .. figure:: images/era-provision-3.png
 
-Click **Next**.
+#. Click **Next**.
 
-Review the default **Time Machine** configuration and click **Provision**.
+#. Review the default **Time Machine** configuration and click **Provision**.
 
-Select **Operations** from the Era drop-down menu to monitor the status of the **Provision Database** job.
+#. Select **Operations** from the Era drop-down menu to monitor the status of the **Provision Database** job.
 
-Proceed to the next exercise while the database is provisioned.
+   Proceed to the next exercise while the database is provisioned.
 
 Creating the Object Storage Bucket
 ++++++++++++++++++++++++++++++++++
 
 In this exercise you will create an object storage bucket utilizing Nutanix Buckets. This bucket will be used to store all of our web app’s images.
 
-Open https://10.42.71.39:9440/ in a new browser tab and log in using the following credentials to access the *shared* Nutanix Buckets deployment:
+#. Open https://10.42.71.39:9440/ in a new browser tab and log in using the following credentials to access the *shared* Nutanix Buckets deployment:
 
-- **Username** - admin
-- **Password** - Nutanix.123
+   - **Username** - admin
+   - **Password** - Nutanix.123
 
-Select :fa:`bars` **> Services > Buckets**.
+#. Select :fa:`bars` **> Services > Buckets**.
 
-Select the pre-deployed **techsummit2019** Object Store.
+#. Select the pre-deployed **techsummit2019** Object Store.
 
-Click **Create Bucket** and fill out the following fields:
+#. Click **Create Bucket** and fill out the following fields:
 
-- **Name** - *initialsLowerCase*-**oscarstatic**
+   - **Name** - *initialsLowerCase*-**oscarstatic**
 
-.. figure:: images/buckets_create1.png
+   .. figure:: images/buckets_create1.png
 
-Click **Create**.
+#. Click **Create**.
 
-Buckets created via Prism use the default Access Key account, **poseidon_access**.
+   Buckets created via Prism use the default Access Key account, **poseidon_access**.
 
-You can verify access to these buckets via the Buckets Object Store Browser for the **techsummit2019 Object Store** at https://10.42.71.42:7200/ using the following credentials:
+#. You can verify access to these buckets via the Buckets Object Store Browser for the **techsummit2019 Object Store** at https://10.42.71.42:7200/ using the following credentials:
 
-- **Access Key** - poseidon_access
-- **Secret Key** - poseidon_secret
+   - **Access Key** - poseidon_access
+   - **Secret Key** - poseidon_secret
 
-.. figure:: images/buckets_create2.png
+   .. figure:: images/buckets_create2.png
 
-.. note::
+   .. note::
 
-  Similar to the default **nutanix/4u** password, it is recommended the default **poseidon** credentials be changed following deployment.
+     Similar to the default **nutanix/4u** password, it is recommended the default **poseidon** credentials be changed following deployment.
 
 
 ..  Select **Access Keys** and click **Add People**.
@@ -184,29 +184,29 @@ The application is an implementation of `Oscar <https://github.com/django-oscar/
 
 You will review each of the individual YAML files, and make some minor modifications.
 
-Using your *Initials*\ **-Windows-ToolsVM** web browser, download `NutanixCloudNativeLab.zip <https://github.com/nutanixworkshops/ts2019/raw/master/cloud_native_lab/NutanixCloudNativeLab.zip>`_, which contains all YAML files required for the lab.
+#. Using your *Initials*\ **-Windows-ToolsVM** web browser, download `NutanixCloudNativeLab.zip <https://github.com/nutanixworkshops/ts2019/raw/master/cloud_native_lab/NutanixCloudNativeLab.zip>`_, which contains all YAML files required for the lab.
 
-Once the download has completed, extract the **NutanixCloudNativeLab-master** directory.
+#. Once the download has completed, extract the **NutanixCloudNativeLab-master** directory.
 
 Review buckets-secret.yaml File
 ...............................
 
-In *Initials*\ **-Windows-ToolsVM**, open and review the contents of the **buckets-secrets.yaml** file within the **buckets** directory.
+#. In *Initials*\ **-Windows-ToolsVM**, open and review the contents of the **buckets-secrets.yaml** file within the **buckets** directory.
 
-This file provides the **Access Key** and **Secret Key** required for the application to access the previously configured bucket.
+   This file provides the **Access Key** and **Secret Key** required for the application to access the previously configured bucket.
 
-**No modifications are necessary.**
+   **No modifications are necessary.**
 
-`Kubernetes secrets <https://kubernetes.io/docs/concepts/configuration/secret/>`_ store obfuscate credential data as base64-encoded strings.
+   `Kubernetes secrets <https://kubernetes.io/docs/concepts/configuration/secret/>`_ store obfuscate credential data as base64-encoded strings.
 
-You can verify that **buckets-secrets.yaml** is using the **poseidon** keys used to create your bucket with the following PowerShell command:
+#. You can verify that **buckets-secrets.yaml** is using the **poseidon** keys used to create your bucket with the following PowerShell command:
 
-.. code-block:: powershell
+   .. code-block:: powershell
 
-  [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes("ACCESS-KEY-STRING"))
-  [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes("SECRET-KEY-STRING"))
+     [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes("ACCESS-KEY-STRING"))
+     [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes("SECRET-KEY-STRING"))
 
-.. figure:: images/buckets_create3.png
+   .. figure:: images/buckets_create3.png
 
 ..  Substituting your **Access Key** and **Secret Key** values, execute the following in PowerShell to convert your keys into base64-encoded strings:
 
@@ -225,100 +225,100 @@ You can verify that **buckets-secrets.yaml** is using the **poseidon** keys used
 
   .. figure:: images/buckets-base64-2.png
 
-Close **buckets-secrets.yaml**.
+#. Close **buckets-secrets.yaml**.
 
 Review era-secret.yaml File
 ...........................
 
-In *Initials*\ **-Windows-ToolsVM**, open and review the contents of the **era-secrets.yaml** file within the **era** directory.
+#. In *Initials*\ **-Windows-ToolsVM**, open and review the contents of the **era-secrets.yaml** file within the **era** directory.
 
-Similar to **buckets-secrets.yaml**, this file provides the credentials for the PostgreSQL database provisioned by Era.
+   Similar to **buckets-secrets.yaml**, this file provides the credentials for the PostgreSQL database provisioned by Era.
 
-**No modifications are necessary.**
+   **No modifications are necessary.**
 
-.. note::
+   .. note::
 
-  If you did **NOT** use the provided **Nutanix/4u!** password for the PostgreSQL database during provisioning, you will need to encode your password string using the ``[System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes("YOUR-STRING-HERE"))`` command and update the **password** value in **era-secrets.yaml**.
+     If you did **NOT** use the provided **Nutanix/4u!** password for the PostgreSQL database during provisioning, you will need to encode your password string using the ``[System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes("YOUR-STRING-HERE"))`` command and update the **password** value in **era-secrets.yaml**.
 
-Close **era-secrets.yaml**.
+#. Close **era-secrets.yaml**.
 
 Review era-service.yaml File
 ............................
 
-In **Era > Databases > Sources**, click *Initials*_**oscar_django** and note the IP Address under **Database Server**.
+#. In **Era > Databases > Sources**, click *Initials*_**oscar_django** and note the IP Address under **Database Server**.
 
-.. figure:: images/era-db-ip.png
+   .. figure:: images/era-db-ip.png
 
-In *Initials*\ **-Windows-ToolsVM**, open and review the contents of the **era-service.yaml** file within the **era** directory.
+#. In *Initials*\ **-Windows-ToolsVM**, open and review the contents of the **era-service.yaml** file within the **era** directory.
 
-This file creates a Kubernetes Service of type `ExternalName <https://kubernetes.io/docs/concepts/services-networking/service/#externalname>`_, which indicates that it is external from Kubernetes.
+   This file creates a Kubernetes Service of type `ExternalName <https://kubernetes.io/docs/concepts/services-networking/service/#externalname>`_, which indicates that it is external from Kubernetes.
 
-Update the value of the **externalName** key to match the IP of your *Initials*_**oscar_django** VM.
+#. Update the value of the **externalName** key to match the IP of your *Initials*_**oscar_django** VM.
 
-.. figure:: images/era-service-yaml.png
+   .. figure:: images/era-service-yaml.png
 
-Save and close **era-service.yaml**.
+#. Save and close **era-service.yaml**.
 
 Review django-configmap.yaml File
 .................................
 
-Open and review the contents of the **django-configmap.yaml** file within the **django-jet** directory.
+#. Open and review the contents of the **django-configmap.yaml** file within the **django-jet** directory.
 
-This file sets various environment variables in our web application.
+   This file sets various environment variables in our web application.
 
-Update the following:
+#. Update the following:
 
-- **S3_ENDPOINT_URL** - https://10.42.71.42:7200/
-- **STATIC_BUCKET** -  *initialsLowerCase*-oscarstatic **(ALL LOWER CASE)**
-- **DATABASE_NAME** - *initialsLowerCase*_oscar_django **(ALL LOWER CASE)**
+   - **S3_ENDPOINT_URL** - https://10.42.71.42:7200/
+   - **STATIC_BUCKET** -  *initialsLowerCase*-oscarstatic **(ALL LOWER CASE)**
+   - **DATABASE_NAME** - *initialsLowerCase*_oscar_django **(ALL LOWER CASE)**
 
-Save and close **django-configmap.yaml**.
+#. Save and close **django-configmap.yaml**.
 
 Review django-deployment.yaml File
 ..................................
 
-Open and review the contents of the **django-deployment.yaml** file within the **django-jet** directory.
+#. Open and review the contents of the **django-deployment.yaml** file within the **django-jet** directory.
 
-**No modifications are necessary**.
+   **No modifications are necessary**.
 
-Please review the following:
+   Please review the following:
 
-- The **kind** is a **Deployment**, which is a Kubernetes Controller that defines a set of Pods.
-- The **replicas** key indicates how many pods (which generally, but not always, contain a single container) to spin up.
-- The **containers name, image**, and **ports** keys specify what we should name our pods once deployed, the image source of the container (stored on Docker Hub), and the port that the containers communicate on.
-- The env section contains many entries that should look familiar:
-    - Our Era database user and password, which is sourced from our **era-secrets.yaml** file (named **postgres-credentials**).
-    - Our Era database host, which is sourced from our **era-service.yaml** file (named **postgres-service**).
-    - Our Nutanix Buckets Object Storage access and secret access keys, which is sourced from our **buckets-secrets.yaml** file (named **object-credentials**).
-- The **envFrom** entry ties in the **django-configmap.yaml** from the previous step to set the necessary environment variables in our application to our runtime values.
+   - The **kind** is a **Deployment**, which is a Kubernetes Controller that defines a set of Pods.
+   - The **replicas** key indicates how many pods (which generally, but not always, contain a single container) to spin up.
+   - The **containers name, image**, and **ports** keys specify what we should name our pods once deployed, the image source of the container (stored on Docker Hub), and the port that the containers communicate on.
+   - The env section contains many entries that should look familiar:
+       - Our Era database user and password, which is sourced from our **era-secrets.yaml** file (named **postgres-credentials**).
+       - Our Era database host, which is sourced from our **era-service.yaml** file (named **postgres-service**).
+       - Our Nutanix Buckets Object Storage access and secret access keys, which is sourced from our **buckets-secrets.yaml** file (named **object-credentials**).
+   - The **envFrom** entry ties in the **django-configmap.yaml** from the previous step to set the necessary environment variables in our application to our runtime values.
 
-Close **django-deployment.yaml**.
+#. Close **django-deployment.yaml**.
 
 Review django-migration.yaml File
 .................................
 
-Open and review the contents of the **django-migration.yaml** file within the **django-jet** directory.
+#. Open and review the contents of the **django-migration.yaml** file within the **django-jet** directory.
 
-**No modifications are necessary**.
+   **No modifications are necessary**.
 
-Note the **kind** of this file is a **Job**. Jobs create one or more pods to complete a task, and once that task is completed, the pods are cleaned up.
+   Note the **kind** of this file is a **Job**. Jobs create one or more pods to complete a task, and once that task is completed, the pods are cleaned up.
 
-In our app, this task is to seed the PostgreSQL database and Object storage with our sandbox data. Without that, we would have an empty and boring application.
+   In our app, this task is to seed the PostgreSQL database and Object storage with our sandbox data. Without that, we would have an empty and boring application.
 
-Close **django-migration.yaml**.
+#. Close **django-migration.yaml**.
 
 Review django-service.yaml File
 ...............................
 
-Open and review the contents of the **django-service.yaml** file within the **django-jet** directory.
+#. Open and review the contents of the **django-service.yaml** file within the **django-jet** directory.
 
-**No modifications are necessary**.
+   **No modifications are necessary**.
 
-This creates a Kubernetes **Service**, of type **NodePort**, which means it exposes a port (8000) externally from the Kubernetes cluster.
+   This creates a Kubernetes **Service**, of type **NodePort**, which means it exposes a port (8000) externally from the Kubernetes cluster.
 
-Once we have a running application, this will be what allows us to access the app from a web browser.
+   Once we have a running application, this will be what allows us to access the app from a web browser.
 
-Close **django-service.yaml**.
+#. Close **django-service.yaml**.
 
 Running the Application
 +++++++++++++++++++++++
@@ -328,49 +328,49 @@ In this section, we’ll deploy the application using **kubectl** commands, and 
 Deploy the Application
 ......................
 
-In PowerShell, change directories to **NutanixCloudNativeLab-master** and run the following commands:
+#. In PowerShell, change directories to **NutanixCloudNativeLab-master** and run the following commands:
 
-.. code-block:: bash
+   .. code-block:: bash
 
-  kubectl apply -f era\
-  kubectl apply -f buckets\
-  kubectl apply -f django-jet\
+     kubectl apply -f era\
+     kubectl apply -f buckets\
+     kubectl apply -f django-jet\
 
-Run ``kubectl get pods`` to verify your pods are up and running.
+#. Run ``kubectl get pods`` to verify your pods are up and running.
 
-After a couple of minutes, assuming everything is working properly, you should see the **oscar-django-migrations-xxxxx** pod change status from **Running** to **Completed**.
+   After a couple of minutes, assuming everything is working properly, you should see the **oscar-django-migrations-xxxxx** pod change status from **Running** to **Completed**.
 
-.. note::
+   .. note::
 
-  If this does not happen, you can troubleshoot the issue by running the following command (substituting in your unique 5 digit key instead of xxxxx):
+     If this does not happen, you can troubleshoot the issue by running the following command (substituting in your unique 5 digit key instead of xxxxx):
 
-  ``kubectl logs oscar-django-migrations-xxxxx``
+     ``kubectl logs oscar-django-migrations-xxxxx``
 
-  If you need to stop the deployment, run the following commands to clean up your pods:
+     If you need to stop the deployment, run the following commands to clean up your pods:
 
-  .. code-block:: bash
+     .. code-block:: bash
 
-    kubectl delete -f django-jet\
-    kubectl delete -f era\
-    kubectl delete -f buckets\
-    kubectl delete --all pods --namespace=default
+       kubectl delete -f django-jet\
+       kubectl delete -f era\
+       kubectl delete -f buckets\
+       kubectl delete --all pods --namespace=default
 
 Accessing the Application
 ..........................
 
-In your Terminal or PowerShell window run the following command two commands to get Node and Service information:
+#. In your Terminal or PowerShell window run the following command two commands to get Node and Service information:
 
-.. code-block:: bash
+   .. code-block:: bash
 
-  kubectl describe nodes | Select-String -Pattern "InternalIP"
+     kubectl describe nodes | Select-String -Pattern "InternalIP"
 
-  kubectl get svc
+     kubectl get svc
 
-Using this information, we can access our application by combining one of the Internal IPs and the 3xxxx port number of the **oscar-django-service**.
+   Using this information, we can access our application by combining one of the Internal IPs and the 3xxxx port number of the **oscar-django-service**.
 
-Open \http://*WORKER-VM-IP:OSCAR-DJANGO-SERVICE-PORT*/ in a new browser tab to access and use the online store provisioned leveraging Karbon, Era, and Buckets.
+#. Open \http://*WORKER-VM-IP:OSCAR-DJANGO-SERVICE-PORT*/ in a new browser tab to access and use the online store provisioned leveraging Karbon, Era, and Buckets.
 
-.. figure:: images/oscar-ncn.png
+   .. figure:: images/oscar-ncn.png
 
 Takeaways
 +++++++++

@@ -48,7 +48,7 @@ Fill out the following fields:
 
 Click **Save** to create the VM.
 
-Power On the VM.
+Power on the VM.
 
 Login to the VM via RDP or Console session, using the following credentials:
 
