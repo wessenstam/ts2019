@@ -13,7 +13,7 @@ Refer to **YOUR NAME** in the table below for all critical environmental informa
 
 .. raw:: html
 
-  <iframe width="99%" height="450" frameborder="0" scrolling="no" src="https://nutanixinc-my.sharepoint.com/:x:/g/personal/matthew_bator_nutanix_com/EZ1ixb2RUHlBhZSq373eJLEBYmpuiQ6R1Bbn8PrHbsFKbw?e=f9qRHk&action=embedview&Item='Sheet1'!A1%3AP565&wdDownloadButton=True&wdInConfigurator=True"></iframe>
+  <iframe width="99%" height="450" frameborder="0" scrolling="no" src="https://nutanixinc-my.sharepoint.com/:x:/g/personal/matthew_bator_nutanix_com/EZ1ixb2RUHlBhZSq373eJLEBYmpuiQ6R1Bbn8PrHbsFKbw?e=f9qRHk&action=embedview&Item='APAC'!A1%3AP565&wdDownloadButton=True&wdInConfigurator=True"></iframe>
 
 .. note::
 
@@ -24,7 +24,7 @@ Refer to **YOUR NAME** in the table below for all critical environmental informa
 Cluster Staging Details
 +++++++++++++++++++++++
 
-Each attendee will have access to a a **SHARED** AOS 5.10.1 (AHV 20170830.185) cluster, staged as follows:
+Each attendee will have access to a **SHARED** AOS 5.10.2 (AHV 20170830.185) cluster, staged as follows:
 
 .. note::
 
@@ -78,7 +78,9 @@ All disk images required to complete the labs have been uploaded to the Image Se
      - Xtract for VMs 2.0.3 Disk Image
    * - **hycu-3.5.0-6253.qcow2**
      - HYCU 3.5.0 Appliance Disk Image
-   * - **VeeamAvailability_1.0.457.vmdk**
+   * - **sherlock-k8s-base-image_403.qcow2**
+     - Xi IoT EdgeOS Disk Image
+..   * - **VeeamAvailability_1.0.457.vmdk**
      - Veeam Backup Proxy for AHV 1.0 Disk Image
    * - **VeeamBR-9.5.4.2615.Update4.iso**
      - Veeam Backup & Replication 9.5 Update 4 ISO Image

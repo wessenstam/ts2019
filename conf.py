@@ -18,8 +18,8 @@
 #
 import os
 import sys
-#import sphinx_bootstrap_theme
-#import sphinx_fontawesome
+import sphinx_bootstrap_theme
+import sphinx_fontawesome
 #sys.path.insert(0, os.path.abspath('..'))
 
 
@@ -33,7 +33,9 @@ import sys
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = ['sphinx.ext.todo',
-    'sphinx.ext.ifconfig']
+    'sphinx.ext.ifconfig',
+    'sphinxcontrib.fulltoc',
+    'sphinx_fontawesome']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -87,6 +89,8 @@ todo_include_todos = True
 #
 #html_theme = "sphinx_rtd_theme"
 #html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
+html_theme = 'bootstrap'
+html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 
 # (Optional) Logo. Should be small enough to fit the navbar (ideally 24x24).
 # Path should be relative to the ``_static`` files directory.

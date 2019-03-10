@@ -33,21 +33,21 @@ Once you have initiated the **Task Manager** deployment, you can proceed with th
 Accessing Xi Epoch
 +++++++++++++++++++
 
-Open https://epoch.nutanix.com/ in your browser to access to Xi Epoch SaaS control plane, called the **Application Operations Center (AOC)**.
+#. Open https://epoch.nutanix.com/ in your browser to access to Xi Epoch SaaS control plane, called the **Application Operations Center (AOC)**.
 
-Log in using your **my.nutanix.com** credentials.
+#. Log in using your **my.nutanix.com** credentials.
 
-.. note::
+   .. note::
 
-  These are the same credentials used to access the Nutanix Support Portal.
+     These are the same credentials used to access the Nutanix Support Portal.
 
-You will be prompted to provide a subdomain for accessing Epoch. This is the URL that you will use to access the AOC and where your application data will be sent. Examples include your name or organization name.
+   You will be prompted to provide a subdomain for accessing Epoch. This is the URL that you will use to access the AOC and where your application data will be sent. Examples include your name or organization name.
 
-Provide a URL and click **Sign Up**.
+#. Provide a URL and click **Sign Up**.
 
-.. figure:: images/0.png
+   .. figure:: images/0.png
 
-It should take ~1 minute to create your Epoch instance, at which time you will be redirected to the AOC.
+   It should take ~1 minute to create your Epoch instance, at which time you will be redirected to the AOC.
 
 Installing Epoch Collector
 ++++++++++++++++++++++++++
@@ -62,123 +62,127 @@ By default, Epoch will display instructions for installing the collector for mul
 
 Epoch offers support for Windows and common Linux distributions, as well as support for Kubernetes and Docker. For container environments, Epoch only requires installation of the collector on the container host, and not within individual containers.
 
-Select **CentOS**.
+#. Select **CentOS**.
 
-.. figure:: images/2.png
+   .. figure:: images/2.png
 
-Under **Quickstart Installation**, copy and paste the entire provided command to a scratch file.
+#. Under **Quickstart Installation**, copy and paste the entire provided command to a scratch file.
 
-.. figure:: images/3.png
+   .. figure:: images/3.png
 
-The installation command includes the script to perform installation of the collector, but also includes customized variables that define which Epoch instance is sent data, packet analysis depth (e.g. Layer 4 vs. Layer 7), and sampling rate.
+   The installation command includes the script to perform installation of the collector, but also includes customized variables that define YOUR Epoch instance, packet analysis depth (e.g. Layer 4 vs. Layer 7), and sampling rate.
 
-`Tags <https://docs.epoch.nutanix.com/v1.12.11/integrations/tagging-infrastructure/#configuration>`_ can also be added at the time of installation using the EPOCH_TAGS environment variable: ``EPOCH_TAGS="tag1,tag_key2:tag_value2"``. Tags help group VM instances and containers, allowing you another means of easily filtering different applications, regions, etc. Proper tagging can speed up incidence response and help define meaningful alerts.
+   `Tags <https://docs.epoch.nutanix.com/v1.12.11/integrations/tagging-infrastructure/#configuration>`_ can also be added at the time of installation using the EPOCH_TAGS environment variable: ``EPOCH_TAGS="tag1,tag_key2:tag_value2"``. Tags help group VM instances and containers, allowing you another means of easily filtering different applications, regions, etc. Proper tagging can speed up incidence response and help define meaningful alerts.
 
-Close the documentation pop-up window.
+#. Close the documentation pop-up window.
 
-.. note::
+   .. note::
 
-  The installation instructions can be accessed at any time under the *User name* drop down menu in the upper right of the toolbar.
+     The installation instructions can be accessed at any time under the *User name* drop down menu in the upper right of the toolbar.
 
-Return to **Calm > Applications >** *Initials*\ **-TaskManager > Services** and select a WebServer VM to determine its IP address.
+#. Return to **Calm > Applications >** *Initials*\ **-TaskManager > Services** and select a WebServer VM to determine its IP address.
 
-.. figure:: images/4.png
+   .. figure:: images/4.png
 
-.. note::
+   .. note::
 
-  Click the **<>** icon to expand the WebServer service to select the individual service VMs in the array.
+     Click the **<>** icon to expand the WebServer service to select the individual service VMs in the array.
 
-  You can also determine the IP addresses of each VM through Prism.
+     You can also determine the IP addresses of each VM through Prism.
 
-Connect to your first VM via SSH using the following credentials:
+#. Connect to your first VM via SSH using the following credentials:
 
-  - **Username** - centos
-  - **Password** - Nutanix/4u
+     - **Username** - centos
+     - **Password** - Nutanix/4u
 
-Run the following commands to elevate the permissions of the session and install ``wget``:
+#. Run the following commands to elevate the permissions of the session and install ``wget``:
 
-.. code-block:: bash
+   .. code-block:: bash
 
-  sudo bash
-  yum -y install wget
+     sudo bash
+     yum -y install wget
 
-Once ``wget`` has been installed, paste the collector quickstart installation command into the SSH session.
+#. Once ``wget`` has been installed, paste the collector quickstart installation command into the SSH session.
 
-Running the command will download the proper package, install, configure, and then start the ``epoch-collectors`` service.
+   Running the command will download the proper package, install, configure, and then start the ``epoch-collectors`` service.
 
-Run ``systemctl status epoch-collectors`` to verify the service is **Active (Running)**.
+#. Run ``systemctl status epoch-collectors`` to verify the service is **Active (Running)**.
 
-.. figure:: images/5.png
+   .. figure:: images/5.png
 
-Repeat these steps to install the collector on the remaining WebServer VM, MySQL VM, and HAProxy VM. The WinClient VM will not be used in this exercise.
+#. Repeat Steps 4-8 to install the collector on the remaining WebServer VM, MySQL VM, and HAProxy VM. The WinClient VM will not be used in this exercise.
 
-Epoch's collectors are designed to minimize overhead while performing packet capture, stream processing, and infrastructure metrics collection. However, it is important to understand the CPU, memory, and network overheads associated with different collector configurations.
+   Epoch's collectors are designed to minimize overhead while performing packet capture, stream processing, and infrastructure metrics collection. However, it is important to understand the CPU, memory, and network overheads associated with different collector configurations.
 
-A default installation, which only performs Layer 4 protocol analysis, has a typical overhead of 1-2% CPU time and ~200MB of RAM.
+   A default installation, which only performs Layer 4 protocol analysis, has a typical overhead of 1-2% CPU time and ~200MB of RAM.
 
-As seen in the quickstart installation command, you have configured your collectors to perform Layer 7 protocol analysis. While actual overhead depends on the throughput of network transactions, typical workloads have an overhead of 5-10% CPU time and 300-700MB of RAM.
+   As seen in the quickstart installation command, you have configured your collectors to perform Layer 7 protocol analysis. While actual overhead depends on the throughput of network transactions, typical workloads have an overhead of 5-10% CPU time and 300-700MB of RAM.
 
-Outgoing network bandwidth per collector is ~5-20KBps, depending on workload.
+   Outgoing network bandwidth per collector is ~5-20KBps, depending on workload.
 
-For complete details on collector overhead, and how to balance or offload overhead, see the `Collector Documentation <https://docs.epoch.nutanix.com/v1.12.11/setup-guide/collectors/overheads/>`_.
+   For complete details on collector overhead, and how to balance or offload overhead, see the `Collector Documentation <https://docs.epoch.nutanix.com/v1.12.11/setup-guide/collectors/overheads/>`_.
 
-Return to **Xi Epoch** and select **Settings > Collector Health**. What is the status of the collectors you have installed?
+#. Return to **Xi Epoch** and select **Settings > Collector Health**. What is the status of the collectors you have installed?
 
-.. figure:: images/6.png
+   .. figure:: images/6.png
 
 Using Application Maps
 ++++++++++++++++++++++
 
 The Epoch Application Maps can be thought of as “Google Maps for Cloud Apps,” providing interactive visualization of interactions between services on the network. From the application maps, users can drill down and quickly diagnose a range of complex issues such as service configuration (e.g. Kubernetes DNS errors), service reachability issues (e.g. HTTP errors) and service creation problems (e.g. pod scheduling errors).
 
-Open \http://*HAPROXY-VM-IP*/ in your browser to access the Task Manager application. Add several sample tasks and then delete a few tasks.
+#. Open \http://*HAPROXY-VM-IP*/ in your browser to access the Task Manager application. Add several sample tasks and then delete a few tasks.
 
-This action will create calls from the client to HAProxy, from HAProxy to your Web Servers, and from the Web Servers to the MySQL database, all of which will be captured by Epoch.
+   This action will create calls from the client to HAProxy, from HAProxy to your Web Servers, and from the Web Servers to the MySQL database, all of which will be captured by Epoch.
 
-.. figure:: images/7.png
+   .. figure:: images/7.png
 
-Return to the **AOC** and select **Maps > Hosts**.
+#. Return to the **AOC** and select **Maps > Hosts**.
 
-The timeline slider at the top of the map allows you to define the period of time during which you want to analyze data. Pause the **Live** display and select an interval of time that included your accessing the Task Manager application described above. Epoch retains captured metrics for up to 1 year.
+#. The timeline slider at the top of the map allows you to define the period of time during which you want to analyze data. Pause the **Live** display and select an interval of time that included your accessing the Task Manager application described above. Epoch retains captured metrics for up to 1 year.
 
-.. figure:: images/8.png
+   .. figure:: images/8.png
 
-Remove the default **Filters** and **Groups** options by clicking the **x** on each. This should display a **Merged Node** containing the consolidated statistics of all collectors.
+#. Remove the default **Filters** and **Groups** options by clicking the **x** on each. This should display a **Merged Node** containing the consolidated statistics of all collectors.
 
-Select the **Merged Node** and explore to available metrics. What is the host count of the node?
+#. Select the **Merged Node** and explore to available metrics. What is the host count of the node?
 
-The **Merged Node** view is helpful in containerized environments to quickly understand the status of container hosts, number of containers, etc.
+   The **Merged Node** view is helpful in containerized environments to quickly understand the status of container hosts, number of containers, etc.
 
-Unselect the **Merged Node** (e.g. click the grey area outside the node) and click **Discard Changes > Discard Changes** to restore the Filter and GroupBy settings.
+#. Unselect the **Merged Node** (e.g. click the grey area outside the node) and click **Discard Changes > Discard Changes** to restore the Filter and GroupBy settings.
 
-Groups and Filters allow for multi-dimensional analysis of data. **GroupBy** will create a grouping of data points based of specified attributes, such as hostname, port, or resource type. **Filters** alow for the selection and/or elimination of data points based on defined criteria, such as hostnames that match a specific regular expression (RegEx).
+   Groups and Filters allow for multi-dimensional analysis of data. **GroupBy** will create a grouping of data points based of specified attributes, such as hostname, port, or resource type. **Filters** alow for the selection and/or elimination of data points based on defined criteria, such as hostnames that match a specific regular expression (RegEx).
 
-Click the **Map Settings** :fa:`cog` icon and select **Link metrics**. What additional information does this add to the map?
+#. Click the **Map Settings** :fa:`cog` icon and select **Link metrics**. What additional information does this add to the map?
 
-.. figure:: images/9.png
+   .. figure:: images/9.png
 
-Filter for and select your *Initials*\ **-MYSQL...** VM node.
+#. Filter for and select your *Initials*\ **-MYSQL...** VM node.
 
-.. figure:: images/10.png
+   .. figure:: images/10.png
 
-Selecting a node or a link in the application map allows you to deep-dive into the health metrics, arranged by inbound and outbound traffic, of that node. The health metrics are further grouped by technology, such as: System (infrastructure health), Network (layer 4 health), HTTP (layer 7 health), Docker, Kubernetes, MySQL, etc.
+   Selecting a node or a link in the application map allows you to deep-dive into the health metrics, arranged by inbound and outbound traffic, of that node. The health metrics are further grouped by technology, such as: System (infrastructure health), Network (layer 4 health), HTTP (layer 7 health), Docker, Kubernetes, MySQL, etc.
 
-The technology options will be displayed based on the selected node and the collector configuration, for example:
+   The technology options will be displayed based on the selected node and the collector configuration, for example:
 
-- **HTTP, HTTP/2** - This provides interactive graphs and trends for golden signals grouped by most impacted endpoints.
-- **System** - This provides interactive graphs and trends for infrastructure KPIs such as CPU, Memory, I/O wait, and traffic.
-- **Docker** - This provides interactive graphs and trends for golden signals grouped by docker image and containers.
-- **Kubernetes** - This provides interactive graphs and trends for CPU, Memory, Deployments, ReplicaSet, DaemonSet, Network In/Out by pods and hosts.
-- **MySQL/PostgreSQL** - This provides interactive graphs and trends for golden signals grouped by queries and response size etc.
-- **Network Flow** - This provides interactive graphs and trends for request and response byte, request and response packets, and session rate.
-- **DNS** - This provides interactive graphs and trends for golden signals grouped by DNS domains and lookup status etc.
-- **Memcached** - This provides interactive graphs and trends for Memcached commands, read/writes, hits/misses, filling, connections, gets/sets, domains, and lookup etc.
+   - **HTTP, HTTP/2** - This provides interactive graphs and trends for golden signals grouped by most impacted endpoints.
+   - **System** - This provides interactive graphs and trends for infrastructure KPIs such as CPU, Memory, I/O wait, and traffic.
+   - **Docker** - This provides interactive graphs and trends for golden signals grouped by docker image and containers.
+   - **Kubernetes** - This provides interactive graphs and trends for CPU, Memory, Deployments, ReplicaSet, DaemonSet, Network In/Out by pods and hosts.
+   - **MySQL/PostgreSQL** - This provides interactive graphs and trends for golden signals grouped by queries and response size etc.
+   - **Network Flow** - This provides interactive graphs and trends for request and response byte, request and response packets, and session rate.
+   - **DNS** - This provides interactive graphs and trends for golden signals grouped by DNS domains and lookup status etc.
+   - **Memcached** - This provides interactive graphs and trends for Memcached commands, read/writes, hits/misses, filling, connections, gets/sets, domains, and lookup etc.
 
-Unselect the *Initials*\ **-MYSQL...** node and click **Show 1-hop** in the toolbar. This view provides a topological breakdown of incoming and outgoing connections 1 network "hop" from the selected host.
+#. Unselect the *Initials*\ **-MYSQL...** node and click **Show 1-hop** in the toolbar.
 
-.. figure:: images/11.png
+   This view provides a topological breakdown of incoming and outgoing connections 1 network "hop" from the selected host.
 
-Finally, you can save your customized map view by clicking the **Clone And Save Map** button. This allows you to easily return to pre-filtered views of specific apps, regions, etc.
+   .. figure:: images/11.png
+
+#. Finally, you can save your customized map view by clicking the **Clone And Save Map** button.
+
+   This allows you to easily return to pre-filtered views of specific apps, regions, etc.
 
 Configuring Dashboards & Integrations
 +++++++++++++++++++++++++++++++++++++
@@ -187,107 +191,121 @@ While the Map view provides an interactive means of viewing Live or historical m
 
 Integrations are what power advanced data collection within the AOC with support for specific applications and protocols. Epoch currently supports over 75 different applications and services, including vSphere, SQL Server, MySQL, ssh, Nginx, AWS and more.
 
-In the **AOC**, select **Integrations**.
+#. In the **AOC**, select **Integrations**.
 
-Search for and select the **MySQL** integration. Note that the integration is enabled by default and provides several metrics, including information about throughput, latency, and actual query statements made on the MySQL server. These metrics require no changes to your existing application or infrastructure, but does require that the collector be configured to capture Layer 7 data.
+#. Search for and select the **MySQL** integration.
 
-Under **Configuration**, you will see the additional stats reported by MySQL that Epoch can capture with some additional configuration of the MySQL environment, but critically still requires no changes to the application itself.
+   The integration is enabled by default and provides several metrics, including information about throughput, latency, and actual query statements made on the MySQL server. These metrics require no changes to your existing application or infrastructure, but do require that the collector be configured to capture Layer 7 data.
 
-Explore some of the other available integrations and note the data provided by the integration, as well as any infrastructure changes required to enable the integration.
+   Under **Configuration**, you will see the additional stats reported by MySQL that Epoch can capture with some additional configuration of the MySQL environment, but critically still requires no changes to the application itself.
 
-Selecting **Show Integration Dashboards** will enable the integration, but individual integrations may require additional configuration in order for data to be collected.
+#. Explore some of the other available integrations and note the data provided by the integration, as well as any infrastructure changes required to enable the integration.
 
-In the **AOC**, select **Dashboards**.
+   Selecting **Show Integration Dashboards** will enable the integration, but individual integrations may require additional configuration in order for data to be collected.
 
-This page offers many pre-configured dashboards based on native data capture like **System - Disk I/O** and **Network Flows**, as well as dashboards based on integrations like **MySQL** and **HTTP**.
+#. In the **AOC**, select **Dashboards**.
 
-Select the **MySQL** dashboard and ensure your selected timeline includes the time period you created and deleted tasks in your Task Manager web application. Dashboards allow you to consolidate and evaluated metrics over a significantly longer time span than Maps, allowing an interval of up to 90 days.
+   This page offers many pre-configured dashboards based on native data capture like **System - Disk I/O** and **Network Flows**, as well as dashboards based on integrations like **MySQL** and **HTTP**.
 
-You should see multiple charts detailing key application specific metrics populated, similar to below:
+#. Select the **MySQL** dashboard and ensure your selected timeline includes the time period you created and deleted tasks in your Task Manager web application.
 
-.. figure:: images/12.png
+   Dashboards allow you to consolidate and evaluated metrics over a significantly longer time span than Maps, allowing an interval of up to 90 days.
 
-As shown, you can use the **Table View** button to toggle the view of charts to provide a table with the associated data, which may be more helpful for understanding a metric such as the **Throughput of Top 5 Most Requested Queries**.
+   You should see multiple charts detailing key application specific metrics populated, similar to below:
 
-You can also use dashboards to drill down into additional attributes of the data sources.
+   .. figure:: images/12.png
 
-Select the query with the highest **Average Latency of Slowest Queries (Top 5)** and click **Drill into > mysql.db** to learn what database is experiencing the slowest average query. This **mysql.** attributes are provided by the MySQL integration.
+#. As shown, you can use the **Table View** button to toggle the view of charts to provide a table with the associated data, which may be more helpful for understanding a metric such as the **Throughput of Top 5 Most Requested Queries**.
 
-.. figure:: images/13.png
+   You can also use dashboards to drill down into additional attributes of the data sources.
 
-Using the same capability, can you determine which hosts are experiencing your highest latency query?
+#. Select the query with the highest **Average Latency of Slowest Queries (Top 5)** and click **Drill into > mysql.db** to learn what database is experiencing the slowest average query.
 
-Use the **+ Add Filters** bar to filter the data specific to a **mysql.query**. Filtering based on client, query, etc. can allow an administrator to quickly transform data and evaluate the health of very specific aspects of the environment.
+   This **mysql.** attributes are provided by the MySQL integration.
 
-Built-in dashboards can easily be cloned to persistent customized views, such as a custom dashboard to track key metrics related to your Task Manager application. At the top of the dashboard, select **... > Clone Dashboard** and provide a **Name** (e.g. *Initials*\ - **TaskManager**.)
+   .. figure:: images/13.png
 
-Once cloned, note that you can now click the **...** icon on each chart and clone or delete it individually. You can remove any unwanted charts.
+#. Using the same capability, can you determine which hosts are experiencing your highest latency query?
 
-At the bottom of the dashboard you now have an option to add **Charts** and **Widgets**.
+#. Use the **+ Add Filters** bar to filter the data specific to a **mysql.query**.
 
-Widgets import **HTML iframes** from other sources, such as a Google Sheet or 3rd party monitoring output, allowing Epoch to remain a single pane of glass.
+   Filtering based on client, query, etc. can allow an administrator to quickly transform data and evaluate the health of very specific aspects of the environment.
 
-Charts use the built-in query builder to visualize source data as either a multiline, stacked area, stacked bar, bar, or pie chart, as well as tables or individual values.
+#. At the top of the dashboard, select **... > Clone Dashboard** and provide a **Name** (e.g. *Initials*\ - **TaskManager**.)
 
-Click **+ Add Chart**.
+   Built-in dashboards can easily be cloned to persistent customized views, such as a custom dashboard to track key metrics related to your Task Manager application.
 
-For your Task Manager application it would be helpful to have a display of how many HTTP requests are being made against the load balancer during a given period of time.
+   Once cloned, note that you can now click the **...** icon on each chart and clone or delete it individually. You can remove any unwanted charts.
 
-Fill out the following fields:
+   At the bottom of the dashboard you now have an option to add **Charts** and **Widgets**.
 
-- **Name** HAProxy HTTP Requests
-- **Type** - Value (This is the 123 icon under **Main Query**)
-- **Metric** - http.request.count
-- **Filters** - client.host_name: *Initials*\ -HAProxy...
+   Widgets import **HTML iframes** from other sources, such as a Google Sheet or 3rd party monitoring output, allowing Epoch to remain a single pane of glass.
 
-.. figure:: images/14.png
+   Charts use the built-in query builder to visualize source data as either a multiline, stacked area, stacked bar, bar, or pie chart, as well as tables or individual values.
 
-Click **Create new chart** to add to your custom dashboard.
+#. Click **+ Add Chart**.
 
-.. figure:: images/15.png
+   For your Task Manager application it would be helpful to have a display of how many HTTP requests are being made against the load balancer during a given period of time.
 
-While this is a simple example, the Query Builder can be used to model many types of helpful metrics related to applications, such as the frequency of specific HTTP error codes, changes in latency over time, DNS timeouts between services, and more.
+#. Fill out the following fields:
+
+   - **Name** HAProxy HTTP Requests
+   - **Type** - Value (This is the 123 icon under **Main Query**)
+   - **Metric** - http.request.count
+   - **Filters** - client.host_name: *Initials*\ -HAProxy...
+
+   .. figure:: images/14.png
+
+#. Click **Create new chart** to add to your custom dashboard.
+
+   .. figure:: images/15.png
+
+   While this is a simple example, the Query Builder can be used to model many types of helpful metrics related to applications, such as the frequency of specific HTTP error codes, changes in latency over time, DNS timeouts between services, and more.
 
 Configuring Alerts
 ++++++++++++++++++
 
 Epoch provides a flexible alerting engine that allows the user to set up alerts and receive notifications for application and infrastructure events.
 
-In the **AOC**, select **Alerts > Manage Alerts**.
+#. In the **AOC**, select **Alerts > Manage Alerts**.
 
-As with Dashboards, Epoch provides multiple out-of-the-box alert policies that can be cloned and edited.
+   As with Dashboards, Epoch provides multiple out-of-the-box alert policies that can be cloned and edited.
 
-Select the **Hosts diskUsed > 75%** alert and click **Clone Alert** when prompted.
+#. Select the **Hosts diskUsed > 75%** alert and click **Clone Alert** when prompted.
 
-.. figure:: images/16.png
+   .. figure:: images/16.png
 
-The in use storage for all of your VMs should be displayed as a multiline graph, similar to the image below:
+   The in use storage for all of your VMs should be displayed as a multiline graph, similar to the image below:
 
-.. figure:: images/17.png
+   .. figure:: images/17.png
 
-You can expand the **Query Builder** to understand how Epoch is measuring disk utilization.
+   You can expand the **Query Builder** to understand how Epoch is measuring disk utilization.
 
-Under **Alert Conditions**, modify the threshold values such that some of your VMs will alert as critical. In the example, HAProxy is at ~10% disk capacity utilization, MySQL at ~13%, and Web Servers at ~14%, so the critical threshold is defined as 13.5 and warning threshold at 12.
+#. Under **Alert Conditions**, modify the threshold values such that some of your VMs will alert as critical.
 
-.. figure:: images/18.png
+   In the example, HAProxy is at ~10% disk capacity utilization, MySQL at ~13%, and Web Servers at ~14%, so the critical threshold is defined as 13.5 and warning threshold at 12.
 
-Under **Alert Notifications**, set notifications to **unmuted** and add your e-mail in the notification recipients field.
+   .. figure:: images/18.png#.
 
-.. figure:: images/19.png
+#. Under **Alert Notifications**, set notifications to **unmuted** and add your e-mail in the notification recipients field.
 
-Update the alert name to reflect your updated threshold and click **Save Alert**.
+   .. figure:: images/19.png
 
-In the **AOC**, select **Alerts > Triggered Alerts**.
+#. Update the alert name to reflect your updated threshold and click **Save Alert**.
 
-Toggle the **Live** button to on (blue) and validate that the expected alerts have been triggered. You should have also received e-mails from Epoch AOC with the defined alert message.
+#. In the **AOC**, select **Alerts > Triggered Alerts**.
 
-.. figure:: images/20.png
+#. Toggle the **Live** button to on (blue) and validate that the expected alerts have been triggered.
 
-Return to **Maps > Hosts** and note that the nodes with triggered alerts are highlighted the appropriate color.
+   You should have also received e-mails from Epoch AOC with the defined alert message.
 
-Select a node and click the **Status** tab to drill down into the specific details of the alert.
+   .. figure:: images/20.png
 
-The combination of maps and alerts makes pin pointing issues within complex environments fast and simple.
+#. Return to **Maps > Hosts** and note that the nodes with triggered alerts are highlighted the appropriate color.
+
+#. Select a node and click the **Status** tab to drill down into the specific details of the alert.
+
+   The combination of maps and alerts makes pin pointing issues within complex environments fast and simple.
 
 (Optional) Enabling HAProxy Integration
 +++++++++++++++++++++++++++++++++++++++

@@ -4,88 +4,81 @@
 Nutanix 101
 ------------------------
 
+*The estimated time to complete this lab is 60 minutes.*
+
 Overview
 ++++++++
 
-**Estimated time to complete: 60 MINUTES**
+New to Nutanix and AHV? This lab is for you!
 
-So you just started at Nutanix, this is the set of labs for you. This will give you an opportunity to get your hands dirty.
-
-This lab will introduce the Prism Element UI, and familiarize you with its layout and navigation.
-You will use Prism to perform a basic container, and network setup for the cluster.
-The networks you create in the steps below provide VMs with connectivity by assigning the appropriate networks for the VMs’ respective NICs.
-Get experience with basic VM deployment, and VM management tasks from Prism, which include power actions, searching, cloning, and migrating.
-As well as, learn how to set up protection domains, create VM snapshots, and restore from those snapshots.
+**In this lab you will explore Prism Element and become familiar with its features and navigation. You will use Prism to perform basic cluster administration tasks, including storage and networking. You will also walk through basic VM deployment and management tasks with Prism and AHV. Finally, you will explore VM data protection, including snapshots and replication.**
 
 Prism Element
 +++++++++++++
 
-From the Firefox web browser (preferred), log into the Nutanix Prism GUI using the Cluster IP.
+The Prism service provides the web UI for managing Nutanix clusters and runs on every Controller VM (CVM). This local Prism service, referred to Prism Element, can be accessed via the IP of any individual CVM, or via the virtual IP for the cluster, which will redirect to the current Prism leader.
 
-Open https://<*NUTANIX-CLUSTER-IP*>:9440
+#. Open \https://<*NUTANIX-CLUSTER-IP*>:9440 in a new browser tab.
 
-Fill out the following fields and click **Enter**:
+#. Log in using the following credentials:
 
-- **Username** - admin
-- **Password** - *HPOC Password*
+   - **Username** - admin
+   - **Password** - *HPOC Password*
 
-.. figure:: images/nutanix_tech_overview_01.png
+   .. figure:: images/nutanix_tech_overview_01.png
 
-After you log in to Prism Element, familiarize yourself with the Prism UI. Explore the information on the **Home** screen, as well as the other screens.
+#. After you log in to Prism Element, familiarize yourself with the Prism UI. Explore the information on the **Home** screen, as well as the other screens.
 
-Review the Home screen, and identify the following items:
+#. Review the Home screen, and identify the following items:
 
-- Hypervisor
-- Version
-- Hardware Model
-- Health
-- VM Summary
-- Warning Alerts
-- Data Resiliency Status
+   - Hypervisor
+   - Version
+   - Hardware Model
+   - Health
+   - VM Summary
+   - Warning Alerts
+   - Data Resiliency Status
 
-.. figure:: images/nutanix_tech_overview_02.png
+   .. figure:: images/nutanix_tech_overview_02.png
 
-Review the UI navigation options.
+#. Review the UI navigation options.
 
-.. figure:: images/nutanix_tech_overview_03.png
+   .. figure:: images/nutanix_tech_overview_03.png
 
-Examine the cluster hardware by using the navigation menu, and go to the Hardware.
+#. Examine the cluster hardware under **Prism > Hardware**, click **Hardware**, then click **Diagram**.
 
-In **Prism > Hardware**, click **Hardware**, then click **Diagram**.
+#. Review the hardware summary information:
 
-Review the hardware summary information:
+   - Blocks
+   - Hosts
+   - Memory
+   - CPU
+   - Disks
 
-- Blocks
-- Hosts
-- Memory
-- CPU
-- Disks
+   .. figure:: images/nutanix_tech_overview_04.png
 
-.. figure:: images/nutanix_tech_overview_04.png
+#. Review the other sections, and do a quick walk through:
 
-Review the other sections, and do a quick walk through:
+   - VM
+   - Health
+   - Network
+   - Data Protection
+   - Storage
+   - Alerts
+   - Etc.
 
-- VM
-- Health
-- Network
-- Data Protection
-- Storage
-- Alerts
-- Etc.
+#. Review other sections of the Prism UI
 
-Review other sections of the Prism UI
+   - Health :fa:`heartbeat`
+   - Alarms :fa:`bell`
+   - Tasks :fa:`circle-o`
+   - Search :fa:`search`
+   - Help :fa:`question`
+   - Configuration :fa:`cog`
+   - User :fa:`user`
 
-- Health :fa:`heartbeat`
-- Alarms :fa:`bell`
-- Tasks :fa:`circle-o`
-- Search :fa:`search`
-- Help :fa:`question`
-- Configuration :fa:`cog`
-- User :fa:`user`
+   .. figure:: images/nutanix_tech_overview_05.png
 
-.. figure:: images/nutanix_tech_overview_05.png
-
-.......................
 Prism Element UI Review
 .......................
 
@@ -111,13 +104,19 @@ What page would show you the latest activity in the system? On this page, you ca
 
 .. figure:: images/nutanix_tech_overview_09.png
 
-First Way, In **Prism > Tasks**, click **Tasks**. Second Way, click :fa:`circle-o`.
+Browse to **Prism > Tasks** and click **Tasks**, or click the :fa:`circle-o` icon in the toolbar.
+
+Prism Element Storage Configuration Items
++++++++++++++++++++++++++++++++++++++++++
+
+Configure Storage Containers
+............................
+
+**Containers** are software-defined, logical constructs for managing storage policy that greatly simplify storage management.
 
 .. note::
 
-  In ESXi:
-
-  - The containers created in Prism appear as datastores in vCenter.
+  In ESXi, each Nutanix storage container is presented as an NFS datastore.
 
   Example view of storage containers from Prism:
 
@@ -127,48 +126,53 @@ First Way, In **Prism > Tasks**, click **Tasks**. Second Way, click :fa:`circle-
 
   .. figure:: images/nutanix_tech_overview_14.png
 
-Prism Element Storage Configuration Items
-+++++++++++++++++++++++++++++++++++++++++
-
-Configure Storage Containers
-............................
-
-**Containers** are software-defined, logical constructs for managing storage policy that greatly simplify storage management. Containers are similar to datastores in ESXi.
-
 Let's use Prism Element to perform a basic container setup.
 
-In **Prism Element> Storage**, click **Storage**, click **Table**, then click **+ Storage Container**.
+#. In **Prism Element> Storage**, click **Storage**, click **Table**, then click **+ Storage Container**.
 
-Use the following specifications (with **Advance Settings**), and click **Save**:
+#. Use the following specifications (with **Advance Settings**), and click **Save**:
 
-- **Name** - *initials*-container
-- **Advertised Capacity** - 5 GiB
-- **Compression** - Enabled (inline 0 mins)
-- **Deduplication** - Cache Only
-- **Erasure Coding** - Disabled
+   - **Name** - *initials*-container
+   - **Advertised Capacity** - 5 GiB
+   - **Compression** - Enabled (inline 0 mins)
+   - **Deduplication** - Cache Only
+   - **Erasure Coding** - Disabled
 
-.. figure:: images/storage_config_01.png
+   .. figure:: images/storage_config_01.png
 
-You can create multiple containers with different policies.
+   You can create multiple containers with different policies.
 
-.. note::
+   .. note::
 
-  Containers do not reserve any actual disk space—they are policies with a soft limit that trigger alerts but do not stop new data from being written to the container.
+     Containers do not reserve any actual disk space—they are policies with a soft limit that trigger alerts but do not stop new data from being written to the container.
 
-Explore the configuration basics further.
+#. Explore the configuration basics further. Go back to the container you created above and edit it to add another 10 GiB to the advertised capacity. While you’re in that window, what is the redundancy factor for the container you created in the first task?
 
-Go back to the container you created above and edit it to add another 10 GiB to the advertised capacity. While you’re in that window, what is the redundancy factor for the container you created in the first task?
+   .. figure:: images/storage_config_02.png
 
-.. figure:: images/storage_config_02.png
+
+
+
+
+
+
+COME BACK TO THIS SPOT!!!!!!!!!!!!!!!!
+
+
+
+
+
+
+
 
 Redundancy Factor (RF)
-.................
+.......................
 
 You can locate the redundancy level of containers and the cluster within Prism.
 
 .. figure:: images/storage_config_03.png
 
-Block awareness, introduced in 4.0, allows the cluster to survive a full 2RU block failure without using any more disk space.The basic requirement for rack/block fault tolerance is to have minimum 3 blocks in the cluster as we need to store 3 copies of metadata. Starting in AOS 5.8, block awareness is supported in conjunction with erasure coding.
+Block awareness, introduced in AOS 4.0, allows the cluster to sustain a full 2RU block failure without using any more disk space.The basic requirement for rack/block fault tolerance is to have minimum 3 blocks in the cluster as we need to store 3 copies of metadata. Starting in AOS 5.8, block awareness is supported in conjunction with erasure coding.
 
 In **Prism > Home**, click the **green OK** in the Data Resiliency Status box. This opens the Data Resiliency Status window.
 

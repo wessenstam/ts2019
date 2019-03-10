@@ -221,10 +221,10 @@ Join this session for an opportunity to engage in live Q&A with Nutanix Product 
 
 Panelists include:
 
-- **Aravindan Gopalakrishnan** - Principal Product Management
-- **Dhruv Doshi** : member of technical Staff
-- **Ankush Jindal**  : member of technical Staff
-- **Ashwin TV** : member of technical Staff
+- **Aravindan Gopalakrishnan** - Principal Product Manager
+- **Dhruv Doshi** - Member of Technical Staff
+- **Ankush Jindal**  - Member of Technical Staff
+- **Ashwin TV** - Member of Technical Staff
 
 Ask the Product Team - Virtualization and Management
 ....................................................
@@ -237,13 +237,12 @@ Panelists include:
 
 - **Tanuja Ingale** -Product Management
 - **Tarak Parekh** - Principal Product Manager
-- **Monica Jeyachandran** -Sr member of Technical Staff
-- **Rajesh Battala** -Sr member of Technical Staff
-- **Ayon Gosh** -member of technical Staff
-- **Priyanka Mahipala** -member of technical Staff
+- **Monica Jeyachandran** - Sr. Member of Technical Staff
+- **Rajesh Battala** - Sr. Member of Technical Staff
+- **Ayon Gosh** - Member of Technical Staff
+- **Priyanka Mahipala** - Member of Technical Staff
 
 **For all Q&A during the session, use this slack channel: #apac_pm_qa_breakout_2**
-
 
 Delivering API Workshops
 ........................
@@ -251,7 +250,6 @@ Delivering API Workshops
 *Wednesday, 1:00PM - 3:00PM - Great Hall Meeting Room 1 (7th Floor)*
 
 Join Luke Kilpatrick and Chris Rasmussen from Nutanix Developer Marketing to learn how to effectively deliver a Nutanix API Workshop with your accounts, engaging developers in a hands-on way.
-
 
 Everything about Era
 .....................
@@ -275,8 +273,8 @@ Join this session for an opportunity to engage in live Q&A with Nutanix Product 
 **For all Q&A during the session, use this slack channel: #apac_pm_qa_breakout_3**
 
 - **Harry Yang** - Director, Product Management
-- **Pranav Gupta** - member of technical Staff
-- **Prathap Jayadevappa**- member of technical Staff
+- **Pranav Gupta** - Member of Technical Staff
+- **Prathap Jayadevappa** - Member of Technical Staff
 
 Public Cloud & Xi Beam Overview
 ...............................
