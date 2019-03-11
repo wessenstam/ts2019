@@ -217,8 +217,6 @@ Ask the Product Team - Storage and HCI
 
 Join this session for an opportunity to engage in live Q&A with Nutanix Product Managers and Engineers responsible for core AOS, data protection, performance, and security. Session topics include storage performance, capacity and resiliency, disaster recovery, encryption, key management, and security.
 
-**For all Q&A during the session, use this slack channel: #apac_pm_qa_breakout_1**
-
 Panelists include:
 
 - **Aravindan Gopalakrishnan** - Principal Product Manager
@@ -241,8 +239,6 @@ Panelists include:
 - **Rajesh Battala** - Sr. Member of Technical Staff
 - **Ayon Gosh** - Member of Technical Staff
 - **Priyanka Mahipala** - Member of Technical Staff
-
-**For all Q&A during the session, use this slack channel: #apac_pm_qa_breakout_2**
 
 Delivering API Workshops
 ........................
@@ -270,8 +266,6 @@ Ask the Product Team - Supportability and Operations
 
 Join this session for an opportunity to engage in live Q&A with Nutanix Product Managers and Engineers responsible for Prism and Prism Pro. Session topics include Lifecycle Manager (LCM), monitoring, and auditing.
 
-**For all Q&A during the session, use this slack channel: #apac_pm_qa_breakout_3**
-
 - **Harry Yang** - Director, Product Management
 - **Pranav Gupta** - Member of Technical Staff
 - **Prathap Jayadevappa** - Member of Technical Staff
@@ -282,3 +276,24 @@ Public Cloud & Xi Beam Overview
 *Wednesday, 3:30PM - 5:30PM - Great Hall Meeting Room 2 (7th Floor)*
 
 Want to know more about offerings from AWS, Azure, and others? Technical knowledge about public cloud solutions are critical to being able to effectively position on-premises alternatives, and well as complimentary Nutanix services. In addition to providing a "crash course" on the public cloud, this session will provide details on how Xi Beam can provide additional value in these environments.
+
+Breakout Q&A
+++++++++++++
+
+You can ask questions for any of the breakout sessions using the web app below. **You do not need to attend a session to submit or vote on questions.**
+
+Open https://sli.do/GTS19 on your laptop or mobile device.
+
+.. note::
+
+  You can also access the app through https://www.slido.com using **#GTS19** as the **Event Code**.
+
+Select the desired breakout session from the list.
+
+.. figure:: images/slido1.png
+
+Review existing questions and upvote any similar questions by clicking the :fa:`thumbs-up` icon before potentially submitting a duplicate question. Questions with the most votes will be prioritized by speakers.
+
+.. figure:: images/slido2.png
+
+ If a similar question does not already exist, click **Ask** to submit your own question.

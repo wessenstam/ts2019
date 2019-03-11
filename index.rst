@@ -8,9 +8,8 @@
 
    info/apacagenda
    info/clusteraccess
-..   info/clusterinfo
+   info/clusterinfo
    info/validation
-..   info/hackerearth
 
 .. toctree::
    :maxdepth: 2
@@ -87,18 +86,18 @@ Welcome to Nutanix Global Tech Summit 2019!
 
 Following the General Session on Tuesday morning, you will be able to access the **Hands on Learning** lab content.
 
-.. Labs are designed to be completed by each individual, not in groups. Each Nutanix SE registered for the **Hands on Learning** track must complete the :ref:`era` , :ref:`flow`, :ref:`files`, and :ref:`xplay` labs. You should be able to complete 2-4 additional labs by the end of the day Wednesday.
+Labs are designed to be completed by each individual, not in groups. Each Nutanix SE registered for the **Hands on Learning** track must complete the :ref:`era` and :ref:`flow` labs. You should be able to complete 2-4 additional labs by the end of the day Wednesday.
 
-.. Nutanix SEs who did not participate in last year's Tech Summit event must also complete the :ref:`nutanix101` and :ref:`hycu` labs.
+Nutanix SEs who did not participate in last year's Tech Summit event must also complete the :ref:`nutanix101`, :ref:`files`, and :ref:`hycu` labs.
 
-.. **For each lab you complete & validate, you'll be entered into a raffle to win a $70 USD VISA Gift Card!**
+**For each lab you complete & validate, you'll be entered into a raffle to win a $70 Visa Gift Card!**
 
-.. **Proctors will be regularly checking in with each table to validate completed labs.**
+**Proctors will be regularly checking in with each table to validate completed labs. You do NOT need to wait for lab validation before proceeding to your next lab, but please take the time to clean up unneeded VMs after each lab validation.**
 
-.. .. raw:: html
+.. raw:: html
 
-   <strong><font color="red">REVIEW THE FOLLOWING SECTIONS BEFORE BEGINNING ANY LABS:</font></strong>
+  <strong><font color="red">REVIEW THE FOLLOWING SECTIONS BEFORE BEGINNING ANY LABS:</font></strong>
 
-.. - :ref:`clusteraccess` - *VPN configuration for accessing the Nutanix Hosted POC network*
-.. - :ref:`clusterinfo` - *Your individual cluster assignment and details on how your cluster was staged*
-.. - :ref:`validation` - *How to get assistance with a lab*
+- :ref:`clusteraccess` - *VPN configuration for accessing the Nutanix Hosted POC network*
+- :ref:`clusterinfo` - *Your individual cluster assignment and details on how your cluster was staged*
+- :ref:`validation` - *How to get assistance with a lab*
