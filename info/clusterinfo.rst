@@ -13,11 +13,13 @@ Refer to **YOUR NAME** in the table below for all critical environmental informa
 
 .. raw:: html
 
-  <iframe width="99%" height="450" frameborder="0" scrolling="no" src="https://nutanixinc-my.sharepoint.com/:x:/g/personal/matthew_bator_nutanix_com/EZ1ixb2RUHlBhZSq373eJLEBYmpuiQ6R1Bbn8PrHbsFKbw?e=f9qRHk&action=embedview&Item='APAC'!A1%3AP565&wdDownloadButton=True&wdInConfigurator=True"></iframe>
+  <iframe width="99%" height="450" frameborder="0" scrolling="no" src="https://nutanixinc-my.sharepoint.com/:x:/g/personal/matthew_bator_nutanix_com/EZ1ixb2RUHlBhZSq373eJLEBYmpuiQ6R1Bbn8PrHbsFKbw?e=f9qRHk&action=embedview&ActiveCell='APAC'!A1&Item='APAC'!A1%3AO289&wdDownloadButton=True&wdInConfigurator=True"></iframe>
 
 .. note::
 
   The table above can be filtered in place to display only your assignment or can be downloaded and viewed locally.
+
+  If the embedded spreadsheet does not load, try loading the page in Incognito or Private browsing mode.
 
 .. _stagingdetails:
 
