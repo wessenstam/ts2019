@@ -14,7 +14,7 @@ In order to access these resources you must be connected to one of the (2) VPN o
 
 .. raw:: html
 
-  <strong><font color="red">If you encounter issues connecting to the VPN, Nutanix IT Helpdesk is available near the Sponsor Lounge outside of Floridian Ballroom or in the Church breakout room on the Ground level.</font></strong>
+  <strong><font color="red">If you encounter issues connecting to the VPN, Nutanix IT Helpdesk is located in the back of the Thai Chitlada Ballroom.</font></strong>
 
 Nutanix Employees
 .................
