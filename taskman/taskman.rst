@@ -75,6 +75,10 @@ Before you can launch the blueprint, you must first provide specify the informat
 
    .. figure:: images/4c.png
 
+#. Select the **WebServer**, **HAProxy**, and **MySQL** services and ensure each has the **Image** is set to the **CentOS7.qcow2** disk image as shown below (**NOT** the **CentOS_7_Cloud** image).
+
+   .. figure:: images/4e.png
+
 #. Select the **WebServer**, **HAProxy**, and **MySQL** services and ensure each has **NIC 1** set to **Primary**.
 
    .. figure:: images/4d.png
