@@ -282,11 +282,11 @@ Breakout Q&A
 
 You can ask questions for any of the breakout sessions using the web app below. **You do not need to attend a session to submit or vote on questions.**
 
-Open https://sli.do/GTS19 on your laptop or mobile device.
+Open https://sli.do/GTSAPAC on your laptop or mobile device.
 
 .. note::
 
-  You can also access the app through https://www.slido.com using **#GTS19** as the **Event Code**.
+  You can also access the app through https://www.slido.com using **#GTSAPAC** as the **Event Code**.
 
 Select the desired breakout session from the list.
 
