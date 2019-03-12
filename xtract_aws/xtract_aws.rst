@@ -50,9 +50,9 @@ Signing up for a new AWS account provides free, limited access to a number of AW
 
      Move does **not** currently support AMIs with `product codes <https://docs.aws.amazon.com/marketplace/latest/userguide/ami-products.html>`_, such as Paid AMIs or AMIs found in the AWS Marketplace.
 
-#. Under **Quick Start**, search for the **"Free tier eligible" Ubuntu Server 18.04 LTS (HVM) 64-bit x86** AMI and click the **Select** button.
+#. Under **Community AMIs**, search for the **Nutanix Move Ubuntu 1604** AMI and click the **Select** button.
 
-   .. figure:: images/3.png
+   .. figure:: images/3b.png
 
    .. note::
 
