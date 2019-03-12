@@ -273,7 +273,7 @@ Creating the Export
    - **Authentication** - System
    - **Default Access (For All Clients)** - No Access
    - Select **+ Add exceptions**
-   - **Clients with Read-Write Access** - 10.21.\ *Your HPOC Subnet*\ .* (e.g. 10.21.78.\*)
+   - **Clients with Read-Write Access** - *The first 3 octets of your cluster network*\ .* (e.g. 10.42.78.\*)
 
    .. figure:: images/24.png
 
@@ -347,7 +347,7 @@ You will first provision a CentOS VM to use as a client for your Files export.
 
      .. code-block:: bash
 
-       echo '*intials*-Files.ntnxlab.local:/logs /filesmnt nfs4' >> /etc/fstab
+       echo 'Intials-Files.ntnxlab.local:/ /filesmnt nfs4' >> /etc/fstab
 
 #. The following command will add 100 2MB files filled with random data to ``/filesmnt/logs``:
 
