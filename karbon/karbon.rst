@@ -281,8 +281,8 @@ Now that you have successfully run commands against your Kubernetes cluster usin
 
 #. Using your *Initials*\ **-Windows-ToolsVM** web browser, download the following YAML files for Wordpress and the MySQL deployment used by Wordpress:
 
-   - :download:`mysql-deployment.yaml`
-   - :download:`wordpress-deployment.yaml`
+   - https://raw.githubusercontent.com/nutanixworkshops/ts2019/master/karbon/mysql-deployment.yaml
+   - https://raw.githubusercontent.com/nutanixworkshops/ts2019/master/karbon/wordpress-deployment.yaml
 
 .. note::
 
