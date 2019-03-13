@@ -43,7 +43,7 @@ Accessing Xi Epoch
 
    You will be prompted to provide a subdomain for accessing Epoch. This is the URL that you will use to access the AOC and where your application data will be sent. Examples include your name or organization name.
 
-#. Provide a URL and click **Sign Up**.
+#. Provide a unique URL and click **Sign Up** (e.g. yourname.epoch.nutanix.com).
 
    .. figure:: images/0.png
 
