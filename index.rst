@@ -43,7 +43,7 @@
    xtract_aws/xtract_aws
    epoch/epoch
    frame/frame
-   xiiot/xiiot
+   .. xiiot/xiiot
 
 .. toctree::
    :maxdepth: 2

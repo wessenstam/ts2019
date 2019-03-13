@@ -281,8 +281,12 @@ Now that you have successfully run commands against your Kubernetes cluster usin
 
 #. Using your *Initials*\ **-Windows-ToolsVM** web browser, download the following YAML files for Wordpress and the MySQL deployment used by Wordpress:
 
-   - https://kubernetes.io/examples/application/wordpress/mysql-deployment.yaml
-   - https://kubernetes.io/examples/application/wordpress/wordpress-deployment.yaml
+   - :download:`mysql-deployment.yaml`
+   - :download:`wordpress-deployment.yaml`
+
+.. note::
+
+  If attempting to download the script results in an Access Denied error, log out of any AWS accounts from your browser or open the download link in **Incognito (Private Browsing)** mode.
 
 #. Move both files to the **wordpress** directory using the following command:
 
