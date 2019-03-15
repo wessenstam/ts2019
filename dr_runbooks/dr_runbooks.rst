@@ -35,39 +35,39 @@ Once you have initiated the **Wordpress** deployment, you can proceed with the l
 Create Category
 ...............
 
-In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > Categories**, and click **Create Category**.
+#. In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > Categories**, and click **Create Category**.
 
-Fill out the following fields:
+#. Fill out the following fields:
 
-- **Name**  - *Initials*-DR
-- **Purpose** - DR Runbooks
-- **Values**  - DB
-- **Values**  - web
+   - **Name**  - *Initials*-DR
+   - **Purpose** - DR Runbooks
+   - **Values**  - DB
+   - **Values**  - web
 
-.. figure:: images/drrunbooks_01.png
+   .. figure:: images/drrunbooks_01.png
 
-Click **Save**.
+#. Click **Save**.
 
 Assign Category
 ...............
 
-In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**.
+#. In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**.
 
-Select the DRDB VM you created, and click **Manage Categories** from the **Actions** dropdown.
+#. Select the DRDB VM you created, and click **Manage Categories** from the **Actions** dropdown.
 
-.. figure:: images/drrunbooks_02.png
+   .. figure:: images/drrunbooks_02.png
 
-Search for *Initials*-**DR** you just created, and select *Initials*-**DR:DB**.
+#. Search for *Initials*-**DR** you just created, and select *Initials*-**DR:DB**.
 
-.. figure:: images/drrunbooks_03.png
+   .. figure:: images/drrunbooks_03.png
 
-Click **Save**.
+#. Click **Save**.
 
-Select the DRWeb VM you created, and click **Manage Categories** from the **Actions** dropdown.
+#. Select the DRWeb VM you created, and click **Manage Categories** from the **Actions** dropdown.
 
-Search for *Initials*-**DR** you just created, and select *Initials*-**DR:Web**.
+#. Search for *Initials*-**DR** you just created, and select *Initials*-**DR:Web**.
 
-Click **Save**.
+#. Click **Save**.
 
 Create Protection Policy
 ++++++++++++++++++++++++
@@ -83,165 +83,158 @@ Enable Leap and Connect Availability Zone (Local)
 
 Leap works with pairs of physically isolated locations called availability zones. Each availability zone must run its own instance of Prism Central. One availability zone serves as the primary location for an application while a paired availability zone serves as the recovery location.
 
-In **Prism Central**, click the **?** drop down menu, expand **New in Prism Central** and select **Leap**.
+#. In **Prism Central**, click the **?** drop down menu, expand **New in Prism Central** and select **Leap**.
 
-In **Prism Central** > select :fa:`bars` **> Administration > Availability Zones**, and click **Connect to Availability Zone**.
+#. In **Prism Central** > select :fa:`bars` **> Administration > Availability Zones**, and click **Connect to Availability Zone**.
 
-.. note::
+   .. note::
 
-  You can only setup the **Connect to Availability Zone** once to a given Prism Central.
+     You can only setup the **Connect to Availability Zone** once to a given Prism Central. If Leap has been enabled on both PCs and the PCs have been paired, proceed to `Create Protection Policy`_.
 
-Refer to :ref:`clusterassignments` to determine your **Secondary PC IP**, this will be used as the **DR PC** for this exercise.
+#. Refer to :ref:`clusterassignments` to determine your **Secondary PC IP**, this will be used as the **DR PC** for this exercise.
 
-.. note::
+   .. note::
 
-  The DR PC IP is entered on the local cluster because you are instantiating the connection to the DR cluster, and vice versa for the remote cluster.
+     The DR PC IP is entered on the local cluster because you are instantiating the connection to the DR cluster, and vice versa for the remote cluster.
 
-Fill out the following fields:
+#. Fill out the following fields:
 
-- **Availability Zone Type**  - Physical location
-- **IP Address for Remote PC**  - *Assigned DR PC IP*
-- **Username**  - admin
-- **Password**  - techX2019!
+   - **Availability Zone Type**  - Physical location
+   - **IP Address for Remote PC**  - *Assigned DR PC IP*
+   - **Username**  - admin
+   - **Password**  - techX2019!
 
-.. figure:: images/drrunbooks_04.png
+   .. figure:: images/drrunbooks_04.png
 
-Click **Connect**.
+#. Click **Connect**.
 
 Enable Leap and Connect Availability Zone (Remote)
 .................................................
 
-In **DR Prism Central**, click the **?** drop down menu, expand **New in Prism Central** and select **Leap**.
+#. In **DR Prism Central**, click the **?** drop down menu, expand **New in Prism Central** and select **Leap**.
 
-In **DR Prism Central** > select :fa:`bars` **> Administration > Availability Zones**, and click **Connect to Availability Zone**.
+#. In **DR Prism Central** > select :fa:`bars` **> Administration > Availability Zones**, and click **Connect to Availability Zone**.
 
-.. note::
+   .. note::
 
-  You can only setup the **Connect to Availability Zone** once to a given Prism Central.
+     You can only setup the **Connect to Availability Zone** once to a given Prism Central.
 
-Fill out the following fields:
+#. Fill out the following fields:
 
-- **Availability Zone Type**  - Physical location
-- **IP Address for Remote PC**  - *Assigned PC IP*
-- **Username**  - admin
-- **Password**  - techX2019!
+   - **Availability Zone Type**  - Physical location
+   - **IP Address for Remote PC**  - *Assigned PC IP*
+   - **Username**  - admin
+   - **Password**  - techX2019!
 
-.. figure:: images/drrunbooks_05.png
+   .. figure:: images/drrunbooks_05.png
 
-Click **Connect**.
-
-.. note::
-
-  If Leap has been enabled on both PC's and the PC’s have been paired, proceed.
+#. Click **Connect**.
 
 Create Protection Policy
 ++++++++++++++++++++++++
 
-In **Prism Central** > select :fa:`bars` **> Policies > Protection Policies**, and click **Create Protection Policy**.
+#. In **Prism Central** > select :fa:`bars` **> Policies > Protection Policies**, and click **Create Protection Policy**.
 
-Fill out the following fields:
+#. Fill out the following fields:
 
-- **Name**  - *Initials*-Protection
-- **Primary Location**  - Local AZ
-- **Remote Location** - Assigned DR PC
-- **Target Cluster**  - Assigned DR HPOC
-- **Recovery Point Objective**  - Hours
-- **Start immediately** - 1
-- **Remote Retention**  - 2
-- **Local Retention**  - 2
+   - **Name**  - *Initials*-Protection
+   - **Primary Location**  - Local AZ
+   - **Remote Location** - Assigned DR PC
+   - **Target Cluster**  - Assigned DR HPOC
+   - **Recovery Point Objective**  - Hours
+   - **Start immediately** - 1
+   - **Remote Retention**  - 2
+   - **Local Retention**  - 2
+   - Select **+ Add Categories**
 
-- Select **+ Add Categories**
-    - **Select Categories** - *Initials*-**DR:Web**
-    - **Select Categories** - *Initials*-**DR:DB**
-    Select **Save**
+       - **Select Categories** - *Initials*-**DR:Web**
+       - **Select Categories** - *Initials*-**DR:DB**
+       - Select **Save**
 
-.. figure:: images/drrunbooks_06.png
+   .. figure:: images/drrunbooks_06.png
 
-Click **Save**
+#. Click **Save**.
 
 Create Recovery Plan
 ++++++++++++++++++++++++
 
-In **Prism Central** > select :fa:`bars` **> Policies > Recovery Plans**, and click **Create Recovery Plan**.
+#. In **Prism Central** > select :fa:`bars` **> Policies > Recovery Plans**, and click **Create Recovery Plan**.
 
-Fill out the following fields:
+#. Fill out the following fields:
 
-- **Primary Location**  - Local AZ
-- **Remote Location** - Assigned DR PC
+   - **Primary Location**  - Local AZ
+   - **Remote Location** - Assigned DR PC
 
-Click **Proceed**
+#. Click **Proceed**.
 
-Fill out the following fields:
+#. Fill out the following fields:
 
-- **Name**  - *Initials*-Recovery
-- **Recovery Plan Description** - optional
+   - **Name**  - *Initials*-Recovery
+   - **Recovery Plan Description** - optional
 
-Click **Next**
+#. Click **Next**.
 
-Select **+ Add Entities**
+#. Select **+ Add Entities**.
 
-- **Search Entities by**  - VM Name
-    - Add *DRDB1 - DRDB12 based on assignment*
-    Select **Add**
+   - **Search Entities by**  - VM Name
+   - Add *DRDB1 - DRDB12 based on assignment*
+   - Select **Add**.
 
-.. figure:: images/drrunbooks_07.png
+   .. figure:: images/drrunbooks_07.png
 
-Click **+ Add New Stage**
+#. Click **+ Add New Stage**.
 
-.. figure:: images/drrunbooks_08.png
+   .. figure:: images/drrunbooks_08.png
 
-Select **+ Add Entities**
+#. Select **+ Add Entities**.
 
-- **Search Entities by**  - VM Name
-    - Add *DRWeb1 - DRWeb12 based on assignment*
-    Select **Add**
+   - **Search Entities by**  - VM Name
+   - Add *DRWeb1 - DRWeb12 based on assignment*
+   - Select **Add**.
 
-.. note::
+   .. note::
 
-  Sometimes it can take up to 5 minutes for the individual VMs to be added to the protection policy.
-  Since we added the policy at the start you should be good to go.
+     It can take up to 5 minutes for the individual VMs to be added to the protection policy. If you don’t want to wait, you can manually protect the VM by using “Protect” on the VM menu in PC.
 
-  If you don’t want to wait you can manually protect the VM by using “Protect” on the VM menu in PC.
+   Next you will add a delay between stages 1 and 2 for 60 seconds to allow the database to become available before the web front end boots.
 
-Add in a delay between stages 1 and 2 or 60 seconds to make sure the database is up first before the web front end loads.
+#. Click **+ Add Delay**.
 
-Click **+ Add Delay**
+   - **Seconds** - 60
 
-- **Seconds** - 60
+#. Click **Add**.
 
-Click **Add**
+   .. figure:: images/drrunbooks_09.png
 
-.. figure:: images/drrunbooks_09.png
+#. Click **Next**.
 
-Click **Next**
+   Virtual networks in on-premises Nutanix clusters are virtual subnets that are bound to a single VLAN.
 
-Virtual networks in on-premises Nutanix clusters are virtual subnets that are bound to a single VLAN.
+   At physical locations, including the recovery location, administrators must create these virtual subnets manually, with separate virtual subnets created for production and test purposes.
 
-At physical locations, including the recovery location, administrators must create these virtual subnets manually, with separate virtual subnets created for production and test purposes.
+   .. note::
 
-.. note::
+     You must create these virtual subnets before configuring recovery plans.
 
-  You must create these virtual subnets before configuring recovery plans.
+   When configuring a recovery plan, map the virtual subnets at the source location to the virtual subnets at the recovery location.
 
-When configuring a recovery plan, map the virtual subnets at the source location to the virtual subnets at the recovery location.
+#. Fill out the following fields:
 
-Fill out the following fields:
+   - Local AZ
+       - **Virtual Network or Port Group** - Secondary
 
-- Local AZ
-    - **Virtual Network or Port Group** - Secondary
+   - Remote AZ
+       - **Virtual Network or Port Group** - Secondary
 
-- Remote AZ
-    - **Virtual Network or Port Group** - Secondary
+   .. figure:: images/drrunbooks_10.png
 
-.. figure:: images/drrunbooks_10.png
+   .. note::
 
-.. note::
+     You can leave out the Test Failback Network as we don’t have enough networks setup. Typically, the Test Network will be a non-routable network.
 
-  You can leave out the Test Failback Network as we don’t have enough networks setup. Typically, the Test Network will be a non-routable network.
+     If you are not using Nutanix AHV IPAM and need to retain your IP addresses, you would need to install NGT on each protected VM.
 
-  If you are not using Nutanix AHV IPAM and need to retain your IP addresses, you would need to install NGT. ESXi will always need NGT to reserve IP address.
-
-Click **Done**, and click **Continue** on the "incomplete Network Mapping" warning.
+#. Click **Done**, and click **Continue** on the "incomplete Network Mapping" warning.
 
 Perform a Failover to the Remote AZ (PC)
 ++++++++++++++++++++++++++++++++++++++++
@@ -273,72 +266,68 @@ The unplanned failover operation cannot perform recovery based on snapshots that
 Perform Failover
 ................
 
-In **DR Prism Central** > select :fa:`bars` **> Policies > Recovery Plans**.
+#. In **DR Prism Central** > select :fa:`bars` **> Policies > Recovery Plans**.
 
-Select your *Initials*-**Recovery** recovery plan and select **Failover** from the **Actions** dropdown.
+#. Select your *Initials*-**Recovery** recovery plan and select **Failover** from the **Actions** dropdown.
 
-.. figure:: images/drrunbooks_11.png
+   .. figure:: images/drrunbooks_11.png
 
-You should see your assigned HPOC PC as the **Primary Location**, and your assigned DR PC (that you are logged into) as the **Recovery Location**.
+#. You should see your assigned HPOC PC as the **Primary Location**, and your assigned DR PC (that you are logged into) as the **Recovery Location**.
 
-.. figure:: images/drrunbooks_12.png
+   .. figure:: images/drrunbooks_12.png
 
-Click **Failover**.
+#. Click **Failover**.
 
-Change the **Action** to **Execute Anyway**, and click **Proceed**..
+#. Change the **Action** to **Execute Anyway**, and click **Proceed** when prompted about the licensing error.
 
-.. figure:: images/drrunbooks_13.png
+   .. figure:: images/drrunbooks_13.png
 
 Check Failover Status
 .....................
 
-Click the *Initials*-**Recovery** recovery plan to see the status and details.
+#. Click the *Initials*-**Recovery** recovery plan to see the status and details.
 
-.. figure:: images/drrunbooks_14.png
+   .. figure:: images/drrunbooks_14.png
 
-.. note::
+   .. note::
 
-  The failed validation is due to the licensing error earlier.
+     The failed validation is due to the licensing error earlier.
 
-Click on Failover to see more details.
+#. Click on **Failover** to see more details.
 
-.. figure:: images/drrunbooks_15.png
+   .. figure:: images/drrunbooks_15.png
 
-In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**.
+#. In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**.
 
-You can make sure that the DB and Web VMs are up.
+#. Verify that the DB and Web VMs are powered on.
 
-You can also go to the Wordpress url in your *Initials*-**Windows-ToolsVM**, http://drweb1.ntnxlab.local and check that the service is up.
+#. You can also browse to the Wordpress URL (e.g. http://drweb1.ntnxlab.local) in your *Initials*-**Windows-ToolsVM** VM and verify the site is accessible.
 
 Fail Back to the Original AZ (PC)
 +++++++++++++++++++++++++++++++++
 
-In **Prism Central** > select :fa:`bars` **> Policies > Recovery Plans**.
+#. In **Prism Central** > select :fa:`bars` **> Policies > Recovery Plans**.
 
-Select your *Initials*-**Recovery** recovery plan and select **Failover** from the **Actions** dropdown.
+#. Select your *Initials*-**Recovery** recovery plan and select **Failover** from the **Actions** dropdown.
 
-You should see your assigned DR PC as the **Primary Location**, and your assigned HPOC PC (that you are logged into) as the **Recovery Location**.
+   You should see your assigned DR PC as the **Primary Location**, and your assigned HPOC PC (that you are logged into) as the **Recovery Location**.
 
-Click **Failover**.
+#. Click **Failover**.
 
-Change the **Action** to **Execute Anyway**, and click **Proceed** when se the licensing error.
+#. Change the **Action** to **Execute Anyway**, and click **Proceed** when prompted about the licensing error.
 
 Check Failover Status
 .....................
 
-Click the *Initials*-**Recovery** recovery plan to see the status and details.
+#. Click the *Initials*-**Recovery** recovery plan to see the status and details.
 
-.. note::
+   .. note::
 
-  The failed validation is due to the licensing error earlier.
+     The failed validation is due to the licensing error earlier.
 
-Click on Failover to see more details.
+#. Click on **Failover** to see more details.
 
-In **Prism Central** > select :fa:`bars` **> Virtual Infrastructure > VMs**.
-
-You can make sure that the DB and Web VMs are up.
-
-You can also go to the Wordpress url in your *Initials*-**Windows-ToolsVM**, http://drweb1.ntnxlab.local and check that the service is up.
+#. Verify the site is accessible via the Wordpress URL using your *Initials*-**Windows-ToolsVM** VM.
 
 Takeaways
 +++++++++

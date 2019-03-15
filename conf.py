@@ -88,6 +88,10 @@ todo_include_todos = True
 # a list of builtin themes.
 #
 #html_theme = "sphinx_rtd_theme"
+<<<<<<< HEAD
+=======
+#html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
+>>>>>>> upstream/master
 html_theme = 'bootstrap'
 html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 
